@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CSS3实现3D轮播图｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/02/24/CSS3-3D/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CSS3实现3D轮播图</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-02-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            CSS3实现3D轮播图
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>css3动画效果的强大不言而喻，自它出现一直热度不减，它与js动画的优劣也一直成为前端界争论的话题，不可置疑的是css3动画的出现在一定程度上降低了动画效果的实现难度，利于前端的学习，其精简的代码量把我们从烦人的js调试中解放出来，当然css的动画效果有其局限性，我们不能只用css3模拟出全部的就是动画，另外就是浏览器的兼容性问题。我们这次用css3实现一个3D轮播图效果，体验一下css3的强大。 </p>
+<h4 id="一、Demo和源代码"><a href="#一、Demo和源代码" class="headerlink" title="一、Demo和源代码"></a>一、Demo和源代码</h4><p><a href="http://htmlpreview.github.com/?https://github.com/SmartDoubleXiao/IFE2017/blob/master/css3lb2.html" target="_blank" rel="external">Demo预览</a><br><a href="https://github.com/SmartDoubleXiao/IFE2017/blob/master/css3lb2.html" target="_blank" rel="external">源代码</a>  </p>
+<h4 id="二、CSS3-0关键技术"><a href="#二、CSS3-0关键技术" class="headerlink" title="二、CSS3.0关键技术"></a>二、CSS3.0关键技术</h4><h5 id="2-1、transition"><a href="#2-1、transition" class="headerlink" title="2.1、transition"></a>2.1、transition</h5><p>平滑过渡，设置元素的某个属性由样式1转变为样式2的过程所需要的时间、模式，语法为：</p>
+<pre><code>transition-property:width;
+
+transition-duration:3s;
+
+transition-timing-function:linear;
+
+或
+
+transition:&lt;过渡属性名称&gt;&lt;过渡时间&gt;&lt;过渡模式&gt;
+
+比如：transition:width 3s linear;
+</code></pre><p>多个属性的过渡效果：  </p>
+<pre><code>transition:&lt;属性1&gt;&lt;时间1&gt;,&lt;属性2&gt;&lt;时间2&gt;,…
+
+或
+
+transition:&lt;属性1&gt;&lt;时间1&gt;；
+
+transition:&lt;属性2&gt;&lt;时间2&gt;；
+</code></pre><p>过度模式:<br>· ease（缓慢开始，缓慢结束，默认）<br>· linear（匀速）<br>· ease-in（缓慢开始)<br>· ease-out（缓慢结束）<br>· ease-in-out（缓慢开始，缓慢结束，和ease稍有区别）</p>
+<p>(注：animation通过关键帧技术，产生更复杂的动画效果）</p>
+<h5 id="2-2、perspective、perspective-origin"><a href="#2-2、perspective、perspective-origin" class="headerlink" title="2.2、perspective、perspective-origin"></a>2.2、perspective、perspective-origin</h5><p>透视/景深属性perspective，景深就是我们的肉眼距离显示器的距离，景深越大，元素离我们越远，效果就不好，在我们CSS3中，perspective用于激活一个3D空间，属性值就是景深大小（默认none无景深）<br>创建3D场景：<br>-webkit-perspective: 800; //设置景深，3D物体与视窗的距离<br>-webkit-perspective-origin: 50% 50%; //设置视窗可视位置，50% %50 为视窗中央<br><img src="../../../../images/39.jpg" alt=""><br>应用景深的元素称为“舞台元素”，舞台元素的所有后代元素都会受影响（如果后代元素中也添加了perspective属性，效果会叠加而不是覆盖<br>景深的另一种用法，是应用在动画元素（不是舞台元素）变形的函数中和其他变形函数写在一起  </p>
+<pre><code>.stage .demo {
+
+ ......
+
+ transform: rotateX(45deg) perspective(100px);
+
+}
+</code></pre><h5 id="2-3、transform"><a href="#2-3、transform" class="headerlink" title="2.3、transform"></a>2.3、transform</h5><p>使用transform属性调整元素，使元素变形<br>-webkit-transform-style: preserve-3d; //所有子元素在3D平面呈现,<code>flat</code>表示所有子元素在2D平面呈现 </p>
+<p>-translate 位移操作<br>· translateX(x px) //方向向右<br>· translateY(y px) //方向向下<br>· translateZ(z px) //方向向屏幕外<br>· 合成函数translate3d(x,y,z) //注意前两个值可以使用百分比形式，但是沿z轴平移的值只能使用长度值</p>
+<p>-rotate 旋转操作<br>· rotateX(x deg) //沿着X轴旋转，正方向是从右往左看为顺时针<br>· rotateY(y deg) //沿着Y轴旋转，正方向是从下往上看为顺时针<br>· rotateZ(z deg) //沿着Z轴旋转，正方向是从外往里看为顺时针<br>（旋转角度、弧度制、顺时针为正数）<br>· 其实3D旋转还有一个合成的函数是rotate3d(num,num,num,deg），参数并不是我们想那样的3个角度值，而是三个数字一个角度值，前三个数字分别表示绕x、y、z轴旋转的矢量值，最后一个表示在空间的旋转角度，等价关系如下：<br>rotate3d(1,0,0,xxdeg) &lt;==&gt; rotateX(xxdeg)<br>rotate3d(0,1,0,xxdeg) &lt;==&gt; rotateY(xxdeg)<br>rotate3d(0,0,1,xxdeg) &lt;==&gt; rotateZ(xxdeg) </p>
+<p>-origin:调整旋转中心，默认正中心。<br>· x轴：left center right，<br>· y轴：top，center，bottom，<br>· z轴：length：100px</p>
+<p>-scale（缩放倍数）<br>· scaleX(num)<br>· scaleY(num)<br>· scaleZ(num)<br>· scale3d(num,num,num) </p>
+<p>-skew（扭曲元素）<br>3D的倾斜属性是不存在的，换句话说，不存在skew3d函数</p>
+<h5 id="2-4、box-shadow"><a href="#2-4、box-shadow" class="headerlink" title="2.4、box-shadow"></a>2.4、box-shadow</h5><p>给元素的边框增加阴影的效果，语法为：<br>box-shadow:x轴偏移量 y轴偏移量 [阴影模糊半径] [阴影扩展半径] [阴影颜色] [投影方式]</p>
+<h5 id="2-5、z-index"><a href="#2-5、z-index" class="headerlink" title="2.5、z-index"></a>2.5、z-index</h5><p>设置元素的上下层显示顺序（数值大的在上面）</p>
+<h5 id="2-6、backface-visibility"><a href="#2-6、backface-visibility" class="headerlink" title="2.6、backface-visibility"></a>2.6、backface-visibility</h5><p>背面可见属性backface-visibility，通过这个元素我们可以指定当元素背对我们时是否可见,只有两个属性值visibility（默认）和hidden。如果我们希望元素背对我们不可见就这样设置：  </p>
+<pre><code>.demo {
+
+ ...
+
+ backface-visibility: hidden;
+
+}
+</code></pre><h5 id="2-7、浏览器兼容"><a href="#2-7、浏览器兼容" class="headerlink" title="2.7、浏览器兼容"></a>2.7、浏览器兼容</h5><p>-webkit- 是Chrome和Safari浏览器的前缀<br>-moz- 是Firefox浏览器的前缀<br>-o- 是Opera浏览器的前缀</p>
+<h4 id="三、CSS部分"><a href="#三、CSS部分" class="headerlink" title="三、CSS部分"></a>三、CSS部分</h4><p>3.1、设立一个舞台，也就是包裹旋转的图片们的容器，给他设置一个 persepective 距离，以及 transform-style: preserve-3d 让后代可以进行 3D 变换；</p>
+<pre><code>#stage {
+
+ -webkit-perspective: 3000px;
+
+ -webkit-perspective-origin: 50% 50%;
+
+ width: 100%;
+
+ overflow: hidden;
+
+ zoom: 1;
+
+}
+</code></pre><p>3.2、准备 N 张图片置于容器内部，N 的大小看个人喜好了，图片的 3D 旋转木马效果是类似钢管舞旋转的运动，因此是绕 Y 轴的，我们关心的是 rotateY 的大小，根据我们添加的图片数量，用 360° 的圆周角将每个图片等分，也就是让每张图片绕 Y 轴旋转固定角度依次散开：<br><img src="../../../../images/40.png" alt=""></p>
+<p>3.3、这个时候，N 张图肯定是重合叠在了一起，所以这里关键一步是运用 translateZ(length) 让图片沿 Z 轴平移，也就是运用 translateZ 可以让图片离我们更近或者更远，因为上一步设置了图片不同的 rotateY() 角度，所以 N 张图片设定一个 translateZ 后，图片就很自然以中点为圆心分散开了，也就是这样：<br><img src="../../../../images/41.png" alt=""></p>
+<pre><code>&lt;div id=&quot;stage&quot;&gt;
+
+ &lt;div id=&quot;container&quot;&gt;
+
+ &lt;img src=&quot;images/1.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(0deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/2.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(45deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/3.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(90deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/4.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(135deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/5.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(180deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/6.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(225deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/7.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(270deg) translateZ(1500px);&quot;&gt;
+
+ &lt;img src=&quot;images/8.jpg&quot; class=&apos;piece&apos; style=&quot;-webkit-transform: rotateY(315deg) translateZ(1500px);&quot;&gt;
+
+ &lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre><p>3.4、最后利用 animation ，我们让舞台，也就是包裹着图片的容器绕 Y 轴旋转起来（rotateY），那么一个类似旋转木马的 3D 照片墙效果就完成了！</p>
+<pre><code>#container {
+
+
+
+ position: relative;
+
+ width: 640px;
+
+ height: 640px;
+
+ margin:0 auto;
+
+ -webkit-transform-style: preserve-3d;
+
+ cursor: pointer;
+
+ -webkit-transition: -webkit-transform 1s;
+
+ -webkit-animation: photoRotate 16s ease-in-out infinite 1s;
+
+}
+
+.piece {
+
+ width: 640px;
+
+ height: 500px
+
+ padding:0px;
+
+ overflow: hidden;
+
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+ -webkit-transition: -webkit-transform 1s;
+
+ position: absolute;
+
+ bottom: 0;
+
+}
+
+@-webkit-keyframes photoRotate {
+
+ 0% {
+
+ -webkit-transform: rotateY(0deg);
+
+ transform: rotateY(0deg);
+
+ }
+
+ 12.5% {
+
+ -webkit-transform: rotateY(45deg);
+
+ transform: rotateY(45deg);
+
+ }
+
+ 25% {
+
+ -webkit-transform: rotateY(90deg);
+
+ transform: rotateY(90deg);
+
+ }
+
+ 37.5% {
+
+ -webkit-transform: rotateY(135deg);
+
+ transform: rotateY(135deg);
+
+ }
+
+ 50% {
+
+ -webkit-transform: rotateY(180deg);
+
+ transform: rotateY(180deg);
+
+ }
+
+ 62.5% {
+
+ -webkit-transform: rotateY(225deg);
+
+ transform: rotateY(225deg);
+
+ }
+
+ 75% {
+
+ -webkit-transform: rotateY(270deg);
+
+ transform: rotateY(270deg);
+
+ }
+
+ 87.5% {
+
+ -webkit-transform: rotateY(315deg);
+
+ transform: rotateY(315deg);
+
+ }
+
+ 100% {
+
+ -webkit-transform: rotateY(360deg);
+
+ transform: rotateY(360deg);
+
+ }
+
+}
+</code></pre><p>这里要注意的一点是设置的 persepective 值和单个图片translateZ(length) 的值，persepective 一定要比translateZ(length) 的值大，否则就是相当于舞台跑你身后去了，肯定是看不到效果了。</p>
+<p>参考资料：<br><a href="http://www.cnblogs.com/coco1s/p/5414153.html" target="_blank" rel="external">【CSS3进阶】酷炫的3D旋转透视</a></p>
+<p><a href="/q1056843325/article/details/53287833">CSS3景深、三维变换属性及旋转三维立方体的实现</a></p>
+<p><a href="http://www.jianshu.com/p/28643f36011e" target="_blank" rel="external">手把手教你用纯css3实现轮播图效果</a></p>
+<p><a href="http://www.imooc.com/course/list?c=CSS3&amp;page=1" target="_blank" rel="external">慕课网CSS3教程</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function" target="_blank" rel="external">MDN文档</a></p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/02/phantomjs/" data-toggle="tooltip" data-placement="top"
+                           title="PhantomJS入门教程">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/02/18/notes/" data-toggle="tooltip" data-placement="top"
+                           title="做项目时总结的一些经验">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、Demo和源代码"><span class="toc-text">一、Demo和源代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、CSS3-0关键技术"><span class="toc-text">二、CSS3.0关键技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1、transition"><span class="toc-text">2.1、transition</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2、perspective、perspective-origin"><span class="toc-text">2.2、perspective、perspective-origin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3、transform"><span class="toc-text">2.3、transform</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4、box-shadow"><span class="toc-text">2.4、box-shadow</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5、z-index"><span class="toc-text">2.5、z-index</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6、backface-visibility"><span class="toc-text">2.6、backface-visibility</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7、浏览器兼容"><span class="toc-text">2.7、浏览器兼容</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、CSS部分"><span class="toc-text">三、CSS部分</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

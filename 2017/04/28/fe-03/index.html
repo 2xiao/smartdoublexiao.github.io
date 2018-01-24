@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][03]Ajax与跨域｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-03/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][03]Ajax与跨域</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][03]Ajax与跨域
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="ajax-有那些优缺点"><a href="#ajax-有那些优缺点" class="headerlink" title="ajax 有那些优缺点?"></a>ajax 有那些优缺点?</h2><p>优点：<br>（1）通过异步模式，提升了用户体验.<br>（2）优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用.<br>（3）Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。<br>（4）Ajax可以实现动态不刷新（局部刷新）<br>缺点：<br>（1）安全问题 AJAX暴露了与服务器交互的细节。<br>（2）对搜索引擎的支持比较弱。<br>（3）不容易调试。  </p>
+<h2 id="创建ajax过程"><a href="#创建ajax过程" class="headerlink" title="创建ajax过程"></a>创建ajax过程</h2><p>(1)创建XMLHttpRequest对象,也就是创建一个异步调用对象.<br>(2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息.<br>(3)设置响应HTTP请求状态变化的函数.<br>(4)发送HTTP请求.<br>(5)获取异步调用返回的数据.<br>(6)使用JavaScript和DOM实现局部刷新.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var xmlHttp = new XMLHttpRequest();</div><div class="line">xmlHttp.open(&apos;GET&apos;,&apos;demo.php&apos;,&apos;true&apos;);</div><div class="line">xmlHttp.send()</div><div class="line">xmlHttp.onreadystatechange = function()&#123;</div><div class="line"> if(xmlHttp.readyState === 4 &amp; xmlHttp.status === 200)&#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>详情：<a href="http://segmentfault.com/blog/trigkit4/1190000000691919" target="_blank" rel="external">JavaScript学习总结（七）Ajax和Http状态字</a></p>
+<h2 id="ajax怎么向服务器发送请求"><a href="#ajax怎么向服务器发送请求" class="headerlink" title="ajax怎么向服务器发送请求"></a>ajax怎么向服务器发送请求</h2><h2 id="ajax可以跨域吗？怎么跨域？"><a href="#ajax可以跨域吗？怎么跨域？" class="headerlink" title="ajax可以跨域吗？怎么跨域？"></a>ajax可以跨域吗？怎么跨域？</h2><h2 id="Flash、Ajax各自的优缺点，在使用中如何取舍？"><a href="#Flash、Ajax各自的优缺点，在使用中如何取舍？" class="headerlink" title="Flash、Ajax各自的优缺点，在使用中如何取舍？"></a>Flash、Ajax各自的优缺点，在使用中如何取舍？</h2><p>1.Ajax的优势：1.可搜索性 2.开放性 3.费用 4.易用性 5.易于开发。<br>2.Flash的优势：1.多媒体处理 2.兼容性 3.矢量图形 4.客户端资源调度<br>3.Ajax的劣势：1.它可能破坏浏览器的后退功能   2.使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中 ，不过这些都有相关方法解决。<br>4.Flash的劣势：1.二进制格式 2.格式私有 3.flash 文件经常会很大，用户第一次使用的时候需要忍耐较长的等待时间  4.性能问题 </p>
+<p>Flash适合处理多媒体、矢量图形、访问机器；对CSS、处理文本上不足，不容易被搜索。<br>Ajax对CSS、文本支持很好，支持搜索；多媒体、矢量图形、机器访问不足。<br>共同点：与服务器的无刷新传递消息、用户离线和在线状态、操作DOM  </p>
+<h2 id="ajax的缺点"><a href="#ajax的缺点" class="headerlink" title="ajax的缺点"></a>ajax的缺点</h2><p>1、ajax不支持浏览器back按钮。 2、安全问题 AJAX暴露了与服务器交互的细节。 3、对搜索引擎的支持比较弱。 4、破坏了程序的异常机制。 5、不容易调试。 </p>
+<blockquote>
+<p>IE缓存问题</p>
+</blockquote>
+<p>在IE浏览器下，如果请求的方法是<code>GET</code>，并且请求的<code>URL</code>不变，那么这个请求的结果就会被缓存。解决这个问题的办法可以通过实时改变请求的<code>URL</code>，只要URL改变，就不会被缓存，可以通过在URL末尾添加上随机的时间戳参数(<code>&#39;t&#39;= + new Date().getTime()</code>)</p>
+<p>或者：<br>​<br>    open(‘GET’,’demo.php?rand=+Math.random()’,true);//</p>
+<blockquote>
+<p>Ajax请求的页面历史记录状态问题</p>
+</blockquote>
+<p>可以通过锚点来记录状态，<code>location.hash</code>。让浏览器记录Ajax请求时页面状态的变化。</p>
+<p>还可以通过<code>HTML5</code>的<code>history.pushState</code>，来实现浏览器地址栏的无刷新改变</p>
+<h2 id="XMLHttpRequest通用属性和方法"><a href="#XMLHttpRequest通用属性和方法" class="headerlink" title="XMLHttpRequest通用属性和方法"></a>XMLHttpRequest通用属性和方法</h2><ol>
+<li><code>readyState</code>:表示请求状态的整数，取值：<ul>
+<li>UNSENT（0）：对象已创建</li>
+<li>OPENED（1）：open()成功调用，在这个状态下，可以为xhr设置请求头，或者使用send()发送请求</li>
+<li>HEADERS_RECEIVED(2)：所有重定向已经自动完成访问，并且最终响应的HTTP头已经收到</li>
+<li>LOADING(3)：响应体正在接收</li>
+<li>DONE(4)：数据传输完成或者传输产生错误</li>
+</ul>
+</li>
+<li><code>onreadystatechange</code>：readyState改变时调用的函数</li>
+<li><code>status</code>：服务器返回的HTTP状态码（如，200， 404）</li>
+<li><code>statusText</code>:服务器返回的HTTP状态信息（如，OK，No Content）</li>
+<li><code>responseText</code>:作为字符串形式的来自服务器的完整响应</li>
+<li><code>responseXML</code>: Document对象，表示服务器的响应解析成的XML文档</li>
+<li><code>abort()</code>:取消异步HTTP请求</li>
+<li><code>getAllResponseHeaders()</code>: 返回一个字符串，包含响应中服务器发送的全部HTTP报头。每个报头都是一个用冒号分隔开的名/值对，并且使用一个回车/换行来分隔报头行</li>
+<li><code>getResponseHeader(headerName)</code>:返回headName对应的报头值</li>
+<li><code>open(method, url, asynchronous [, user, password])</code>:初始化准备发送到服务器上的请求。method是HTTP方法，不区分大小写；url是请求发送的相对或绝对URL；asynchronous表示请求是否异步；user和password提供身份验证</li>
+<li><code>setRequestHeader(name, value)</code>:设置HTTP报头</li>
+<li><code>send(body)</code>:对服务器请求进行初始化。参数body包含请求的主体部分，对于POST请求为键值对字符串；对于GET请求，为null</li>
+</ol>
+<h2 id="GET和POST的区别，何时使用POST？"><a href="#GET和POST的区别，何时使用POST？" class="headerlink" title="GET和POST的区别，何时使用POST？"></a>GET和POST的区别，何时使用POST？</h2><p>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符（1字符=1字节=0.5字）<br>POST：一般用于修改服务器上的资源，对所发送的信息没有限制。<br>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值，<br>也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。<br>然而，在以下情况中，请使用 POST 请求：<br>无法使用缓存文件（更新服务器上的文件或数据库）<br>向服务器发送大量数据（POST 没有数据量限制）<br>发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠  </p>
+<h2 id="javascript跨域通信"><a href="#javascript跨域通信" class="headerlink" title="javascript跨域通信"></a>javascript跨域通信</h2><p>概念:同源策略是客户端脚本（尤其是<code>Javascript</code>）的重要的安全度量标准。它最早出自<code>Netscape Navigator2.0</code>，其目的是防止某个文档或脚本从多个不同源装载。</p>
+<p>这里的同源策略指的是：协议，域名，端口相同，同源策略是一种安全协议。指一段脚本只能读取来自同一来源的窗口和文档的属性。</p>
+<p>跨域通信：js进行DOM操作、通信时如果目标与当前窗口不满足同源条件，浏览器为了安全会阻止跨域操作。跨域通信通常有以下方法</p>
+<ul>
+<li>如果是log之类的简单<strong>单项通信</strong>，新建<code>&lt;img&gt;</code>,<code>&lt;script&gt;</code>,<code>&lt;link&gt;</code>,<code>&lt;iframe&gt;</code>元素，通过src，href属性设置为目标url。实现跨域请求</li>
+<li>如果请求<strong>json数据</strong>，使用<code>&lt;script&gt;</code>进行jsonp请求</li>
+<li>现代浏览器中<strong>多窗口通信</strong>使用HTML5规范的targetWindow.postMessage(data, origin);其中data是需要发送的对象，origin是目标窗口的origin。window.addEventListener(‘message’, handler, false);handler的event.data是postMessage发送来的数据，event.origin是发送窗口的origin，event.source是发送消息的窗口引用</li>
+<li>内部服务器代理请求跨域url，然后返回数据</li>
+<li>跨域请求数据，现代浏览器可使用HTML5规范的CORS功能，只要目标服务器返回HTTP头部<strong><code>Access-Control-Allow-Origin: *</code></strong>即可像普通ajax一样访问跨域资源</li>
+</ul>
+<h2 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h2><p>jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面。  </p>
+<blockquote>
+<p>JSONP：<br>原理是：动态插入<code>script</code>标签，通过<code>script</code>标签引入一个<code>js</code>文件，这个js文件载入成功后会执行我们在url参数中指定的函数，并且会把我们需要的<code>json</code>数据作为参数传入。<br>由于同源策略的限制，<code>XmlHttpRequest</code>只允许请求当前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过<code>script</code>标签实现跨域请求，然后在服务端输出JSON数据并执行回调函数，从而解决了跨域的数据请求。<br>优点是兼容性好，简单易用，支持浏览器与服务器双向通信。缺点是只支持GET请求。<br><code>JSONP</code>：<code>json+padding</code>（内填充），顾名思义，就是把JSON填充到一个盒子里</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line"> function createJs(sUrl)&#123;</div><div class="line"></div><div class="line"> var oScript = document.createElement(&apos;script&apos;);</div><div class="line"></div><div class="line"> oScript.type = &apos;text/javascript&apos;;</div><div class="line"></div><div class="line"> oScript.src = sUrl;</div><div class="line"></div><div class="line"> document.getElementsByTagName(&apos;head&apos;)[0].appendChild(oScript);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> createJs(&apos;jsonp.js&apos;);</div><div class="line"></div><div class="line"> box(&#123;</div><div class="line"></div><div class="line"> &apos;name&apos;: &apos;test&apos;</div><div class="line"></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> function box(json)&#123;</div><div class="line"></div><div class="line"> alert(json.name);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>CORS</p>
+</blockquote>
+<p>服务器端对于<code>CORS</code>的支持，主要就是通过设置<code>Access-Control-Allow-Origin</code>来进行的。如果浏览器检测到相应的设置，就可以允许<code>Ajax</code>进行跨域的访问。</p>
+<blockquote>
+<p>通过修改document.domain来跨子域<br>将子域和主域的<code>document.domain</code>设为同一个主域.前提条件：这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用<code>document.domain</code>进行跨域<br>主域相同的使用<code>document.domain</code></p>
+<p>使用window.name来进行跨域</p>
+</blockquote>
+<p><code>window</code>对象有个<code>name</code>属性，该属性有个特征：即在一个窗口(window)的生命周期内,窗口载入的所有的页面都是共享一个<code>window.name</code>的，每个页面对<code>window.name</code>都有读写的权限，<code>window.name</code>是持久存在一个窗口载入过的所有页面中的</p>
+<blockquote>
+<p>使用HTML5中新引进的<code>window.postMessage</code>方法来跨域传送数据</p>
+</blockquote>
+<p>还有flash、在服务器上设置代理页面等跨域方式。个人认为<code>window.name</code>的方法既不复杂，也能兼容到几乎所有浏览器，这真是极好的一种跨域方法。</p>
+<h2 id="XML和JSON的区别？"><a href="#XML和JSON的区别？" class="headerlink" title="XML和JSON的区别？"></a><code>XML</code>和<code>JSON</code>的区别？</h2><p>(1).数据体积方面。<br>JSON相对于XML来讲，数据的体积小，传递的速度更快些。<br>(2).数据交互方面。<br>JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互。<br>(3).数据描述方面。<br>JSON对数据的描述性比XML较差。<br>(4).传输速度方面。<br>JSON的速度要远远快于XML。</p>
+<h2 id="异步加载和延迟加载"><a href="#异步加载和延迟加载" class="headerlink" title="异步加载和延迟加载"></a>异步加载和延迟加载</h2><p>1.异步加载的方案： 动态插入script标签<br>2.通过ajax去获取js代码，然后通过eval执行<br>3.script标签上添加defer或者async属性<br>4.创建并插入iframe，让它异步执行js<br>5.延迟加载：有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。 </p>
+<h2 id="为什么要有同源限制？"><a href="#为什么要有同源限制？" class="headerlink" title="为什么要有同源限制？"></a>为什么要有同源限制？</h2><p>我们举例说明：比如一个黑客程序，他利用<code>Iframe</code>把真正的银行登录页面嵌到他的页面上，当你使用真实的用户名，密码登录时，他的页面就可以通过<code>Javascript</code>读取到你的表单中<code>input</code>中的内容，这样用户名，密码就轻松到手了。</p>
+<p>缺点：<br>现在网站的<code>JS</code> 都会进行压缩，一些文件用了严格模式，而另一些没有。这时这些本来是严格模式的文件，被 <code>merge</code> 后，这个串就到了文件的中间，不仅没有指示严格模式，反而在压缩后浪费了字节。</p>
+<h2 id="ajax的缺点和在IE下的问题？"><a href="#ajax的缺点和在IE下的问题？" class="headerlink" title="ajax的缺点和在IE下的问题？"></a>ajax的缺点和在IE下的问题？</h2><p>详情请见：<a href="http://segmentfault.com/blog/trigkit4/1190000000691919" target="_blank" rel="external">JavaScript学习总结（七）Ajax和Http状态字</a></p>
+<blockquote>
+<p>ajax的缺点</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、ajax不支持浏览器back按钮。 2、安全问题 AJAX暴露了与服务器交互的细节。 3、对搜索引擎的支持比较弱。 4、破坏了程序的异常机制。 5、不容易调试。</div></pre></td></tr></table></figure>
+<blockquote>
+<p>IE缓存问题</p>
+</blockquote>
+<p>在IE浏览器下，如果请求的方法是<code>GET</code>，并且请求的<code>URL</code>不变，那么这个请求的结果就会被缓存。解决这个问题的办法可以通过实时改变请求的<code>URL</code>，只要URL改变，就不会被缓存，可以通过在URL末尾添加上随机的时间戳参数(<code>&#39;t&#39;= + new Date().getTime()</code>)</p>
+<p>或者：<br>​    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">open(&apos;GET&apos;,&apos;demo.php?rand=+Math.random()&apos;,true);//</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Ajax请求的页面历史记录状态问题</p>
+</blockquote>
+<p>可以通过锚点来记录状态，<code>location.hash</code>。让浏览器记录Ajax请求时页面状态的变化。</p>
+<p>还可以通过<code>HTML5</code>的<code>history.pushState</code>，来实现浏览器地址栏的无刷新改变</p>
+<h4 id="Flash、Ajax各自的优缺点，在使用中如何取舍？-1"><a href="#Flash、Ajax各自的优缺点，在使用中如何取舍？-1" class="headerlink" title="Flash、Ajax各自的优缺点，在使用中如何取舍？"></a><code>Flash</code>、<code>Ajax</code>各自的优缺点，在使用中如何取舍？</h4><ul>
+<li><code>Flash</code>适合处理多媒体、矢量图形、访问机器；对<code>CSS</code>、处理文本上不足，不容易被搜索。</li>
+</ul>
+<p>-<code>Ajax</code>对<code>CSS</code>、文本支持很好，支持搜索；多媒体、矢量图形、机器访问不足。</p>
+<ul>
+<li>共同点：与服务器的无刷新传递消息、用户离线和在线状态、操作DOM</li>
+</ul>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>可以表示那些数据类型？</p>
+<blockquote>
+<p>对象，数组，数值，字符串，null，Boolean</p>
+</blockquote>
+<p>解析函数<code>JSON.stringify()</code>和<code>JSON.parse()</code>的参数以及给对象定义的<code>toJSON()</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var book = &#123;</div><div class="line">	&quot;title&quot;:&quot;hello&quot;,</div><div class="line">	&quot;author&quot;:[&quot;wxx&quot;],</div><div class="line">	edition:1,</div><div class="line">	year:2017,</div><div class="line">	releaseDate:new Date(2011,1,1),</div><div class="line">	toJSON: function()&#123;</div><div class="line">		return book</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var jsonText = JSON.stringify(book,function(key,value)&#123;</div><div class="line">	switch(key)&#123;</div><div class="line">		case &quot;title&quot;:</div><div class="line">		return &quot;change&quot;</div><div class="line">		default:</div><div class="line">		return value</div><div class="line">	&#125;</div><div class="line">&#125;,4)</div><div class="line">var bookCopy = JSON.parse(jsonText,function(key,value)&#123;</div><div class="line">	if(key==&quot;releaseDate&quot;)&#123;</div><div class="line">		return new Date(value)</div><div class="line">	&#125;else&#123;</div><div class="line">		return value</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">console.log(bookCopy.releaseDate.getFullYear())</div></pre></td></tr></table></figure>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-04/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][04]闭包与作用域">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-02/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][02]类数组对象转换为数组对象">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax-有那些优缺点"><span class="toc-text">ajax 有那些优缺点?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建ajax过程"><span class="toc-text">创建ajax过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax怎么向服务器发送请求"><span class="toc-text">ajax怎么向服务器发送请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax可以跨域吗？怎么跨域？"><span class="toc-text">ajax可以跨域吗？怎么跨域？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flash、Ajax各自的优缺点，在使用中如何取舍？"><span class="toc-text">Flash、Ajax各自的优缺点，在使用中如何取舍？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax的缺点"><span class="toc-text">ajax的缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest通用属性和方法"><span class="toc-text">XMLHttpRequest通用属性和方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET和POST的区别，何时使用POST？"><span class="toc-text">GET和POST的区别，何时使用POST？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript跨域通信"><span class="toc-text">javascript跨域通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何解决跨域问题"><span class="toc-text">如何解决跨域问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML和JSON的区别？"><span class="toc-text">XML和JSON的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步加载和延迟加载"><span class="toc-text">异步加载和延迟加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要有同源限制？"><span class="toc-text">为什么要有同源限制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax的缺点和在IE下的问题？"><span class="toc-text">ajax的缺点和在IE下的问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flash、Ajax各自的优缺点，在使用中如何取舍？-1"><span class="toc-text">Flash、Ajax各自的优缺点，在使用中如何取舍？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON"><span class="toc-text">JSON</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

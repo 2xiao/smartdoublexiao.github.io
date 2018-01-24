@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][10]javascript部分｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-10/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][10]javascript部分</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][10]javascript部分
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="说说严格模式的限制"><a href="#说说严格模式的限制" class="headerlink" title="说说严格模式的限制"></a>说说严格模式的限制</h2><p>严格模式主要有以下限制：</p>
+<p>变量必须声明后再使用 函数的参数不能有同名属性，否则报错 不能使用with语句 不能对只读属性赋值，否则报错 不能使用前缀0表示八进制数，否则报错 不能删除不可删除的属性，否则报错 不能删除变量delete prop，会报错，只能删除属性delete global[prop] eval不会在它的外层作用域引入变量 eval和arguments不能被重新赋值 arguments不会自动反映函数参数的变化 不能使用arguments.callee 不能使用arguments.caller 禁止this指向全局对象 不能使用fn.caller和fn.arguments获取函数调用的堆栈 增加了保留字（比如protected、static和interface） </p>
+<p>设立”严格模式”的目的，主要有以下几个：</p>
+<ul>
+<li>消除<code>Javascript</code>语法的一些不合理、不严谨之处，减少一些怪异行为;</li>
+<li>消除代码运行的一些不安全之处，保证代码运行的安全；</li>
+<li>提高编译器效率，增加运行速度；</li>
+<li>为未来新版本的<code>Javascript</code>做好铺垫。</li>
+</ul>
+<p>注：经过测试<code>IE6,7,8,9</code>均不支持严格模式。<br>具体：<br>不能通过脚本访问argument.callee<br>外部访问不到eval()中创建的任何变量和函数，为eval()赋值会导致错误</p>
+<h2 id="DOM元素e的e-getAttribute-propName-和e-propName有什么区别和联系"><a href="#DOM元素e的e-getAttribute-propName-和e-propName有什么区别和联系" class="headerlink" title="DOM元素e的e.getAttribute(propName)和e.propName有什么区别和联系"></a>DOM元素e的e.getAttribute(propName)和e.propName有什么区别和联系</h2><ul>
+<li>e.getAttribute()，是标准DOM操作文档元素属性的方法，具有通用性可在任意文档上使用，返回元素在源文件中<strong>设置的属性</strong></li>
+<li>e.propName通常是在HTML文档中访问特定元素的<strong>特性</strong>，浏览器解析元素后生成对应对象（如a标签生成HTMLAnchorElement），这些对象的特性会根据特定规则结合属性设置得到，对于没有对应特性的属性，只能使用getAttribute进行访问</li>
+<li>e.getAttribute()返回值是源文件中设置的值，类型是字符串或者null（有的实现返回””）</li>
+<li>e.propName返回值可能是字符串、布尔值、对象、undefined等</li>
+<li>大部分attribute与property是一一对应关系，修改其中一个会影响另一个，如id，title等属性</li>
+<li>一些布尔属性<code>&lt;input hidden/&gt;</code>的检测设置需要hasAttribute和removeAttribute来完成，或者设置对应property</li>
+<li>像<code>&lt;a href=&quot;../index.html&quot;&gt;link&lt;/a&gt;</code>中href属性，转换成property的时候需要通过转换得到完整URL</li>
+<li>一些attribute和property不是一一对应如：form控件中<code>&lt;input value=&quot;hello&quot;/&gt;</code>对应的是defaultValue，修改或设置value property修改的是控件当前值，setAttribute修改value属性不会改变value property</li>
+</ul>
+<h2 id="offsetWidth-offsetHeight-clientWidth-clientHeight与scrollWidth-scrollHeight的区别"><a href="#offsetWidth-offsetHeight-clientWidth-clientHeight与scrollWidth-scrollHeight的区别" class="headerlink" title="offsetWidth/offsetHeight,clientWidth/clientHeight与scrollWidth/scrollHeight的区别"></a>offsetWidth/offsetHeight,clientWidth/clientHeight与scrollWidth/scrollHeight的区别</h2><ul>
+<li>offsetWidth/offsetHeight返回值包含<strong>content + padding + border</strong>，效果与e.getBoundingClientRect()相同</li>
+<li>clientWidth/clientHeight返回值只包含<strong>content + padding</strong>，如果有滚动条，也<strong>不包含滚动条</strong></li>
+<li>scrollWidth/scrollHeight返回值包含<strong>content + padding + 溢出内容的尺寸</strong></li>
+</ul>
+<p><a href="http://msdn.microsoft.com/en-us/library/ie/hh781509(v=vs.85" target="_blank" rel="external">Measuring Element Dimension and Location with CSSOM in Windows Internet Explorer 9</a>.aspx)</p>
+<p><img src="img/element-size.png" alt="元素尺寸"></p>
+<h2 id="XMLHttpRequest通用属性和方法"><a href="#XMLHttpRequest通用属性和方法" class="headerlink" title="XMLHttpRequest通用属性和方法"></a>XMLHttpRequest通用属性和方法</h2><ol>
+<li><code>readyState</code>:表示请求状态的整数，取值：<ul>
+<li>UNSENT（0）：对象已创建</li>
+<li>OPENED（1）：open()成功调用，在这个状态下，可以为xhr设置请求头，或者使用send()发送请求</li>
+<li>HEADERS_RECEIVED(2)：所有重定向已经自动完成访问，并且最终响应的HTTP头已经收到</li>
+<li>LOADING(3)：响应体正在接收</li>
+<li>DONE(4)：数据传输完成或者传输产生错误</li>
+</ul>
+</li>
+<li><code>onreadystatechange</code>：readyState改变时调用的函数</li>
+<li><code>status</code>：服务器返回的HTTP状态码（如，200， 404）</li>
+<li><code>statusText</code>:服务器返回的HTTP状态信息（如，OK，No Content）</li>
+<li><code>responseText</code>:作为字符串形式的来自服务器的完整响应</li>
+<li><code>responseXML</code>: Document对象，表示服务器的响应解析成的XML文档</li>
+<li><code>abort()</code>:取消异步HTTP请求</li>
+<li><code>getAllResponseHeaders()</code>: 返回一个字符串，包含响应中服务器发送的全部HTTP报头。每个报头都是一个用冒号分隔开的名/值对，并且使用一个回车/换行来分隔报头行</li>
+<li><code>getResponseHeader(headerName)</code>:返回headName对应的报头值</li>
+<li><code>open(method, url, asynchronous [, user, password])</code>:初始化准备发送到服务器上的请求。method是HTTP方法，不区分大小写；url是请求发送的相对或绝对URL；asynchronous表示请求是否异步；user和password提供身份验证</li>
+<li><code>setRequestHeader(name, value)</code>:设置HTTP报头</li>
+<li><code>send(body)</code>:对服务器请求进行初始化。参数body包含请求的主体部分，对于POST请求为键值对字符串；对于GET请求，为null</li>
+</ol>
+<h2 id="focus-blur与focusin-focusout的区别与联系"><a href="#focus-blur与focusin-focusout的区别与联系" class="headerlink" title="focus/blur与focusin/focusout的区别与联系"></a>focus/blur与focusin/focusout的区别与联系</h2><ol>
+<li>focus/blur不冒泡，focusin/focusout冒泡</li>
+<li>focus/blur兼容性好，focusin/focusout在除FireFox外的浏览器下都保持良好兼容性，如需使用事件托管，可考虑在FireFox下使用事件捕获elem.addEventListener(‘focus’, handler, true)</li>
+<li>可获得焦点的元素：<ol>
+<li>window</li>
+<li>链接被点击或键盘操作</li>
+<li>表单空间被点击或键盘操作</li>
+<li>设置<code>tabindex</code>属性的元素被点击或键盘操作</li>
+</ol>
+</li>
+</ol>
+<h2 id="mouseover-mouseout与mouseenter-mouseleave的区别与联系"><a href="#mouseover-mouseout与mouseenter-mouseleave的区别与联系" class="headerlink" title="mouseover/mouseout与mouseenter/mouseleave的区别与联系"></a>mouseover/mouseout与mouseenter/mouseleave的区别与联系</h2><ol>
+<li>mouseover/mouseout是标准事件，<strong>所有浏览器都支持</strong>；mouseenter/mouseleave是IE5.5引入的特有事件后来被DOM3标准采纳，现代标准浏览器也支持</li>
+<li>mouseover/mouseout是<strong>冒泡</strong>事件；mouseenter/mouseleave<strong>不冒泡</strong>。需要为<strong>多个元素监听鼠标移入/出事件时，推荐mouseover/mouseout托管，提高性能</strong></li>
+<li>标准事件模型中event.target表示发生移入/出的元素,<strong>vent.relatedTarget</strong>对应移出/如元素；在老IE中event.srcElement表示发生移入/出的元素，<strong>event.toElement</strong>表示移出的目标元素，<strong>event.fromElement</strong>表示移入时的来源元素</li>
+</ol>
+<p>例子：鼠标从div#target元素移出时进行处理，判断逻辑如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;div id=&quot;target&quot;&gt;&lt;span&gt;test&lt;/span&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">var target = document.getElementById(&apos;target&apos;);</div><div class="line">if (target.addEventListener) &#123;</div><div class="line">  target.addEventListener(&apos;mouseout&apos;, mouseoutHandler, false);</div><div class="line">&#125; else if (target.attachEvent) &#123;</div><div class="line">  target.attachEvent(&apos;onmouseout&apos;, mouseoutHandler);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function mouseoutHandler(e) &#123;</div><div class="line">  e = e || window.event;</div><div class="line">  var target = e.target || e.srcElement;</div><div class="line"></div><div class="line">  // 判断移出鼠标的元素是否为目标元素</div><div class="line">  if (target.id !== &apos;target&apos;) &#123;</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 判断鼠标是移出元素还是移到子元素</div><div class="line">  var relatedTarget = event.relatedTarget || e.toElement;</div><div class="line">  while (relatedTarget !== target</div><div class="line">    &amp;&amp; relatedTarget.nodeName.toUpperCase() !== &apos;BODY&apos;) &#123;</div><div class="line">    relatedTarget = relatedTarget.parentNode;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 如果相等，说明鼠标在元素内部移动</div><div class="line">  if (relatedTarget === target) &#123;</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 执行需要操作</div><div class="line">  //alert(&apos;鼠标移出&apos;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="sessionStorage-localStorage-cookie区别"><a href="#sessionStorage-localStorage-cookie区别" class="headerlink" title="sessionStorage,localStorage,cookie区别"></a>sessionStorage,localStorage,cookie区别</h2><ol>
+<li>都会在浏览器端保存，有大小限制，同源限制</li>
+<li>cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。cookie数据始终在同源的http请求中携带（即使不需要），会在浏览器和服务器间来回传递。cookie会在请求时发送到服务器，作为会话标识，服务器可修改cookie；web storage不会发送到服务器,sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。</li>
+<li>cookie有path概念，子路径可以访问父路径cookie，父路径不能访问子路径cookie</li>
+<li>有效期：cookie在设置的有效期内有效，默认为浏览器关闭；sessionStorage在窗口关闭前有效，localStorage长期有效，直到用户删除</li>
+<li>共享：sessionStorage不能共享，localStorage在同源文档之间共享，cookie在同源且符合path规则的文档之间共享</li>
+<li>localStorage的修改会促发其他文档窗口的update事件</li>
+<li>cookie有secure属性要求HTTPS传输</li>
+<li>存储大小：浏览器不能保存超过300个cookie，单个服务器不能超过20个，每个cookie不能超过4k。web storage大小支持能达到5M</li>
+</ol>
+<h2 id="javascript跨域通信"><a href="#javascript跨域通信" class="headerlink" title="javascript跨域通信"></a>javascript跨域通信</h2><p>同源：两个文档同源需满足</p>
+<ol>
+<li>协议相同</li>
+<li>域名相同</li>
+<li>端口相同</li>
+</ol>
+<p>跨域通信：js进行DOM操作、通信时如果目标与当前窗口不满足同源条件，浏览器为了安全会阻止跨域操作。跨域通信通常有以下方法</p>
+<ul>
+<li>如果是log之类的简单<strong>单项通信</strong>，新建<code>&lt;img&gt;</code>,<code>&lt;script&gt;</code>,<code>&lt;link&gt;</code>,<code>&lt;iframe&gt;</code>元素，通过src，href属性设置为目标url。实现跨域请求</li>
+<li>如果请求<strong>json数据</strong>，使用<code>&lt;script&gt;</code>进行jsonp请求</li>
+<li>现代浏览器中<strong>多窗口通信</strong>使用HTML5规范的targetWindow.postMessage(data, origin);其中data是需要发送的对象，origin是目标窗口的origin。window.addEventListener(‘message’, handler, false);handler的event.data是postMessage发送来的数据，event.origin是发送窗口的origin，event.source是发送消息的窗口引用</li>
+<li>内部服务器代理请求跨域url，然后返回数据</li>
+<li>跨域请求数据，现代浏览器可使用HTML5规范的CORS功能，只要目标服务器返回HTTP头部<strong><code>Access-Control-Allow-Origin: *</code></strong>即可像普通ajax一样访问跨域资源</li>
+</ul>
+<h2 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h2><ul>
+<li>JSONP：</li>
+</ul>
+<p>原理是：动态插入<code>script</code>标签，通过<code>script</code>标签引入一个<code>js</code>文件，这个js文件载入成功后会执行我们在url参数中指定的函数，并且会把我们需要的<code>json</code>数据作为参数传入。</p>
+<p>由于同源策略的限制，<code>XmlHttpRequest</code>只允许请求当前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过<code>script</code>标签实现跨域请求，然后在服务端输出JSON数据并执行回调函数，从而解决了跨域的数据请求。</p>
+<p>优点是兼容性好，简单易用，支持浏览器与服务器双向通信。缺点是只支持GET请求。</p>
+<p><code>JSONP</code>：<code>json+padding</code>（内填充），顾名思义，就是把JSON填充到一个盒子里<br>​<br>​<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line"> function createJs(sUrl)&#123;</div><div class="line"></div><div class="line"> var oScript = document.createElement(&apos;script&apos;);</div><div class="line"></div><div class="line"> oScript.type = &apos;text/javascript&apos;;</div><div class="line"></div><div class="line"> oScript.src = sUrl;</div><div class="line"></div><div class="line"> document.getElementsByTagName(&apos;head&apos;)[0].appendChild(oScript);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> createJs(&apos;jsonp.js&apos;);</div><div class="line"></div><div class="line"> box(&#123;</div><div class="line"></div><div class="line"> &apos;name&apos;: &apos;test&apos;</div><div class="line"></div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> function box(json)&#123;</div><div class="line"></div><div class="line"> alert(json.name);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>CORS</li>
+</ul>
+<p>服务器端对于<code>CORS</code>的支持，主要就是通过设置<code>Access-Control-Allow-Origin</code>来进行的。如果浏览器检测到相应的设置，就可以允许<code>Ajax</code>进行跨域的访问。</p>
+<ul>
+<li>通过修改document.domain来跨子域</li>
+</ul>
+<p>将子域和主域的<code>document.domain</code>设为同一个主域.前提条件：这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用<code>document.domain</code>进行跨域</p>
+<p>主域相同的使用<code>document.domain</code></p>
+<ul>
+<li>使用window.name来进行跨域</li>
+</ul>
+<p><code>window</code>对象有个<code>name</code>属性，该属性有个特征：即在一个窗口(window)的生命周期内,窗口载入的所有的页面都是共享一个<code>window.name</code>的，每个页面对<code>window.name</code>都有读写的权限，<code>window.name</code>是持久存在一个窗口载入过的所有页面中的</p>
+<ul>
+<li>使用HTML5中新引进的<code>window.postMessage</code>方法来跨域传送数据</li>
+</ul>
+<p>还有flash、在服务器上设置代理页面等跨域方式。个人认为<code>window.name</code>的方法既不复杂，也能兼容到几乎所有浏览器，这真是极好的一种跨域方法。</p>
+<h2 id="如何实现浏览器内多个标签页之间的通信"><a href="#如何实现浏览器内多个标签页之间的通信" class="headerlink" title="如何实现浏览器内多个标签页之间的通信?"></a>如何实现浏览器内多个标签页之间的通信?</h2><p>WebSocket、SharedWorker<br>也可以调用localstorge、cookies等本地存储方式。<br>localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，我们通过监听事件，控制它的值来进行页面信息通信。<br>注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常。</p>
+<h2 id="childNodes和children的区别"><a href="#childNodes和children的区别" class="headerlink" title="childNodes和children的区别"></a>childNodes和children的区别</h2><p>对于DOM元素，children是指DOM Object类型的子对象，不包括tag之间隐形存在的TextNode，而childNodes包括tag之间隐形存在的TextNode对象。</p>
+<h2 id="defer和async的区别"><a href="#defer和async的区别" class="headerlink" title="defer和async的区别"></a>defer和async的区别</h2><p>当浏览器碰到 <code>script</code> 脚本的时候：</p>
+<ol>
+<li><code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code>没有 <code>defer</code> 或 <code>async</code>，浏览器会立即加载并执行指定的脚本，“立即”指的是在渲染该 <code>script</code> 标签之下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。</li>
+<li><code>&lt;script async src=&quot;script.js&quot;&gt;&lt;/script&gt;</code>有 <code>async</code>，加载和渲染后续文档元素的过程将和 <code>script.js</code> 的加载与执行并行进行（异步）。</li>
+<li><code>&lt;script defer src=&quot;myscript.js&quot;&gt;&lt;/script&gt;</code>有 <code>defer</code>，加载后续文档元素的过程将和 <code>script.js</code> 的加载并行进行（异步），但是 <code>script.js</code> 的执行要在所有元素解析完成之后，<code>DOMContentLoaded</code> 事件触发之前完成。</li>
+</ol>
+<h2 id="javascript有哪几种数据类型"><a href="#javascript有哪几种数据类型" class="headerlink" title="javascript有哪几种数据类型"></a>javascript有哪几种数据类型</h2><p>六种基本数据类型</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>string</li>
+<li>boolean</li>
+<li>number</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Symbol" target="_blank" rel="external">symbol</a>(ES6)</li>
+</ul>
+<p>一种引用类型</p>
+<ul>
+<li>Object</li>
+<li><p>js的数据类型</p>
+</li>
+<li><p>typeof用以检测一个变量是不是基本数据类型的变量，返回的是字符串有六种可能:”number”,”string”,”boolean”,”object”（NULL,数组,对象）,”function”(函数）,”undefined”</p>
+</li>
+<li>instanceof用于判断一个变量是否某个对象的实例</li>
+</ul>
+<p>##js有哪些内置对象？<br>数据封装类对象：Object、Array、Boolean、Number 和 String<br>其他对象：Function、Arguments、Math、Date、RegExp、Error  </p>
+<h2 id="什么闭包-闭包有什么用"><a href="#什么闭包-闭包有什么用" class="headerlink" title="什么闭包,闭包有什么用"></a>什么闭包,闭包有什么用</h2><p><strong>闭包是在某个作用域内定义的函数，它可以访问这个作用域内的所有变量</strong>。闭包作用域链通常包括三个部分：</p>
+<ol>
+<li>函数本身作用域。</li>
+<li>闭包定义时的作用域。</li>
+<li>全局作用域。</li>
+</ol>
+<p>闭包，官方对闭包的解释是：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。闭包的特点：<br>（1）作为一个函数变量的一个引用，当函数返回时，其处于激活状态。<br>（2） 一个闭包就是当一个函数返回时，一个没有释放资源的栈区。<br>简单的说，Javascript允许使用内部函数—即函数定义和函数表达式位于另一个函数的函数体内。而且，这些内部函数可以访问它们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。 </p>
+<p>闭包常见用途：</p>
+<ol>
+<li>创建特权方法用于访问控制</li>
+<li>事件处理程序及回调</li>
+</ol>
+<h2 id="javascript有哪几种方法定义函数"><a href="#javascript有哪几种方法定义函数" class="headerlink" title="javascript有哪几种方法定义函数"></a>javascript有哪几种方法定义函数</h2><ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function" target="_blank" rel="external">函数声明表达式</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function" target="_blank" rel="external">function操作符</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" rel="external">Function 构造函数</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/arrow_functions" target="_blank" rel="external">ES6:arrow function</a></li>
+</ol>
+<p>重要参考资料：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope" target="_blank" rel="external">MDN:Functions_and_function_scope</a></p>
+<h2 id="应用程序存储和离线web应用"><a href="#应用程序存储和离线web应用" class="headerlink" title="应用程序存储和离线web应用"></a>应用程序存储和离线web应用</h2><p>HTML5新增应用程序缓存，允许web应用将应用程序自身保存到用户浏览器中，用户离线状态也能访问。<br>1.为html元素设置manifest属性:<code>&lt;html manifest=&quot;myapp.appcache&quot;&gt;</code>，其中后缀名只是一个约定，真正识别方式是通过<code>text/cache-manifest</code>作为MIME类型。所以需要配置服务器保证设置正确<br>2.manifest文件首行为<code>CACHE MANIFEST</code>，其余就是要缓存的URL列表，每个一行，相对路径都相对于manifest文件的url。注释以#开头<br>3.url分为三种类型：<code>CACHE</code>:为默认类型。<code>NETWORK</code>：表示资源从不缓存。 <code>FALLBACK</code>:每行包含两个url，第二个URL是指需要加载和存储在缓存中的资源， 第一个URL是一个前缀。任何匹配该前缀的URL都不会缓存，如果从网络中载入这样的URL失败的话，就会用第二个URL指定的缓存资源来替代。以下是一个文件例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CACHE MANIFEST</div><div class="line"></div><div class="line">CACHE:</div><div class="line">myapp.html</div><div class="line">myapp.css</div><div class="line">myapp.js</div><div class="line"></div><div class="line">FALLBACK:</div><div class="line">videos/ offline_help.html</div><div class="line"></div><div class="line">NETWORK:</div><div class="line">cgi/</div></pre></td></tr></table></figure>
+<h2 id="客户端存储localStorage和sessionStorage"><a href="#客户端存储localStorage和sessionStorage" class="headerlink" title="客户端存储localStorage和sessionStorage"></a>客户端存储localStorage和sessionStorage</h2><ul>
+<li>localStorage有效期为永久，sessionStorage有效期为顶层窗口关闭前</li>
+<li>同源文档可以读取并修改localStorage数据，sessionStorage只允许同一个窗口下的文档访问，如通过iframe引入的同源文档。</li>
+<li>Storage对象通常被当做普通javascript对象使用：<strong>通过设置属性来存取字符串值</strong>，也可以通过<strong>setItem(key, value)设置</strong>，<strong>getItem(key)读取</strong>，<strong>removeItem(key)删除</strong>，<strong>clear()删除所有数据</strong>，<strong>length表示已存储的数据项数目</strong>，<strong>key(index)返回对应索引的key</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">localStorage.setItem(&apos;x&apos;, 1); // storge x-&gt;1</div><div class="line">localStorage.getItem(&apos;x); // return value of x</div><div class="line"></div><div class="line">// 枚举所有存储的键值对</div><div class="line">for (var i = 0, len = localStorage.length; i &lt; len; ++i ) &#123;</div><div class="line">    var name = localStorage.key(i);</div><div class="line">    var value = localStorage.getItem(name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">localStorage.removeItem(&apos;x&apos;); // remove x</div><div class="line">localStorage.clear();  // remove all data</div></pre></td></tr></table></figure>
+<h2 id="cookie及其操作"><a href="#cookie及其操作" class="headerlink" title="cookie及其操作"></a>cookie及其操作</h2><ul>
+<li>cookie是web浏览器存储的少量数据，最早设计为服务器端使用，作为HTTP协议的扩展实现。cookie数据会自动在浏览器和服务器之间传输。</li>
+<li>通过读写cookie检测是否支持</li>
+<li>cookie属性有<strong>名</strong>，<strong>值</strong>，<strong>max-age</strong>，<strong>path</strong>, <strong>domain</strong>，<strong>secure</strong>；</li>
+<li>cookie默认有效期为浏览器会话，一旦用户关闭浏览器，数据就丢失，通过设置<strong>max-age=seconds</strong>属性告诉浏览器cookie有效期</li>
+<li>cookie作用域通过<strong>文档源</strong>和<strong>文档路径</strong>来确定，通过<strong>path</strong>和<strong>domain</strong>进行配置，web页面同目录或子目录文档都可访问</li>
+<li>通过cookie保存数据的方法为：为document.cookie设置一个符合目标的字符串如下</li>
+<li>读取document.cookie获得’; ‘分隔的字符串，key=value,解析得到结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">document.cookie = &apos;name=qiu; max-age=9999; path=/; domain=domain; secure&apos;;</div><div class="line"></div><div class="line">document.cookie = &apos;name=aaa; path=/; domain=domain; secure&apos;;</div><div class="line">// 要改变cookie的值，需要使用相同的名字、路径和域，新的值</div><div class="line">// 来设置cookie，同样的方法可以用来改变有效期</div><div class="line"></div><div class="line">// 设置max-age为0可以删除指定cookie</div><div class="line"></div><div class="line">//读取cookie，访问document.cookie返回键值对组成的字符串，</div><div class="line">//不同键值对之间用&apos;; &apos;分隔。通过解析获得需要的值</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/qiu-deqing/google/blob/master/module/js/cookieUtil.js" target="_blank" rel="external">cookieUtil.js</a>：自己写的cookie操作工具</p>
+<h2 id="如何删除一个cookie"><a href="#如何删除一个cookie" class="headerlink" title="如何删除一个cookie"></a>如何删除一个cookie</h2><ol>
+<li>将时间设为当前时间往前一点。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var date = new Date();</div><div class="line">date.setDate(date.getDate() - 1);//真正的删除</div><div class="line">`setDate()`方法用于设置一个月的某一天。</div></pre></td></tr></table></figure>
+<p>2.expires的设置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">document.cookie = &apos;user=&apos;+ encodeURIComponent(&apos;name&apos;) + &apos;;expires = &apos; + new Date(0)</div></pre></td></tr></table></figure>
+<h2 id="请你谈谈Cookie的弊端"><a href="#请你谈谈Cookie的弊端" class="headerlink" title="请你谈谈Cookie的弊端"></a>请你谈谈Cookie的弊端</h2><p><code>cookie</code>虽然在持久保存客户端数据提供了方便，分担了服务器存储的负担，但还是有很多局限性的。</p>
+<p>第一：每个特定的域名下最多生成20个<code>cookie</code><br>1.IE6或更低版本最多20个cookie<br>2.IE7和之后的版本最后可以有50个cookie。<br>3.Firefox最多50个cookie<br>4.chrome和Safari没有做硬性限制 </p>
+<p><code>IE</code>和<code>Opera</code> 会清理近期最少使用的<code>cookie</code>，<code>Firefox</code>会随机清理<code>cookie</code>。</p>
+<p><code>cookie</code>的最大大约为<code>4096</code>字节，为了兼容性，一般不能超过<code>4095</code>字节。</p>
+<p>IE 提供了一种存储可以持久化用户数据，叫做<code>userdata</code>，从<code>IE5.0</code>就开始支持。每个数据最多128K，每个域名下最多1M。这个持久化数据放在缓存中，如果缓存没有清理，那么会一直存在。</p>
+<blockquote>
+<p>优点：极高的扩展性和可用性<br>1.通过良好的编程，控制保存在cookie中的session对象的大小。<br>2.通过加密和安全传输技术（SSL），减少cookie被破解的可能性。<br>3.只在cookie中存放不敏感数据，即使被盗也不会有重大损失。<br>4.控制cookie的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的cookie。 </p>
+<p>缺点：<br>1.<code>Cookie</code>数量和长度的限制。每个domain最多只能有20条cookie，每个cookie长度不能超过4KB，否则会被截掉.<br>2.安全性问题。如果cookie被人拦截了，那人就可以取得所有的session信息。即使加密也与事无补，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。<br>3.有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用。 </p>
+</blockquote>
+<h2 id="浏览器本地存储"><a href="#浏览器本地存储" class="headerlink" title="浏览器本地存储"></a>浏览器本地存储</h2><p>在较高版本的浏览器中，<code>js</code>提供了<code>sessionStorage</code>和<code>globalStorage</code>。在<code>HTML5</code>中提供了<code>localStorage</code>来取代<code>globalStorage</code>。</p>
+<p><code>html5</code>中的<code>Web Storage</code>包括了两种存储方式：<code>sessionStorage</code>和<code>localStorage</code>。</p>
+<p><code>sessionStorage</code>用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此<code>sessionStorage</code>不是一种持久化的本地存储，仅仅是会话级别的存储。</p>
+<p>而<code>localStorage</code>用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。</p>
+<h2 id="web-storage和cookie的区别"><a href="#web-storage和cookie的区别" class="headerlink" title="web storage和cookie的区别"></a>web storage和cookie的区别</h2><p><code>Web Storage</code>的概念和<code>cookie</code>相似，区别是它是为了更大容量存储设计的。<code>Cookie</code>的大小是受限的，并且每次你请求一个新的页面的时候<code>Cookie</code>都会被发送过去，这样无形中浪费了带宽，另外<code>cookie</code>还需要指定作用域，不可以跨域调用。</p>
+<p>除此之外，<code>Web Storage</code>拥有<code>setItem,getItem,removeItem,clear</code>等方法，不像<code>cookie</code>需要前端开发者自己封装<code>setCookie，getCookie</code>。</p>
+<p>但是<code>cookie</code>也是不可以或缺的：<code>cookie</code>的作用是与服务器进行交互，作为<code>HTTP</code>规范的一部分而存在 ，而<code>Web Storage</code>仅仅是为了在本地“存储”数据而生</p>
+<p>浏览器的支持除了<code>IE７</code>及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，值得一提的是IE总是办好事，例如IE7、IE6中的<code>userData</code>其实就是<code>javascript</code>本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持<code>web storage</code>。</p>
+<p><code>localStorage</code>和<code>sessionStorage</code>都具有相同的操作方法，例如<code>setItem、getItem</code>和<code>removeItem</code>等</p>
+<h2 id="cookie-和session-的区别："><a href="#cookie-和session-的区别：" class="headerlink" title="cookie 和session 的区别："></a>cookie 和session 的区别：</h2><p>1、cookie数据存放在客户的浏览器上，session数据放在服务器上。 2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗 考虑到安全应当使用session。<br>3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能 考虑到减轻服务器性能方面，应当使用COOKIE。<br>4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。<br>5、所以个人建议： 将登陆信息等重要信息存放为SESSION 其他信息如果需要保留，可以放在COOKIE中 </p>
+<h2 id="javascript有哪些方法定义对象"><a href="#javascript有哪些方法定义对象" class="headerlink" title="javascript有哪些方法定义对象"></a>javascript有哪些方法定义对象</h2><ol>
+<li>对象字面量： <code>var obj = {};</code></li>
+<li>构造函数： <code>var obj = new Object();</code></li>
+<li>Object.create(): <code>var obj = Object.create(Object.prototype);</code></li>
+</ol>
+<h2 id="javascript对象的几种创建方式"><a href="#javascript对象的几种创建方式" class="headerlink" title="javascript对象的几种创建方式"></a>javascript对象的几种创建方式</h2><p> 1，工厂模式<br> 2，构造函数模式<br> 3，原型模式<br> 4，混合构造函数和原型模式<br> 5，动态原型模式<br> 6，寄生构造函数模式<br> 7，稳妥构造函数模式 </p>
+<h2 id="运算符判断相等的流程是怎样的"><a href="#运算符判断相等的流程是怎样的" class="headerlink" title="===运算符判断相等的流程是怎样的"></a>===运算符判断相等的流程是怎样的</h2><ol>
+<li>如果两个值不是相同类型，它们不相等</li>
+<li>如果两个值都是null或者都是undefined，它们相等</li>
+<li>如果两个值都是布尔类型true或者都是false，它们相等</li>
+<li>如果其中有一个是<strong>NaN</strong>，它们不相等</li>
+<li>如果都是数值型并且数值相等，他们相等， -0等于0</li>
+<li>如果他们都是字符串并且在相同位置包含相同的16位值，他它们相等；如果在长度或者内容上不等，它们不相等；两个字符串显示结果相同但是编码不同==和===都认为他们不相等</li>
+<li>如果他们指向相同对象、数组、函数，它们相等；如果指向不同对象，他们不相等</li>
+</ol>
+<h2 id="运算符判断相等的流程是怎样的-1"><a href="#运算符判断相等的流程是怎样的-1" class="headerlink" title="==运算符判断相等的流程是怎样的"></a>==运算符判断相等的流程是怎样的</h2><ol>
+<li>如果两个值类型相同，按照===比较方法进行比较</li>
+<li>如果类型不同，使用如下规则进行比较<ol>
+<li>如果其中一个值是null，另一个是undefined，它们相等</li>
+<li>如果一个值是<strong>数字</strong>另一个是<strong>字符串</strong>，将<strong>字符串转换为数字</strong>进行比较</li>
+<li>如果有布尔类型，将<strong>true转换为1，false转换为0</strong>，然后用==规则继续比较</li>
+<li>如果一个值是对象，另一个是数字或字符串，将对象转换为原始值然后用==规则继续比较</li>
+<li><strong>其他所有情况都认为不相等</strong></li>
+</ol>
+</li>
+</ol>
+<h2 id="对象到字符串的转换步骤"><a href="#对象到字符串的转换步骤" class="headerlink" title="对象到字符串的转换步骤"></a>对象到字符串的转换步骤</h2><ol>
+<li>如果对象有toString()方法，javascript调用它。如果返回一个原始值（primitive value如：string number boolean）,将这个值转换为字符串作为结果</li>
+<li>如果对象没有toString()方法或者返回值不是原始值，javascript寻找对象的valueOf()方法，如果存在就调用它，返回结果是原始值则转为字符串作为结果</li>
+<li>否则，javascript不能从toString()或者valueOf()获得一个原始值，此时throws a TypeError</li>
+</ol>
+<h2 id="对象到数字的转换步骤"><a href="#对象到数字的转换步骤" class="headerlink" title="对象到数字的转换步骤"></a>对象到数字的转换步骤</h2><ol>
+<li>如果对象有valueOf()方法并且返回元素值，javascript将返回值转换为数字作为结果</li>
+<li>否则，如果对象有toString()并且返回原始值，javascript将返回结果转换为数字作为结果</li>
+<li>否则，throws a TypeError</li>
+</ol>
+<h2 id="lt-gt-lt-gt-的比较规则"><a href="#lt-gt-lt-gt-的比较规则" class="headerlink" title="&lt;,&gt;,&lt;=,&gt;=的比较规则"></a>&lt;,&gt;,&lt;=,&gt;=的比较规则</h2><p>所有比较运算符都支持任意类型，但是<strong>比较只支持数字和字符串</strong>，所以需要执行必要的转换然后进行比较，转换规则如下:</p>
+<ol>
+<li>如果操作数是对象，转换为原始值：如果valueOf方法返回原始值，则使用这个值，否则使用toString方法的结果，如果转换失败则报错</li>
+<li>经过必要的对象到原始值的转换后，如果两个操作数都是字符串，按照字母顺序进行比较（他们的16位unicode值的大小）</li>
+<li>否则，如果有一个操作数不是字符串，<strong>将两个操作数转换为数字</strong>进行比较</li>
+</ol>
+<h2 id="运算符工作流程"><a href="#运算符工作流程" class="headerlink" title="+运算符工作流程"></a>+运算符工作流程</h2><ol>
+<li>如果有操作数是对象，转换为原始值</li>
+<li>此时如果有<strong>一个操作数是字符串</strong>，其他的操作数都转换为字符串并执行连接</li>
+<li>否则：<strong>所有操作数都转换为数字并执行加法</strong></li>
+</ol>
+<h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><ol>
+<li>回调函数，这是异步编程最基本的方法。</li>
+<li>事件监听，另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</li>
+<li>发布/订阅，上一节的”事件”，完全可以理解成”信号”。</li>
+<li>Promises对象，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。</li>
+</ol>
+<h2 id="异步加载和延迟加载"><a href="#异步加载和延迟加载" class="headerlink" title="异步加载和延迟加载"></a>异步加载和延迟加载</h2><p>1.异步加载的方案： 动态插入script标签<br>2.通过ajax去获取js代码，然后通过eval执行<br>3.script标签上添加defer或者async属性<br>4.创建并插入iframe，让它异步执行js<br>5.延迟加载：有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。</p>
+<h2 id="函数内部arguments变量有哪些特性-有哪些属性-如何将它转换为数组"><a href="#函数内部arguments变量有哪些特性-有哪些属性-如何将它转换为数组" class="headerlink" title="函数内部arguments变量有哪些特性,有哪些属性,如何将它转换为数组"></a>函数内部arguments变量有哪些特性,有哪些属性,如何将它转换为数组</h2><ul>
+<li>arguments所有函数中都包含的一个局部变量，是一个类数组对象，对应函数调用时的实参。如果函数定义同名参数会在调用时覆盖默认对象</li>
+<li>arguments[index]分别对应函数调用时的实参，并且通过arguments修改实参时会同时修改实参</li>
+<li>arguments.length为实参的个数（Function.length表示形参长度）</li>
+<li>arguments.callee为当前正在执行的函数本身，使用这个属性进行递归调用时需注意this的变化</li>
+<li>arguments.caller为调用当前函数的函数（已被遗弃）</li>
+<li>转换为数组：<code>var args = Array.prototype.slice.call(arguments, 0);</code></li>
+</ul>
+<h2 id="DOM事件模型是如何的-编写一个EventUtil工具类实现事件管理兼容"><a href="#DOM事件模型是如何的-编写一个EventUtil工具类实现事件管理兼容" class="headerlink" title="DOM事件模型是如何的,编写一个EventUtil工具类实现事件管理兼容"></a>DOM事件模型是如何的,编写一个EventUtil工具类实现事件管理兼容</h2><ul>
+<li>DOM事件包含捕获（capture）和冒泡（bubble）两个阶段：捕获阶段事件从window开始触发事件然后通过祖先节点一次传递到触发事件的DOM元素上；冒泡阶段事件从初始元素依次向祖先节点传递直到window</li>
+<li>标准事件监听elem.addEventListener(type, handler, capture)/elem.removeEventListener(type, handler, capture)：handler接收保存事件信息的event对象作为参数，event.target为触发事件的对象，handler调用上下文this为绑定监听器的对象，event.preventDefault()取消事件默认行为，event.stopPropagation()/event.stopImmediatePropagation()取消事件传递</li>
+<li>老版本IE事件监听elem.attachEvent(‘on’+type, handler)/elem.detachEvent(‘on’+type, handler)：handler不接收event作为参数，事件信息保存在window.event中，触发事件的对象为event.srcElement，handler执行上下文this为window使用闭包中调用handler.call(elem, event)可模仿标准模型，然后返回闭包，保证了监听器的移除。event.returnValue为false时取消事件默认行为，event.cancleBubble为true时取消时间传播</li>
+<li>通常利用事件冒泡机制托管事件处理程序提高程序性能。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 跨浏览器事件处理工具。只支持冒泡。不支持捕获</div><div class="line"> * @author  (qiu_deqing@126.com)</div><div class="line"> */</div><div class="line"></div><div class="line">var EventUtil = &#123;</div><div class="line">    getEvent: function (event) &#123;</div><div class="line">        return event || window.event;</div><div class="line">    &#125;,</div><div class="line">    getTarget: function (event) &#123;</div><div class="line">        return event.target || event.srcElement;</div><div class="line">    &#125;,</div><div class="line">    // 返回注册成功的监听器，IE中需要使用返回值来移除监听器</div><div class="line">    on: function (elem, type, handler) &#123;</div><div class="line">        if (elem.addEventListener) &#123;</div><div class="line">            elem.addEventListener(type, handler, false);</div><div class="line">            return handler;</div><div class="line">        &#125; else if (elem.attachEvent) &#123;</div><div class="line">            var wrapper = function () &#123;</div><div class="line">              var event = window.event;</div><div class="line">              event.target = event.srcElement;</div><div class="line">              handler.call(elem, event);</div><div class="line">            &#125;;</div><div class="line">            elem.attachEvent(&apos;on&apos; + type, wrapper);</div><div class="line">            return wrapper;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    off: function (elem, type, handler) &#123;</div><div class="line">        if (elem.removeEventListener) &#123;</div><div class="line">            elem.removeEventListener(type, handler, false);</div><div class="line">        &#125; else if (elem.detachEvent) &#123;</div><div class="line">            elem.detachEvent(&apos;on&apos; + type, handler);</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    preventDefault: function (event) &#123;</div><div class="line">        if (event.preventDefault) &#123;</div><div class="line">            event.preventDefault();</div><div class="line">        &#125; else if (&apos;returnValue&apos; in event) &#123;</div><div class="line">            event.returnValue = false;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    stopPropagation: function (event) &#123;</div><div class="line">        if (event.stopPropagation) &#123;</div><div class="line">            event.stopPropagation();</div><div class="line">        &#125; else if (&apos;cancelBubble&apos; in event) &#123;</div><div class="line">            event.cancelBubble = true;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    /**</div><div class="line">     * keypress事件跨浏览器获取输入字符</div><div class="line">     * 某些浏览器在一些特殊键上也触发keypress，此时返回null</div><div class="line">     **/</div><div class="line">     getChar: function (event) &#123;</div><div class="line">        if (event.which == null) &#123;</div><div class="line">            return String.fromCharCode(event.keyCode);  // IE</div><div class="line">        &#125;</div><div class="line">        else if (event.which != 0 &amp;&amp; event.charCode != 0) &#123;</div><div class="line">            return String.fromCharCode(event.which);    // the rest</div><div class="line">        &#125;</div><div class="line">        else &#123;</div><div class="line">            return null;    // special key</div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="评价一下三种方法实现继承的优缺点-并改进"><a href="#评价一下三种方法实现继承的优缺点-并改进" class="headerlink" title="评价一下三种方法实现继承的优缺点,并改进"></a>评价一下三种方法实现继承的优缺点,并改进</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function Shape() &#123;&#125;</div><div class="line"></div><div class="line">function Rect() &#123;&#125;</div><div class="line"></div><div class="line">// 方法1</div><div class="line">Rect.prototype = new Shape();</div><div class="line"></div><div class="line">// 方法2</div><div class="line">Rect.prototype = Shape.prototype;</div><div class="line"></div><div class="line">// 方法3</div><div class="line">Rect.prototype = Object.create(Shape.prototype);</div><div class="line"></div><div class="line">Rect.prototype.area = function () &#123;</div><div class="line">  // do something</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>方法1：</p>
+<ol>
+<li>优点：正确设置原型链实现继承</li>
+<li>优点：父类实例属性得到继承，原型链查找效率提高，也能为一些属性提供合理的默认值</li>
+<li>缺点：父类实例属性为引用类型时，不恰当地修改会导致所有子类被修改</li>
+<li>缺点：创建父类实例作为子类原型时，可能无法确定构造函数需要的合理参数，这样提供的参数继承给子类没有实际意义，当子类需要这些参数时应该在构造函数中进行初始化和设置</li>
+<li>总结：继承应该是继承方法而不是属性，为子类设置父类实例属性应该是通过在子类构造函数中调用父类构造函数进行初始化</li>
+</ol>
+<p>方法2：</p>
+<ol>
+<li>优点：正确设置原型链实现继承</li>
+<li>缺点：父类构造函数原型与子类相同。修改子类原型添加方法会修改父类</li>
+</ol>
+<p>方法3：</p>
+<ol>
+<li>优点：正确设置原型链且避免方法1.2中的缺点</li>
+<li>缺点：ES5方法需要注意兼容性</li>
+</ol>
+<p>改进：</p>
+<ol>
+<li>所有三种方法应该在子类构造函数中调用父类构造函数实现实例属性初始化</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function Rect() &#123;</div><div class="line">    Shape.call(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>用新创建的对象替代子类默认原型，设置<code>Rect.prototype.constructor = Rect;</code>保证一致性</li>
+<li>第三种方法的polyfill：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function create(obj) &#123;</div><div class="line">    if (Object.create) &#123;</div><div class="line">        return Object.create(obj);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function f() &#123;&#125;;</div><div class="line">    f.prototype = obj;</div><div class="line">    return new f();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="什么叫优雅降级和渐进增强？"><a href="#什么叫优雅降级和渐进增强？" class="headerlink" title="什么叫优雅降级和渐进增强？"></a>什么叫优雅降级和渐进增强？</h2><p>优雅降级：Web站点在所有新式浏览器中都能正常工作，如果用户使用的是老式浏览器，则代码会检查以确认它们是否能正常工作。由于IE独特的盒模型布局问题，针对不同版本的IE的hack实践过优雅降级了,为那些无法支持功能的浏览器增加候选方案，使之在旧式浏览器上以某种形式降级体验却不至于完全失效.<br>渐进增强：从被所有浏览器支持的基本功能开始，逐步地添加那些只有新式浏览器才支持的功能,向页面增加无害于基础浏览器的额外样式和功能的。当浏览器支持时，它们会自动地呈现出来并发挥作用。</p>
+<h2 id="哪些常见操作会造成内存泄漏？"><a href="#哪些常见操作会造成内存泄漏？" class="headerlink" title="哪些常见操作会造成内存泄漏？"></a>哪些常见操作会造成内存泄漏？</h2><p>内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。<br>垃圾回收器定期扫描对象，并计算引用了每个对象的其他对象的数量。如果一个对象的引用数量为 0（没有其他对象引用过该对象），或对该对象的惟一引用是循环的，那么该对象的内存即可回收。<br>setTimeout 的第一个参数使用字符串而非函数的话，会引发内存泄漏。<br>闭包、控制台日志、循环（在两个对象彼此引用且彼此保留时，就会产生一个循环）  </p>
+<h2 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h2><p>一个程序至少有一个进程,一个进程至少有一个线程.<br>线程的划分尺度小于进程，使得多线程程序的并发性高。<br>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。<br>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。  </p>
+<h2 id="常用浏览器的内核-Layout-Engine"><a href="#常用浏览器的内核-Layout-Engine" class="headerlink" title="常用浏览器的内核(Layout Engine)?"></a>常用浏览器的内核(Layout Engine)?</h2><p>浏览器：IE，Chrome，FireFox，Safari，Opera。<br>内核：Trident，Gecko，Presto，Webkit。</p>
+<h2 id="介绍一下你对浏览器内核的理解？"><a href="#介绍一下你对浏览器内核的理解？" class="headerlink" title="介绍一下你对浏览器内核的理解？"></a>介绍一下你对浏览器内核的理解？</h2><p>主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。<br>渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。<br>JS引擎则：解析和执行javascript来实现网页的动态效果。<br>最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。  </p>
+<h2 id="this对象的理解"><a href="#this对象的理解" class="headerlink" title="this对象的理解"></a>this对象的理解</h2><p>this总是指向函数的直接调用者（而非间接调用者）；<br>如果有new关键字，this指向new出来的那个对象；<br>在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；  </p>
+<h2 id="eval是做什么的？"><a href="#eval是做什么的？" class="headerlink" title="eval是做什么的？"></a>eval是做什么的？</h2><p>它的功能是把对应的字符串解析成JS代码并运行；<br>应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。<br>由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);  </p>
+<h2 id="DOM怎样添加、移除、移动、复制、创建和查找节点"><a href="#DOM怎样添加、移除、移动、复制、创建和查找节点" class="headerlink" title="DOM怎样添加、移除、移动、复制、创建和查找节点"></a>DOM怎样添加、移除、移动、复制、创建和查找节点</h2><pre><code>// 创建新节点
+
+createDocumentFragment()    //创建一个DOM片段
+
+createElement()   //创建一个具体的元素
+
+createTextNode()   //创建一个文本节点
+
+// 添加、移除、替换、插入
+
+appendChild()
+
+removeChild()
+
+replaceChild()
+
+insertBefore() //在已有的子节点前插入一个新的子节点
+
+// 查找
+
+getElementsByTagName()    //通过标签名称
+
+getElementsByName()    //通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于name值的)
+
+getElementById()    //通过元素Id，唯一性
+</code></pre><h2 id="null和undefined的区别？"><a href="#null和undefined的区别？" class="headerlink" title="null和undefined的区别？"></a>null和undefined的区别？</h2><p>null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。<br>undefined：<br>（1）变量被声明了，但没有赋值时，就等于undefined。<br>（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。<br>（3）对象没有赋值的属性，该属性的值为undefined。<br>（4）函数没有返回值时，默认返回undefined。<br>null：<br>（1） 作为函数的参数，表示该函数的参数不是对象。<br>（2） 作为对象原型链的终点。  </p>
+<h2 id="new操作符具体干了什么呢"><a href="#new操作符具体干了什么呢" class="headerlink" title="new操作符具体干了什么呢?"></a>new操作符具体干了什么呢?</h2><p>（1）创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。<br>（2）属性和方法被加入到 this 引用的对象中。<br>（3）新创建的对象由 this 所引用，并且最后隐式的返回 this 。<br><code>var obj = {}; obj.__proto__ = Base.prototype; Base.call(obj);</code></p>
+<h2 id="JSON-的了解？"><a href="#JSON-的了解？" class="headerlink" title="JSON 的了解？"></a>JSON 的了解？</h2><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小。<br>格式：采用键值对，例如：{‘age’:’12’, ‘name’:’back’} </p>
+<h2 id="call-和-apply-的区别和作用"><a href="#call-和-apply-的区别和作用" class="headerlink" title="call() 和 apply() 的区别和作用"></a>call() 和 apply() 的区别和作用</h2><p>apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。<br>如：function.apply(this,[1,2,3]);<br>call()的第一个参数是上下文，后续是实例传入的参数序列。<br>如：function.call(this,1,2,3);  </p>
+<h2 id="如何获取UA？"><a href="#如何获取UA？" class="headerlink" title="如何获取UA？"></a>如何获取UA？</h2><pre><code>function whatBrowser() {  
+
+    document.Browser.Name.value=navigator.appName;  
+
+    document.Browser.Version.value=navigator.appVersion;  
+
+    document.Browser.Code.value=navigator.appCodeName;  
+
+    document.Browser.Agent.value=navigator.userAgent;  
+
+}  
+</code></pre><h2 id="array的一些属性和方法"><a href="#array的一些属性和方法" class="headerlink" title="array的一些属性和方法"></a>array的一些属性和方法</h2><pre><code>arr.toString();
+arr.valueOf();
+arr.toLocaleString();
+arr.join(); //注意不传参数或传undefined，用，分隔
+
+arr.push(); //添加到数组末尾，返回长度
+arr.pop(); //移除数组末尾，返回移除的数
+arr.shift();  // 移除数组第一个，返回该数
+arr.unshift(); // 添加到数组前端，返回长度
+
+arr.reverse(); 
+arr.sort(function(a,b){return a-b;});
+
+arr.concat(&quot;a&quot;,[&quot;b&quot;,&quot;c&quot;]);//且arr不改变
+arr.slice(1,4);//有4就是1~3，没4就是1~末尾
+arr.splice(2,3,&quot;q&quot;,&quot;q&quot;);//删除2开始的3个数，再添加后续，返回删除数的数组
+
+arr.indexOf(num);//严格全等 === 
+arr.lastIndexOf(4,4);
+
+arr.forEach(function(item, index, arr){
+    s += item;},this);
+arr.every();//every true return true
+arr.filter(); //return true
+arr.map(); //return func(arr)
+arr.some(); any true return true
+
+arr.reduce(function(prev,cur,index,array){});
+arr.reduceRight(function(prev,cur,index,array){});  
+</code></pre><h2 id="Bootstrap-框架的网格系统工作原理"><a href="#Bootstrap-框架的网格系统工作原理" class="headerlink" title="Bootstrap 框架的网格系统工作原理"></a>Bootstrap 框架的网格系统工作原理</h2><p>1 、数据行 (.row) 必须包含在容器（ .container ）中，以便为其赋予合适的对齐方式和内距 (padding) 。<br>    如： <div class=" container "><br>       <div class=" row "></div><br>       </div><br>2 、在行 (.row) 中可以添加列 (.column) ，但列数之和不能超过平分的总列数，比如 12 。<br>    如： <div class="container"><br>            <div class="row"><br>            <div class="col-md- 4 "></div><br>            <div class="col-md- 8 "></div><br>3 、具体内容应当放置在列容器（ column ）之内，而且只有列（ column ）才可以作为行容器 (.row) 的直接子元素<br>4 、通过设置内距（ padding ）从而创建列与列之间的间距。然后通过为第一列和最后一列设置负值的外距（ margin ）来抵消内距 (padding) 的影响<br>详： <a href="http://www.imooc.com/code/2325" target="_blank" rel="external">http://www.imooc.com/code/2325</a></div></div></p>
+<h2 id="解释一下-JavaScript-的同源策略"><a href="#解释一下-JavaScript-的同源策略" class="headerlink" title="解释一下 JavaScript 的同源策略"></a>解释一下 JavaScript 的同源策略</h2><p><strong>概念:</strong><br>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。<br>这里的同源策略指的是：协议，域名，端口相同，同源策略是一种安全协议。<br>指一段脚本只能读取来自同一来源的窗口和文档的属性。<br><strong>为什么要有同源限制？</strong><br>我们举例说明：比如一个黑客程序，他利用Iframe把真正的银行登录页面嵌到他的页面上，当你使用真实的用户名，密码登录时，他的页面就可以通过Javascript读取到你的表单中input中的内容，这样用户名，密码就轻松到手了。<br><strong>缺点：</strong><br>现在网站的<code>JS</code> 都会进行压缩，一些文件用了严格模式，而另一些没有。这时这些本来是严格模式的文件，被 <code>merge</code> 后，这个串就到了文件的中间，不仅没有指示严格模式，反而在压缩后浪费了字节。</p>
+<h2 id="JavaScript原型，原型链有什么特点"><a href="#JavaScript原型，原型链有什么特点" class="headerlink" title="JavaScript原型，原型链有什么特点"></a>JavaScript原型，原型链有什么特点</h2><p>（1）原型对象也是普通的对象，是对象一个自带隐式的 <strong>proto</strong> 属性，原型也有可能有自己的原型，如果一个原型对象的原型不为null的话，我们就称之为原型链。<br>（2）原型链是由一些用来继承和共享属性的对象组成的（有限的）对象链。 </p>
+<h2 id="说说你对作用域链的理解"><a href="#说说你对作用域链的理解" class="headerlink" title="说说你对作用域链的理解"></a>说说你对作用域链的理解</h2><p>作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到<code>window</code>对象即被终止，作用域链向下访问变量是不被允许的。</p>
+<h2 id="XML和JSON的区别？"><a href="#XML和JSON的区别？" class="headerlink" title="XML和JSON的区别？"></a><code>XML</code>和<code>JSON</code>的区别？</h2><p>(1).数据体积方面。<br>JSON相对于XML来讲，数据的体积小，传递的速度更快些。<br>(2).数据交互方面。<br>JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互。<br>(3).数据描述方面。<br>JSON对数据的描述性比XML较差。<br>(4).传输速度方面。<br>JSON的速度要远远快于XML。</p>
+<h2 id="谈谈你对webpack的看法"><a href="#谈谈你对webpack的看法" class="headerlink" title="谈谈你对webpack的看法"></a>谈谈你对webpack的看法</h2><p><code>WebPack</code> 是一个模块打包工具，你可以使用<code>WebPack</code>管理你的模块依赖，并编绎输出模块们所需的静态文件。它能够很好地管理、打包Web开发中所用到的<code>HTML、Javascript、CSS</code>以及各种静态文件（图片、字体等），让开发过程更加高效。对于不同类型的资源，<code>webpack</code>有对应的模块加载器。<code>webpack</code>模块打包器会分析模块间的依赖关系，最后 生成了优化且合并后的静态资源。</p>
+<p><code>webpack</code>的两大特色：   </p>
+<ol>
+<li>code splitting（可以自动完成） </li>
+<li>loader 可以处理各种类型的静态文件，并且支持串联操作 </li>
+</ol>
+<p><code>webpack</code> 是以<code>commonJS</code>的形式来书写脚本滴，但对 <code>AMD/CMD</code> 的支持也很全面，方便旧项目进行代码迁移。</p>
+<p><code>webpack</code>具有<code>requireJs</code>和<code>browserify</code>的功能，但仍有很多自己的新特性：</p>
+<ol>
+<li>对 CommonJS 、 AMD 、ES6的语法做了兼容</li>
+<li>对js、css、图片等资源文件都支持打包</li>
+<li>串联式模块加载器以及插件机制，让其具有更好的灵活性和扩展性，例如提供对CoffeeScript、ES6的支持</li>
+<li>有独立的配置文件webpack.config.js</li>
+<li>可以将代码切割成不同的chunk，实现按需加载，降低了初始化时间</li>
+<li>支持 SourceUrls 和 SourceMaps，易于调试</li>
+<li>具有强大的Plugin接口，大多是内部插件，使用起来比较灵活</li>
+<li>webpack 使用异步 IO 并具有多级缓存。这使得 webpack 很快且在增量编译上更加快</li>
+</ol>
+<h2 id="说说你对AMD和Commonjs的理解"><a href="#说说你对AMD和Commonjs的理解" class="headerlink" title="说说你对AMD和Commonjs的理解"></a>说说你对AMD和Commonjs的理解</h2><p><code>CommonJS</code>是服务器端模块的规范，Node.js采用了这个规范。<code>CommonJS</code>规范加载模块是同步的，也就是说，只有加载完成，才能执行后面的操作。AMD规范则是非同步加载模块，允许指定回调函数。</p>
+<p><code>AMD</code>推荐的风格通过返回一个对象做为模块对象，<code>CommonJS</code>的风格通过对<code>module.exports</code>或<code>exports</code>的属性赋值来达到暴露模块对象的目的。</p>
+<blockquote>
+<p>详情：<a href="https://segmentfault.com/a/1190000004888589" target="_blank" rel="external">也谈webpack及其开发模式</a></p>
+</blockquote>
+<h2 id="iframe有那些缺点？"><a href="#iframe有那些缺点？" class="headerlink" title="iframe有那些缺点？"></a>iframe有那些缺点？</h2><p>iframe会阻塞主页面的Onload事件；<br>搜索引擎的检索程序无法解读这种页面，不利于SEO;<br>iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。<br>使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以绕开以上两个问题。  </p>
+<h2 id="对前端模块化的认识"><a href="#对前端模块化的认识" class="headerlink" title="对前端模块化的认识"></a>对前端模块化的认识</h2><ul>
+<li>AMD 是 <code>RequireJS</code> 在推广过程中对模块定义的规范化产出。</li>
+<li>CMD 是 <code>SeaJS</code> 在推广过程中对模块定义的规范化产出。<br><code>AMD</code> 是提前执行，<code>CMD</code> 是延迟执行。<br><code>AMD</code>推荐的风格通过返回一个对象做为模块对象，<code>CommonJS</code>的风格通过对<code>module.exports</code>或<code>exports</code>的属性赋值来达到暴露模块对象的目的。</li>
+<li>CMD模块方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">define(function(require, exports, module) &#123;</div><div class="line"> // 模块代码</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Javascript垃圾回收方法"><a href="#Javascript垃圾回收方法" class="headerlink" title="Javascript垃圾回收方法"></a>Javascript垃圾回收方法</h2><blockquote>
+<p>标记清除（mark and sweep）</p>
+</blockquote>
+<p>这是JavaScript最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开环境”。</p>
+<p>垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了</p>
+<blockquote>
+<p>引用计数(reference counting)</p>
+</blockquote>
+<p>在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。</p>
+<p>在IE中虽然<code>JavaScript</code>对象通过标记清除的方式进行垃圾回收，但BOM与DOM对象却是通过引用计数回收垃圾的，<br>也就是说只要涉及<code>BOM</code>及DOM就会出现循环引用问题。</p>
+<h2 id="什么是Etag？"><a href="#什么是Etag？" class="headerlink" title="什么是Etag？"></a>什么是Etag？</h2><p>当发送一个服务器请求时，浏览器首先会进行缓存过期判断。浏览器根据缓存过期时间判断缓存文件是否过期。  </p>
+<p>情景一：若没有过期，则不向服务器发送请求，直接使用缓存中的结果，此时我们在浏览器控制台中可以看到  <code>200 OK</code>(from cache) ，此时的情况就是完全使用缓存，浏览器和服务器没有任何交互的。</p>
+<p>情景二：若已过期，则向服务器发送请求，此时请求中会带上①中设置的文件修改时间，和<code>Etag</code></p>
+<p>然后，进行资源更新判断。服务器根据浏览器传过来的文件修改时间，判断自浏览器上一次请求之后，文件是不是没有被修改过；根据<code>Etag</code>，判断文件内容自上一次请求之后，有没有发生变化</p>
+<p>情形一：若两种判断的结论都是文件没有被修改过，则服务器就不给浏览器发<code>index.html</code>的内容了，直接告诉它，文件没有被修改过，你用你那边的缓存吧—— <code>304 Not Modified</code>，此时浏览器就会从本地缓存中获取<code>index.html</code>的内容。此时的情况叫协议缓存，浏览器和服务器之间有一次请求交互。  </p>
+<p>情形二：若修改时间和文件内容判断有任意一个没有通过，则服务器会受理此次请求，之后的操作同①</p>
+<p>① 只有get请求会被缓存，post请求不会</p>
+<h2 id="Expires和Cache-Control"><a href="#Expires和Cache-Control" class="headerlink" title="Expires和Cache-Control"></a>Expires和Cache-Control</h2><p><code>Expires</code>要求客户端和服务端的时钟严格同步。<code>HTTP1.1</code>引入<code>Cache-Control</code>来克服Expires头的限制。如果max-age和Expires同时出现，则max-age有更高的优先级。<br>​<br>    Cache-Control: no-cache, private, max-age=0</p>
+<pre><code>ETag: abcde
+
+Expires: Thu, 15 Apr 2014 20:00:00 GMT
+
+Pragma: private
+
+Last-Modified: $now // RFC1123 format
+</code></pre><h2 id="ETag应用"><a href="#ETag应用" class="headerlink" title="ETag应用:"></a>ETag应用:</h2><p><code>Etag</code>由服务器端生成，客户端通过<code>If-Match</code>或者说<code>If-None-Match</code>这个条件判断请求来验证资源是否修改。常见的是使用<code>If-None-Match</code>。请求一个文件的流程可能如下：</p>
+<p>====第一次请求===<br>​<br>    1.客户端发起 HTTP GET 请求一个文件； 2.服务器处理请求，返回文件内容和一堆Header，当然包括Etag(例如”2e681a-6-5d044840”)(假设服务器支持Etag生成和已经开启了Etag).状态码200 </p>
+<p>====第二次请求===<br>​<br>    客户端发起 HTTP GET 请求一个文件，注意这个时候客户端同时发送一个If-None-Match头，这个头的内容就是第一次请求时服务器返回的Etag：2e681a-6-5d0448402.服务器判断发送过来的Etag和计算出来的Etag匹配，因此If-None-Match为False，不返回200，返回304，客户端继续使用本地缓存；流程很简单，问题是，如果服务器又设置了Cache-Control:max-age和Expires呢，怎么办 </p>
+<p>答案是同时使用，也就是说在完全匹配<code>If-Modified-Since</code>和<code>If-None-Match</code>即检查完修改时间和<code>Etag</code>之后，</p>
+<p>服务器才能返回304.(不要陷入到底使用谁的问题怪圈)</p>
+<p>为什么使用Etag请求头?</p>
+<p>Etag 主要为了解决 <code>Last-Modified</code> 无法解决的一些问题。</p>
+<h2 id="Web-Worker-和webSocket"><a href="#Web-Worker-和webSocket" class="headerlink" title="Web Worker 和webSocket"></a>Web Worker 和webSocket</h2><p>worker主线程:</p>
+<ol>
+<li>通过 worker = new Worker( url ) 加载一个JS文件来创建一个worker，同时返回一个worker实例。</li>
+<li>通过worker.postMessage( data ) 方法来向worker发送数据。</li>
+<li>绑定worker.onmessage方法来接收worker发送过来的数据。</li>
+<li>可以使用 worker.terminate() 来终止一个worker的执行。</li>
+</ol>
+<p><code>WebSocket</code>是<code>Web</code>应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个<code>HTML5</code>协议，<code>WebSocket</code>的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。</p>
+<h2 id="栈和队列的区别"><a href="#栈和队列的区别" class="headerlink" title="栈和队列的区别?"></a>栈和队列的区别?</h2><p>栈的插入和删除操作都是在一端进行的，而队列的操作却是在两端进行的。 队列先进先出，栈先进后出。 栈只允许在表尾一端进行插入和删除，而队列只允许在表尾一端进行插入，在表头一端进行删除 </p>
+<h2 id="栈和堆的区别？"><a href="#栈和堆的区别？" class="headerlink" title="栈和堆的区别？"></a>栈和堆的区别？</h2><p>栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。 堆区（heap） — 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收。 堆（数据结构）：堆可以被看成是一棵树，如：堆排序； 栈（数据结构）：一种先进后出的数据结构。</p>
+<h2 id="你觉得jQuery或zepto源码有哪些写的好的地方"><a href="#你觉得jQuery或zepto源码有哪些写的好的地方" class="headerlink" title="你觉得jQuery或zepto源码有哪些写的好的地方"></a>你觉得jQuery或zepto源码有哪些写的好的地方</h2><p>(答案仅供参考)<br><code>jquery</code>源码封装在一个匿名函数的自执行环境中，有助于防止变量的全局污染，然后通过传入window对象参数，可以使window对象作为局部变量使用，好处是当<code>jquery</code>中访问window对象的时候，就不用将作用域链退回到顶层作用域了，从而可以更快的访问<code>window</code>对象。同样，传入<code>undefined</code>参数，可以缩短查找undefined时的作用域链。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">(function( window, undefined ) &#123;</div><div class="line"> //用一个函数域包起来，就是所谓的沙箱</div><div class="line"> //在这里边var定义的变量，属于这个函数域内的局部变量，避免污染全局</div><div class="line"> //把当前沙箱需要的外部变量通过函数参数引入进来</div><div class="line"> //只要保证参数对内提供的接口的一致性，你还可以随意替换传进来的这个参数</div><div class="line"> window.jQuery = window.$ = jQuery;</div><div class="line">&#125;)( window );</div></pre></td></tr></table></figure>
+<p>jquery将一些原型属性和方法封装在了<code>jquery.prototype</code>中，为了缩短名称，又赋值给了<code>jquery.fn</code>，这是很形象的写法。<br>有一些数组或对象的方法经常能使用到，jQuery将其保存为局部变量以提高访问速度。<br><code>jquery</code>实现的链式调用可以节约代码，所返回的都是同一个对象，可以提高代码效率。</p>
+<h2 id="ES6的了解"><a href="#ES6的了解" class="headerlink" title="ES6的了解"></a>ES6的了解</h2><p>新增模板字符串（为JavaScript提供了简单的字符串插值功能）、箭头函数（操作符左边为输入的参数，而右边则是进行的操作以及返回的值<code>Inputs=&gt;outputs</code>。）、<code>for-of</code>（用来遍历数据—例如数组中的值。）<code>arguments</code>对象可被不定参数和默认参数完美代替。<code>ES6</code>将<code>promise</code>对象纳入规范，提供了原生的<code>Promise</code>对象。增加了<code>let</code>和<code>const</code>命令，用来声明变量。增加了块级作用域。let命令实际上就增加了块级作用域。ES6规定，<code>var</code>命令和<code>function</code>命令声明的全局变量，属于全局对象的属性；<code>let</code>命令、<code>const</code>命令、<code>class</code>命令声明的全局变量，不属于全局对象的属性。。还有就是引入<code>module</code>模块的概念</p>
+<h2 id="js继承方式及其优缺点"><a href="#js继承方式及其优缺点" class="headerlink" title="js继承方式及其优缺点"></a>js继承方式及其优缺点</h2><blockquote>
+<p>原型链继承的缺点<br>一是字面量重写原型会中断关系，使用引用类型的原型，并且子类型还无法给超类型传递参数。 </p>
+<p>借用构造函数（类式继承）<br>借用构造函数虽然解决了刚才两种问题，但没有原型，则复用无从谈起。所以我们需要原型链+借用构造函数的模式，这种模式称为组合继承 </p>
+<p>组合式继承<br>组合式继承是比较常用的一种继承方法，其背后的思路是 使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，既通过在原型上定义方法实现了函数复用，又保证每个实例都有它自己的属性。 </p>
+</blockquote>
+<p>具体请看：<a href="http://segmentfault.com/a/1190000002440502" target="_blank" rel="external">JavaScript继承方式详解</a></p>
+<h2 id="如何评价AngularJS和BackboneJS"><a href="#如何评价AngularJS和BackboneJS" class="headerlink" title="如何评价AngularJS和BackboneJS"></a>如何评价AngularJS和BackboneJS</h2><p><code>backbone</code>具有依赖性，依赖<code>underscore.js</code>。<code>Backbone + Underscore + jQuery(or Zepto)</code> 就比一个<code>AngularJS</code> 多出了2 次HTTP请求.</p>
+<p><code>Backbone</code>的<code>Model</code>没有与UI视图数据绑定，而是需要在View中自行操作DOM来更新或读取UI数据。<code>AngularJS</code>与此相反，Model直接与UI视图绑定，<code>Model</code>与UI视图的关系，通过<code>directive</code>封装，<code>AngularJS</code>内置的通用<code>directive</code>，就能实现大部分操作了，也就是说，基本不必关心<code>Model</code>与UI视图的关系，直接操作Model就行了，UI视图自动更新。</p>
+<p><code>AngularJS</code>的<code>directive</code>，你输入特定数据，他就能输出相应UI视图。是一个比较完善的前端MVW框架，包含模板，数据双向绑定，路由，模块化，服务，依赖注入等所有功能，模板功能强大丰富，并且是声明式的，自带了丰富的 Angular 指令。</p>
+<h2 id="用过哪些设计模式？"><a href="#用过哪些设计模式？" class="headerlink" title="用过哪些设计模式？"></a>用过哪些设计模式？</h2><ul>
+<li><p>工厂模式：<br>主要好处就是可以消除对象间的耦合，通过使用工程方法而不是new关键字。将所有实例化的代码集中在一个位置防止代码重复。 工厂模式解决了重复实例化的问题 ，但还有一个问题,那就是识别问题，因为根本无法 搞清楚他们到底是哪个对象的实例。 function createObject(name,age,profession){//集中实例化的函数var obj = new Object(); obj.name = name; obj.age = age; obj.profession = profession; obj.move = function () { return this.name + ‘ at ‘ + this.age + ‘ engaged in ‘ + this.profession; }; return obj; } var test1 = createObject(‘trigkit4’,22,’programmer’);//第一个实例var test2 = createObject(‘mike’,25,’engineer’);//第二个实例 </p>
+</li>
+<li><p>构造函数模式<br>使用构造函数的方法 ，即解决了重复实例化的问题 ，又解决了对象识别的问题，该模式与工厂模式的不同之处在于：<br>​1.构造函数方法没有显示的创建对象 (new Object());<br>​2.直接将属性和方法赋值给 this 对象;<br>​3.没有 renturn 语句。   </p>
+</li>
+</ul>
+<h2 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h2><p>怎样添加、移除、移动、复制、创建和查找节点。</p>
+<ul>
+<li><p>1）创建新节点<br>createDocumentFragment() //创建一个DOM片段 createElement() //创建一个具体的元素 createTextNode() //创建一个文本节点 </p>
+</li>
+<li><p>2）添加、移除、替换、插入<br>appendChild() removeChild() replaceChild() insertBefore() //并没有insertAfter() </p>
+</li>
+<li><p>3）查找<br>getElementsByTagName() //通过标签名称 getElementsByName() //通过元素的Name属性的值(IE容错能力较强， 会得到一个数组，其中包括id等于name值的) getElementById() //通过元素Id，唯一性 </p>
+</li>
+</ul>
+<h2 id="WEB应用从服务器主动推送Data到客户端有那些方式？"><a href="#WEB应用从服务器主动推送Data到客户端有那些方式？" class="headerlink" title="WEB应用从服务器主动推送Data到客户端有那些方式？"></a>WEB应用从服务器主动推送Data到客户端有那些方式？</h2><p>Javascript数据推送</p>
+<ul>
+<li><code>Commet</code>：基于HTTP长连接的服务器推送技术</li>
+<li>基于<code>WebSocket</code>的推送方案</li>
+<li><code>SSE</code>（Server-Send Event）：服务器推送数据新方式</li>
+</ul>
+<h2 id="说说你对Promise的理解"><a href="#说说你对Promise的理解" class="headerlink" title="说说你对Promise的理解"></a>说说你对Promise的理解</h2><p>依照 <code>Promise/A+</code> 的定义，<code>Promise</code> 有四种状态：<br>​<br>    pending: 初始状态, 非 fulfilled 或 rejected. fulfilled: 成功的操作. rejected: 失败的操作. settled: Promise已被fulfilled或rejected，且不是pending </p>
+<p>另外， <code>fulfilled</code> 与 <code>rejected</code> 一起合称 <code>settled</code>。</p>
+<p><code>Promise</code> 对象用来进行延迟(deferred) 和异步(asynchronous ) 计算。</p>
+<blockquote>
+<p>Promise 的构造函数</p>
+</blockquote>
+<p>构造一个 <code>Promise</code>，最基本的用法如下：<br>​<br>    var promise = new Promise(function(resolve, reject) {</p>
+<pre><code> if (...) { // succeed
+
+ resolve(result);
+
+ } else { // fails
+
+ reject(Error(errMessage));
+
+ }
+
+});
+</code></pre><p><code>Promise</code> 实例拥有 <code>then</code> 方法（具有 <code>then</code> 方法的对象，通常被称为 <code>thenable</code>）。它的使用方法如下：<br>​<br>    promise.then(onFulfilled, onRejected)</p>
+<p>接收两个函数作为参数，一个在 <code>fulfilled</code> 的时候被调用，一个在 <code>rejected</code> 的时候被调用，接收参数就是 <code>future，onFulfilled</code> 对应 <code>resolve</code>, <code>onRejected</code> 对应 <code>reject</code>。</p>
+<h2 id="document-write-的用法"><a href="#document-write-的用法" class="headerlink" title="document.write()的用法"></a>document.write()的用法</h2><p><code>document.write()</code>方法可以用在两个方面：页面载入过程中用实时脚本创建页面内容，以及用延时脚本创建本窗口或新窗口的内容。</p>
+<p><code>document.write</code>只能重绘整个页面。<code>innerHTML</code>可以重绘页面的一部分</p>
+<h2 id="git-fetch和git-pull的区别"><a href="#git-fetch和git-pull的区别" class="headerlink" title="git fetch和git pull的区别"></a>git fetch和git pull的区别</h2><p>git pull：相当于是从远程获取最新版本并merge到本地<br>git fetch：相当于是从远程获取最新版本到本地，不会自动merge</p>
+<h2 id="说说你对MVC和MVVM的理解"><a href="#说说你对MVC和MVVM的理解" class="headerlink" title="说说你对MVC和MVVM的理解"></a>说说你对MVC和MVVM的理解</h2><ul>
+<li><p><code>MVC</code></p>
+<p>  View 传送指令到 Controller Controller 完成业务逻辑后，要求 Model 改变状态 Model 将新的数据发送到 View，用户得到反馈 </p>
+</li>
+</ul>
+<p>所有通信都是单向的。</p>
+<p><code>Angular</code>它采用双向绑定（data-binding）：<code>View</code>的变动，自动反映在 <code>ViewModel</code>，反之亦然。<br>​<br>组成部分Model、View、ViewModel View：UI界面 ViewModel：它是View的抽象，负责View与Model之间信息转换，将View的Command传送到Model； Model：数据访问层 </p>
+<h2 id="attribute和property的区别是什么？"><a href="#attribute和property的区别是什么？" class="headerlink" title="attribute和property的区别是什么？"></a>attribute和property的区别是什么？</h2><p><code>attribute</code>是<code>dom</code>元素在文档中作为<code>html</code>标签拥有的属性；</p>
+<p><code>property</code>就是<code>dom</code>元素在<code>js</code>中作为对象拥有的属性。</p>
+<p>所以：</p>
+<p>对于<code>html</code>的标准属性来说，<code>attribute</code>和<code>property</code>是同步的，是会自动更新的，</p>
+<p>但是对于自定义的属性来说，他们是不同步的，</p>
+<h2 id="说说mongoDB和MySQL的区别"><a href="#说说mongoDB和MySQL的区别" class="headerlink" title="说说mongoDB和MySQL的区别"></a>说说mongoDB和MySQL的区别</h2><p><code>MySQL</code>是传统的关系型数据库，<code>MongoDB</code>则是非关系型数据库</p>
+<p><code>mongodb</code>以<code>BSON</code>结构（二进制）进行存储，对海量数据存储有着很明显的优势。</p>
+<p>对比传统关系型数据库,NoSQL有着非常显著的性能和扩展性优势，与关系型数据库相比，MongoDB的优点有：<br>①弱一致性（最终一致），更能保证用户的访问速度：<br>②文档结构的存储方式，能够更便捷的获取数据。</p>
+<h2 id="讲讲304缓存的原理"><a href="#讲讲304缓存的原理" class="headerlink" title="讲讲304缓存的原理"></a>讲讲304缓存的原理</h2><p>服务器首先产生<code>ETag</code>，服务器可在稍后使用它来判断页面是否已经被修改。本质上，客户端通过将该记号传回服务器要求服务器验证其（客户端）缓存。</p>
+<p>304是HTTP状态码，服务器用来标识这个文件没修改，不返回内容，浏览器在接收到个状态码后，会使用浏览器已缓存的文件</p>
+<p>客户端请求一个页面（A）。 服务器返回页面A，并在给<code>A</code>加上一个<code>ETag</code>。 客户端展现该页面，并将页面连同<code>ETag</code>一起缓存。 客户再次请求页面<code>A</code>，并将上次请求时服务器返回的<code>ETag</code>一起传递给服务器。 服务器检查该<code>ETag</code>，并判断出该页面自上次客户端请求之后还未被修改，直接返回响应<code>304</code>（未修改——<code>Not Modified</code>）和一个空的响应体。</p>
+<h2 id="什么样的前端代码是好的"><a href="#什么样的前端代码是好的" class="headerlink" title="什么样的前端代码是好的"></a>什么样的前端代码是好的</h2><p>高复用低耦合，这样文件小，好维护，而且好扩展。</p>
+<p><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong>$javascript编程部分<strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></p>
+<h2 id="常见排序算法的时间复杂度-空间复杂度"><a href="#常见排序算法的时间复杂度-空间复杂度" class="headerlink" title="常见排序算法的时间复杂度,空间复杂度"></a>常见排序算法的时间复杂度,空间复杂度</h2><p><img src="../../../../images/sort-compare.png" alt="排序算法比较"></p>
+<p><strong>快速排序</strong><br>“快速排序”的思想很简单，整个排序过程只需要三步：<br>（1）在数据集之中，找一个基准点<br>（2）建立两个数组，分别存储左边和右边的数组<br>（3）利用递归进行下次比较<br>　　<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"> function quickSort(arr)&#123;</div><div class="line"> 	if(arr.length&lt;=1)&#123;</div><div class="line"> 		return arr;//如果数组只有一个数，就直接返回；</div><div class="line"> 	&#125;</div><div class="line"> var num = Math.floor(arr.length/2);//找到中间数的索引值，如果是浮点数，则向下取整</div><div class="line"> var numValue = arr.splice(num,1);//找到中间数的值</div><div class="line"> var left = [];</div><div class="line"> var right = [];</div><div class="line"> for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line"> 	if(arr[i]&lt;numValue)&#123;</div><div class="line"> 		left.push(arr[i]);//基准点的左边的数传到左边数组</div><div class="line">	 &#125;</div><div class="line"> 	else&#123;</div><div class="line"> 		right.push(arr[i]);//基准点的右边的数传到右边数组</div><div class="line">	 &#125;</div><div class="line"> &#125;</div><div class="line">	 return quickSort(left).concat([numValue],quickSort(right));//递归不断重复比较</div><div class="line"> &#125;</div><div class="line">	 alert(quickSort([32,45,37,16,2,87]));//弹出“2,16,32,37,45,87”</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">```    </div><div class="line"></div><div class="line">## 找出所有的数字，并乘以10，再返回这个字符串</div><div class="line"></div><div class="line">	var str = &quot;abe35jdj22ff &quot;;</div><div class="line">	var arr = str.split(&quot;&quot;);</div><div class="line">	var pat = /\d/;</div><div class="line">	alert(arr.map(function(item, index, arr) &#123;</div><div class="line">	  if (pat.test(item)) &#123;</div><div class="line">	    item *= 10;</div><div class="line">	  &#125;</div><div class="line">	  return item;</div><div class="line">	&#125;));</div><div class="line"></div><div class="line">## 去除开头和结尾的空格</div><div class="line"></div><div class="line">	str.replace(/\s*/, &quot;&quot;);   </div><div class="line">	str.trim();</div><div class="line"></div><div class="line">## 实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制</div></pre></td></tr></table></figure></p>
+<p>Object.prototype.clone = function(){</p>
+<p> var o = this.constructor === Array ? [] : {};</p>
+<p> for(var e in this){</p>
+<p> o[e] = typeof this[e] === “object” ? this[e].clone() : this[e];</p>
+<p> }</p>
+<p> return o;</p>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">## JS数组去重 </div><div class="line">以下是展示三种方法：  </div><div class="line"></div><div class="line">​```   </div><div class="line">Array.prototype.unique1 = function () &#123;</div><div class="line">  var n = []; //一个新的临时数组</div><div class="line">  for (var i = 0; i &lt; this.length; i++) //遍历当前数组</div><div class="line">  &#123;</div><div class="line">    //如果当前数组的第i已经保存进了临时数组，那么跳过，</div><div class="line">    //否则把当前项push到临时数组里面</div><div class="line">    if (n.indexOf(this[i]) == -1) n.push(this[i]);</div><div class="line">  &#125;</div><div class="line">  return n;</div><div class="line">&#125;</div><div class="line">Array.prototype.unique2 = function()</div><div class="line">&#123;</div><div class="line">    var n = &#123;&#125;,r=[]; //n为hash表，r为临时数组</div><div class="line">    for(var i = 0; i &lt; this.length; i++) //遍历当前数组</div><div class="line">    &#123;</div><div class="line">        if (!n[this[i]]) //如果hash表中没有当前项</div><div class="line">        &#123;</div><div class="line">            n[this[i]] = true; //存入hash表</div><div class="line">            r.push(this[i]); //把当前数组的当前项push到临时数组里面</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return r;</div><div class="line">&#125;</div><div class="line">Array.prototype.unique3 = function()</div><div class="line">&#123;</div><div class="line">    var n = [this[0]]; //结果数组</div><div class="line">    for(var i = 1; i &lt; this.length; i++) //从第二项开始遍历</div><div class="line">    &#123;</div><div class="line">        //如果当前数组的第i项在当前数组中第一次出现的位置不是i，</div><div class="line">        //那么表示第i项是重复的，忽略掉。否则存入结果数组</div><div class="line">        if (this.indexOf(this[i]) == i) n.push(this[i]);</div></pre></td></tr></table></figure>
+<h2 id="js操作获取和设置cookie"><a href="#js操作获取和设置cookie" class="headerlink" title="js操作获取和设置cookie"></a>js操作获取和设置cookie</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//创建cookie    function setCookie(name, value, expires, path, domain, secure) &#123;</div><div class="line">    var cookieText = encodeURIComponent(name) + &apos;=&apos; + encodeURIComponent(value);</div><div class="line">    if (expires instanceof Date) &#123;</div><div class="line">        cookieText += &apos;; expires=&apos; + expires;</div><div class="line">    &#125;</div><div class="line">    if (path) &#123;</div><div class="line">        cookieText += &apos;; expires=&apos; + expires;</div><div class="line">    &#125;</div><div class="line">    if (domain) &#123;</div><div class="line">        cookieText += &apos;; domain=&apos; + domain;</div><div class="line">    &#125;</div><div class="line">    if (secure) &#123;</div><div class="line">        cookieText += &apos;; secure&apos;;</div><div class="line">    &#125;</div><div class="line">    document.cookie = cookieText;</div><div class="line">&#125;</div><div class="line">//获取cookie</div><div class="line"></div><div class="line">function getCookie(name) &#123;</div><div class="line">    var cookieName = encodeURIComponent(name) + &apos;=&apos;;</div><div class="line">    var cookieStart = document.cookie.indexOf(cookieName);</div><div class="line">    var cookieValue = null;</div><div class="line">    if (cookieStart &gt; -1) &#123;</div><div class="line">        var cookieEnd = document.cookie.indexOf(&apos;;&apos;, cookieStart);</div><div class="line">        if (cookieEnd == -1) &#123;</div><div class="line">            cookieEnd = document.cookie.length;</div><div class="line">        &#125;</div><div class="line">        cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));</div><div class="line">    &#125;</div><div class="line">    return cookieValue;</div><div class="line">&#125;</div><div class="line">```​   </div><div class="line"> </div><div class="line">## 编写一个方法 求一个字符串的字节长度</div><div class="line">假设：一个英文字符占用一个字节，一个中文字符占用两个字节</div><div class="line"></div><div class="line">​```    </div><div class="line"> function GetBytes(str)&#123;</div><div class="line"></div><div class="line"> var len = str.length;</div><div class="line"></div><div class="line"> var bytes = len;</div><div class="line"></div><div class="line"> for(var i=0; i&lt;len; i++)&#123;</div><div class="line"></div><div class="line"> if (str.charCodeAt(i) &gt; 255) bytes++;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> return bytes;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line">alert(GetBytes(&quot;你好,as&quot;));</div></pre></td></tr></table></figure>
+<h2 id="请用原生js实现一个函数-给页面制定的任意一个元素添加一个透明遮罩-透明度可变-默认0-2-使这个区域点击无效-要求兼容IE8-及各主流浏览器-遮罩层效果如下图所示"><a href="#请用原生js实现一个函数-给页面制定的任意一个元素添加一个透明遮罩-透明度可变-默认0-2-使这个区域点击无效-要求兼容IE8-及各主流浏览器-遮罩层效果如下图所示" class="headerlink" title="请用原生js实现一个函数,给页面制定的任意一个元素添加一个透明遮罩(透明度可变,默认0.2),使这个区域点击无效,要求兼容IE8+及各主流浏览器,遮罩层效果如下图所示:"></a>请用原生js实现一个函数,给页面制定的任意一个元素添加一个透明遮罩(透明度可变,默认0.2),使这个区域点击无效,要求兼容IE8+及各主流浏览器,遮罩层效果如下图所示:</h2><p><img src="../../../../images/element-mask.jpg" alt="遮罩效果"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">#target &#123;</div><div class="line">    width: 200px;</div><div class="line">    height: 300px;</div><div class="line">    margin: 40px;</div><div class="line">    background-color: tomato;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;target&quot;&gt;&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">function addMask(elem, opacity) &#123;</div><div class="line">    opacity = opacity || 0.2;</div><div class="line"></div><div class="line">    var rect = elem.getBoundingClientRect();</div><div class="line">    var style = getComputedStyle(elem, null);</div><div class="line"></div><div class="line">    var mask = document.createElement(&apos;div&apos;);</div><div class="line">    mask.style.position = &apos;absolute&apos;;</div><div class="line">    var marginLeft = parseFloat(style.marginLeft);</div><div class="line">    mask.style.left = (elem.offsetLeft - marginLeft) + &apos;px&apos;;</div><div class="line">    var marginTop = parseFloat(style.marginTop);</div><div class="line">    mask.style.top = (elem.offsetTop - marginTop) + &apos;px&apos;;</div><div class="line">    mask.style.zIndex = 9999;</div><div class="line">    mask.style.opacity = &apos;&apos; + opacity;</div><div class="line">    mask.style.backgroundColor = &apos;#000&apos;;</div><div class="line"></div><div class="line">    mask.style.width = (parseFloat(style.marginLeft) +</div><div class="line">        parseFloat(style.marginRight) + rect.width) + &apos;px&apos;;</div><div class="line">    mask.style.height = (parseFloat(style.marginTop) +</div><div class="line">        parseFloat(style.marginBottom) + rect.height) + &apos;px&apos;;</div><div class="line"></div><div class="line">    elem.parentNode.appendChild(mask);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var target = document.getElementById(&apos;target&apos;);</div><div class="line">addMask(target);</div><div class="line"></div><div class="line">target.addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">    console.log(&apos;click&apos;);</div><div class="line">&#125;, false);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="请用代码写出-今天是星期x-其中x表示当天是星期几-如果当天是星期一-输出应该是”今天是星期一”"><a href="#请用代码写出-今天是星期x-其中x表示当天是星期几-如果当天是星期一-输出应该是”今天是星期一”" class="headerlink" title="请用代码写出(今天是星期x)其中x表示当天是星期几,如果当天是星期一,输出应该是”今天是星期一”"></a>请用代码写出(今天是星期x)其中x表示当天是星期几,如果当天是星期一,输出应该是”今天是星期一”</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var days = [&apos;日&apos;,&apos;一&apos;,&apos;二&apos;,&apos;三&apos;,&apos;四&apos;,&apos;五&apos;,&apos;六&apos;];</div><div class="line">var date = new Date();</div><div class="line"></div><div class="line">console.log(&apos;今天是星期&apos; + days[date.getDay()]);</div></pre></td></tr></table></figure>
+<h2 id="下面这段代码想要循环延时输出结果0-1-2-3-4-请问输出结果是否正确-如果不正确-请说明为什么-并修改循环内的代码使其输出正确结果"><a href="#下面这段代码想要循环延时输出结果0-1-2-3-4-请问输出结果是否正确-如果不正确-请说明为什么-并修改循环内的代码使其输出正确结果" class="headerlink" title="下面这段代码想要循环延时输出结果0 1 2 3 4,请问输出结果是否正确,如果不正确,请说明为什么,并修改循环内的代码使其输出正确结果"></a>下面这段代码想要循环延时输出结果0 1 2 3 4,请问输出结果是否正确,如果不正确,请说明为什么,并修改循环内的代码使其输出正确结果</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; ++i) &#123;</div><div class="line">  setTimeout(function () &#123;</div><div class="line">    console.log(i + &apos; &apos;);</div><div class="line">  &#125;, 100);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不能输出正确结果，因为循环中setTimeout接受的参数函数通过闭包访问变量i。javascript运行环境为单线程，setTimeout注册的函数需要等待线程空闲才能执行，此时for循环已经结束，i值为5.五个定时输出都是5<br>修改方法：将setTimeout放在函数立即调用表达式中，将i值作为参数传递给包裹函数，创建新闭包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; ++i) &#123;</div><div class="line">  (function (i) &#123;</div><div class="line">    setTimeout(function () &#123;</div><div class="line">      console.log(i + &apos; &apos;);</div><div class="line">    &#125;, 100);</div><div class="line">  &#125;(i));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="现有一个Page类-其原型对象上有许多以post开头的方法-如postMsg-另有一拦截函数chekc-只返回ture或false-请设计一个函数-该函数应批量改造原Page的postXXX方法-在保留其原有功能的同时-为每个postXXX方法增加拦截验证功能-当chekc返回true时继续执行原postXXX方法-返回false时不再执行原postXXX方法"><a href="#现有一个Page类-其原型对象上有许多以post开头的方法-如postMsg-另有一拦截函数chekc-只返回ture或false-请设计一个函数-该函数应批量改造原Page的postXXX方法-在保留其原有功能的同时-为每个postXXX方法增加拦截验证功能-当chekc返回true时继续执行原postXXX方法-返回false时不再执行原postXXX方法" class="headerlink" title="现有一个Page类,其原型对象上有许多以post开头的方法(如postMsg);另有一拦截函数chekc,只返回ture或false.请设计一个函数,该函数应批量改造原Page的postXXX方法,在保留其原有功能的同时,为每个postXXX方法增加拦截验证功能,当chekc返回true时继续执行原postXXX方法,返回false时不再执行原postXXX方法"></a>现有一个Page类,其原型对象上有许多以post开头的方法(如postMsg);另有一拦截函数chekc,只返回ture或false.请设计一个函数,该函数应批量改造原Page的postXXX方法,在保留其原有功能的同时,为每个postXXX方法增加拦截验证功能,当chekc返回true时继续执行原postXXX方法,返回false时不再执行原postXXX方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function Page() &#123;&#125;</div><div class="line"></div><div class="line">Page.prototype = &#123;</div><div class="line">  constructor: Page,</div><div class="line"></div><div class="line">  postA: function (a) &#123;</div><div class="line">    console.log(&apos;a:&apos; + a);</div><div class="line">  &#125;,</div><div class="line">  postB: function (b) &#123;</div><div class="line">    console.log(&apos;b:&apos; + b);</div><div class="line">  &#125;,</div><div class="line">  postC: function (c) &#123;</div><div class="line">    console.log(&apos;c:&apos; + c);</div><div class="line">  &#125;,</div><div class="line">  check: function () &#123;</div><div class="line">    return Math.random() &gt; 0.5;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function checkfy(obj) &#123;</div><div class="line">  for (var key in obj) &#123;</div><div class="line">    if (key.indexOf(&apos;post&apos;) === 0 &amp;&amp; typeof obj[key] === &apos;function&apos;) &#123;</div><div class="line">      (function (key) &#123;</div><div class="line">        var fn = obj[key];</div><div class="line">        obj[key] = function () &#123;</div><div class="line">          if (obj.check()) &#123;</div><div class="line">            fn.apply(obj, arguments);</div><div class="line">          &#125;</div><div class="line">        &#125;;</div><div class="line">      &#125;(key));</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125; // end checkfy()</div><div class="line"></div><div class="line">checkfy(Page.prototype);</div><div class="line"></div><div class="line">var obj = new Page();</div><div class="line"></div><div class="line">obj.postA(&apos;checkfy&apos;);</div><div class="line">obj.postB(&apos;checkfy&apos;);</div><div class="line">obj.postC(&apos;checkfy&apos;);</div></pre></td></tr></table></figure>
+<h2 id="完成下面的tool-tip"><a href="#完成下面的tool-tip" class="headerlink" title="完成下面的tool-tip"></a>完成下面的tool-tip</h2><p><img src="../../../../images/tip-box.jpg" alt=""></p>
+<h2 id="编写javascript深度克隆函数deepClone"><a href="#编写javascript深度克隆函数deepClone" class="headerlink" title="编写javascript深度克隆函数deepClone"></a>编写javascript深度克隆函数deepClone</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function deepClone(obj) &#123;</div><div class="line">    var _toString = Object.prototype.toString;</div><div class="line"></div><div class="line">    // null, undefined, non-object, function</div><div class="line">    if (!obj || typeof obj !== &apos;object&apos;) &#123;</div><div class="line">        return obj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // DOM Node</div><div class="line">    if (obj.nodeType &amp;&amp; &apos;cloneNode&apos; in obj) &#123;</div><div class="line">        return obj.cloneNode(true);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Date</div><div class="line">    if (_toString.call(obj) === &apos;[object Date]&apos;) &#123;</div><div class="line">        return new Date(obj.getTime());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // RegExp</div><div class="line">    if (_toString.call(obj) === &apos;[object RegExp]&apos;) &#123;</div><div class="line">        var flags = [];</div><div class="line">        if (obj.global) &#123; flags.push(&apos;g&apos;); &#125;</div><div class="line">        if (obj.multiline) &#123; flags.push(&apos;m&apos;); &#125;</div><div class="line">        if (obj.ignoreCase) &#123; flags.push(&apos;i&apos;); &#125;</div><div class="line"></div><div class="line">        return new RegExp(obj.source, flags.join(&apos;&apos;));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var result = Array.isArray(obj) ? [] :</div><div class="line">        obj.constructor ? new obj.constructor() : &#123;&#125;;</div><div class="line"></div><div class="line">    for (var key in obj ) &#123;</div><div class="line">        result[key] = deepClone(obj[key]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function A() &#123;</div><div class="line">    this.a = a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var a = &#123;</div><div class="line">    name: &apos;qiu&apos;,</div><div class="line">    birth: new Date(),</div><div class="line">    pattern: /qiu/gim,</div><div class="line">    container: document.body,</div><div class="line">    hobbys: [&apos;book&apos;, new Date(), /aaa/gim, 111]</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var c = new A();</div><div class="line">var b = deepClone(c);</div><div class="line">console.log(c.a === b.a);</div><div class="line">console.log(c, b);</div></pre></td></tr></table></figure>
+<h2 id="补充代码-鼠标单击Button1后将Button1移动到Button2的后面"><a href="#补充代码-鼠标单击Button1后将Button1移动到Button2的后面" class="headerlink" title="补充代码,鼠标单击Button1后将Button1移动到Button2的后面"></a>补充代码,鼠标单击Button1后将Button1移动到Button2的后面</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!doctype html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;TEst&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div&gt;</div><div class="line">   &lt;input type=&quot;button&quot; id =&quot;button1&quot; value=&quot;1&quot; /&gt;</div><div class="line">   &lt;input type=&quot;button&quot; id =&quot;button2&quot; value=&quot;2&quot; /&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var btn1 = document.getElementById(&apos;button1&apos;);</div><div class="line">    var btn2 = document.getElementById(&apos;button2&apos;);</div><div class="line"></div><div class="line">    addListener(btn1, &apos;click&apos;, function (event) &#123;</div><div class="line">        btn1.parentNode.insertBefore(btn2, btn1);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    function addListener(elem, type, handler) &#123;</div><div class="line">        if (elem.addEventListener) &#123;</div><div class="line">            elem.addEventListener(type, handler, false);</div><div class="line">            return handler;</div><div class="line">        &#125; else if (elem.attachEvent) &#123;</div><div class="line">            function wrapper() &#123;</div><div class="line">                var event = window.event;</div><div class="line">                event.target = event.srcElement;</div><div class="line">                handler.call(elem, event);</div><div class="line">            &#125;</div><div class="line">            elem.attachEvent(&apos;on&apos; + type, wrapper);</div><div class="line">            return wrapper;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="网页中实现一个计算当年还剩多少时间的倒数计时程序-要求网页上实时动态显示”××年还剩××天××时××分××秒”"><a href="#网页中实现一个计算当年还剩多少时间的倒数计时程序-要求网页上实时动态显示”××年还剩××天××时××分××秒”" class="headerlink" title="网页中实现一个计算当年还剩多少时间的倒数计时程序,要求网页上实时动态显示”××年还剩××天××时××分××秒”"></a>网页中实现一个计算当年还剩多少时间的倒数计时程序,要求网页上实时动态显示”××年还剩××天××时××分××秒”</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!doctype html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;TEst&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">    &lt;span id=&quot;target&quot;&gt;&lt;/span&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    // 为了简化。每月默认30天</div><div class="line">    function getTimeString() &#123;</div><div class="line">        var start = new Date();</div><div class="line">        var end = new Date(start.getFullYear() + 1, 0, 1);</div><div class="line">        var elapse = Math.floor((end - start) / 1000);</div><div class="line"></div><div class="line">        var seconds = elapse % 60 ;</div><div class="line">        var minutes = Math.floor(elapse / 60) % 60;</div><div class="line">        var hours = Math.floor(elapse / (60 * 60)) % 24;</div><div class="line">        var days = Math.floor(elapse / (60 * 60 * 24)) % 30;</div><div class="line">        var months = Math.floor(elapse / (60 * 60 * 24 * 30)) % 12;</div><div class="line">        var years = Math.floor(elapse / (60 * 60 * 24 * 30 * 12));</div><div class="line"></div><div class="line">        return start.getFullYear() + &apos;年还剩&apos; + years + &apos;年&apos; + months + &apos;月&apos; + days + &apos;日&apos;</div><div class="line">            + hours + &apos;小时&apos; + minutes + &apos;分&apos; + seconds + &apos;秒&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function domText(elem, text) &#123;</div><div class="line">        if (text == undefined) &#123;</div><div class="line"></div><div class="line">            if (elem.textContent) &#123;</div><div class="line">                return elem.textContent;</div><div class="line">            &#125; else if (elem.innerText) &#123;</div><div class="line">                return elem.innerText;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (elem.textContent) &#123;</div><div class="line">                elem.textContent = text;</div><div class="line">            &#125; else if (elem.innerText) &#123;</div><div class="line">                elem.innerText = text;</div><div class="line">            &#125; else &#123;</div><div class="line">                elem.innerHTML = text;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var target = document.getElementById(&apos;target&apos;);</div><div class="line"></div><div class="line">    setInterval(function () &#123;</div><div class="line">        domText(target, getTimeString());</div><div class="line">    &#125;, 1000)</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="完成一个函数-接受数组作为参数-数组元素为整数或者数组-数组元素包含整数或数组-函数返回扁平化后的数组"><a href="#完成一个函数-接受数组作为参数-数组元素为整数或者数组-数组元素包含整数或数组-函数返回扁平化后的数组" class="headerlink" title="完成一个函数,接受数组作为参数,数组元素为整数或者数组,数组元素包含整数或数组,函数返回扁平化后的数组"></a>完成一个函数,接受数组作为参数,数组元素为整数或者数组,数组元素包含整数或数组,函数返回扁平化后的数组</h2><p>如：[1, [2, [ [3, 4], 5], 6]] =&gt; [1, 2, 3, 4, 5, 6]</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var data =  [1, [2, [ [3, 4], 5], 6]];</div><div class="line"></div><div class="line">function flat(data, result) &#123;</div><div class="line">    var i, d, len;</div><div class="line">    for (i = 0, len = data.length; i &lt; len; ++i) &#123;</div><div class="line">        d = data[i];</div><div class="line">        if (typeof d === &apos;number&apos;) &#123;</div><div class="line">            result.push(d);</div><div class="line">        &#125; else &#123;</div><div class="line">            flat(d, result);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var result = [];</div><div class="line">flat(data, result);</div><div class="line"></div><div class="line">console.log(result);</div></pre></td></tr></table></figure>
+<h2 id="如何判断一个对象是否为数组"><a href="#如何判断一个对象是否为数组" class="headerlink" title="如何判断一个对象是否为数组"></a>如何判断一个对象是否为数组</h2><p>如果浏览器支持Array.isArray()可以直接判断否则需进行必要判断</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 判断一个对象是否是数组，参数不是对象或者不是数组，返回false</div><div class="line"> *</div><div class="line"> * @param &#123;Object&#125; arg 需要测试是否为数组的对象</div><div class="line"> * @return &#123;Boolean&#125; 传入参数是数组返回true，否则返回false</div><div class="line"> */</div><div class="line">function isArray(arg) &#123;</div><div class="line">    if (typeof arg === &apos;object&apos;) &#123;</div><div class="line">        return Object.prototype.toString.call(arg) === &apos;[object Array]&apos;;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="请评价以下事件监听器代码并给出改进意见"><a href="#请评价以下事件监听器代码并给出改进意见" class="headerlink" title="请评价以下事件监听器代码并给出改进意见"></a>请评价以下事件监听器代码并给出改进意见</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">if (window.addEventListener) &#123;</div><div class="line">  var addListener = function (el, type, listener, useCapture) &#123;</div><div class="line">    el.addEventListener(type, listener, useCapture);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">else if (document.all) &#123;</div><div class="line">  addListener = function (el, type, listener) &#123;</div><div class="line">    el.attachEvent(&apos;on&apos; + type, function () &#123;</div><div class="line">      listener.apply(el);</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>作用：浏览器功能检测实现跨浏览器DOM事件绑定</p>
+<p>优点：</p>
+<ol>
+<li>测试代码只运行一次，根据浏览器确定绑定方法</li>
+<li>通过<code>listener.apply(el)</code>解决IE下监听器this与标准不一致的地方</li>
+<li>在浏览器不支持的情况下提供简单的功能，在标准浏览器中提供捕获功能</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>document.all作为IE检测不可靠，应该使用if(el.attachEvent)</li>
+<li>addListener在不同浏览器下API不一样</li>
+<li><code>listener.apply</code>使this与标准一致但监听器无法移除</li>
+<li>未解决IE下listener参数event。 target问题</li>
+</ol>
+<p>改进:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var addListener;</div><div class="line"></div><div class="line">if (window.addEventListener) &#123;</div><div class="line">  addListener = function (el, type, listener, useCapture) &#123;</div><div class="line">    el.addEventListener(type, listener, useCapture);</div><div class="line">    return listener;</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">else if (window.attachEvent) &#123;</div><div class="line">  addListener = function (el, type, listener) &#123;</div><div class="line">    // 标准化this，event，target</div><div class="line">    var wrapper = function () &#123;</div><div class="line">      var event = window.event;</div><div class="line">      event.target = event.srcElement;</div><div class="line">      listener.call(el, event);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    el.attachEvent(&apos;on&apos; + type, wrapper);</div><div class="line">    return wrapper;</div><div class="line">    // 返回wrapper。调用者可以保存，以后remove</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="如何判断一个对象是否为函数"><a href="#如何判断一个对象是否为函数" class="headerlink" title="如何判断一个对象是否为函数"></a>如何判断一个对象是否为函数</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 判断对象是否为函数，如果当前运行环境对可调用对象（如正则表达式）</div><div class="line"> * 的typeof返回&apos;function&apos;，采用通用方法，否则采用优化方法</div><div class="line"> *</div><div class="line"> * @param &#123;Any&#125; arg 需要检测是否为函数的对象</div><div class="line"> * @return &#123;boolean&#125; 如果参数是函数，返回true，否则false</div><div class="line"> */</div><div class="line">function isFunction(arg) &#123;</div><div class="line">    if (arg) &#123;</div><div class="line">        if (typeof (/./) !== &apos;function&apos;) &#123;</div><div class="line">            return typeof arg === &apos;function&apos;;</div><div class="line">        &#125; else &#123;</div><div class="line">            return Object.prototype.toString.call(arg) === &apos;[object Function]&apos;;</div><div class="line">        &#125;</div><div class="line">    &#125; // end if</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="编写一个函数接受url中query-string为参数-返回解析后的Object-query-string使用application-x-www-form-urlencoded编码"><a href="#编写一个函数接受url中query-string为参数-返回解析后的Object-query-string使用application-x-www-form-urlencoded编码" class="headerlink" title="编写一个函数接受url中query string为参数,返回解析后的Object,query string使用application/x-www-form-urlencoded编码"></a>编写一个函数接受url中query string为参数,返回解析后的Object,query string使用application/x-www-form-urlencoded编码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 解析query string转换为对象，一个key有多个值时生成数组</div><div class="line"> *</div><div class="line"> * @param &#123;String&#125; query 需要解析的query字符串，开头可以是?，</div><div class="line"> * 按照application/x-www-form-urlencoded编码</div><div class="line"> * @return &#123;Object&#125; 参数解析后的对象</div><div class="line"> */</div><div class="line">function parseQuery(query) &#123;</div><div class="line">    var result = &#123;&#125;;</div><div class="line"></div><div class="line">    // 如果不是字符串返回空对象</div><div class="line">    if (typeof query !== &apos;string&apos;) &#123;</div><div class="line">        return result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 去掉字符串开头可能带的?</div><div class="line">    if (query.charAt(0) === &apos;?&apos;) &#123;</div><div class="line">        query = query.substring(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var pairs = query.split(&apos;&amp;&apos;);</div><div class="line">    var pair;</div><div class="line">    var key, value;</div><div class="line">    var i, len;</div><div class="line"></div><div class="line">    for (i = 0, len = pairs.length; i &lt; len; ++i) &#123;</div><div class="line">        pair = pairs[i].split(&apos;=&apos;);</div><div class="line">        // application/x-www-form-urlencoded编码会将&apos; &apos;转换为+</div><div class="line">        key = decodeURIComponent(pair[0]).replace(/\+/g, &apos; &apos;);</div><div class="line">        value = decodeURIComponent(pair[1]).replace(/\+/g, &apos; &apos;);</div><div class="line"></div><div class="line">        // 如果是新key，直接添加</div><div class="line">        if (!(key in result)) &#123;</div><div class="line">            result[key] = value;</div><div class="line">        &#125;</div><div class="line">        // 如果key已经出现一次以上，直接向数组添加value</div><div class="line">        else if (isArray(result[key])) &#123;</div><div class="line">            result[key].push(value);</div><div class="line">        &#125;</div><div class="line">        // key第二次出现，将结果改为数组</div><div class="line">        else &#123;</div><div class="line">            var arr = [result[key]];</div><div class="line">            arr.push(value);</div><div class="line">            result[key] = arr;</div><div class="line">        &#125; // end if-else</div><div class="line">    &#125; // end for</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function isArray(arg) &#123;</div><div class="line">    if (arg &amp;&amp; typeof arg === &apos;object&apos;) &#123;</div><div class="line">        return Object.prototype.toString.call(arg) === &apos;[object Array]&apos;;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div><div class="line">/**</div><div class="line">console.log(parseQuery(&apos;sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8&apos;));</div><div class="line"> */</div></pre></td></tr></table></figure>
+<h2 id="解析一个完整的url-返回Object包含域与window-location相同"><a href="#解析一个完整的url-返回Object包含域与window-location相同" class="headerlink" title="解析一个完整的url,返回Object包含域与window.location相同"></a>解析一个完整的url,返回Object包含域与window.location相同</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 解析一个url并生成window.location对象中包含的域</div><div class="line"> * location:</div><div class="line"> * &#123;</div><div class="line"> *      href: &apos;包含完整的url&apos;,</div><div class="line"> *      origin: &apos;包含协议到pathname之前的内容&apos;,</div><div class="line"> *      protocol: &apos;url使用的协议，包含末尾的:&apos;,</div><div class="line"> *      username: &apos;用户名&apos;, // 暂时不支持</div><div class="line"> *      password: &apos;密码&apos;,  // 暂时不支持</div><div class="line"> *      host: &apos;完整主机名，包含:和端口&apos;,</div><div class="line"> *      hostname: &apos;主机名，不包含端口&apos;</div><div class="line"> *      port: &apos;端口号&apos;,</div><div class="line"> *      pathname: &apos;服务器上访问资源的路径/开头&apos;,</div><div class="line"> *      search: &apos;query string，?开头&apos;,</div><div class="line"> *      hash: &apos;#开头的fragment identifier&apos;</div><div class="line"> * &#125;</div><div class="line"> *</div><div class="line"> * @param &#123;string&#125; url 需要解析的url</div><div class="line"> * @return &#123;Object&#125; 包含url信息的对象</div><div class="line"> */</div><div class="line">function parseUrl(url) &#123;</div><div class="line">    var result = &#123;&#125;;</div><div class="line">    var keys = [&apos;href&apos;, &apos;origin&apos;, &apos;protocol&apos;, &apos;host&apos;,</div><div class="line">                &apos;hostname&apos;, &apos;port&apos;, &apos;pathname&apos;, &apos;search&apos;, &apos;hash&apos;];</div><div class="line">    var i, len;</div><div class="line">    var regexp = /(([^:]+:)\/\/(([^:\/\?#]+)(:\d+)?))(\/[^?#]*)?(\?[^#]*)?(#.*)?/;</div><div class="line"></div><div class="line">    var match = regexp.exec(url);</div><div class="line"></div><div class="line">    if (match) &#123;</div><div class="line">        for (i = keys.length - 1; i &gt;= 0; --i) &#123;</div><div class="line">            result[keys[i]] = match[i] ? match[i] : &apos;&apos;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完成函数getViewportSize返回指定窗口的视口尺寸"><a href="#完成函数getViewportSize返回指定窗口的视口尺寸" class="headerlink" title="完成函数getViewportSize返回指定窗口的视口尺寸"></a>完成函数getViewportSize返回指定窗口的视口尺寸</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line">* 查询指定窗口的视口尺寸，如果不指定窗口，查询当前窗口尺寸</div><div class="line">**/</div><div class="line">function getViewportSize(w) &#123;</div><div class="line">    w = w || window;</div><div class="line"></div><div class="line">    // IE9及标准浏览器中可使用此标准方法</div><div class="line">    if (&apos;innerHeight&apos; in w) &#123;</div><div class="line">        return &#123;</div><div class="line">            width: w.innerWidth,</div><div class="line">            height: w.innerHeight</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var d = w.document;</div><div class="line">    // IE 8及以下浏览器在标准模式下</div><div class="line">    if (document.compatMode === &apos;CSS1Compat&apos;) &#123;</div><div class="line">        return &#123;</div><div class="line">            width: d.documentElement.clientWidth,</div><div class="line">            height: d.documentElement.clientHeight</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // IE8及以下浏览器在怪癖模式下</div><div class="line">    return &#123;</div><div class="line">        width: d.body.clientWidth,</div><div class="line">        height: d.body.clientHeight</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完成函数getScrollOffset返回窗口滚动条偏移量"><a href="#完成函数getScrollOffset返回窗口滚动条偏移量" class="headerlink" title="完成函数getScrollOffset返回窗口滚动条偏移量"></a>完成函数getScrollOffset返回窗口滚动条偏移量</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取指定window中滚动条的偏移量，如未指定则获取当前window</div><div class="line"> * 滚动条偏移量</div><div class="line"> *</div><div class="line"> * @param &#123;window&#125; w 需要获取滚动条偏移量的窗口</div><div class="line"> * @return &#123;Object&#125; obj.x为水平滚动条偏移量,obj.y为竖直滚动条偏移量</div><div class="line"> */</div><div class="line">function getScrollOffset(w) &#123;</div><div class="line">    w =  w || window;</div><div class="line">    // 如果是标准浏览器</div><div class="line">    if (w.pageXOffset != null) &#123;</div><div class="line">        return &#123;</div><div class="line">            x: w.pageXOffset,</div><div class="line">            y: w.pageYOffset</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 老版本IE，根据兼容性不同访问不同元素</div><div class="line">    var d = w.document;</div><div class="line">    if (d.compatMode === &apos;CSS1Compat&apos;) &#123;</div><div class="line">        return &#123;</div><div class="line">            x: d.documentElement.scrollLeft,</div><div class="line">            y: d.documentElement.scrollTop</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return &#123;</div><div class="line">        x: d.body.scrollLeft,</div><div class="line">        y: d.body.scrollTop</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="现有一个字符串richText-是一段富文本-需要显示在页面上-有个要求-需要给其中只包含一个img元素的p标签增加一个叫pic的class-请编写代码实现-可以使用jQuery或KISSY"><a href="#现有一个字符串richText-是一段富文本-需要显示在页面上-有个要求-需要给其中只包含一个img元素的p标签增加一个叫pic的class-请编写代码实现-可以使用jQuery或KISSY" class="headerlink" title="现有一个字符串richText,是一段富文本,需要显示在页面上.有个要求,需要给其中只包含一个img元素的p标签增加一个叫pic的class.请编写代码实现.可以使用jQuery或KISSY."></a>现有一个字符串richText,是一段富文本,需要显示在页面上.有个要求,需要给其中只包含一个img元素的p标签增加一个叫pic的class.请编写代码实现.可以使用jQuery或KISSY.</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function richText(text) &#123;</div><div class="line">    var div = document.createElement(&apos;div&apos;);</div><div class="line">    div.innerHTML = text;</div><div class="line">    var p = div.getElementsByTagName(&apos;p&apos;);</div><div class="line">    var i, len;</div><div class="line"></div><div class="line">    for (i = 0, len = p.length; i &lt; len; ++i) &#123;</div><div class="line">        if (p[i].getElementsByTagName(&apos;img&apos;).length === 1) &#123;</div><div class="line">            p[i].classList.add(&apos;pic&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return div.innerHTML;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="请实现一个Event类-继承自此类的对象都会拥有两个方法on-off-once和trigger"><a href="#请实现一个Event类-继承自此类的对象都会拥有两个方法on-off-once和trigger" class="headerlink" title="请实现一个Event类,继承自此类的对象都会拥有两个方法on,off,once和trigger"></a>请实现一个Event类,继承自此类的对象都会拥有两个方法on,off,once和trigger</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function Event() &#123;</div><div class="line">    if (!(this instanceof Event)) &#123;</div><div class="line">        return new Event();</div><div class="line">    &#125;</div><div class="line">    this._callbacks = &#123;&#125;;</div><div class="line">&#125;</div><div class="line">Event.prototype.on = function (type, handler) &#123;</div><div class="line">    this_callbacks = this._callbacks || &#123;&#125;;</div><div class="line">    this._callbacks[type] = this.callbacks[type] || [];</div><div class="line">    this._callbacks[type].push(handler);</div><div class="line"></div><div class="line">    return this;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Event.prototype.off = function (type, handler) &#123;</div><div class="line">    var list = this._callbacks[type];</div><div class="line"></div><div class="line">    if (list) &#123;</div><div class="line">        for (var i = list.length; i &gt;= 0; --i) &#123;</div><div class="line">            if (list[i] === handler) &#123;</div><div class="line">                list.splice(i, 1);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return this;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Event.prototype.trigger = function (type, data) &#123;</div><div class="line">    var list = this._callbacks[type];</div><div class="line"></div><div class="line">    if (list) &#123;</div><div class="line">        for (var i = 0, len = list.length; i &lt; len; ++i) &#123;</div><div class="line">            list[i].call(this, data);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Event.prototype.once = function (type, handler) &#123;</div><div class="line">    var self = this;</div><div class="line"></div><div class="line">    function wrapper() &#123;</div><div class="line">        handler.apply(self, arguments);</div><div class="line">        self.off(type, wrapper);</div><div class="line">    &#125;</div><div class="line">    this.on(type, wrapper);</div><div class="line">    return this;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="编写一个函数将列表子元素顺序反转"><a href="#编写一个函数将列表子元素顺序反转" class="headerlink" title="编写一个函数将列表子元素顺序反转"></a>编写一个函数将列表子元素顺序反转</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;ul id=&quot;target&quot;&gt;</div><div class="line">    &lt;li&gt;1&lt;/li&gt;</div><div class="line">    &lt;li&gt;2&lt;/li&gt;</div><div class="line">    &lt;li&gt;3&lt;/li&gt;</div><div class="line">    &lt;li&gt;4&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    var target = document.getElementById(&apos;target&apos;);</div><div class="line">    var i;</div><div class="line">    var frag = document.createDocumentFragment();</div><div class="line"></div><div class="line">    for (i = target.children.length - 1; i &amp;gt;= 0; --i) &#123;</div><div class="line">        frag.appendChild(target.children[i]);</div><div class="line">    &#125;</div><div class="line">    target.appendChild(frag);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="以下函数的作用是-空白区域应该填写什么"><a href="#以下函数的作用是-空白区域应该填写什么" class="headerlink" title="以下函数的作用是?空白区域应该填写什么"></a>以下函数的作用是?空白区域应该填写什么</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// define</div><div class="line">(function (window) &#123;</div><div class="line">    function fn(str) &#123;</div><div class="line">        this.str = str;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fn.prototype.format = function () &#123;</div><div class="line">        var arg = __1__;</div><div class="line">        return this.str.replace(__2__, function (a, b) &#123;</div><div class="line">            return arg[b] || &apos;&apos;;</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    window.fn = fn;</div><div class="line">&#125;)(window);</div><div class="line"></div><div class="line">// use</div><div class="line">(function () &#123;</div><div class="line">    var t = new fn(&apos;&lt;p&gt;&lt;a href=&quot;&#123;0&#125;&quot;&gt;&#123;1&#125;&lt;/a&gt;&lt;span&gt;&#123;2&#125;&lt;/span&gt;&lt;/p&gt;&apos;);</div><div class="line">    console.log(t.format(&apos;http://www.alibaba.com&apos;, &apos;Alibaba&apos;, &apos;Welcome&apos;));</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>define部分定义一个简单的模板类，使用{}作为转义标记，中间的数字表示替换目标，format实参用来替换模板内标记<br>横线处填：</p>
+<ol>
+<li><code>Array.prototype.slice.call(arguments, 0)</code></li>
+<li><code>/\{\s*(\d+)\s*\}/g</code></li>
+</ol>
+<h2 id="编写一个函数实现form的序列化-即将一个表单中的键值序列化为可提交的字符串"><a href="#编写一个函数实现form的序列化-即将一个表单中的键值序列化为可提交的字符串" class="headerlink" title="编写一个函数实现form的序列化(即将一个表单中的键值序列化为可提交的字符串)"></a>编写一个函数实现form的序列化(即将一个表单中的键值序列化为可提交的字符串)</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;form id=&quot;target&quot;&gt;</div><div class="line">    &lt;select name=&quot;age&quot;&gt;</div><div class="line">        &lt;option value=&quot;aaa&quot;&gt;aaa&lt;/option&gt;</div><div class="line">        &lt;option value=&quot;bbb&quot; selected&gt;bbb&lt;/option&gt;</div><div class="line">    &lt;/select&gt;</div><div class="line">    &lt;select name=&quot;friends&quot; multiple&gt;</div><div class="line">        &lt;option value=&quot;qiu&quot; selected&gt;qiu&lt;/option&gt;</div><div class="line">        &lt;option value=&quot;de&quot;&gt;de&lt;/option&gt;</div><div class="line">        &lt;option value=&quot;qing&quot; selected&gt;qing&lt;/option&gt;</div><div class="line">    &lt;/select&gt;</div><div class="line">    &lt;input name=&quot;name&quot; value=&quot;qiudeqing&quot;&gt;</div><div class="line">    &lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;11111&quot;&gt;</div><div class="line">    &lt;input type=&quot;hidden&quot; name=&quot;salery&quot; value=&quot;3333&quot;&gt;</div><div class="line">    &lt;textarea name=&quot;description&quot;&gt;description&lt;/textarea&gt;</div><div class="line">    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; checked value=&quot;football&quot;&gt;Football</div><div class="line">    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;basketball&quot;&gt;Basketball</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; checked value=&quot;Female&quot;&gt;Female</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;Male&quot;&gt;Male</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line"> * 将一个表单元素序列化为可提交的字符串</div><div class="line"> *</div><div class="line"> * @param &#123;FormElement&#125; form 需要序列化的表单元素</div><div class="line"> * @return &#123;string&#125; 表单序列化后的字符串</div><div class="line"> */</div><div class="line">function serializeForm(form) &#123;</div><div class="line">  if (!form || form.nodeName.toUpperCase() !== &apos;FORM&apos;) &#123;</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  var result = [];</div><div class="line"></div><div class="line">  var i, len;</div><div class="line">  var field, fieldName, fieldType;</div><div class="line"></div><div class="line">  for (i = 0, len = form.length; i &lt; len; ++i) &#123;</div><div class="line">    field = form.elements[i];</div><div class="line">    fieldName = field.name;</div><div class="line">    fieldType = field.type;</div><div class="line"></div><div class="line">    if (field.disabled || !fieldName) &#123;</div><div class="line">      continue;</div><div class="line">    &#125; // enf if</div><div class="line"></div><div class="line">    switch (fieldType) &#123;</div><div class="line">      case &apos;text&apos;:</div><div class="line">      case &apos;password&apos;:</div><div class="line">      case &apos;hidden&apos;:</div><div class="line">      case &apos;textarea&apos;:</div><div class="line">        result.push(encodeURIComponent(fieldName) + &apos;=&apos; +</div><div class="line">            encodeURIComponent(field.value));</div><div class="line">        break;</div><div class="line"></div><div class="line">      case &apos;radio&apos;:</div><div class="line">      case &apos;checkbox&apos;:</div><div class="line">        if (field.checked) &#123;</div><div class="line">          result.push(encodeURIComponent(fieldName) + &apos;=&apos; +</div><div class="line">            encodeURIComponent(field.value));</div><div class="line">        &#125;</div><div class="line">        break;</div><div class="line"></div><div class="line">      case &apos;select-one&apos;:</div><div class="line">      case &apos;select-multiple&apos;:</div><div class="line">        for (var j = 0, jLen = field.options.length; j &lt; jLen; ++j) &#123;</div><div class="line">          if (field.options[j].selected) &#123;</div><div class="line">            result.push(encodeURIComponent(fieldName) + &apos;=&apos; +</div><div class="line">              encodeURIComponent(field.options[j].value || field.options[j].text));</div><div class="line">          &#125;</div><div class="line">        &#125; // end for</div><div class="line">        break;</div><div class="line"></div><div class="line">      case &apos;file&apos;:</div><div class="line">      case &apos;submit&apos;:</div><div class="line">        break; // 是否处理？</div><div class="line"></div><div class="line">      default:</div><div class="line">        break;</div><div class="line">    &#125; // end switch</div><div class="line">  &#125; // end for</div><div class="line"></div><div class="line">    return result.join(&apos;&amp;&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var form = document.getElementById(&apos;target&apos;);</div><div class="line">console.log(serializeForm(form));</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用原生javascript给下面列表中的li节点绑定点击事件-点击时创建一个Object对象-兼容IE和标准浏览器"><a href="#使用原生javascript给下面列表中的li节点绑定点击事件-点击时创建一个Object对象-兼容IE和标准浏览器" class="headerlink" title="使用原生javascript给下面列表中的li节点绑定点击事件,点击时创建一个Object对象,兼容IE和标准浏览器"></a>使用原生javascript给下面列表中的li节点绑定点击事件,点击时创建一个Object对象,兼容IE和标准浏览器</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;ul id=&quot;nav&quot;&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;http://11111&quot;&gt;111&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;http://2222&quot;&gt;222&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;http://333&quot;&gt;333&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;http://444&quot;&gt;444&lt;/a&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">Object:</div><div class="line">&#123;</div><div class="line">    &quot;index&quot;: 1,</div><div class="line">    &quot;name&quot;: &quot;111&quot;,</div><div class="line">    &quot;link&quot;: &quot;http://1111&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>script:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var EventUtil = &#123;</div><div class="line">    getEvent: function (event) &#123;</div><div class="line">        return event || window.event;</div><div class="line">    &#125;,</div><div class="line">    getTarget: function (event) &#123;</div><div class="line">        return event.target || event.srcElement;</div><div class="line">    &#125;,</div><div class="line">    // 返回注册成功的监听器，IE中需要使用返回值来移除监听器</div><div class="line">    on: function (elem, type, handler) &#123;</div><div class="line">        if (elem.addEventListener) &#123;</div><div class="line">            elem.addEventListener(type, handler, false);</div><div class="line">            return handler;</div><div class="line">        &#125; else if (elem.attachEvent) &#123;</div><div class="line">            function wrapper(event) &#123;</div><div class="line">                return handler.call(elem, event);</div><div class="line">            &#125;;</div><div class="line">            elem.attachEvent(&apos;on&apos; + type, wrapper);</div><div class="line">            return wrapper;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    off: function (elem, type, handler) &#123;</div><div class="line">        if (elem.removeEventListener) &#123;</div><div class="line">            elem.removeEventListener(type, handler, false);</div><div class="line">        &#125; else if (elem.detachEvent) &#123;</div><div class="line">            elem.detachEvent(&apos;on&apos; + type, handler);</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    preventDefault: function (event) &#123;</div><div class="line">        if (event.preventDefault) &#123;</div><div class="line">            event.preventDefault();</div><div class="line">        &#125; else if (&apos;returnValue&apos; in event) &#123;</div><div class="line">            event.returnValue = false;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    stopPropagation: function (event) &#123;</div><div class="line">        if (event.stopPropagation) &#123;</div><div class="line">            event.stopPropagation();</div><div class="line">        &#125; else if (&apos;cancelBubble&apos; in event) &#123;</div><div class="line">            event.cancelBubble = true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">var DOMUtil = &#123;</div><div class="line">    text: function (elem) &#123;</div><div class="line">        if (&apos;textContent&apos; in elem) &#123;</div><div class="line">            return elem.textContent;</div><div class="line">        &#125; else if (&apos;innerText&apos; in elem) &#123;</div><div class="line">            return elem.innerText;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    prop: function (elem, propName) &#123;</div><div class="line">        return elem.getAttribute(propName);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var nav = document.getElementById(&apos;nav&apos;);</div><div class="line"></div><div class="line">EventUtil.on(nav, &apos;click&apos;, function (event) &#123;</div><div class="line">    var event = EventUtil.getEvent(event);</div><div class="line">    var target = EventUtil.getTarget(event);</div><div class="line"></div><div class="line">    var children = this.children;</div><div class="line">    var i, len;</div><div class="line">    var anchor;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line"></div><div class="line">    for (i = 0, len = children.length; i &lt; len; ++i) &#123;</div><div class="line">        if (children[i] === target) &#123;</div><div class="line">            obj.index = i + 1;</div><div class="line">            anchor = target.getElementsByTagName(&apos;a&apos;)[0];</div><div class="line">            obj.name = DOMUtil.text(anchor);</div><div class="line">            obj.link = DOMUtil.prop(anchor, &apos;href&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    alert(&apos;index: &apos; + obj.index + &apos; name: &apos; + obj.name +</div><div class="line">        &apos; link: &apos; + obj.link);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="有一个大数组-var-a-‘1’-‘2’-‘3’-…-a的长度是100-内容填充随机整数的字符串-请先构造此数组a-然后设计一个算法将其内容去重"><a href="#有一个大数组-var-a-‘1’-‘2’-‘3’-…-a的长度是100-内容填充随机整数的字符串-请先构造此数组a-然后设计一个算法将其内容去重" class="headerlink" title="有一个大数组,var a = [‘1’, ‘2’, ‘3’, …];a的长度是100,内容填充随机整数的字符串.请先构造此数组a,然后设计一个算法将其内容去重"></a>有一个大数组,var a = [‘1’, ‘2’, ‘3’, …];a的长度是100,内容填充随机整数的字符串.请先构造此数组a,然后设计一个算法将其内容去重</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line">* 数组去重</div><div class="line">**/</div><div class="line">function normalize(arr) &#123;</div><div class="line">    if (arr &amp;&amp; Array.isArray(arr)) &#123;</div><div class="line">        var i, len, map = &#123;&#125;;</div><div class="line">        for (i = arr.length; i &gt;= 0; --i) &#123;</div><div class="line">            if (arr[i] in map) &#123;</div><div class="line">                arr.splice(i, 1);</div><div class="line">            &#125; else &#123;</div><div class="line">                map[arr[i]] = true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* 用100个随机整数对应的字符串填充数组。</div><div class="line">**/</div><div class="line">function fillArray(arr, start, end) &#123;</div><div class="line">    start = start == undefined ? 1 : start;</div><div class="line">    end = end == undefined ?  100 : end;</div><div class="line"></div><div class="line">    if (end &lt;= start) &#123;</div><div class="line">        end = start + 100;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var width = end - start;</div><div class="line">    var i;</div><div class="line">    for (i = 100; i &gt;= 1; --i) &#123;</div><div class="line">        arr.push(&apos;&apos; + (Math.floor(Math.random() * width) + start));</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var input = [];</div><div class="line">fillArray(input, 1, 100);</div><div class="line">input.sort(function (a, b) &#123;</div><div class="line">    return a - b;</div><div class="line">&#125;);</div><div class="line">console.log(input);</div><div class="line"></div><div class="line">normalize(input);</div><div class="line">console.log(input);</div></pre></td></tr></table></figure>
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-11/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][11]面筋">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-09/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][09]CSS部分">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说严格模式的限制"><span class="toc-text">说说严格模式的限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM元素e的e-getAttribute-propName-和e-propName有什么区别和联系"><span class="toc-text">DOM元素e的e.getAttribute(propName)和e.propName有什么区别和联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offsetWidth-offsetHeight-clientWidth-clientHeight与scrollWidth-scrollHeight的区别"><span class="toc-text">offsetWidth/offsetHeight,clientWidth/clientHeight与scrollWidth/scrollHeight的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest通用属性和方法"><span class="toc-text">XMLHttpRequest通用属性和方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#focus-blur与focusin-focusout的区别与联系"><span class="toc-text">focus/blur与focusin/focusout的区别与联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mouseover-mouseout与mouseenter-mouseleave的区别与联系"><span class="toc-text">mouseover/mouseout与mouseenter/mouseleave的区别与联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sessionStorage-localStorage-cookie区别"><span class="toc-text">sessionStorage,localStorage,cookie区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript跨域通信"><span class="toc-text">javascript跨域通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何解决跨域问题"><span class="toc-text">如何解决跨域问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现浏览器内多个标签页之间的通信"><span class="toc-text">如何实现浏览器内多个标签页之间的通信?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#childNodes和children的区别"><span class="toc-text">childNodes和children的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defer和async的区别"><span class="toc-text">defer和async的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript有哪几种数据类型"><span class="toc-text">javascript有哪几种数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么闭包-闭包有什么用"><span class="toc-text">什么闭包,闭包有什么用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript有哪几种方法定义函数"><span class="toc-text">javascript有哪几种方法定义函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用程序存储和离线web应用"><span class="toc-text">应用程序存储和离线web应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端存储localStorage和sessionStorage"><span class="toc-text">客户端存储localStorage和sessionStorage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie及其操作"><span class="toc-text">cookie及其操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何删除一个cookie"><span class="toc-text">如何删除一个cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请你谈谈Cookie的弊端"><span class="toc-text">请你谈谈Cookie的弊端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器本地存储"><span class="toc-text">浏览器本地存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-storage和cookie的区别"><span class="toc-text">web storage和cookie的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie-和session-的区别："><span class="toc-text">cookie 和session 的区别：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript有哪些方法定义对象"><span class="toc-text">javascript有哪些方法定义对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript对象的几种创建方式"><span class="toc-text">javascript对象的几种创建方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符判断相等的流程是怎样的"><span class="toc-text">===运算符判断相等的流程是怎样的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符判断相等的流程是怎样的-1"><span class="toc-text">==运算符判断相等的流程是怎样的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象到字符串的转换步骤"><span class="toc-text">对象到字符串的转换步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象到数字的转换步骤"><span class="toc-text">对象到数字的转换步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-gt-lt-gt-的比较规则"><span class="toc-text"><,>,<=,>=的比较规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符工作流程"><span class="toc-text">+运算符工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步"><span class="toc-text">异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步加载和延迟加载"><span class="toc-text">异步加载和延迟加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数内部arguments变量有哪些特性-有哪些属性-如何将它转换为数组"><span class="toc-text">函数内部arguments变量有哪些特性,有哪些属性,如何将它转换为数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM事件模型是如何的-编写一个EventUtil工具类实现事件管理兼容"><span class="toc-text">DOM事件模型是如何的,编写一个EventUtil工具类实现事件管理兼容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#评价一下三种方法实现继承的优缺点-并改进"><span class="toc-text">评价一下三种方法实现继承的优缺点,并改进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么叫优雅降级和渐进增强？"><span class="toc-text">什么叫优雅降级和渐进增强？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哪些常见操作会造成内存泄漏？"><span class="toc-text">哪些常见操作会造成内存泄漏？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程与进程的区别"><span class="toc-text">线程与进程的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用浏览器的内核-Layout-Engine"><span class="toc-text">常用浏览器的内核(Layout Engine)?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍一下你对浏览器内核的理解？"><span class="toc-text">介绍一下你对浏览器内核的理解？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this对象的理解"><span class="toc-text">this对象的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eval是做什么的？"><span class="toc-text">eval是做什么的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM怎样添加、移除、移动、复制、创建和查找节点"><span class="toc-text">DOM怎样添加、移除、移动、复制、创建和查找节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null和undefined的区别？"><span class="toc-text">null和undefined的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new操作符具体干了什么呢"><span class="toc-text">new操作符具体干了什么呢?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-的了解？"><span class="toc-text">JSON 的了解？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call-和-apply-的区别和作用"><span class="toc-text">call() 和 apply() 的区别和作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何获取UA？"><span class="toc-text">如何获取UA？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#array的一些属性和方法"><span class="toc-text">array的一些属性和方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bootstrap-框架的网格系统工作原理"><span class="toc-text">Bootstrap 框架的网格系统工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解释一下-JavaScript-的同源策略"><span class="toc-text">解释一下 JavaScript 的同源策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript原型，原型链有什么特点"><span class="toc-text">JavaScript原型，原型链有什么特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你对作用域链的理解"><span class="toc-text">说说你对作用域链的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML和JSON的区别？"><span class="toc-text">XML和JSON的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#谈谈你对webpack的看法"><span class="toc-text">谈谈你对webpack的看法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你对AMD和Commonjs的理解"><span class="toc-text">说说你对AMD和Commonjs的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iframe有那些缺点？"><span class="toc-text">iframe有那些缺点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对前端模块化的认识"><span class="toc-text">对前端模块化的认识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript垃圾回收方法"><span class="toc-text">Javascript垃圾回收方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Etag？"><span class="toc-text">什么是Etag？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Expires和Cache-Control"><span class="toc-text">Expires和Cache-Control</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETag应用"><span class="toc-text">ETag应用:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Worker-和webSocket"><span class="toc-text">Web Worker 和webSocket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈和队列的区别"><span class="toc-text">栈和队列的区别?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈和堆的区别？"><span class="toc-text">栈和堆的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#你觉得jQuery或zepto源码有哪些写的好的地方"><span class="toc-text">你觉得jQuery或zepto源码有哪些写的好的地方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的了解"><span class="toc-text">ES6的了解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js继承方式及其优缺点"><span class="toc-text">js继承方式及其优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何评价AngularJS和BackboneJS"><span class="toc-text">如何评价AngularJS和BackboneJS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用过哪些设计模式？"><span class="toc-text">用过哪些设计模式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM操作"><span class="toc-text">DOM操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB应用从服务器主动推送Data到客户端有那些方式？"><span class="toc-text">WEB应用从服务器主动推送Data到客户端有那些方式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你对Promise的理解"><span class="toc-text">说说你对Promise的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-write-的用法"><span class="toc-text">document.write()的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-fetch和git-pull的区别"><span class="toc-text">git fetch和git pull的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你对MVC和MVVM的理解"><span class="toc-text">说说你对MVC和MVVM的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#attribute和property的区别是什么？"><span class="toc-text">attribute和property的区别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说mongoDB和MySQL的区别"><span class="toc-text">说说mongoDB和MySQL的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#讲讲304缓存的原理"><span class="toc-text">讲讲304缓存的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么样的前端代码是好的"><span class="toc-text">什么样的前端代码是好的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见排序算法的时间复杂度-空间复杂度"><span class="toc-text">常见排序算法的时间复杂度,空间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js操作获取和设置cookie"><span class="toc-text">js操作获取和设置cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请用原生js实现一个函数-给页面制定的任意一个元素添加一个透明遮罩-透明度可变-默认0-2-使这个区域点击无效-要求兼容IE8-及各主流浏览器-遮罩层效果如下图所示"><span class="toc-text">请用原生js实现一个函数,给页面制定的任意一个元素添加一个透明遮罩(透明度可变,默认0.2),使这个区域点击无效,要求兼容IE8+及各主流浏览器,遮罩层效果如下图所示:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请用代码写出-今天是星期x-其中x表示当天是星期几-如果当天是星期一-输出应该是”今天是星期一”"><span class="toc-text">请用代码写出(今天是星期x)其中x表示当天是星期几,如果当天是星期一,输出应该是”今天是星期一”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下面这段代码想要循环延时输出结果0-1-2-3-4-请问输出结果是否正确-如果不正确-请说明为什么-并修改循环内的代码使其输出正确结果"><span class="toc-text">下面这段代码想要循环延时输出结果0 1 2 3 4,请问输出结果是否正确,如果不正确,请说明为什么,并修改循环内的代码使其输出正确结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#现有一个Page类-其原型对象上有许多以post开头的方法-如postMsg-另有一拦截函数chekc-只返回ture或false-请设计一个函数-该函数应批量改造原Page的postXXX方法-在保留其原有功能的同时-为每个postXXX方法增加拦截验证功能-当chekc返回true时继续执行原postXXX方法-返回false时不再执行原postXXX方法"><span class="toc-text">现有一个Page类,其原型对象上有许多以post开头的方法(如postMsg);另有一拦截函数chekc,只返回ture或false.请设计一个函数,该函数应批量改造原Page的postXXX方法,在保留其原有功能的同时,为每个postXXX方法增加拦截验证功能,当chekc返回true时继续执行原postXXX方法,返回false时不再执行原postXXX方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成下面的tool-tip"><span class="toc-text">完成下面的tool-tip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写javascript深度克隆函数deepClone"><span class="toc-text">编写javascript深度克隆函数deepClone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充代码-鼠标单击Button1后将Button1移动到Button2的后面"><span class="toc-text">补充代码,鼠标单击Button1后将Button1移动到Button2的后面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页中实现一个计算当年还剩多少时间的倒数计时程序-要求网页上实时动态显示”××年还剩××天××时××分××秒”"><span class="toc-text">网页中实现一个计算当年还剩多少时间的倒数计时程序,要求网页上实时动态显示”××年还剩××天××时××分××秒”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成一个函数-接受数组作为参数-数组元素为整数或者数组-数组元素包含整数或数组-函数返回扁平化后的数组"><span class="toc-text">完成一个函数,接受数组作为参数,数组元素为整数或者数组,数组元素包含整数或数组,函数返回扁平化后的数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断一个对象是否为数组"><span class="toc-text">如何判断一个对象是否为数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请评价以下事件监听器代码并给出改进意见"><span class="toc-text">请评价以下事件监听器代码并给出改进意见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断一个对象是否为函数"><span class="toc-text">如何判断一个对象是否为函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写一个函数接受url中query-string为参数-返回解析后的Object-query-string使用application-x-www-form-urlencoded编码"><span class="toc-text">编写一个函数接受url中query string为参数,返回解析后的Object,query string使用application/x-www-form-urlencoded编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析一个完整的url-返回Object包含域与window-location相同"><span class="toc-text">解析一个完整的url,返回Object包含域与window.location相同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成函数getViewportSize返回指定窗口的视口尺寸"><span class="toc-text">完成函数getViewportSize返回指定窗口的视口尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成函数getScrollOffset返回窗口滚动条偏移量"><span class="toc-text">完成函数getScrollOffset返回窗口滚动条偏移量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#现有一个字符串richText-是一段富文本-需要显示在页面上-有个要求-需要给其中只包含一个img元素的p标签增加一个叫pic的class-请编写代码实现-可以使用jQuery或KISSY"><span class="toc-text">现有一个字符串richText,是一段富文本,需要显示在页面上.有个要求,需要给其中只包含一个img元素的p标签增加一个叫pic的class.请编写代码实现.可以使用jQuery或KISSY.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请实现一个Event类-继承自此类的对象都会拥有两个方法on-off-once和trigger"><span class="toc-text">请实现一个Event类,继承自此类的对象都会拥有两个方法on,off,once和trigger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写一个函数将列表子元素顺序反转"><span class="toc-text">编写一个函数将列表子元素顺序反转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以下函数的作用是-空白区域应该填写什么"><span class="toc-text">以下函数的作用是?空白区域应该填写什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写一个函数实现form的序列化-即将一个表单中的键值序列化为可提交的字符串"><span class="toc-text">编写一个函数实现form的序列化(即将一个表单中的键值序列化为可提交的字符串)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用原生javascript给下面列表中的li节点绑定点击事件-点击时创建一个Object对象-兼容IE和标准浏览器"><span class="toc-text">使用原生javascript给下面列表中的li节点绑定点击事件,点击时创建一个Object对象,兼容IE和标准浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有一个大数组-var-a-‘1’-‘2’-‘3’-…-a的长度是100-内容填充随机整数的字符串-请先构造此数组a-然后设计一个算法将其内容去重"><span class="toc-text">有一个大数组,var a = [‘1’, ‘2’, ‘3’, …];a的长度是100,内容填充随机整数的字符串.请先构造此数组a,然后设计一个算法将其内容去重</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

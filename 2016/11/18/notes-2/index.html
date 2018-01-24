@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        二小日报｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/11/18/notes-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>二小日报</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-11-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            二小日报
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p><strong>内容</strong>：每日的科研时间，成果，总结；<br><strong>目标</strong>：成为一个牛逼的前端工程师，发表一篇会议论文，顺利毕业；<br><strong>周期</strong>：2016年10月11日至2017年11月25日<br><strong>计划</strong>：早8晚11*7、前端基础知识、写项目、刷题、背单词、健身</p>
+<h2 id="1月8日-周日"><a href="#1月8日-周日" class="headerlink" title="1月8日 周日"></a>1月8日 周日</h2><p><strong>时间</strong>：晚上2h<br><strong>成就</strong>：js。</p>
+<h2 id="12月30日-1月7日"><a href="#12月30日-1月7日" class="headerlink" title="12月30日 - 1月7日"></a>12月30日 - 1月7日</h2><p>旅行</p>
+<h2 id="12月29日-周四"><a href="#12月29日-周四" class="headerlink" title="12月29日 周四"></a>12月29日 周四</h2><p><strong>时间</strong>：上午2h<br><strong>成就</strong>：js。</p>
+<h2 id="12月28日-周三"><a href="#12月28日-周三" class="headerlink" title="12月28日 周三"></a>12月28日 周三</h2><p><strong>时间</strong>：上午3h，下午3h,晚上4h<br><strong>成就</strong>：做实验，混频器搭好了。</p>
+<h2 id="12月27日-周二"><a href="#12月27日-周二" class="headerlink" title="12月27日 周二"></a>12月27日 周二</h2><p><strong>时间</strong>：上午3h，下午3h,晚上1h<br><strong>成就</strong>：写论文，画图。重新做实验！！！<br><strong>感悟</strong>：不奢求OECC了，感觉走进了死胡同。</p>
+<h2 id="12月26日-周一"><a href="#12月26日-周一" class="headerlink" title="12月26日 周一"></a>12月26日 周一</h2><p><strong>时间</strong>：上午2h，下午2h,晚上3h<br><strong>成就</strong>：写论文。</p>
+<h2 id="12月23日-周五"><a href="#12月23日-周五" class="headerlink" title="12月23日 周五"></a>12月23日 周五</h2><p><strong>时间</strong>：上午2h，下午3h,晚上0h<br><strong>成就</strong>：写论文。</p>
+<h2 id="12月22日-周四"><a href="#12月22日-周四" class="headerlink" title="12月22日 周四"></a>12月22日 周四</h2><p><strong>时间</strong>：上午2h，下午5h,晚上4h<br><strong>成就</strong>：刷3题，做完项目，写完了开题报告。</p>
+<h2 id="12月21日-周三"><a href="#12月21日-周三" class="headerlink" title="12月21日 周三"></a>12月21日 周三</h2><p><strong>时间</strong>：上午2h，下午5h,晚上0h<br><strong>成就</strong>：面试。</p>
+<h2 id="12月20日-周二"><a href="#12月20日-周二" class="headerlink" title="12月20日 周二"></a>12月20日 周二</h2><p><strong>时间</strong>：上午2h，下午5h,晚上4h<br><strong>成就</strong>：刷3题，做完项目，写完了开题报告，准备面试。<br><strong>计划</strong>：先完成毕业论文开题，再学前端准备好面试，周三晚上开始处理数据，拿给老师看，然后周末写论文，要在29号之前写完全文。回来就去实习。</p>
+<h2 id="12月19日-周一"><a href="#12月19日-周一" class="headerlink" title="12月19日 周一"></a>12月19日 周一</h2><p><strong>时间</strong>：上午1h，下午3h,晚上4h<br><strong>成就</strong>：刷3题，写开题报告。</p>
+<h2 id="12月18日-周日"><a href="#12月18日-周日" class="headerlink" title="12月18日 周日"></a>12月18日 周日</h2><p><strong>时间</strong>：上午0h，下午3h,晚上1h<br><strong>成就</strong>：做gdt项目，写开题报告</p>
+<h2 id="12月17日-周六"><a href="#12月17日-周六" class="headerlink" title="12月17日 周六"></a>12月17日 周六</h2><p><strong>时间</strong>：上午0h，下午3h,晚上4h<br><strong>成就</strong>：刷3题，做gdt项目</p>
+<h2 id="12月16日-周五"><a href="#12月16日-周五" class="headerlink" title="12月16日 周五"></a>12月16日 周五</h2><p><strong>时间</strong>：上午0h，下午2h,晚上2h<br><strong>成就</strong>：做了一个项目<br><strong>感悟</strong>：要赶紧处理数据，写论文，写开题报告，做完项目.</p>
+<h2 id="12月15日-周四"><a href="#12月15日-周四" class="headerlink" title="12月15日 周四"></a>12月15日 周四</h2><p><strong>时间</strong>：上午0h，下午4h,晚上4h<br><strong>成就</strong>：刷3题，制作简历，做了一个项目</p>
+<h2 id="12月14日-周三"><a href="#12月14日-周三" class="headerlink" title="12月14日 周三"></a>12月14日 周三</h2><p><strong>时间</strong>：上午1h，下午2h,晚上0h<br><strong>成就</strong>：刷3题</p>
+<h2 id="12月13日-周二"><a href="#12月13日-周二" class="headerlink" title="12月13日 周二"></a>12月13日 周二</h2><p><strong>时间</strong>：上午0h，下午5h,晚上4h<br><strong>成就</strong>：刷3题，晚上做实验，用铌酸锂调制器级联测了直接和相干的数据。</p>
+<h2 id="12月12日-周一"><a href="#12月12日-周一" class="headerlink" title="12月12日 周一"></a>12月12日 周一</h2><p><strong>时间</strong>：上午1h，下午4h,晚上4h<br><strong>成就</strong>：刷3题，晚上做实验，做完了直接探测，采了几组数据，接下来还需要采相干探测数据。<br><strong>感悟</strong>：上周感觉前端没怎么进步，所以这周要制定学习计划，保证进度。<br>项目：做完4-5个；<br>书：看完3章（5，6，7）；<br>算法：一天三个（easy和medium一共340道，但是我也不用全部刷完，到3月初差不多能刷完）；<br>实验：这周必须做完一次得到数据，进行分析。</p>
+<h2 id="12月11日-周日"><a href="#12月11日-周日" class="headerlink" title="12月11日 周日"></a>12月11日 周日</h2><p><strong>时间</strong>：上午1h，下午3h,晚上2h<br><strong>成就</strong>：将域名dns改到cloudXNS，修改了一些bug，博客的新主题总算弄好了，以后还需要添加作品栏和简介栏。</p>
+<h2 id="12月10日-周六"><a href="#12月10日-周六" class="headerlink" title="12月10日 周六"></a>12月10日 周六</h2><p><strong>时间</strong>：上午1h，下午0h,晚上通宵<br><strong>成就</strong>：刷3题，和二师兄做实验调好了仪器，更改了博客的主题<br><strong>感悟</strong>：因为一个bug而通宵这种事我还是经常干的，但是突然很怕自己会猝死。</p>
+<h2 id="12月9日-周五"><a href="#12月9日-周五" class="headerlink" title="12月9日 周五"></a>12月9日 周五</h2><p><strong>时间</strong>：上午1h，下午3h,晚上0h<br><strong>成就</strong>：刷3题，完成了项目18</p>
+<h2 id="12月8日-周四"><a href="#12月8日-周四" class="headerlink" title="12月8日 周四"></a>12月8日 周四</h2><p><strong>时间</strong>：上午2h，下午0h,晚上0h<br><strong>成就</strong>：刷3题<br><strong>感悟</strong>：很容易放弃的一个人，但是没办法，人生太艰难。</p>
+<h2 id="12月7日-周三"><a href="#12月7日-周三" class="headerlink" title="12月7日 周三"></a>12月7日 周三</h2><p><strong>时间</strong>：上午2h，下午4h,晚上5h<br><strong>成就</strong>：刷3题，做完项目18，做实验<br><strong>感悟</strong>：低调低调。</p>
+<h2 id="12月6日-周二"><a href="#12月6日-周二" class="headerlink" title="12月6日 周二"></a>12月6日 周二</h2><p><strong>时间</strong>：上午2h，下午4h,晚上5h<br><strong>成就</strong>：刷3题，下午和晚上去做了实验，搭好了平台，但是单路光出环形器之后功率不稳定，图像抖动严重，不知道怎么回事，换了个PC的原因吗？<br><strong>感悟</strong>：OECC截稿日期1月17日，应该可以赶在那之前投稿，如果中了就可以去新加坡哈哈，抱紧晟博大腿。</p>
+<h2 id="12月5日-周一"><a href="#12月5日-周一" class="headerlink" title="12月5日 周一"></a>12月5日 周一</h2><p><strong>时间</strong>：上午2h，下午4h,晚上5h<br><strong>成就</strong>：刷3题，完成了ife项目17，学习了一点JSON<br><strong>感悟</strong>：醉心科研，跑步都在看教学视频</p>
+<h2 id="12月4日-周日"><a href="#12月4日-周日" class="headerlink" title="12月4日 周日"></a>12月4日 周日</h2><p><strong>时间</strong>：0<br><strong>成就</strong>：滑雪S型更6️⃣了，下次要挑战单板！</p>
+<h2 id="12月3日-周六"><a href="#12月3日-周六" class="headerlink" title="12月3日 周六"></a>12月3日 周六</h2><p><strong>时间</strong>：上午3h，下午2h,晚上5h<br><strong>成就</strong>：刷3题，解决了问题，看了直播课程<br><strong>感悟</strong>：今天的目标是：刷题+整理博客+学习JS+做ife项目+解决一些疑问<br>近期目标是：做完ife项目，刷完js高级教程。马上出去实习！</p>
+<h2 id="12月2日-周五"><a href="#12月2日-周五" class="headerlink" title="12月2日 周五"></a>12月2日 周五</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：刷3题，学习了git，将ife项目上传到github上，注册了领英但有待完善，下载了推荐的书籍。<br><strong>感悟</strong>：今天的目标是：刷题+整理博客+学习git+整理github+制作领英+下载书籍+学习JS+做ife项目<br>近期目标是：做完ife项目，刷完js高级教程。马上出去实习！</p>
+<h2 id="12月1日-周四"><a href="#12月1日-周四" class="headerlink" title="12月1日 周四"></a>12月1日 周四</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：去参加了618的就业分享会，对目标更明确了。<br><strong>感悟</strong>：目前主要方向就是：JavaScript以及其他前端技能，每天都要刷题50道，学习前端一直玩那个模块（3章以上）。12月去找实习。</p>
+<h2 id="11月30日-周三"><a href="#11月30日-周三" class="headerlink" title="11月30日 周三"></a>11月30日 周三</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：完善了个人博客，并写了一篇博文。 </p>
+<h2 id="11月29日-周二"><a href="#11月29日-周二" class="headerlink" title="11月29日 周二"></a>11月29日 周二</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：个人hexo博客的搭建，刷题。 </p>
+<h2 id="11月28日-周一"><a href="#11月28日-周一" class="headerlink" title="11月28日 周一"></a>11月28日 周一</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：买器件，个人博客的搭建。</p>
+<h2 id="11月27日-周日"><a href="#11月27日-周日" class="headerlink" title="11月27日 周日"></a>11月27日 周日</h2><p><strong>时间</strong>：0<br><strong>成就</strong>：滑雪</p>
+<h2 id="11月26日-周六"><a href="#11月26日-周六" class="headerlink" title="11月26日 周六"></a>11月26日 周六</h2><p><strong>时间</strong>：上午2h，下午2h,晚上5h<br><strong>成就</strong>：完成了个人hexo博客的搭建！<code>xxwu.tech</code></p>
+<h2 id="11月25日-周五"><a href="#11月25日-周五" class="headerlink" title="11月25日 周五"></a>11月25日 周五</h2><p><strong>时间</strong>：上午1h，下午2h,晚上5h<br><strong>成就</strong>：和大师兄视频解决了论文思路，参加就业交流会打了一腔鸡血<br><strong>感悟</strong>：<br>1.刷算法和学前端不相干，所以应该现在开始刷题；<br>2.面试不仅限于基础知识，所以应该开始刷面试题；<br>3.时间真的很紧张，在接下来的12月里我需要针对简历上标红的部分进行补漏，开始刷算法题，尽早出去实习。</p>
+<h2 id="11月24日-周四"><a href="#11月24日-周四" class="headerlink" title="11月24日 周四"></a>11月24日 周四</h2><p><strong>时间</strong>：上午2h，下午5h<br><strong>成就</strong>：百度ife项目17，做实验.跨浏览器事件绑定</p>
+<h2 id="11月23日-周三"><a href="#11月23日-周三" class="headerlink" title="11月23日 周三"></a>11月23日 周三</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：<br><strong>感悟</strong>：<br>昨天突然想做一个小应用，由于现在大家的钱都放在不同的地方，比如银行卡，信用卡，支付宝，微信，一卡通等，其实一般的记账软件根本无法满足记账功能，你每天都记，但是仍然不知道自己有多少钱。所以为什么不自己写一个记账小应用，or，my day,记录一天的学习，运动，天气，收入支出，而且，我要用微信小程序写！</p>
+<h2 id="11月21、22日-周一周二"><a href="#11月21、22日-周一周二" class="headerlink" title="11月21、22日 周一周二"></a>11月21、22日 周一周二</h2><p>实习去了，没有学习</p>
+<h2 id="11月20日-周日"><a href="#11月20日-周日" class="headerlink" title="11月20日 周日"></a>11月20日 周日</h2><p><strong>时间</strong>：晚上2h<br><strong>成就</strong>：ife项目17一点点进展</p>
+<h2 id="11月19日-周六"><a href="#11月19日-周六" class="headerlink" title="11月19日 周六"></a>11月19日 周六</h2><p><strong>时间</strong>：下午2.5h<br><strong>成就</strong>：<br>1.完成了daycheck的编辑工作 </p>
+<h2 id="11月18日-周五"><a href="#11月18日-周五" class="headerlink" title="11月18日 周五"></a>11月18日 周五</h2><p><strong>时间</strong>：上午3h,下午4h<br><strong>成就</strong>：ife项目16;安装了<code>webstorm</code>，<code>dash</code>，<code>alfred</code>，<code>clearmymac</code>，<code>markdown</code>，<code>solarized</code>，<code>github desktop</code>，都有待研究。 </p>
+<h2 id="11月17日-周四"><a href="#11月17日-周四" class="headerlink" title="11月17日 周四"></a>11月17日 周四</h2><p><strong>时间</strong>：上午1h,下午4h，晚上2h<br><strong>成就</strong>：ife项目13,14,15<br><strong>感悟</strong>：昨天初步接触react，觉得有点难度，而且自己的JS 基础不够扎实，所以应该先做几个项目练练手，然后再去系统的学习一个框架。 </p>
+<blockquote>
+<p>不知道其他人是不是这样，念书的时候，很容易就能看出哪些同学注定了以后能干成比较大的事情，不一定是注定会发财或者说出人头地，但一看就和我这种碌碌之辈不一样。他们不一定学习成绩很好或者家境殷实有背景或者做人活泛很吃得开，有些人可能各种表现都一般甚至可能心思都不在拿学位上。但是他们共同拥有一些品格和美德：比如心气很高，思维开阔，做事情稳准狠，静得下心沉得住气，非常有担当，性格豁达，重情义，相当有毅力，对自己特别狠。还有就是，他们有特别想做成一番大事业的欲望和掩饰不住的好胜心。古人讲发大愿者必有魔考，他们脑子里清清楚楚地能分辨什么是最重要的，什么并不重要，他们愿意牺牲太多去实现他们的目的。面对这种同学我从来不敢开玩笑说苟富贵勿相忘，一向是该配合就配合该闭嘴就闭嘴该让路就让路，因为他们根本看不见我，我在他们面前连说这句话的资格都没有。</p>
+</blockquote>
+<h2 id="11月16日-周三"><a href="#11月16日-周三" class="headerlink" title="11月16日 周三"></a>11月16日 周三</h2><p><strong>时间</strong>：上午2h,下午4h<br><strong>成就</strong>：放弃《jQuery基础》（四），学习了《AJAX》和一点点《React》 </p>
+<h2 id="11月15日-周二"><a href="#11月15日-周二" class="headerlink" title="11月15日 周二"></a>11月15日 周二</h2><p><strong>时间</strong>：上午2.5h,下午4h<br><strong>成就</strong>：完成《jQuery基础》(三) </p>
+<h2 id="11月14日-周一"><a href="#11月14日-周一" class="headerlink" title="11月14日 周一"></a>11月14日 周一</h2><p><strong>时间</strong>：上午2h,下午3h,晚上2h<br><strong>成就</strong>：学到《jQuery基础》(三) 3.1 </p>
+<h2 id="11月13日-周日"><a href="#11月13日-周日" class="headerlink" title="11月13日 周日"></a>11月13日 周日</h2><p><strong>时间</strong>：上午0h,下午8h<br><strong>成就</strong>：学完《jQuery基础》(二)，学到《jQuery基础》(三) 2.2 </p>
+<h2 id="11月12日-周六"><a href="#11月12日-周六" class="headerlink" title="11月12日 周六"></a>11月12日 周六</h2><p><strong>时间</strong>：上午2h,下午4h<br><strong>成就</strong>：学到《jQuery基础》(二)5.5<br><strong>感悟</strong>：多自习，少睡觉 </p>
+<h2 id="11月11日-周五"><a href="#11月11日-周五" class="headerlink" title="11月11日 周五"></a>11月11日 周五</h2><p><strong>时间</strong>：上午1h,下午4h，晚上2h<br><strong>成就</strong>：学完《jQuery基础》(一),学到《jQuery基础》(二) 4.5<br><strong>感悟</strong>：<br>差不多了解了jQuery的用途，按照大牛给的学习路线，应该在学好HTML5和CSS的前提下，学习原生JS，再学习jQuery框架，大致掌握之后就可以抛弃jQuery，然后好好啃JS高级教程，然后再去学react，Vue，nodejs，ajax~还有很长的路要走！本周学完jQuery四章，然后下周啃完JS，下下周啃react，Vue，nodejs，ajax；然后在准备一下面试，十二月出去实习！ </p>
+<h2 id="11月10日-周四"><a href="#11月10日-周四" class="headerlink" title="11月10日 周四"></a>11月10日 周四</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：学到《jQuery基础》3.3 </p>
+<h2 id="11月9日-周三"><a href="#11月9日-周三" class="headerlink" title="11月9日 周三"></a>11月9日 周三</h2><p><strong>时间</strong>：上午0h,下午 5h<br><strong>成就</strong>：学到《jQuery基础》2.9 </p>
+<h2 id="11月8日-周二"><a href="#11月8日-周二" class="headerlink" title="11月8日 周二"></a>11月8日 周二</h2><p><strong>时间</strong>：上午3h,下午2h<br><strong>成就</strong>：学到《jQuery基础》2.1 </p>
+<h2 id="11月7日-周一"><a href="#11月7日-周一" class="headerlink" title="11月7日 周一"></a>11月7日 周一</h2><p><strong>时间</strong>：上午2h,下午3h<br><strong>成就</strong>：<br>1.学习《JS动画》到4.2<br>2.学习《jQuery基础》到1.4 </p>
+<h2 id="11月3日-周四"><a href="#11月3日-周四" class="headerlink" title="11月3日 周四"></a>11月3日 周四</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：完成了dom事件处理。</p>
+<h2 id="11月2日-周三"><a href="#11月2日-周三" class="headerlink" title="11月2日 周三"></a>11月2日 周三</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：看了黑镜一二季 </p>
+<h2 id="11月1日-周二"><a href="#11月1日-周二" class="headerlink" title="11月1日 周二"></a>11月1日 周二</h2><p><strong>时间</strong>：上午1h,下午2h<br><strong>成就</strong>：完成《js进阶》，《dom事件》第三章 </p>
+<h2 id="10月31日-周一"><a href="#10月31日-周一" class="headerlink" title="10月31日 周一"></a>10月31日 周一</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：nothing </p>
+<h2 id="10月28日-周五"><a href="#10月28日-周五" class="headerlink" title="10月28日 周五"></a>10月28日 周五</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：不记得了，学到了《JS进阶》9.14</p>
+<h2 id="10月27日-周四"><a href="#10月27日-周四" class="headerlink" title="10月27日 周四"></a>10月27日 周四</h2><p><strong>时间</strong>：上午3h<br><strong>成就</strong>：第九章 DOM </p>
+<h2 id="10月26日-周三"><a href="#10月26日-周三" class="headerlink" title="10月26日 周三"></a>10月26日 周三</h2><p><strong>时间</strong>：上午1h,下午2h<br><strong>成就</strong>：完成第七章编程练习;《JS进阶》第八章 内置对象<br><strong>感悟</strong>：<br>1.把显示器连在电脑上，瞬间感觉码农气息满满，开心，还买了优衣库码农专用外套。 </p>
+<h2 id="10月25日-周二"><a href="#10月25日-周二" class="headerlink" title="10月25日 周二"></a>10月25日 周二</h2><p><strong>时间</strong>：上午2.5h,下午1h<br><strong>成就</strong>：《JS进阶》第七章 事件响应 </p>
+<h2 id="10月24日-周一"><a href="#10月24日-周一" class="headerlink" title="10月24日 周一"></a>10月24日 周一</h2><p><strong>时间</strong>：上午2h,下午3h,晚上0.<br><strong>成就</strong>：<br>1．《JS进阶》第六章<br><strong>感悟</strong>：<br><code>switch(se){}</code>的括号里不用加引号，加了就错了！</p>
+<h2 id="10月22日23日-周末"><a href="#10月22日23日-周末" class="headerlink" title="10月22日23日 周末"></a>10月22日23日 周末</h2><p><strong>成就</strong>：<br>1.《JS进阶》第四章完成<br>2.《JS进阶》第五章完成<br><strong>感悟</strong>：加油！</p>
+<h2 id="10月21日"><a href="#10月21日" class="headerlink" title="10月21日"></a>10月21日</h2><p><strong>时间</strong>：上午2h<br><strong>成就</strong>：<br>1.《JS进阶》第二章<br>2.《JS进阶》第三章 </p>
+<h2 id="10月20日-周四"><a href="#10月20日-周四" class="headerlink" title="10月20日 周四"></a>10月20日 周四</h2><p><strong>时间</strong>：上午2h.下午4h，晚上0。<br><strong>成就</strong>：js进阶篇,ife项目13<br><strong>感悟</strong>：原来JS没有想象中的那么高深，也是一些基础语法加上一些函数，下一步想快速过完《JS进阶》然后刷完《JS高级教程》。10月底刷完吧。</p>
+<h2 id="10月19日-周三"><a href="#10月19日-周三" class="headerlink" title="10月19日 周三"></a>10月19日 周三</h2><p><strong>时间</strong>：上午2h,下午3h,晚上1h<br><strong>成就</strong>：<br>开始学习《JS入门》,学到了4.1编程练习 </p>
+<h2 id="10月18日-周二"><a href="#10月18日-周二" class="headerlink" title="10月18日 周二"></a>10月18日 周二</h2><p><strong>时间</strong>：上午2h,下午1h,晚上0<br><strong>成就</strong>：下载了王子南等人的论文。准备开始学习JS.<br><strong>感悟</strong>：生日快乐~</p>
+<h2 id="10月17日-周一"><a href="#10月17日-周一" class="headerlink" title="10月17日 周一"></a>10月17日 周一</h2><p><strong>时间</strong>：上午2h,下午4h，晚上0<br><strong>成就</strong>：<br>1安装了Xcode和MATLAB，并将OTDR仿真导入；<br>2写了一点移动端页面<br>3大师兄说了相干检测强度问题的闭塞，别人都在处理数据检测相位了，啊，仿真的东西一点价值都没有。<br><strong>感悟</strong>：移动端的html简单，但是css还真不一样。还有待摸索。</p>
+<h2 id="10月14日"><a href="#10月14日" class="headerlink" title="10月14日"></a>10月14日</h2><p><strong>时间</strong>：上午1h,下午1h<br><strong>成就</strong>：nothing<br><strong>感悟</strong>：又懒惰了。</p>
+<h2 id="10月13日"><a href="#10月13日" class="headerlink" title="10月13日"></a>10月13日</h2><p><strong>时间</strong>：上午2h,下午1h<br><strong>成就</strong>：学习了flexbox布局和移动端web，但是没有学会，晚上还没来学习。<br><img src="../../../../images/36.png" alt=""><br><strong>感悟</strong>：温饱思淫欲，别人也是三月份开始学习的，别人就已经实习三个月并且掌握了个大概了，你还有什么理由不努力啊。</p>
+<blockquote>
+<p>我也是研一下开始学的，大概三月中旬，学HTML和CSS基础小一个月，中间一些练习用的IFE，不过后来第二阶段JS不会，又开始啃原生JS，看基础，看完基础看JS高级程序设计。穿插着做了一点点练习，到四月底开始学Jquery，边敲代码过了一遍书。但是那时候对AJAX之类的还是不太熟悉。之后在慕课网学了点小东西，做相册啊什么的用到了zeptojs，对了期间做的一个东西还学了下bootstrap。六月份听说了React不错，学之。觉得很神奇，所以用React做了个小项目。然后学到大概六月底，20多号好像是。投了两个简历，面试了一个，过了。7月到9月愉快的实习了3个月，一开始实习的时候觉得，我的天呀，头儿给的任务，半天做不出啥。不过大概一周以后就比较顺手啦，用的React，然后ES6的语法，所以就边做边学。期间经历了挺多事，接触了加密，数据可视化，canvas···· 到现在不到七个月，觉得进步还是有一些的，但是还是发现很多东西不懂，打算在学校沉淀三四个月，查漏补缺，再去尝试新的实习。分享一下，一起加油吧~ </p>
+</blockquote>
+<h2 id="10月12日"><a href="#10月12日" class="headerlink" title="10月12日"></a>10月12日</h2><p><strong>时间</strong>：上午3h，下午3h，晚上0h<br><strong>成就</strong>：完成了ife项目9<br><img src="../../../../images/37.png" alt=""><br><strong>感悟</strong>：中午在论坛上发了个帖子，表示自己很迷茫。后来我想明白了，我连JS都还没接触，当然不知所云，一脸懵逼。只要踏踏实实地做项目，看书，一定可以入门的。我连通原都能学好，这点东西难不倒我！明天接着做手机版网页，然后，一定要休息好，别熬夜了。</p>
+<h2 id="10月11日"><a href="#10月11日" class="headerlink" title="10月11日"></a>10月11日</h2><p><strong>时间</strong>：上午2h,下午3h,晚上3h<br><strong>成就</strong>：完成了ife项目9的header和部分div，具体如图：<br><img src="../../../../images/38.png" alt=""><br><strong>感悟</strong>：可以自己发现并修改一些bug,但是还是缺乏自己思考html结构和css描述的能力。我现在还属于学习基础的阶段，迷茫是正常的，但是不应该放弃，要把细碎的知识整合起来。要在本周内完成第一阶段的所有项目，然后下周开始学习JS。</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/11/30/hexo-blog/" data-toggle="tooltip" data-placement="top"
+                           title="Hexo实现个人博客搭建部署美化">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/02/IFE/" data-toggle="tooltip" data-placement="top"
+                           title="IFE项目">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1月8日-周日"><span class="toc-text">1月8日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月30日-1月7日"><span class="toc-text">12月30日 - 1月7日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月29日-周四"><span class="toc-text">12月29日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月28日-周三"><span class="toc-text">12月28日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月27日-周二"><span class="toc-text">12月27日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月26日-周一"><span class="toc-text">12月26日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月23日-周五"><span class="toc-text">12月23日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月22日-周四"><span class="toc-text">12月22日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月21日-周三"><span class="toc-text">12月21日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月20日-周二"><span class="toc-text">12月20日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月19日-周一"><span class="toc-text">12月19日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月18日-周日"><span class="toc-text">12月18日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月17日-周六"><span class="toc-text">12月17日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月16日-周五"><span class="toc-text">12月16日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月15日-周四"><span class="toc-text">12月15日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月14日-周三"><span class="toc-text">12月14日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月13日-周二"><span class="toc-text">12月13日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月12日-周一"><span class="toc-text">12月12日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月11日-周日"><span class="toc-text">12月11日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月10日-周六"><span class="toc-text">12月10日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月9日-周五"><span class="toc-text">12月9日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月8日-周四"><span class="toc-text">12月8日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月7日-周三"><span class="toc-text">12月7日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月6日-周二"><span class="toc-text">12月6日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月5日-周一"><span class="toc-text">12月5日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月4日-周日"><span class="toc-text">12月4日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月3日-周六"><span class="toc-text">12月3日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月2日-周五"><span class="toc-text">12月2日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12月1日-周四"><span class="toc-text">12月1日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月30日-周三"><span class="toc-text">11月30日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月29日-周二"><span class="toc-text">11月29日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月28日-周一"><span class="toc-text">11月28日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月27日-周日"><span class="toc-text">11月27日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月26日-周六"><span class="toc-text">11月26日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月25日-周五"><span class="toc-text">11月25日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月24日-周四"><span class="toc-text">11月24日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月23日-周三"><span class="toc-text">11月23日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月21、22日-周一周二"><span class="toc-text">11月21、22日 周一周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月20日-周日"><span class="toc-text">11月20日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月19日-周六"><span class="toc-text">11月19日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月18日-周五"><span class="toc-text">11月18日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月17日-周四"><span class="toc-text">11月17日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月16日-周三"><span class="toc-text">11月16日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月15日-周二"><span class="toc-text">11月15日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月14日-周一"><span class="toc-text">11月14日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月13日-周日"><span class="toc-text">11月13日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月12日-周六"><span class="toc-text">11月12日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月11日-周五"><span class="toc-text">11月11日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月10日-周四"><span class="toc-text">11月10日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月9日-周三"><span class="toc-text">11月9日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月8日-周二"><span class="toc-text">11月8日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月7日-周一"><span class="toc-text">11月7日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月3日-周四"><span class="toc-text">11月3日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月2日-周三"><span class="toc-text">11月2日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月1日-周二"><span class="toc-text">11月1日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月31日-周一"><span class="toc-text">10月31日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月28日-周五"><span class="toc-text">10月28日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月27日-周四"><span class="toc-text">10月27日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月26日-周三"><span class="toc-text">10月26日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月25日-周二"><span class="toc-text">10月25日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月24日-周一"><span class="toc-text">10月24日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月22日23日-周末"><span class="toc-text">10月22日23日 周末</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月21日"><span class="toc-text">10月21日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月20日-周四"><span class="toc-text">10月20日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月19日-周三"><span class="toc-text">10月19日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月18日-周二"><span class="toc-text">10月18日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月17日-周一"><span class="toc-text">10月17日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月14日"><span class="toc-text">10月14日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月13日"><span class="toc-text">10月13日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月12日"><span class="toc-text">10月12日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月11日"><span class="toc-text">10月11日</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

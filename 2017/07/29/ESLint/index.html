@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        如何使用ESLint规范项目代码｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/07/29/ESLint/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>如何使用ESLint规范项目代码</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-07-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#ESLint"
+                           title="ESLint">ESLint</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            如何使用ESLint规范项目代码
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="What’s-ESLint"><a href="#What’s-ESLint" class="headerlink" title="What’s ESLint"></a>What’s ESLint</h2><p>可组装的JavaScript和JSX检查工具</p>
+<ul>
+<li>可拔插 —— 没有什么是“太重要而不能关闭的”</li>
+<li>可配置 —— 开启后可以设置参数，对规则细化配置</li>
+<li>自由 —— 并不推荐任何编码风格，规则是自由的</li>
+<li>多插件 —— 引用共享配置或者自定义规则</li>
+</ul>
+<p>以下组织有一套自己的ESLint规范</p>
+<p><img src="../../../../images/eslint1.png" alt=""></p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">cd your project</div><div class="line"></div><div class="line">npm install eslint --save-dev</div><div class="line"></div><div class="line">./node_modules/.bin/eslint --init</div><div class="line">//you have 3 option here, i usually choose answer questions to init</div><div class="line"></div><div class="line">./node_modules/.bin/eslint yourfile.js</div></pre></td></tr></table></figure>
+<h2 id="配置文件格式"><a href="#配置文件格式" class="headerlink" title="配置文件格式"></a>配置文件格式</h2><ul>
+<li>JavaScript — .eslintrc.js</li>
+<li>YAML — .eslintrc.yaml or .eslintrc.yml</li>
+<li>JSON — .eslintrc.json</li>
+<li>Deprecated — .eslintrc</li>
+<li>package.json( eslintConfig )</li>
+</ul>
+<p>如果同一个目录下存在多个.eslintrc.*文件，ESlint会按照上面的优先级顺序使用文件，且只使用一个文件。<br>类似于CSS,采用级联的形式，会不断向上找，距离近的规则优先级高。</p>
+<h2 id="ESLint-忽略和禁用"><a href="#ESLint-忽略和禁用" class="headerlink" title="ESLint 忽略和禁用"></a>ESLint 忽略和禁用</h2><p><code>.eslintignore</code>：使用Glob模式匹配，并且默认忽略 /node_modules/<em> 和 /bower_components/</em>  中的文件。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 使用块注释，禁止检查某段代码/禁止检查某种规则</div><div class="line"></div><div class="line">/* eslint-disable no-alert, no-console*/</div><div class="line"></div><div class="line">alert(&apos;foo&apos;);</div><div class="line"></div><div class="line">/* eslint-enable no-alert, no-console*/</div><div class="line"></div><div class="line"></div><div class="line">// 使用行注释，禁止检查某段代码/禁止检查某种规则</div><div class="line"></div><div class="line">alert(&apos;foo&apos;); // eslint-disable-line no-alert, quotes, semi</div><div class="line"></div><div class="line">// eslint-disable-next-line no-alert, quotes, semi</div><div class="line">alert(&apos;foo&apos;);</div></pre></td></tr></table></figure>
+<h2 id="ESLint-Pre-commit-Hook"><a href="#ESLint-Pre-commit-Hook" class="headerlink" title="ESLint Pre-commit Hook"></a>ESLint Pre-commit Hook</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">  ...</div><div class="line">  &quot;name&quot;: &quot;thinkjs-application&quot;,</div><div class="line">  &quot;description&quot;: &quot;application created by thinkjs&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;gulp-production&quot;: &quot;gulp production&quot;,</div><div class="line">    &quot;lint-fix&quot;: &quot;eslint &apos;src/**/*.js&apos; --fix&quot;,</div><div class="line">    &quot;lint&quot;: &quot;eslint &apos;src/**/*.js&apos;&quot;,</div><div class="line">    &quot;test&quot;: &quot;ava&quot;,</div><div class="line">    &quot;start&quot;: &quot;node development.js&quot;,</div><div class="line">    &quot;gulp&quot;: &quot;gulp&quot;,</div><div class="line">    &quot;all&quot;: &quot;node development.js &amp; gulp&quot;,</div><div class="line">    &quot;compile&quot;: &quot;babel src/ --presets think-node --out-dir app/&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;pre-commit&quot;: [</div><div class="line">    &quot;test&quot;,</div><div class="line">    &quot;lint-fix&quot;</div><div class="line">  ],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ESLint-with-Sublime"><a href="#ESLint-with-Sublime" class="headerlink" title="ESLint with Sublime"></a>ESLint with Sublime</h2><ul>
+<li><p>安装 SublimeLinter<br>调出package control，输入install,再搜索SublimeLinter进行安装</p>
+</li>
+<li><p>安装 SublimeLinter-contrib-eslint<br>调出package control，输入install,搜索eslint安装即可，全名：SublimeLinter-contrib-eslint。注意：该插件只支持Sublime text 3</p>
+</li>
+</ul>
+<h2 id="ESLint-配置项"><a href="#ESLint-配置项" class="headerlink" title="ESLint 配置项"></a>ESLint 配置项</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  // 脚本执行期间访问的额外的全局变量,当访问未定义的变量时</div><div class="line">  // no-undef 规则将发出警告,设置每个变量等于 true 允许变量被重写，</div><div class="line">  &apos;globals&apos;: &#123;</div><div class="line">    &apos;$&apos;: true,</div><div class="line">    &apos;CKEDITOR&apos;: true,</div><div class="line">    ...,</div><div class="line">  &#125;,</div><div class="line">  // 指定脚本的运行环境</div><div class="line">  &apos;env&apos;: &#123;</div><div class="line">    &apos;browser&apos;: true,</div><div class="line">    &apos;commonjs&apos;: true,</div><div class="line">    ...,</div><div class="line">  &#125;,</div><div class="line">  // 启用airbnb的eslint规则</div><div class="line">  // 对于我们持不同意见的规则，在下面的rules进行了重新定义</div><div class="line">  &apos;extends&apos;: [&apos;vue&apos;, &apos;airbnb&apos;],</div><div class="line">  // 指定解析器，默认为Espree, 满足以上条件的解析器有Esprima和Babel-ESLint</div><div class="line">  &apos;parser&apos;: &apos;babel-eslint&apos;,</div><div class="line">  // 设置解析器选项，帮助 ESLint 确定什么是解析错误</div><div class="line">  &apos;parserOptions&apos;: &#123;</div><div class="line">    &apos;sourceType&apos;: &apos;module&apos;, // 使用ES模块</div><div class="line">    &apos;ecmaFeatures&apos;: &#123;</div><div class="line">      &apos;jsx&apos;: true,</div><div class="line">      &apos;ecmaVersion&apos;: 7, //使用ES2016</div><div class="line">    &#125;,</div><div class="line">  &#125;,</div><div class="line">  // eslint的第三方插件</div><div class="line">  plugins: [&apos;vue&apos;, &apos;vuefix&apos;],</div><div class="line">  // eslint 的规则</div><div class="line">  rules: &#123;</div><div class="line">    // 强制 getter 和 setter 在对象中成对出现</div><div class="line">    // 默认状态是开启对setWithoutGet的监控，关闭对getWithoutSet的监控</div><div class="line">    &apos;accessor-pairs&apos;: &apos;error&apos;,</div><div class="line">    // ✘ : 关闭要求箭头函数体使用大括号的监控</div><div class="line">    // 严格执行会降低可读性</div><div class="line">    // 比如：export default context =&gt; app.preFetch(context).then(() =&gt; app) </div><div class="line">    &apos;arrow-body-style&apos;: [&apos;off&apos;, &apos;as-needed&apos;, &#123; &apos;requireReturnForObjectLiteral&apos;: true &#125;],</div><div class="line">   ...</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="腾讯新闻中使用的-ESLint-配置项"><a href="#腾讯新闻中使用的-ESLint-配置项" class="headerlink" title="腾讯新闻中使用的 ESLint 配置项"></a>腾讯新闻中使用的 ESLint 配置项</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">    env: &#123;</div><div class="line">        browser: true,</div><div class="line">        commonjs: true,</div><div class="line">        es6: true,</div><div class="line">        node: true</div><div class="line">    &#125;,</div><div class="line">    extends: [&apos;airbnb-base&apos;],</div><div class="line">    plugins: [&apos;import&apos;],</div><div class="line">    parser: &apos;babel-eslint&apos;,</div><div class="line">    parserOptions: &#123;</div><div class="line">        ecmaFeatures: &#123;</div><div class="line">            experimentalObjectRestSpread: true,</div><div class="line">            jsx: true</div><div class="line">        &#125;,</div><div class="line">        sourceType: &apos;module&apos;,</div><div class="line">    &#125;,</div><div class="line">    </div><div class="line">    // 指定解析器</div><div class="line">    rules: &#123;</div><div class="line">        // 强制 getter 和 setter 在对象中成对出现</div><div class="line">        // 默认状态是开启对setWithoutGet的监控，关闭对getWithoutSet的监控</div><div class="line">        &apos;accessor-pairs&apos;: &apos;error&apos;,</div><div class="line">        // ✘ : 关闭要求箭头函数体使用大括号的监控</div><div class="line">        // 严格执行会降低可读性</div><div class="line">        // 比如：export default context =&gt; app.preFetch(context).then(() =&gt; app) </div><div class="line">        &apos;arrow-body-style&apos;: [&apos;off&apos;, &apos;as-needed&apos;, &#123; &apos;requireReturnForObjectLiteral&apos;: true &#125;],</div><div class="line">        // ✘ : 关闭对骆驼拼写法的监控</div><div class="line">        // 因为我们要和后端接口保持一致</div><div class="line">        &apos;camelcase&apos;: &apos;off&apos;,</div><div class="line">        // ✘ : 关闭这一规则</div><div class="line">        // JSON 或 Object 最后可以有逗号也可以没有逗号</div><div class="line">        &apos;comma-dangle&apos;: &apos;off&apos;,</div><div class="line">        // ✘ : 关闭对于最后行为空行的监控</div><div class="line">        &apos;eol-last&apos;: &apos;off&apos;,</div><div class="line">        // ✘ : 关闭这一规则</div><div class="line">        // 有些比如说setTimeout一定要为function取名字还挺烦的</div><div class="line">        &apos;func-names&apos;: &apos;off&apos;,</div><div class="line">        // ✘ : 允许使用位操作</div><div class="line">        // 因为 node 里面底层处理比如文件操作之类用位操作还是方便</div><div class="line">        // 另外我们一般用 | 0 来取整</div><div class="line">        &apos;no-bitwise&apos;: &apos;off&apos;,</div><div class="line">        // 要求关键字前后都添加空格，但是overrides数组中的关键字后面不添加空格</div><div class="line">        &apos;keyword-spacing&apos;: [&apos;error&apos;, &#123;</div><div class="line">            &apos;overrides&apos;: &#123;</div><div class="line">                &apos;if&apos;: &#123; &apos;after&apos;: false &#125;,</div><div class="line">                &apos;for&apos;: &#123; &apos;after&apos;: false &#125;,</div><div class="line">                &apos;while&apos;: &#123; &apos;after&apos;: false &#125;,</div><div class="line">                &apos;function&apos;: &#123; &apos;after&apos;: false &#125;,</div><div class="line">            &#125;,</div><div class="line">        &#125;],</div><div class="line">        // 禁止console，但是允许console.warn() 和 console.error()</div><div class="line">        &apos;no-console&apos;: [&apos;warn&apos;, &#123; allow: [&apos;warn&apos;, &apos;error&apos;] &#125;],</div><div class="line">        // 禁止在条件中使用常量表达式</div><div class="line">        // 允许在循环中使用常量表达式</div><div class="line">        &apos;no-constant-condition&apos;: [&apos;warn&apos;, &#123; &apos;checkLoops&apos;: false &#125;],</div><div class="line">        // ✘ : 关闭对于禁用continue的监控</div><div class="line">        &apos;no-continue&apos;: &apos;error&apos;,</div><div class="line">        // 禁止在全局范围使用变量和函数声明</div><div class="line">        &apos;no-implicit-globals&apos;: &apos;error&apos;,</div><div class="line">        // 禁止 this 关键字在类或类对象之外出现</div><div class="line">        &apos;no-invalid-this&apos;: &apos;off&apos;,</div><div class="line">        // 禁止混合操作符，同组的需要添加圆括号</div><div class="line">        // 这个其实有点不太实用  </div><div class="line">        &apos;no-mixed-operators&apos;: [&apos;off&apos;, &#123;</div><div class="line">            groups: [</div><div class="line">                [&apos;===&apos;, &apos;!==&apos;, &apos;&gt;&apos;, &apos;&gt;=&apos;, &apos;&lt;&apos;, &apos;&lt;=&apos;],</div><div class="line">                [&apos;&amp;&amp;&apos;, &apos;||&apos;],</div><div class="line">                [&apos;in&apos;, &apos;instanceof&apos;],</div><div class="line">            ],</div><div class="line">            allowSamePrecedence: false,</div><div class="line">        &#125;],</div><div class="line">        // ✘ : 关闭对于禁止对参数进行赋值的监控</div><div class="line">        // 因为我们其实常常需要对参数进行修改操作</div><div class="line">        &apos;no-param-reassign&apos;: [&apos;off&apos;, &#123; &apos;props&apos;: false &#125;],</div><div class="line">        // ✘ : 关闭对于禁用自增自减的监控</div><div class="line">        &apos;no-plusplus&apos;: &apos;off&apos;,</div><div class="line">        // ✘ : 关闭对于禁用下划线的监控</div><div class="line">        &apos;no-underscore-dangle&apos;: [&apos;off&apos;, &#123; allowAfterThis: false &#125;],</div><div class="line">        // 在声明之前不可以使用变量和类，但是函数除外</div><div class="line">        &apos;no-use-before-define&apos;: [&apos;error&apos;, &#123; functions: false, classes: true, variables: true &#125;],</div><div class="line">        // ✘ : 关闭对强制行的最大长度的监控</div><div class="line">        // 传参很多就很方啊，尤其加上默认参数的时候</div><div class="line">        &apos;max-len&apos;: &apos;off&apos;,</div><div class="line">        // 禁止一个文件中在忽略空行和注释之后行数超过300行</div><div class="line">        &apos;max-lines&apos;: [&apos;error&apos;, &#123;</div><div class="line">            max: 300,</div><div class="line">            skipBlankLines: true,</div><div class="line">            skipComments: true</div><div class="line">        &#125;],</div><div class="line">        // 一个函数的最大参数数量不可以超过5个</div><div class="line">        &apos;max-params&apos;: [&apos;error&apos;, 5],</div><div class="line">        &apos;max-statements&apos;: [&apos;off&apos;, 10],</div><div class="line">        // ✘ : 关闭这一规则</div><div class="line">        // 因为 ES6 之前 JS 没有块级作用域，存在变量提升，故采用此规则</div><div class="line">        // 把变量定义在一起可以减少歧义</div><div class="line">        &apos;one-var&apos;: &apos;off&apos;,</div><div class="line">        // 强制在花括号中不使用空格</div><div class="line">        &apos;object-curly-spacing&apos;: [&apos;error&apos;, &apos;never&apos;],</div><div class="line">        // 强制将对象的属性放在不同的行上</div><div class="line">        // 禁止所有的 key 和 value 在同一行</div><div class="line">        &apos;object-property-newline&apos;: [&apos;error&apos;, &#123;</div><div class="line">            allowMultiplePropertiesPerLine: true,</div><div class="line">        &#125;],</div><div class="line">        // 要求把换行符放在操作符前面</div><div class="line">        &apos;operator-linebreak&apos;: [&apos;error&apos;, &apos;before&apos;],</div><div class="line">        // 在promise函数的reject()中，要么抛出Error要么为空</div><div class="line">        &apos;prefer-promise-reject-errors&apos;: [&apos;error&apos;, &#123; allowEmptyReject: true &#125;],</div><div class="line">        // 强制 async 方法使用 await</div><div class="line">        // 否则可能会导致 babel 把不必要的 async 编译成 generator </div><div class="line">        &apos;require-await&apos;: &apos;error&apos;,</div><div class="line">        &apos;require-yield&apos;: &apos;error&apos;,</div><div class="line">        // 禁用分号</div><div class="line">        &apos;semi&apos;: [&apos;error&apos;, &apos;never&apos;],</div><div class="line">        // import/禁止使用dependency外定义的文件</div><div class="line">        &apos;import/no-extraneous-dependencies&apos;: 0,</div><div class="line">        &apos;import/first&apos;: 0,</div><div class="line">        &apos;import/no-unresolved&apos;: 0,</div><div class="line">        &apos;import/newline-after-import&apos;: 0,</div><div class="line">        &apos;import/extensions&apos;: 0,</div><div class="line">        &apos;indent&apos;: [&apos;error&apos;, 4],</div><div class="line">        &apos;linebreak-style&apos;: [&apos;error&apos;, &apos;unix&apos;],</div><div class="line">        &apos;quotes&apos;: [&apos;error&apos;, &apos;single&apos;],</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>抄送 Eslint 官方文档：<a href="http://eslint.org/docs/user-guide/" target="_blank" rel="external">http://eslint.org/docs/user-guide/</a></p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/29/oops/" data-toggle="tooltip" data-placement="top"
+                           title="轻轻喘出一口气">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/07/29/vue-botebook/" data-toggle="tooltip" data-placement="top"
+                           title="一个 Vue-ToDo 项目">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What’s-ESLint"><span class="toc-text">What’s ESLint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install"><span class="toc-text">install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件格式"><span class="toc-text">配置文件格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLint-忽略和禁用"><span class="toc-text">ESLint 忽略和禁用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLint-Pre-commit-Hook"><span class="toc-text">ESLint Pre-commit Hook</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLint-with-Sublime"><span class="toc-text">ESLint with Sublime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLint-配置项"><span class="toc-text">ESLint 配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#腾讯新闻中使用的-ESLint-配置项"><span class="toc-text">腾讯新闻中使用的 ESLint 配置项</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ESLint"
+                           title="ESLint">ESLint</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

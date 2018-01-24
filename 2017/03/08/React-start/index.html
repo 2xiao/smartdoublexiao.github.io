@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        React学习笔记｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/03/08/React-start/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>React学习笔记</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-03-08
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            React学习笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>React学习笔记</p>
+<p>1.学习React的资料有：<br>《深入React技术栈》  </p>
+<p>阮一峰的<a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="external">React教程</a>和<a href="https://github.com/ruanyf/react-demos" target="_blank" rel="external">React教程的demo</a>  </p>
+<p>2.一个完整的react<a href="http://blog.csdn.net/a153375250/article/details/52667739" target="_blank" rel="external">例子</a></p>
+<p>跟着做这个例子的时候，进行到webpack打包的地方，发现打开html文件总是出错，应该是react没有安装好，或者打包的时候出了错，所以又去学习<a href="http://webpackdoc.com/index.html" target="_blank" rel="external">webpack</a>，见webpack学习笔记。</p>
+<p>3.还是出错，暂时先放一放。</p>
+<p>3-25做项目<br>一、安装node.js npm cnpm<br>二、新建工程文件夹,npm项目初始化，配置package.json文件，安装react / react-dom / babel</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ cd /Users/wuxiaoxiao/Documents/space/React/3-25</div><div class="line">$ ls</div><div class="line">$ npm init</div><div class="line">This utility will walk you through creating a package.json file.</div><div class="line">It only covers the most common items, and tries to guess sensible defaults.</div><div class="line"></div><div class="line">See `npm help json` for definitive documentation on these fields</div><div class="line">and exactly what they do.</div><div class="line"></div><div class="line">Use `npm install &lt;pkg&gt; --save` afterwards to install a package and</div><div class="line">save it as a dependency in the package.json file.</div><div class="line"></div><div class="line">Press ^C at any time to quit.</div><div class="line">name: (3-25) 3-25</div><div class="line">version: (1.0.0) </div><div class="line">description: </div><div class="line">entry point: (index.js) index.js</div><div class="line">test command: </div><div class="line">git repository: </div><div class="line">keywords: </div><div class="line">author: </div><div class="line">license: (ISC) </div><div class="line">About to write to /Users/wuxiaoxiao/Documents/space/React/3-25/package.json:</div><div class="line"></div><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;3-25&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">Is this ok? (yes) yes</div><div class="line">$ ls</div><div class="line">package.json</div><div class="line">$  sudo npm install --save react react-dom bab</div><div class="line">elify babel-preset-react</div><div class="line">Password:</div><div class="line">3-25@1.0.0 /Users/wuxiaoxiao/Documents/space/React/3-25</div></pre></td></tr></table></figure>
+<p>三、因为要用ES2015,接着安装babel并保存到配置文件中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ sudo npm install babel-preset-es2015 --save</div></pre></td></tr></table></figure>
+<p>四、全局安装webpack，在项目文件中再安装一遍</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ sudo npm install -g webpack</div><div class="line">$ sudo npm install -g webpack-dev-server</div><div class="line">$ sudo npm install webpack-dev-server --save</div><div class="line">$ sudo npm install webpack --save</div><div class="line">//另外根据报错,又安装了babel</div><div class="line">$ sudo npm install babel --save</div><div class="line">$ sudo npm install babel-core --save</div><div class="line">$ sudo npm install babel-loader --save</div></pre></td></tr></table></figure>
+<p>五、写webpack.config.js文件，<code>webpack</code>后生成bundle.js,<code>--watch</code>命令使得终端监测文件变化，在网页刷新时自动打包，<code>webpack-dev-server</code>可以不用手动刷新<a href="http://localhost:8080/" target="_blank" rel="external">网页</a>实时刷新。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ webpack</div><div class="line">$ webpack --watch</div><div class="line">$ webpack-dev-server</div><div class="line">Project is running at http://localhost:8080/</div><div class="line">$ webpack-dev-server --contentbase src --inline --hot</div><div class="line">http://localhost:8080/</div></pre></td></tr></table></figure>
+<p>六、配置chrome或者Firefox的 react developer tools和atom插件：atom-beautify、open-in-browser、atom-ternjs、emmet、file-icons、highlight-line、highlight-Selected</p>
+<p>七、创建一个./js/components/hearder.js文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import ReactDOM from &apos;react-dom&apos;;</div><div class="line"></div><div class="line">export default class ComponentHeader extends React.Component&#123;</div><div class="line">  render()&#123;</div><div class="line">    return (</div><div class="line">      &lt;header&gt;</div><div class="line">        &lt;h1&gt;这里是头部&lt;/h1&gt;</div><div class="line">      &lt;/header&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后将index.js文件改为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var React = require(&apos;react&apos;);</div><div class="line">var ReactDOM = require(&apos;react-dom&apos;);</div><div class="line">import ComponentHeader from &apos;./components/header&apos;;</div><div class="line">class Index extends React.Component&#123;</div><div class="line">  render()&#123;</div><div class="line">    return (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;ComponentHeader/&gt;</div><div class="line">        &lt;h2&gt;页面的主体内容&lt;/h2&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">ReactDOM.render(</div><div class="line">	&lt;Index/&gt;, document.getElementById(&apos;example&apos;));</div></pre></td></tr></table></figure>
+<p>就实现了<componentheader>组件的调用。<br>注意，return函数里只能返回一个HTML节点；可以给外部使用的组件定义：<code>export default class ComponentHeader extends React.Component{}</code>; 入口的定义：<code>ReactDOM.render(&lt;Index/&gt;, document.getElementById(&#39;example&#39;));</code></componentheader></p>
+<p>八、JSX的使用。除了直接使用<componentheader>调用组建以外还可以用参数调用：</componentheader></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">render()&#123;</div><div class="line">	/*</div><div class="line">		var component;</div><div class="line">		if (用户已登录) &#123;</div><div class="line">			component = &lt;ComponentLoginedHeader/&gt;</div><div class="line">		&#125;</div><div class="line">		else&#123;</div><div class="line">			component = &lt;ComponentHeader/&gt;</div><div class="line">		&#125;</div><div class="line">	*/</div><div class="line">   	return (</div><div class="line">      &lt;div&gt;</div><div class="line">       	&#123;component&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>三元表达式的书/动态属性值绑定参数/注释/HTML要显示可以进行Unicode转码或设置dangerouslySetInnerHTML属性：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">render()&#123;</div><div class="line">  var userName = &apos;wuxiaoxiao&apos;;</div><div class="line">	var disable = false;</div><div class="line">	var html = &quot;hello&amp;nbsp;world&quot;;</div><div class="line">	var html2 = &quot;hello\u0020world&quot;;</div><div class="line">	return(</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;p&gt;&#123;window.userName == &apos;&apos; ? &apos;默认用户名&apos; : &apos;用户名：&apos;+userName&#125;&lt;/p&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&#123;userName&#125; disable=&#123;disable&#125;/&gt;</div><div class="line">    &#123;/*注释*/&#125;</div><div class="line">    &lt;p&gt;&#123;html&#125;&lt;/p&gt;</div><div class="line">    &lt;p&gt;&#123;html2&#125;&lt;/p&gt;</div><div class="line">    &lt;p dangerouslySetInnerHTML = &#123;&#123;__html:html&#125;&#125;&gt;&lt;/p&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>九、生命周期<br>函数<br>图<br>钩子</p>
+<p>十、React属性与事件<br>state属性，对于模块属于自身属性，state的作用域只属于当前的类，不污染其他模块。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">constructor() &#123; //构造函数</div><div class="line">		super(); //调用基类的所有的初始化方法</div><div class="line">		this.state = &#123; //初始化</div><div class="line">			username: &quot;Parry&quot;,</div><div class="line">			age: 20</div><div class="line">		&#125;; //初始化赋值</div><div class="line">	&#125;</div><div class="line">setTimeout(() =&gt; &#123; //修改state</div><div class="line">      this.setState(&#123;username:&quot;wuxiaoxiao&quot;,age:30&#125;);</div><div class="line">    &#125;,4000);</div></pre></td></tr></table></figure>
+<p>props属性，对于模块属于外来属性<br>父组件向子组件传递参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;BodyIndex userid=&#123;123456&#125; /&gt; //index.js 传递参数</div><div class="line"></div><div class="line">&#123;this.props.userid&#125;  //BodyIndex.js 模块中接受参数</div></pre></td></tr></table></figure>
+<p>子组件向父组件传递参数：<br>在子页面中通过调用父页面传递过来的事件props进行组件间的参数传递</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;p&gt;子页面输入：&lt;input type=&quot;text&quot; onChange=&#123;this.props.handleChildValueChange&#125;/&gt;&lt;/p&gt;</div><div class="line"></div><div class="line">handleChildValueChange(event) &#123;</div><div class="line">		this.setState(&#123;age: event.target.value&#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">&lt;BodyChild handleChildValueChange=&#123;this.handleChildValueChange.bind(this)&#125;/&gt;</div></pre></td></tr></table></figure>
+<p>事件的绑定：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//可以在调用时绑定</div><div class="line">changeUserInfo(num)&#123;</div><div class="line">    this.setState(&#123;age:num&#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">&lt;input type=&quot;button&quot; value=&quot;提交&quot; onClick=&#123;this.changeUserInfo.bind(this,99)&#125;/&gt; </div><div class="line">//也可以在构造函数中绑定</div><div class="line">？？</div></pre></td></tr></table></figure>
+<p>十一、可复用组件<br>Prop验证：<br><a href="https://facebook.github.io/react/docs/components-and-props.html" target="_blank" rel="external">官网介绍</a><br>React.propTypes:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">const propTypes = &#123;id:PropTypes.number.isrequired,url:PropTypes.string.isrequired,text:PropTypes.string&#125;;</div><div class="line">//使用方法</div><div class="line">BodyIndex.propTypes=&#123;userid:PropTypes.number.isrequired&#125;;</div><div class="line">//默认prop值</div><div class="line">const defaultProps = &#123;</div><div class="line">  username: &apos;Mary&apos;</div><div class="line">&#125;;</div><div class="line">//使用方法</div><div class="line">BodyIndex.defaultProps = defaultProps;</div><div class="line">//传递所有参数的快捷方式</div><div class="line">&lt;Component &#123;...this.props&#125; more=&quot;values&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>组件的Refs：<br>Refs是访问到组件内部DOM节点唯一可靠的方法，Refs会自动销毁 对子组件的引用，不要在render或render之前对Refs进行调用，不要滥用Refs.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input id=&apos;submitButton&apos; ref=&apos;submitButton&apos; type=&quot;button&quot; value=&quot;提交&quot; onClick=&#123;this.changeUserInfo.bind(this,99)&#125;/&gt;</div><div class="line"></div><div class="line">//原始获取方式：</div><div class="line">var mySubmitButton = document.getElementById(&apos;submitButton&apos;);</div><div class="line">ReactDOM.findDOMNode(mySubmitButton).style.color = &apos;red&apos;;</div><div class="line"></div><div class="line">//Refs方法获取：</div><div class="line">this.refs.submitButton.style.color = &apos;red&apos;;</div></pre></td></tr></table></figure>
+<p>独立组件间共享Mixins:<br>不同组件之间公用功能，共享代码，和页面具有类似的生命周期。<br>ES6下使用需要安装插件：<br><a href="https://github.com/brigand/react-mixin" target="_blank" rel="external">官方文档</a><br><code>$ sudo npm install --save react-mixin@2</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//mixins.js</div><div class="line">const MixinLog = &#123;</div><div class="line">  componentDidMount()&#123;</div><div class="line">    console.log(&quot;MixinLog componentDidMount&quot;);</div><div class="line">  &#125;,</div><div class="line">  log()&#123;</div><div class="line">    console.log(&quot;abcdefg...&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">export default MixinLog</div><div class="line"></div><div class="line">//BodyIndex.js</div><div class="line">import ReactMixin from &apos;react-mixin&apos;;</div><div class="line">import MixinLog from &apos;./mixins&apos;;</div><div class="line">MixinLog.log();</div><div class="line">ReactMixin(BodyIndex.prototype, MixinLog);</div></pre></td></tr></table></figure>
+<p>十二、React样式<br>css命名规范：dialog__confirm-button-highlight</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">const styleComponentHeader = &#123;</div><div class="line">  header:&#123;</div><div class="line">    backgroundColor: &quot;#333333&quot;,</div><div class="line">    color: &quot;#FFFFFF&quot;,</div><div class="line">    &quot;padding-top&quot;:&quot;15px&quot;,</div><div class="line">    paddingBottom: &quot;15px&quot;</div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意样式的驼峰写法，注意class需要更改className：<code>style = {styleComponentHeader.header} className=&quot;smallFontSize&quot;</code><br>文件中引用css的样式，但是会涉及到模块污染，缺点是动画、伪类（hover）等不能使用。<br>内联样式中的表达式：<code>paddingBottom:(this.state.miniHeader)?&quot;3px&quot;:&quot;15px&quot;</code></p>
+<p>CSS模块化</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//先安装3个包：</div><div class="line">&quot;babel-plugin-react-html-attrs&quot;: &quot;^2.0.0&quot;,</div><div class="line">&quot;style-loader&quot;: &quot;^0.13.1&quot;,</div><div class="line">&quot;css-loader&quot;: &quot;^0.25.0&quot;</div><div class="line"></div><div class="line">$ sudo npm install</div><div class="line"></div><div class="line">//在webpack.config.js文件中配置一下css</div><div class="line">//下面是添加的 css 的 loader，也即是 css 模块化的配置方法，大家可以拷贝过去直接使用</div><div class="line">&#123;</div><div class="line">test: /\.css$/,</div><div class="line">loader: &apos;style!css-loader?modules&amp;importLoaders=1&amp;localIdentName=[name]__[local]___[hash:base64:5]&apos;</div><div class="line">&#125;,</div><div class="line"></div><div class="line">//导入css文件：</div><div class="line">var footerCss  =  require(&quot;../../css/footer.css&quot;);</div><div class="line"></div><div class="line">//使用：</div><div class="line">&lt;footer class=&#123;footerCss.miniFooter&#125;&gt;</div><div class="line"></div><div class="line">//作用范围</div><div class="line">:local(.normal)&#123;color:red;&#125; </div><div class="line">:global(.bin)&#123;color:red;&#125;</div></pre></td></tr></table></figure>
+<p>优点：<br>所有样式都是local，解决了命名冲突和全局污染问题<br>class名生成规则配置灵活，可以此来压缩class名<br>只需引用组件的JS就能搞定组件所有的JS和CSS<br>依然是CSS，零学习成本</p>
+<p>JSX样式和CSS互转：<a href="http://staxmanade.com/CssToReact/" target="_blank" rel="external">http://staxmanade.com/CssToReact/</a></p>
+<p>Ant Design 样式框架<br>www.material-ui.com<br><a href="https://ant.design" target="_blank" rel="external">https://ant.design</a><br>安装包：<code>$ sudo npm install antd --save</code><br>引用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import &apos;antd/dist/antd.css&apos;;</div><div class="line">import &#123; Input &#125; from &apos;antd&apos;;</div><div class="line">&lt;Input placeholder=&quot;Basic usage&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>十三、React Router<br>安装包：<code>$ sudo npm install --save react-router</code><br>见例子3-29<br>单页面构建Router控制<br>控制页面的层级关系<br>底层机制<br>参数传递：<code>path=&quot;list/:id&quot;</code> <code>params</code>to`</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;h2&gt;这里是列表页面 id:&#123;this.props.params.id&#125;&lt;/h2&gt;</div><div class="line">&lt;li&gt;&lt;Link to=&#123;`/list/:1234`&#125;&gt;列表页面&lt;/Link&gt;&lt;/li&gt;</div><div class="line">&lt;Route component=&#123;ComponentList&#125; path=&quot;list/:id&quot;&gt;&lt;/Route&gt;</div></pre></td></tr></table></figure>
+<p>———— new ————- project ————<br>前期准备：postman 新闻头条的数据接口 API 测试环境：chrome</p>
+<p>网站图标：iconfinder</p>
+<ul>
+<li><p>PC端页头开发：<br>flex布局 24栅格</p>
+</li>
+<li><p>移动端页头开发：<br>安装react-responsive插件<br><code>$ sudo npm install react-responsive --save</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import MediaQuery from &apos;react-responsive&apos;;</div><div class="line">&lt;MediaQuery query=&apos;(min-device-width: 1224px)&apos;&gt;</div><div class="line">	&lt;PCIndex/&gt;</div><div class="line">&lt;/MediaQuery&gt;</div><div class="line">&lt;MediaQuery query=&apos;(max-device-width: 1224px)&apos;&gt;</div><div class="line">	&lt;MobileIndex/&gt;</div><div class="line">&lt;/MediaQuery&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>PC端页脚开发：<br>类似页头的开发，引用就可以了</p>
+</li>
+<li><p>移动端页脚开发：<br>和PC端页脚一样</p>
+</li>
+<li><p>PC端注册模块<br>fetch框架<br>安装：<code>$ sudo npm install fetch --save</code></p>
+</li>
+</ul>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/09/rem-start/" data-toggle="tooltip" data-placement="top"
+                           title="rem是什么">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/08/webpack-start/" data-toggle="tooltip" data-placement="top"
+                           title="webpack学习笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

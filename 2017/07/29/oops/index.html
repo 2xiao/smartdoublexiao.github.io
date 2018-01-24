@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        轻轻喘出一口气｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/07/29/oops/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="http://xxwu.tech/images/bg1.JPG">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://xxwu.tech/images/bg1.JPG');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>轻轻喘出一口气</h1>
+                    
+                    <span class="meta">
+                         作者 二小
+                        <span>
+                          日期 2017-07-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Zen"
+                           title="Zen">Zen</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            轻轻喘出一口气
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>这几天一直琢磨着写点东西，但是打开电脑，看到需求列表里测试又提出了几个bug，被远在上海的产品经理在群里@了好几次，瞬间脑补了她拿着一把1200千米长的砍刀架在我的脖子上，赶紧喝一口咖啡压压惊，默默搬砖去了。</p>
+<p>我这么说并没有一点抱怨的意思，因为我深知找一份自己热爱的工作有多么不容易，虽然嘴上总爱说产品和程序员势不两立，但其实是周瑜打黄盖,一个愿打一个愿挨。</p>
+<h2 id="1-哭着吃过饭的人，是能够走下去的"><a href="#1-哭着吃过饭的人，是能够走下去的" class="headerlink" title="1.哭着吃过饭的人，是能够走下去的"></a>1.哭着吃过饭的人，是能够走下去的</h2><p>今年过完年没几天，就被拉进了十几个实习内推群里，我看了看招聘要求，除了“性格开朗，工作积极主动，有责任心”这一条勉强满足，其他的一条都不match，我问爸爸，如果我找不到工作，你可以养我吗？他估计也没料到我会这么问，没有理我，过了很久，才说，饭还是有你一口吃。</p>
+<p>我心一寒，暂时打消了回家啃老的念头，搬出了一本700多页的编程红包书开始啃，知乎上有人说把这本书翻三遍就能找到工作了。我去年拖拖沓沓一整个学期才看了四分之一，而今只好背水一战！每天看书到深夜两三点，除了中午出去吃碗面，基本没有下过楼，十三天就把红宝书刷了两遍，有一些很难理解的章节被三种颜色的记号笔划得密密麻麻，便签条贴了几百张。爸爸起初笑话我临时抱佛脚，后来看到红宝书快被我翻烂了，这次是玩儿真的，就每天陪我看书到深夜，坐在红泥小火炉边，泡一杯茶，不时往火里添几根柴。</p>
+<p>可能是因为红宝书我只看了两遍，也可能知乎上是忽悠人的，开学后我并没有找到工作。</p>
+<p>看着朋友圈里今日头条和网易的同学一到饭点就比今天谁家的工作餐更丰盛，论坛上自称渣硕的大佬列出十几个offer求比较，纠结着拒掉哪个好，我却笔试一家跪一家，甚至被某声称从不挂北邮毕业生简历的公司挂了简历。人类进化至今，巨大挫败感的来源，已经从一只追逐不到的猎物，转移到了一场没应付得来的考试。茫茫然交了考卷后，我沮丧地看见，一只麋鹿离我远去了。</p>
+<p>面试前的焦虑和不知道该朝什么方向努力的迷茫，让我失眠严重，常常两三点睡着，天还没亮又醒来了。我安慰自己，至少我还活着。</p>
+<p>那段时间可以用一个字概括：丧。</p>
+<p>我一只手扶在因为长时间坐着写代码而腰肌劳损的腰上，另一只手提着一碗豌杂面，手扶着哪边的腰，头就歪向哪边的肩膀，闭着眼踱步，一抬头突然看到电梯镜子里有一个鬼，发如枯槁，双目无神，眼皮拉拢，眼眶发黑，唇色惨白。定睛一看，是我本人。</p>
+<p>三月末的北京下了很久的雨，湿淋淋的，枯叶被打落在地上，踩上去有点南方小城的味道，我又动了回家的念头。我想去山里呆着，度过清凉安静的早晨和晚上，带着画画的笔和颜色，带着一个本子，穿宽大的衣服，坐在山泉边的石头上，白天画，乱画，晚上看画，改一改，毁一毁，听着山里特有的空的声音，梦里去更远的地方。</p>
+<p>有时候打开家里的监控摄像头画面，看到妈妈在陪潇哥做作业，舅妈抱着小人儿从对面的街上走过来，没什么事，只是在门口坐一会儿，熙熙攘攘的一大家子，烟火气十足。我突然觉得自己被骗了，我们从小到大考了那么多场试，就是为了离开故乡，没有人告诉我为什么要离开，也没人告诉我离开就回不去了。我想起自己来北京快十年了，从魏公村的上下铺，搬到了西土城的上床下桌，每次回家，都被家乡人当做“别人家的孩子”来教育自己的孩子，甚至有家长找到我爸妈，只为了让我和他家孩子一起吃顿饭，说和小小姐姐一起玩都是励志教育。</p>
+<p>其实只有我自己知道，我早就不是那个内心骄傲自认为天赋异禀的人了，世界太大，而我太渺小了。一个人的战斗，是他们看不见的喜与悲。</p>
+<p>清明过后，我终于拿到了一个offer，我还清楚地记得，那天我在饿了么上订了一份梁山水煮，突然一个陌生的电话打进来，我接通后就说：“师傅你等会儿，我马上下去。”对方愣了一下，说：“我是xx公司的人力……”。</p>
+<p>轻轻喘出一口气，我终于找到工作了！</p>
+<p>我并没有很开心，反而觉得不真实，就是习惯接受生活暴击的休·格拉斯突然变成了盖茨比，满脸长痘的丑八怪突然被男神倒追的那种不真实。</p>
+<p>那顿梁山水煮我是哭着吃完的。</p>
+<h2 id="2-老子不想谈恋爱！老子只想出人头地！"><a href="#2-老子不想谈恋爱！老子只想出人头地！" class="headerlink" title="2.老子不想谈恋爱！老子只想出人头地！"></a>2.老子不想谈恋爱！老子只想出人头地！</h2><p>现在工作的地方是我第一次见到花花的地方，这是热爱这份工作的一个重要原因。</p>
+<p>入职一个多月了，我也渐渐适应了程序员的生活节奏。我每天早上九点起床化妆，九点半出门，沿着师大北路走到蓟门桥坐304，304特别难等，一小时才来一趟也是常有的事，所以后来我改成骑摩拜上下班，沿着知春路骑到公司只要16分钟，途中经过一家7-11，会进去买一个鱿鱼饭团当做早饭，时间不太赶的话会让店员帮我加热半分钟。就像网上的那个段子一样，公司七点之后有免费的加班餐，九点半之后可以免费打车，我当然也落入了这个圈套。每天就算手头的活都干完了也习惯待到十点再走，有时心情好会去公司健身房跑跑步，洗个澡，可以说除了睡觉以外的事情全都在公司解决了。</p>
+<p>十点下班都算走得早的，有一天中午吃饭的时候杰哥特别高兴，说他老婆今天值夜班，他可以加班到十二点了哈哈。</p>
+<p>每天来公司最早的人是大Boss张老师，走得最晚的也是他，不管多么厉害的人，对待我一个小实习生的态度都极其谦卑。我还发现周围可爱的程序猿们有很多共同点，不管是总监，还是实习生，都爱穿企业文化衫和cross洞洞鞋，都用着一千多的机械键盘，都爱打王者荣耀。</p>
+<p>作为我们组唯一一个程序媛，我没有洞洞鞋，没钱买机械键盘，也不打王者荣耀，可是我对自己的形象管理也慢慢放弃治疗了，冕哥经常diss我，说我居然在绿色阔腿裤下配粗犷的运动鞋，嫌弃我眉毛和头发颜色差太多，说每次见到我，我都比上一次更汉子了。</p>
+<p>对了，冕哥现在是女博士了，被一个女博士嫌弃成这样，你们大概知道女程序员是一个多么恐怖的职业了吧。</p>
+<p>从公司走到冕哥的学校只要5分钟，这是我热爱这份工作的另一个原因。</p>
+<p>有一次我们约好一起去嗦粉，冕哥带着男朋友来的，男孩子长得浓眉大眼，鼻梁挺拔，他说他和王姑娘都是要为科学进步做出一点贡献的人，然后吃一半就走了，说是约了人要去化学楼偷点试剂回来做实验。一个星期之后冕哥告诉我，分手了，他们俩科研习惯不太一样，不合适。</p>
+<p>还有一次我们约好午饭一起去CBD（注：春饼店），中午突然下起了暴雨，但我还是挽起裤腿，穿着回力运动鞋淌水去赴约了，淋成落汤鸡的两个人看着对方的惨状笑得前俯后仰。我说，分手了也没关系的，我心力交瘁的时候也会梦到陈清扬，醒来很沮丧，不过我想啊至少他还活着。这和林夕说的“就算分手，可我们分手之后仍然与天地万物同在”差不多是一个意思。冕哥说，放心吧，我是要发Paper为科学进步做贡献的人，怎么能输给自己的悲伤。</p>
+<p>其实长时间的一个人，是可以非常开心的，但需要两个前提。</p>
+<p>前提一是你必须可以看清你想看清的任何问题，也就是说，要拥有对于知识的阅读力。人生唯一的痛苦就是看不懂你想看懂的东西，你先是向任何东西求助，若无人助你，你就恨，然后继续自已设法理解，若仍不能成功，只好放弃，每一次放弃犹如自抽一记耳光，直至最终麻木，麻木无法减轻痛苦，只是将痛苦原封不动地吞咽下去，却无法消化，那些痛苦固化在你心里与你同在，它就是你应该知道却最终没有知道的一切。</p>
+<p>前提二是对从失败中快速恢复比较习惯，也就是说，你对自己有信心，并继续去解决你要解决的问题，直至最终获得进展，这其实就是学习过程本身。要明白曾经挖的坑，迟早会打自己的脸，之前努的力，也会不经意给你回报。</p>
+<p>知乎上有一个回答说：“北京只有理想，没有生活”。简直胡说，我们那么辛苦的生存，小心的伪装，明明就是生活的一种。</p>
+<p>刚入职的时候，我为在leader的工程里加上了自己写的几行代码而激动不已，加完班出门时电闪雷鸣，我听着莫扎特的《第十号小夜曲》骑车从知春路的大下坡冲下去，又和京东小哥暗自较劲爬上一个大上坡，豆大的雨点打在脸上，护城河吹来带着腥味的风，我想起去见冕哥的那个中午也是这么大的雨，我猜爸爸也曾这样在雨里飞驰，我觉得特别快乐。</p>
+<p>还有一次，被一个跨组件通信的问题难住了，想了一整天终于想出一个方法，结果leader用一分钟就敲出了一个更优解，我被自己菜哭了！无精打采的回到家里，坐在椅子上掉眼泪，转念一想，与其低着头掉眼泪，不如卸了妆开始写代码。第二天早上出门的时候看到leader发微信鼓励我，有点想哭，但是又想到刚画好的眼妆，马上憋回去了。</p>
+<p>忙着找实习的时候，我去见了胡老师一面，在一个春风沉醉的晚上。那天我做完一个笔试，脑子一团浆糊，就一头冲进了末班的十号线。去之前心里是有很多想法要和他交流的，但是见了面却只是沉默的坐在对面。他估计是觉得不说话太尴尬，居然想起了大一学过JavaScript的梗，和一个文科生都只能聊编程，这是一件多么滑稽的事。</p>
+<p>我觉察到自己正在变得寡言无趣，也不再是那个在深夜对自己说“再瘦十斤，瘦十斤就会有人好好爱我”的女孩了，我自己爱我自己，春风十里，不如我自己。</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/29/when-I-am-19/" data-toggle="tooltip" data-placement="top"
+                           title="写一写十九岁">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/07/29/ESLint/" data-toggle="tooltip" data-placement="top"
+                           title="如何使用ESLint规范项目代码">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-哭着吃过饭的人，是能够走下去的"><span class="toc-text">1.哭着吃过饭的人，是能够走下去的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-老子不想谈恋爱！老子只想出人头地！"><span class="toc-text">2.老子不想谈恋爱！老子只想出人头地！</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Zen"
+                           title="Zen">Zen</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

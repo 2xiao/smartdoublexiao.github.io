@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][11]面筋｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-11/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][11]面筋</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][11]面筋
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="来也"><a href="#来也" class="headerlink" title="来也"></a>来也</h2><ul>
+<li>defer和async的区别</li>
+<li>css选择器权重规则</li>
+<li>transitionProperty不能作用的属性有哪些</li>
+<li>childNodes和children的区别</li>
+<li>js的数据类型</li>
+<li>const定义一个数据类型</li>
+<li>盒模型的描述有哪些</li>
+</ul>
+<h2 id="新浪"><a href="#新浪" class="headerlink" title="新浪"></a>新浪</h2><p>深拷贝<br>css预处理<br>瀑布流<br>ab整数互换<br>a链接伪类的顺序<br>移动端适配<br>手写微博头像模块<br>数组去重，快排、冒泡之类的<br>也会问一些三次握手，http协议，这些前端相关的计算机基础</p>
+<h2 id="太和音乐"><a href="#太和音乐" class="headerlink" title="太和音乐"></a>太和音乐</h2><p>客户端向服务器发送http请求的过程<br>浏览器接收到一半就开始解析还是全部以后再解析<br>把js放在css之前，浏览器会先解析什么<br>ajax可以跨域吗？怎么跨域？<br>怎么实现三栏布局？（建议把三栏布局、两栏布局、两列等高布局的各种实现方法都掌握）<br>怎么清除浮动？对谁清除浮动？<br>对象的继承<br>如何继承性地创建一个对象<br>选择器优先级<br>闭包的优点缺点<br>jquery如何绑定事件？<br>给元素绑定点击事件怎么绑定，有哪几种方法，区别是什么<br>盒子模型</p>
+<h2 id="搜狗面试题"><a href="#搜狗面试题" class="headerlink" title="搜狗面试题"></a>搜狗面试题</h2><p>闭包，闭包优点缺点<br>事件委托<br>数组去重<br>js框架有哪些，有什么有特点<br>网页性能优化<br>this<br>js中数据类型<br>jquery中事件绑定<br>数组可以push吗？<br><code>$（&quot;li&quot;）</code>得到的是什么<br>.和[ ]的区别<br>HTML5css3新特性<br>call apply的区别<br>ajax怎么向服务器发送请求<br>doc.getelementbyclassname有兼容性问题吗<br>ie6ie7兼容性问题</p>
+<h2 id="百度金融："><a href="#百度金融：" class="headerlink" title="百度金融："></a>百度金融：</h2><p>两列等高<br>内联元素有哪些<br>input的disable和readonly的区别<br>html5新增标签<br>cookie和session区别<br>Jasonp跨域<br>XSS注入防范<br>事件委托的原理<br>NaN==NaN也返回false<br>0==false //true<br>true==1 //true<br>0==undefined //false<br>https为什么更安全<br>jQuery动态添加子节点<br>jQuery动态删除子节点<br>http状态码<br>瀑布流</p>
+<h2 id="腾讯上海OMG，TST校招"><a href="#腾讯上海OMG，TST校招" class="headerlink" title="腾讯上海OMG，TST校招"></a>腾讯上海OMG，TST校招</h2><p>dom 0 dom2 区别<br>作用域链的原理<br>继承<br>闭包<br>session cookie<br>localstorage<br>css等静态文件放在其他域名下的好处与坏处<br>阻止冒泡 阻止默认事件<br>哪些事件会冒泡<br>ES6种let和var</p>
+<h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h2><p>a标签hover飘红<br>添加节点<br>this指向<br>call apply区别<br>callee和caller<br>回流重绘区别，如何避免<br>promise<br>模块化js是什么意思 有什么好处</p>
+<h2 id="百度搜索"><a href="#百度搜索" class="headerlink" title="百度搜索"></a>百度搜索</h2><p>img标签中alt和title的区别<br>如果src=’ ‘会怎样<br>cookie和webstorage的区别<br>form表单的属性<br>面向对象的特点：封装继承多态<br>call和apply的作用和区别<br>导致闭包出现的原因是JavaScript的哪种机制？<br>window.onload=function(){} 和<code>$(document),ready(function{})</code>的区别<br>position有几个属性<br>setInterval和setTimeout的区别？<br>怎么让setTimeout像setInverval一样执行？<br>三次握手<br>TCP和UDP的区别<br>doc.getelementbyclassname的兼容性问题</p>
+<h2 id="腾讯校招，OMG一面"><a href="#腾讯校招，OMG一面" class="headerlink" title="腾讯校招，OMG一面"></a>腾讯校招，OMG一面</h2><p>项目介绍一下…<br>函数声明和函数表达式的区别…<br>出了一道蛋疼的闭包题…<br>手写深拷贝…<em>(:з)∠)</em><br>CSS设置父元素透明子元素怎么取消这个透明…<br>CSS实现一个三角形…<br>怎么跨域<br>实现品字形布局 上方的口中有一个元素水平垂直居中 下面两个口各50%</p>
+<h2 id="阿里面试"><a href="#阿里面试" class="headerlink" title="阿里面试"></a>阿里面试</h2><p>（1）    Object.crease(obj,{params})的具体用处？<br><a href="http://www.cnblogs.com/yupeng/p/3478069.html" target="_blank" rel="external">http://www.cnblogs.com/yupeng/p/3478069.html</a><br>继承性地创建一个对象。</p>
+<p>（2）javascript的几种作用域：<br><a href="http://www.cnblogs.com/silentjesse/p/4024536.html" target="_blank" rel="external">http://www.cnblogs.com/silentjesse/p/4024536.html</a><br>1、    函数作用域 2、变量作用域 3、作用域链 4、with语句</p>
+<p>（3）声明某个变量类型的变量</p>
+<p>（4）js中“==”和“===”的区别<br>==  只要数值value相等即可，会自动进行变量类型转换<br>=== 需要数值value和类型type完全相等。</p>
+<h2 id="腾讯汽车面试题"><a href="#腾讯汽车面试题" class="headerlink" title="腾讯汽车面试题"></a>腾讯汽车面试题</h2><p>1、    html的标签语义化的理解<br>2、    html4、xhtml、html5的区别<br>3、    css hack的用法，如何区别浏览器<br>4、    浏览器的渲染模式有哪些？<br>5、    盒子模型的区别<br>border-box 和 content-box<br>6、    ajax的优点和缺点<br>7、    如何区别浏览器和版本<br>8、    ermaCripts的严格模式和非严格模式的区别，至少三种<br>9、    你所知道的js框架，以及选择原因<br>10、    你所知道的字符串化为数值以及求整的方法<br>12、    html5的新特性有哪些<br>13、    css3的新特性有哪些<br>14、    扩展Date方法，求出当前日期内月份的天数<br>15、    http头协议中的和缓存相关的参数<br>16、    写出一个继承的方法<br>17、    javascript语法优化<br>18、    你常用的前端优化方法</p>
+<h2 id="蘑菇街"><a href="#蘑菇街" class="headerlink" title="蘑菇街"></a>蘑菇街</h2><p>CSS 的引入有哪些方式<br>typeof 能判断哪些类型<br>画一个圆有哪些方法<br>一个字符串取出 2 到 7 的字串<br>什么时候用png，什么时候用jpg</p>
+<h2 id="面经"><a href="#面经" class="headerlink" title="面经"></a>面经</h2><p>开始学习前端差不多是今年4月份，那会大家也都开始了实习的面试准备，心急如焚，不知道自己定位。考虑在实验室的确是整个人都不行不行的。考虑自己是女生，结合性格特征，并且优质实习，尽在猎聘校园！要尽快入门。最终在运营，测试，前端，产品中选择了前端。之后也一直断断续续在面试学习。下面我来分享一下自己半年来的面试过程。<br>4月中旬，</p>
+<h2 id="百度面试"><a href="#百度面试" class="headerlink" title="百度面试"></a>百度面试</h2><p>1.垂直居中的方法（简直是必问题，重复率极高）<br>2.盒子模型描述<br>3.Box-sizing适用场景，原理<br>4.Hack技术<br>5.透明色设置<br>6.画了一个图，让写框架结构。<br>7.写布局，左定宽右自适应</p>
+<p>7月初，</p>
+<h2 id="阿里面试-1"><a href="#阿里面试-1" class="headerlink" title="阿里面试"></a>阿里面试</h2><p>面试官的问题（主要是1面的问题，2，3，4面基本上问项目，有点抽象）<br>1.position（必问）<br>2.异步加载的方法<br>3.你对语义化的理解和好处，自己在前端开发中对于css有没有一些自己的经验<br>4.数组排序。冒泡，插入排序原理<br>5.值类型和引用类型的区别。模块化？CMD，AMD，requireJS<br>6.闭包的理解，跨域的方法<br>7.JavaScript开发模式，知道几种，举个栗子。主要问了单例模式，观察者模式<br>8.Apply和call的相同与不同<br>9.JavaScript事件代理<br>10.你对前端的理解？你为啥要做前端？如何管理一个项目？</p>
+<p>8月中，</p>
+<h2 id="网易面试"><a href="#网易面试" class="headerlink" title="网易面试"></a>网易面试</h2><p>1.DOM节点操作（增删改查）<br>2.Web前端优化方法（参考14条军规即可）<br>3.HTML5的离线储存，sessierror 和localstorage区别<br>4.给了一份大作业，给了前后端接口数据，返回数据格式。</p>
+<p>8月中，</p>
+<h2 id="今日头条面试"><a href="#今日头条面试" class="headerlink" title="今日头条面试"></a>今日头条面试</h2><p>一面：笔试，大约半小时左右<br>1.优化css代码，Jquery一些函数的作用，Param()，Extend()，Deferred()，Serializearray()之类的<br>2.写一个选项联动的，全选/全不选<br>3.算法：字符串中第一个不重复的字母<br>4.打开头条首页，开始写吧。<br>5.数组，字符串的常用方法<br>6.Iframe自适应高度<br>7.JSONP的原理<br>8.Git和SVN的区别</p>
+<p>8月中，</p>
+<h2 id="链家网面试"><a href="#链家网面试" class="headerlink" title="链家网面试"></a>链家网面试</h2><p>1.input的属性，提交表单的除了input，还有啥。<br>2.项目之类的吧，问的比较少</p>
+<p>8月末，</p>
+<h2 id="蘑菇街面试"><a href="#蘑菇街面试" class="headerlink" title="蘑菇街面试"></a>蘑菇街面试</h2><ol>
+<li>浏览器是如何完成网页渲染？</li>
+<li>域名，一二级优缺点</li>
+<li>问之前实习做的项目</li>
+</ol>
+<p>9月中，</p>
+<h2 id="搜狐面试"><a href="#搜狐面试" class="headerlink" title="搜狐面试"></a>搜狐面试</h2><p>因为是后端来面的，一直优质实习，尽在猎聘校园！在问算法<br>1.一张白纸，来，写一下冒泡<br>2.页面渲染过程<br>3.[2,3,5,6,7,8,9]，返回加起来和为10的数字<br>一点感悟：<br>1.尽量在内推的时候搞定offer，渣硕表示，校招开始后，笔试基本上全挂。<br>2.论互联网实习的重要性。<br>3.选择一份你自己喜欢的岗位。</p>
+<p>最后补充一个guoqu211同学的</p>
+<h2 id="美团前端面经："><a href="#美团前端面经：" class="headerlink" title="美团前端面经："></a>美团前端面经：</h2><p>首先，美团的面试很累，如果顺利的话要连续走完至少三面，每一面平均一个多小时，全部面完至少4个小时。<br>一面：考察对js的基础知识掌握程序。主要有js的面向对象，对象继承的集中方式比较，原型和原型链，闭包，数组函数的基本用法，map,filter什么的，还有http协议相关，比如get/post的区别，跨域，原生ajax。之后会问一些简单的Dom操作，jquery某些函数的实现机制，不用看源码，可以自己尝试写原生代码实现就行。中间会穿插着问1-2个简单的算法，可以用js的内置函数解决，也可以写完整的实现过程，比如数组排序，可以用sort也可以自己写。没有问到css，问的这些东西刷一遍js高级程序设计就行了。<br>二面：二面上来也会下问一两个小算法，和数组排序差不多难度的。基本上不会再问基础知识，直接聊项目。常见模式：项目中遇到什么问题，怎么去解决的。github上关注了什么开源项目。如果有做过项目的最好准备几个稍微麻烦一点的问题，然后说一下解决的过程，stackoverflow是个好东西，遇到问题去看看你会发现世界还是很美好的。如果用到框架的话，准备一下框架的特性，举个说明框架特性的栗子。这里感觉也会考察知识面,说明less、sass,gulp,watchify,bower,npm之类的最好都知道一点，没事练练，或许能加分不少。<br>三面：算是主管面了，开始聊人生。性格，爱好，平时优质实习，尽在猎聘校园！看什么书，关注什么博客，学习路线之类的，照实说就对了。最后问了一个稍微复杂的算法，思路很简单，就是写的时候有小细节要注意。别的就没什么了。</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-12/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][12]排序算法">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-10/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][10]javascript部分">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#来也"><span class="toc-text">来也</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新浪"><span class="toc-text">新浪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#太和音乐"><span class="toc-text">太和音乐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜狗面试题"><span class="toc-text">搜狗面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度金融："><span class="toc-text">百度金融：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯上海OMG，TST校招"><span class="toc-text">腾讯上海OMG，TST校招</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度"><span class="toc-text">百度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度搜索"><span class="toc-text">百度搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯校招，OMG一面"><span class="toc-text">腾讯校招，OMG一面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阿里面试"><span class="toc-text">阿里面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯汽车面试题"><span class="toc-text">腾讯汽车面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#蘑菇街"><span class="toc-text">蘑菇街</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面经"><span class="toc-text">面经</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度面试"><span class="toc-text">百度面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阿里面试-1"><span class="toc-text">阿里面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易面试"><span class="toc-text">网易面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今日头条面试"><span class="toc-text">今日头条面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链家网面试"><span class="toc-text">链家网面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#蘑菇街面试"><span class="toc-text">蘑菇街面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜狐面试"><span class="toc-text">搜狐面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#美团前端面经："><span class="toc-text">美团前端面经：</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

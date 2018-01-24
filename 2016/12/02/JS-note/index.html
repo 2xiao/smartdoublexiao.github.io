@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JavaScript学习笔记｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/02/JS-note/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JavaScript学习笔记</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JavaScript学习笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="10月19日-周三"><a href="#10月19日-周三" class="headerlink" title="10月19日 周三"></a>10月19日 周三</h2><p><strong>时间</strong>：上午2h,下午3h,晚上1h<br><strong>成就</strong>：开始学习《JS入门》,学到了4.1编程练习  </p>
+<p><strong>笔记</strong>：<br>进行页面显示初始化的js必须放在head里面，因为初始化都要求提前进行（如给页面body设置css等）；而如果是通过事件调用执行的function那么对位置没什么要求的<br>单行注释使用//；多行注释使用/<em>注释内容</em>/ </p>
+<pre><code>alert confirm prompt window.open window.close
+
+document.getElementById(&quot;ID&quot;) ; innerHTML ; Object.style.property ; Object.style.display=””;
+</code></pre><h2 id="10月20日-周四"><a href="#10月20日-周四" class="headerlink" title="10月20日 周四"></a>10月20日 周四</h2><p><strong>时间</strong>：上午2h.下午4h，晚上0。<br><strong>成就</strong>：js进阶篇,ife项目13<br><strong>感悟</strong>：原来JS没有想象中的那么高深，也是一些基础语法加上一些函数，下一步想快速过完《JS进阶》然后刷完《JS高级教程》。10月底刷完吧。</p>
+<h2 id="10月21日"><a href="#10月21日" class="headerlink" title="10月21日"></a>10月21日</h2><p><strong>时间</strong>：上午2h<br><strong>成就</strong>：<br>1.《JS进阶》第二章<br>2.《JS进阶》第三章<br><strong>笔记</strong>：</p>
+<pre><code>Obj.Onkeyup ; 
+
+obj.keyCode=13;
+
+parseInt();
+
+myarray.length;
+</code></pre><h2 id="10月22日23日-周末"><a href="#10月22日23日-周末" class="headerlink" title="10月22日23日 周末"></a>10月22日23日 周末</h2><p><strong>成就</strong>：<br>1.《JS进阶》第四章完成<br>2.《JS进阶》第五章完成<br><strong>感悟</strong>：加油！</p>
+<h2 id="10月24日-周一"><a href="#10月24日-周一" class="headerlink" title="10月24日 周一"></a>10月24日 周一</h2><p><strong>时间</strong>：上午2h,下午3h,晚上0.<br><strong>成就</strong>：<br>1．《JS进阶》第六章<br><strong>笔记</strong>：<br><code>onclick;</code>;<br><code>onmouseover</code>;<br><code>onmouseout</code>;<br><strong>感悟</strong>：<br><code>switch(se){}</code>的括号里不用加引号，加了就错了！</p>
+<h2 id="10月25日-周二"><a href="#10月25日-周二" class="headerlink" title="10月25日 周二"></a>10月25日 周二</h2><p><strong>时间</strong>：上午2.5h,下午1h<br><strong>成就</strong>：《JS进阶》第七章 事件响应<br><strong>笔记</strong>： </p>
+<ol>
+<li><img src="../../../../images/32.png" alt=""><br>2.大小写：<code>mystr.toUpperCase();age.toLowerCase();</code></li>
+<li>第二个字母：<code>document.write(mystr.charAt(2));</code></li>
+<li>某字符串第一次出现的位置：<code>stringObject.indexOf(substring, startpos)</code></li>
+<li>分割字符串：<code>document.write(mystr.split(&quot;&quot;, 5));</code><br>6.提取字符串：<code>document.write(mystr.substring(2,6));/*第2到第5个，从0开始数*/</code></li>
+<li>提取指定数目的字符<code>document.write(mystr.substr(2,4));</code></li>
+<li>Math 对象属性<br><img src="../../../../images/33.png" alt=""><br>Math 对象方法<br><img src="../../../../images/34.png" alt=""></li>
+<li><code>Math.ceil(x)</code> 可对一个数进行向上取整。<code>Math.floor(x)</code>可对一个数进行向下取整。<code>Math.round(x)</code>可把一个数字四舍五入为最接近的整数。<code>Math.random()</code>方法可返回介于 [0 ,1)的一个随机数。<br>10.数组：<br><img src="../../../../images/35.png" alt=""><br>11．<code>document.write(mya.concat(4,5));</code>该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。 </li>
+<li>指定分隔符连接数组<code>document.write(myarr.join(&quot;.&quot;));</code></li>
+<li>颠倒顺序<code>document.write(myarr.reverse());</code></li>
+<li>返回2-4之间的元素，不包括4<code>.document.write(myarr.slice(2,4));</code></li>
+<li>排序： </li>
+<li><code>function sortNum(a,b) { return a - b;} document.write(myarr.sort(sortNum));</code></li>
+</ol>
+<h2 id="10月26日-周三"><a href="#10月26日-周三" class="headerlink" title="10月26日 周三"></a>10月26日 周三</h2><p><strong>时间</strong>：上午1h,下午2h<br><strong>成就</strong>：完成第七章编程练习;《JS进阶》第八章 内置对象<br><strong>感悟</strong>：<br>1.把显示器连在电脑上，瞬间感觉码农气息满满，开心，还买了优衣库码农专用外套。<br><strong>笔记</strong>：<br>1.计时器<br><img src="../../../../images/28.png" alt=""></p>
+<pre><code>function clock(){
+
+ var time=new Date(); 
+
+ var attime= time.getHours()+&quot;:&quot;+time.getMinutes()+&quot;:&quot;+time.getSeconds();
+
+ document.getElementById(&quot;clock&quot;).value = attime;
+
+ }
+
+ setInterval(clock,100);
+</code></pre><p>2.取消计时器：<code>onclick=&quot;clearInterval(i)&quot;;</code><br>3.计数器：<br><img src="../../../../images/29.png" alt=""><br>取消计时器<code>clearTimeout()</code><br>History 对象属性:<code>var HL = window.history.length;</code><br>History 对象方法:</p>
+<pre><code>window.history.back(); = window.history.go(-1);
+
+window.history.forward(); = window.history.go(1);
+</code></pre><p>Location对象：<br><img src="../../../../images/30.png" alt=""><br>Navigator 对象包含有关浏览器的信息，通常用于检测浏览器与操作系统的版本。<br><img src="../../../../images/31.png" alt=""><br>screen对象<br><code>screen.height</code> 返回屏幕分辨率的高<br><code>screen.width</code> 返回屏幕分辨率的宽<br><code>screen.availWidth</code> 属性返回访问者屏幕的宽度，以像素计，减去界面特性，比如任务栏。<br><code>screen.availHeight</code> 属性返回访问者屏幕的高度，以像素计，减去界面特性，比如任务栏。</p>
+<h2 id="10月27日-周四"><a href="#10月27日-周四" class="headerlink" title="10月27日 周四"></a>10月27日 周四</h2><p><strong>时间</strong>：上午3h<br><strong>成就</strong>：第九章 DOM<br><strong>笔记</strong>：<br>1.dom<br><img src="../../../../images/25.png" alt=""><br><img src="../../../../images/26.png" alt=""></p>
+<ol>
+<li><code>document.getElementsByName(name)</code>方法返回的是元素的数组，而不是一个元素，和数组类似也有length属性。 </li>
+<li><code>document.getElementsByTagName(Tagname)</code> , Tagname是标签的名称，如p、a、img等标签名。 </li>
+<li><code>getAttribute()</code>方法可以得到属性的值 </li>
+<li><code>setAttribute()</code>方法: <code>Lists[i].setAttribute(&quot;title&quot;,&quot;WEB前端技术&quot;);</code></li>
+<li>childNodes访问选定元素节点下的所有子节点的列表，返回的值可以看作是一个数组，具有length属性。elementNode.childNodes;有兼容性问题。 </li>
+<li><code>node.firstChild与node.lastChild；mynode.parentNode;</code>  <code>nodeObject.nextSibling; nodeObject.previousSibling;</code>如果无此节点，则该属性返回 null。 </li>
+<li><code>appendChild(newnode)</code><br><img src="../../../../images/27.png" alt=""></li>
+<li><code>insertBefore(newnode,node);</code></li>
+<li><code>nodeObject.removeChild(node);</code>把删除的子节点赋值给 x，这个子节点不在DOM树中，但是还存在内存中，可通过 x 操作。如果要完全删除对象，给 x 赋 null 值. </li>
+</ol>
+<h2 id="10月28日-周五"><a href="#10月28日-周五" class="headerlink" title="10月28日 周五"></a>10月28日 周五</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：不记得了，学到了《JS进阶》9.14</p>
+<p>##10月31日 周一<br><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：nothing<br><strong>笔记</strong>：</p>
+<h2 id="11月1日-周二"><a href="#11月1日-周二" class="headerlink" title="11月1日 周二"></a>11月1日 周二</h2><p><strong>时间</strong>：上午1h,下午2h<br><strong>成就</strong>：完成《js进阶》，《dom事件》第三章<br><strong>笔记</strong>： </p>
+<pre><code>node.replaceChild (newnode,oldnew )
+
+document.createElement(tagName)
+
+document.createTextNode(data)
+
+``` 
+
+网页尺寸
+</code></pre><p>var w=document.documentElement.scrollWidth || document.body.scrollWidth;<br>var h=document.documentElement.scrollHeight || document.body.scrollHeight;  </p>
+<pre><code>浏览器窗口可视区域大小
+</code></pre><p>var w= document.documentElement.clientWidth || document.body.clientWidth;<br>var h= document.documentElement.clientHeight || document.body.clientHeight;  </p>
+<pre><code>网页尺寸
+</code></pre><p>var w= document.documentElement.offsetWidth || document.body.offsetWidth;<br>var h= document.documentElement.offsetHeight|| document.body.offsetHeight;<br>``` </p>
+<p>事件流：页面中接受时间的顺序，IE——事件冒泡流;Netscape——事件捕获流<br>事件冒泡：事件最开始由最具体的元素接收，然后逐级向上传播至最不具体的那个节点<br>事件捕获：不太具体的元素应该先接受事件， 最具体的元素最后才接受事件<br>1.HTML事件处理程序：直接在HTML标签中添加事件和事件处理程序。 缺点HTML与JS紧密耦合在一起，维护不便。<br>2.DOM 0级事件处理程序：较传统的处理方式：把一个函数 复制给 事件的处理程序 作为属性。优点：简单，跨浏览器兼容。<br>3.DOM 2级事件：<br>添加事件：<code>element.addEventLisenter(&quot;click&quot;,function(){},false/true)</code><br>删除事件：<code>element.removeEventLisenter()</code><br>IE事件处理程序使用<code>attachEvent()和detachEvent()</code>,不需要布尔值，需要加上 on<br>封装，能力检测 </p>
+<ol>
+<li>DOM中的事件对象<br>1.type属性 事件类型<br>2.target属性 事件目标<br>3.stopPropagation() 阻止事件冒泡<br>4.preventDefault() 阻止事件的默认行为</li>
+</ol>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/02/git-start/" data-toggle="tooltip" data-placement="top"
+                           title="git学习笔记">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/01/jQuery-start/" data-toggle="tooltip" data-placement="top"
+                           title="jQuery学习笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#10月19日-周三"><span class="toc-text">10月19日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月20日-周四"><span class="toc-text">10月20日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月21日"><span class="toc-text">10月21日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月22日23日-周末"><span class="toc-text">10月22日23日 周末</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月24日-周一"><span class="toc-text">10月24日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月25日-周二"><span class="toc-text">10月25日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月26日-周三"><span class="toc-text">10月26日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月27日-周四"><span class="toc-text">10月27日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10月28日-周五"><span class="toc-text">10月28日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月1日-周二"><span class="toc-text">11月1日 周二</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

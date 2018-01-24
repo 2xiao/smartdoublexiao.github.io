@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        一刷leetcode题目解答思路｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/01/leetcode/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>一刷leetcode题目解答思路</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-01
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            一刷leetcode题目解答思路
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>leetcode第一遍，记录所有的Best Answer和思路</p>
+<blockquote>
+<p><strong>注意项：</strong><br>codeing style （lintcode）<br>bug free （博客记录算法题，第一天直接写，出错误了，把所有错误记下来，然后第二天接着写，一直loop，直到bug free才return）<br>AC!=Best Answer (九章算法答案，leetcode discuss)<br>练习手写代码、白板写代码能力<br>按类别刷题，多做总结<br>尝试多种解法<br>注意时间 &amp; 空间复杂度。</p>
+</blockquote>
+<p><strong>. </strong><a href=""></a><br>思路：<br>答案：</p>
+<h1 id="1-1-数组和链表（Array-amp-List）"><a href="#1-1-数组和链表（Array-amp-List）" class="headerlink" title="1.1 数组和链表（Array&amp;List）"></a>1.1 数组和链表（Array&amp;List）</h1><p>插入、删除、旋转等操作。 </p>
+<p><strong>219. </strong><a href="https://leetcode.com/problems/contains-duplicate-ii/" target="_blank" rel="external">Contains Duplicate II</a><br>思路：hashmap<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean containsNearbyDuplicate(int[] nums, int k) {
+
+ Map&lt;Integer, Integer&gt; map = new HashMap&lt;Integer, Integer&gt;();
+
+ for (int i = 0; i &lt; nums.length; i++) {
+
+ if (map.containsKey(nums[i])) {
+
+ if (i - map.get(nums[i]) &lt;= k) return true;
+
+ }
+
+ map.put(nums[i], i);
+
+ }
+
+ return false;
+
+ }
+
+}
+</code></pre><p><strong>217. </strong><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank" rel="external">Contains Duplicate</a><br>思路：前一种方法Time complexity: O(N lg N), memory: O(1)，使用Sort()很占用空间；后一种方法用了HashSet，Time complexity: O(N), memory: O(N)<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean containsDuplicate(int[] nums) {
+
+ Arrays.sort(nums);
+
+ for (int i = 1; i &lt; nums.length; i++) {
+
+ if (nums[i] == nums[i - 1]) {
+
+ return true;
+
+ }
+
+ }
+
+ return false;
+
+ }
+
+}
+
+//或
+
+public class Solution {
+
+ public boolean containsDuplicate(int[] nums) {
+
+ final Set&lt;Integer&gt; dis= new HashSet&lt;Integer&gt;();
+
+ for (int num : nums) {
+
+ if (dis.contains(num)) {
+
+ return true;
+
+ }
+
+ dis.add(num);
+
+ }
+
+ return false;
+
+ }
+
+}
+</code></pre><p><strong>121. </strong><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="external">Best Time to Buy and Sell Stock</a><br>思路：max取0、两数之差或两数之差的累加，而profit存储了max的最大值。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int maxProfit(int[] prices) {
+
+ int max= 0, profit = 0;
+
+ for (int i = 1; i &lt; prices.length; i++) {
+
+ max = Math.max(0, max += prices[i] - prices[i - 1]);
+
+ profit = Math.max(profit, max);
+
+ }
+
+ return profit;
+
+ }
+
+}
+</code></pre><p><strong>118. </strong><a href="https://leetcode.com/problems/pascals-triangle/" target="_blank" rel="external">Pascal’s Triangle</a><br>思路：要使用到List，不会！<br>答案：</p>
+<p><strong>88. </strong><a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" rel="external">Merge Sorted Array</a><br>思路：已排序数组，应该从最大的数开始比较，而且<code>--</code>操作只能在较大的数被选取之后做。最后再检查nums2剩下的数。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+ int i = m - 1, j = n - 1, k = m + n - 1;
+
+ while (i &gt; -1 &amp;&amp; j &gt; -1) nums1[k--] = (nums1[i] &gt; nums2[j]) ? nums1[i--] : nums2[j--];
+
+ while (j &gt; -1) nums1[k--] = nums2[j--];
+
+ }
+
+}
+</code></pre><p><strong>66. </strong><a href="https://leetcode.com/problems/plus-one/" target="_blank" rel="external">Plus One</a><br>思路：return 的作用是退出所有括号？<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int[] plusOne(int[] digits) {
+
+ int n = digits.length;
+
+ for (int i = n - 1; i &gt;= 0; i--) {
+
+ if (digits[i] &lt; 9) {
+
+ digits[i]++;
+
+ return digits;
+
+ } else {
+
+ digits[i] = 0;
+
+ }
+
+ }
+
+ int[] newnumber = new int[n + 1];
+
+ newnumber[0] = 1;
+
+ return newnumber;
+
+ }
+
+}
+</code></pre><p><strong>26. </strong><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>思路：题目给的是排序过的数组，用n来遍历数组，用i来接收不重复的数<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int removeDuplicates(int[] nums) {
+
+ int i = 0;
+
+ for (int n : nums) {
+
+ if (i == 0 || n &gt; nums[i - 1]) {
+
+ nums[i++] = n;
+
+ }
+
+ }
+
+ return i;
+
+ }
+
+}
+</code></pre><p><strong>27. </strong><a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="external">Remove Element</a><br>思路：遍历一遍，移除和val相等的数，返回剩余长度。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int removeElement(int[] nums, int val) {
+
+ int res = 0;
+
+ for (int i = 0; i &lt; nums.length; i++) {
+
+ if (nums[i] != val) {
+
+ nums[res++] = nums[i];
+
+ }
+
+ }
+
+ return res;
+
+ }
+
+}
+</code></pre><p><strong>1. </strong><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>思路：使用HashMap，如果有就输出，但是使用了两倍的空间。其实那个map.put()和map.get()没搞懂。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int[] twoSum(int[] nums, int target) {
+
+ int[] result = new int[2];
+
+ Map&lt;Integer, Integer&gt; map = new HashMap&lt;Integer, Integer&gt;();
+
+ for (int i = 0; i &lt; nums.length; i++) {
+
+ if (map.containsKey(target - nums[i])) {
+
+ result[1] = i;
+
+ result[0] = map.get(target - nums[i]);
+
+ return result;
+
+ }
+
+ map.put(nums[i], i);
+
+
+
+ }
+
+ return result;
+
+ }
+
+}
+</code></pre><p><strong>169. </strong><a href="https://leetcode.com/problems/majority-element/" target="_blank" rel="external">Majority Element</a><br>思路：投票算法，因为题目默认肯定会存在一个【n/2】次以上的数，所以只要把数组遍历一遍，不断更新count，最后使得count大于0的数一定是那个major。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int majorityElement(int[] nums) {
+
+ int count = 1, major = nums[0];
+
+ for (int i = 1; i &lt; nums.length; i++) {
+
+ if (count == 0) {
+
+ major = nums[i];
+
+ count++;
+
+ } else if (major == nums[i]) {
+
+ count++;
+
+ } else count--;
+
+ }
+
+ return major;
+
+ }
+
+}
+</code></pre><p><strong>189. </strong><a href="https://leetcode.com/problems/rotate-array/" target="_blank" rel="external">Rotate Array</a><br>思路：先将全数组反转 ，再将1~k个数反转，再将k+1~n个数反转。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public void rotate(int[] nums, int k) {
+
+ k %= nums.length;
+
+ reverse(nums, 0, nums.length - 1);
+
+ reverse(nums, 0, k - 1);
+
+ reverse(nums, k, nums.length - 1);
+
+ }
+
+ public void reverse(int[] nums, int a, int b) {
+
+ while (a &lt; b) {
+
+ int n = nums[a];
+
+ nums[a] = nums[b];
+
+ nums[b] = n;
+
+ a++;
+
+ b--;
+
+ }
+
+ }
+
+}
+</code></pre><p><strong>442. </strong><a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank" rel="external">Find All Duplicates in an Array</a><br>思路：太绕了，赋值来赋值去的。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public List&lt;Integer&gt; findDuplicates(int[] nums) {
+
+ List&lt;Integer&gt; res = new ArrayList&lt;&gt;();
+
+ for (int i = 0; i &lt; nums.length; i++) {
+
+ int index = Math.abs(nums[i]) - 1;
+
+ if (nums[index] &lt; 0) {
+
+ res.add(Math.abs(index + 1));
+
+ }
+
+ nums[index] = -nums[index];
+
+ }
+
+ return res;
+
+ }
+
+}
+</code></pre><p><strong>414. </strong><a href="https://leetcode.com/problems/third-maximum-number/" target="_blank" rel="external">Third Maximum Number</a><br>思路：<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int thirdMax(int[] nums) {
+
+ long max = Long.MIN_VALUE, med = max, min = Long.MIN_VALUE;
+
+ int count = 0;
+
+ for (int x : nums) {
+
+ if (x == max || x == med) {
+
+ continue;
+
+ }
+
+ if (x &gt; max) {
+
+ min = med;
+
+ med = max;
+
+ max = x;
+
+ count++;
+
+ } else if (x &gt; med) {
+
+ min = med;
+
+ med = x;
+
+ count++;
+
+ } else if (x &gt;= min) {
+
+ min = x;
+
+ count++;
+
+ }
+
+ }
+
+ return count &gt;= 3 ? (int) min : (int) max;
+
+ }
+
+}
+</code></pre><p><strong>448. </strong><a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/" target="_blank" rel="external">Find All Numbers Disappeared in an Array</a><br>思路：<br>答案：</p>
+<pre><code>public class Solution {
+
+public List&lt;Integer&gt; findDisappearedNumbers(int[] nums) {
+
+List&lt;Integer&gt; res = new ArrayList&lt;&gt;();
+
+int n = nums.length;
+
+for (int i = 0; i &lt; n; i++) nums[(nums[i] - 1) % n] += n;
+
+for (int i = 0; i &lt; n; i++) if(nums[i] &lt;= n) res.add(i + 1);
+
+return res;
+
+}
+
+}
+</code></pre><p><strong>104. </strong><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="external">Maximum Depth of Binary Tree</a><br>思路：从根部向上，比较左右两边的深度，直到最深<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int maxDepth(TreeNode root) {
+
+ if (root == null) {
+
+ return 0;
+
+ }
+
+ return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+
+ }
+
+}
+</code></pre><p><strong>455. </strong><a href="https://leetcode.com/problems/assign-cookies/" target="_blank" rel="external">Assign Cookies</a><br>思路：Arrays.sort()排序<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int findContentChildren(int[] g, int[] s) {
+
+ Arrays.sort(g);
+
+ Arrays.sort(s);
+
+ int i = 0;
+
+ for (int j = 0; i &lt; g.length &amp;&amp; j &lt; s.length; j++) {
+
+ if (g[i] &lt;= s[j]) {
+
+ i++;
+
+ }
+
+ }
+
+ return i;
+
+ }
+
+}
+</code></pre><p><strong>237. </strong><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="external">Delete Node in a Linked List</a><br>思路：链表，简单删除节点，没有真正删除。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public void deleteNode(ListNode node) {
+
+ if (node.next == null || node == null)
+
+ return;
+
+ node.val = node.next.val;
+
+ node.next = node.next.next;
+
+ }
+
+}
+</code></pre><p><strong>283. </strong><a href="https://leetcode.com/problems/move-zeroes/" target="_blank" rel="external">Move Zeroes</a><br>思路：for循环的另一种方式：<code>for (int i : nums)</code> 空间复杂度o(n)<br>答案：</p>
+<pre><code>public class Solution {
+
+ public void moveZeroes(int[] nums) {
+
+ if (nums == null || nums.length == 0) return;
+
+ int n = 0;
+
+ for (int num : nums) {
+
+ if (num != 0) nums[n++] = num;
+
+ }
+
+ while (n &lt; nums.length){
+
+ nums[n++] = 0;
+
+ }
+
+ }
+
+}
+</code></pre><p><strong>349. </strong><a href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank" rel="external">Intersection of Two Arrays</a><br>思路：<code>Set&lt;Integer&gt; set = new HashSet&lt;&gt;();</code>有待了解，但是总体思路就是把数组转Integer，利用Integer的方法进行比较然后又把结果赋值给数组。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int[] intersection(int[] nums1, int[] nums2) {
+
+ Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+
+ Set&lt;Integer&gt; intersect = new HashSet&lt;&gt;();
+
+ for (int i = 0; i &lt; nums1.length; i++) {
+
+ set.add(nums1[i]);
+
+ }
+
+ for (int i = 0; i &lt; nums2.length; i++) {
+
+ if (set.contains(nums2[i])) {
+
+ intersect.add(nums2[i]);
+
+ }
+
+ }
+
+ int[] result = new int [intersect.size()];
+
+ int i = 0;
+
+ for (Integer n : intersect) {
+
+ result [i++] = n;
+
+ }
+
+ return result;
+
+ }
+
+}
+</code></pre><h1 id="1-2-栈和队列（Stack-amp-Queue）"><a href="#1-2-栈和队列（Stack-amp-Queue）" class="headerlink" title="1.2 栈和队列（Stack&amp;Queue）"></a>1.2 栈和队列（Stack&amp;Queue）</h1><p>栈的典型应用</p>
+<h1 id="1-3-树（Tree）"><a href="#1-3-树（Tree）" class="headerlink" title="1.3 树（Tree）"></a>1.3 树（Tree）</h1><p>构建、验证、遍历、转换<br><strong>100. </strong><a href="https://leetcode.com/problems/same-tree/" target="_blank" rel="external">Same Tree</a><br>思路：遍历树，递推<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean isSameTree(TreeNode p, TreeNode q) {
+
+ if (p == null &amp;&amp; q == null) return true;
+
+ if (p == null || q == null) return false;
+
+ if (p.val == q.val) return isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);
+
+ return false;
+
+ }
+
+}
+</code></pre><p><strong>404. </strong><a href="https://leetcode.com/problems/sum-of-left-leaves/" target="_blank" rel="external">Sum of Left Leaves</a><br>思路：只累加末端的叶子节点<br>答案：</p>
+<pre><code>public int sumOfLeftLeaves(TreeNode root) {
+
+ if (root == null) return 0;
+
+ int ans = 0;
+
+ if (root.left != null) {
+
+ if(root.left.left == null &amp;&amp; root.left.right == null) ans += root.left.val;
+
+ else ans += sumOfLeftLeaves(root.left);
+
+ }
+
+ ans += sumOfLeftLeaves(root.right); 
+
+ return ans;
+
+}
+</code></pre><p><strong>226. </strong><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" rel="external">Invert Binary Tree</a><br>思路：反转二叉树，循环嵌套<br>答案：</p>
+<pre><code>/**
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py Definition for a binary tree node.
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py public class TreeNode {
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py int val;
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py TreeNode left;
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py TreeNode right;
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py TreeNode(int x) { val = x; }
+
+ &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py }
+
+ */
+
+public class Solution {
+
+ public TreeNode invertTree(TreeNode root) {
+
+ if (root == null){
+
+ return null;
+
+ }
+
+ TreeNode temp = root.left;
+
+ root.left = root.right;
+
+ root.right = temp;
+
+ invertTree(root.left);
+
+ invertTree(root.right);
+
+ return root;
+
+ }
+
+}
+</code></pre><h1 id="1-4-字符串（String）"><a href="#1-4-字符串（String）" class="headerlink" title="1.4 字符串（String）"></a>1.4 字符串（String）</h1><p>转换、搜索、运算。<br><strong>383. </strong><a href="https://leetcode.com/problems/ransom-note/" target="_blank" rel="external">Ransom Note</a><br>思路：<code>arr[magazine.charAt(i) - &#39;a&#39;]</code>是把字母当做ASCII码然后转换成数组的一种思路。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean canConstruct(String ransomNote, String magazine) {
+
+ int [] arr = new int [26];
+
+ for (int i = 0; i &lt; magazine.length(); i++) {
+
+ arr[magazine.charAt(i) - &apos;a&apos;]++;
+
+ }
+
+ for (int i = 0; i &lt; ransomNote.length(); i++) {
+
+ if (--arr[ransomNote.charAt(i) - &apos;a&apos;] &lt; 0) {
+
+ return false;
+
+ }
+
+ }
+
+ return true;
+
+ }
+
+}
+</code></pre><p><strong>387. </strong><a href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank" rel="external">First Unique Character in a String</a><br>思路：同上<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int firstUniqChar(String s) {
+
+ int [] str = new int [26];
+
+ for (int i = 0; i &lt; s.length(); i++) {
+
+ str[s.charAt(i) - &apos;a&apos;]++;
+
+ }
+
+ for (int i = 0; i &lt; s.length(); i++) {
+
+ if (str[s.charAt(i) - &apos;a&apos;] == 1)
+
+ return i;
+
+ }
+
+ return -1;
+
+ }
+
+}
+</code></pre><h1 id="1-5-二分查找（Binary-Search）"><a href="#1-5-二分查找（Binary-Search）" class="headerlink" title="1.5 二分查找（Binary Search）"></a>1.5 二分查找（Binary Search）</h1><p>查找位置、范围等。 </p>
+<h1 id="2-1-积木块（Building-Block）"><a href="#2-1-积木块（Building-Block）" class="headerlink" title="2.1 积木块（Building Block）"></a>2.1 积木块（Building Block）</h1><p>哈希、分治、排序。 </p>
+<h1 id="2-2-组合算法（Combinatorial-Algorithm）"><a href="#2-2-组合算法（Combinatorial-Algorithm）" class="headerlink" title="2.2 组合算法（Combinatorial Algorithm）"></a>2.2 组合算法（Combinatorial Algorithm）</h1><p>回溯、组合、排列、子集。 </p>
+<h1 id="2-3-贪心算法（Greedy-Algorithm）"><a href="#2-3-贪心算法（Greedy-Algorithm）" class="headerlink" title="2.3 贪心算法（Greedy Algorithm）"></a>2.3 贪心算法（Greedy Algorithm）</h1><p>贪心的典型应用。 </p>
+<h1 id="2-4-动态规划（Dynamic-Programming）"><a href="#2-4-动态规划（Dynamic-Programming）" class="headerlink" title="2.4 动态规划（Dynamic Programming）"></a>2.4 动态规划（Dynamic Programming）</h1><p>广泛应用DP求最优解。</p>
+<h1 id="3-1-数学（Math）"><a href="#3-1-数学（Math）" class="headerlink" title="3.1 数学（Math）"></a>3.1 数学（Math）</h1><p><strong>415. </strong><a href="https://leetcode.com/problems/add-strings/" target="_blank" rel="external">Add Strings</a><br>思路：不会。。<br>答案：</p>
+<p><strong>396. </strong><a href="https://leetcode.com/problems/rotate-function/" target="_blank" rel="external">Rotate Function</a><br>思路：有点像数列，找规律<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int maxRotateFunction(int[] A) {
+
+ int sum = 0;
+
+ int len = A.length;
+
+ int F = 0;
+
+ for (int i = 0; i &lt; len; i++) {
+
+ F += i &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py A[i];
+
+ sum += A[i];
+
+ }
+
+ int max = F;
+
+ for (int i = len - 1; i &gt;= 1; i--) {
+
+ F = F + sum - len &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py A[i];
+
+ max = Math.max(F, max);
+
+ }
+
+ return max;
+
+ }
+
+}
+</code></pre><p><strong>223. </strong><a href="https://leetcode.com/problems/rectangle-area/" target="_blank" rel="external">Rectangle Area</a><br>思路：数学题，求面积和，保证上&gt;下，右&gt;左即可<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+
+ int left = Math.max(A, E), right = Math.max(Math.min(C, G), left);
+
+ int bottom = Math.max(B, F), top = Math.max(Math.min(D, H),bottom);
+
+ return (C - A) &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py (D - B) - (right - left) &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py (top - bottom) + (G - E) &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py (H - F);
+
+ }
+
+}
+</code></pre><p><strong>204. </strong><a href="https://leetcode.com/problems/count-primes/" target="_blank" rel="external">Count Primes</a><br>思路：找出素数的方法！<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int countPrimes(int n) {
+
+ boolean[] notPrime = new boolean[n];
+
+ int count = 0;
+
+ for (int i = 2; i &lt; n; i++) {
+
+ if (notPrime[i] == false) {
+
+ count++;
+
+ for (int j = 2; i*j &lt; n; j++) {
+
+ notPrime[i*j] = true;
+
+ }
+
+ }
+
+ }
+
+
+
+ return count;
+
+ }
+
+}
+</code></pre><p><strong>263. </strong><a href="https://leetcode.com/problems/ugly-number/" target="_blank" rel="external">Ugly Number</a><br>思路：被2，3，5整除无数次<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean isUgly(int num) {
+
+ if (num == 1) return true;
+
+ if (num == 0) return false;
+
+ while (num % 2 == 0) num = num &gt;&gt; 1;
+
+ while (num % 3 == 0) num /= 3;
+
+ while (num % 5 == 0) num /= 5;
+
+ return num == 1;
+
+ }
+
+}
+</code></pre><p><strong>326. </strong><a href="https://leetcode.com/problems/power-of-three/" target="_blank" rel="external">Power of Three</a><br>思路：1162261467 is 3^19, 3^20 is bigger than int<br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean isPowerOfThree(int n) {
+
+ return (n &gt; 0 &amp;&amp; 1162261467 % n == 0);
+
+ }
+
+}
+</code></pre><p><strong>231. </strong><a href="https://leetcode.com/problems/power-of-two/" target="_blank" rel="external">Power of Two</a><br>思路：2的幂数只含有一个<code>1</code><br>答案：</p>
+<pre><code>public class Solution {
+
+ public boolean isPowerOfTwo(int n) {
+
+ return (n &gt; 0 &amp;&amp; Integer.bitCount(n) == 1);
+
+ }
+
+}
+</code></pre><p><strong>400. </strong><a href="https://leetcode.com/problems/nth-digit/" target="_blank" rel="external">Nth Digit</a><br>思路：第n个数字是什么，而不是数<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int findNthDigit(int n) {
+
+ int len = 1;
+
+ long count = 9;
+
+ int start = 1;
+
+ while (n &gt; len &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py count) {
+
+ n -= len &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py count;
+
+ len += 1;
+
+ count *= 10;
+
+ start *= 10;
+
+ }
+
+ start += (n - 1) / len;
+
+ String s = Integer.toString(start);
+
+ return Character.getNumericValue(s.charAt((n - 1) % len));
+
+ }
+
+}
+</code></pre><p><strong>441. </strong><a href="https://leetcode.com/problems/arranging-coins/" target="_blank" rel="external">Arranging Coins</a><br>思路：res*(res + 1)/2=n<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int arrangeCoins(int n) {
+
+ return (int)((-1 + Math.sqrt(1 + 8 &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py (long)n)) / 2);
+
+ }
+
+}
+</code></pre><p><strong>292. </strong><a href="https://leetcode.com/problems/nim-game/" target="_blank" rel="external">Nim Game</a><br>思路：4个球时必输，5、6、7个球时能赢，8个球时让对方剩5、6、7个球必输，以此类推，只要4的倍数都会输。<br>答案： </p>
+<pre><code>public class Solution {
+
+ public boolean canWinNim(int n) {
+
+ return n % 4 != 0;
+
+ }
+
+}
+</code></pre><p><strong>453. </strong><a href="https://leetcode.com/problems/minimum-moves-to-equal-array-elements/" target="_blank" rel="external">Minimum Moves to Equal Array Elements</a><br>思路：一次移动<code>n-1</code>个数<code>+1</code>，相当于一次移动<code>1</code>个数<code>-1</code>,将所有数都减到最小数即可。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int minMoves(int[] nums) {
+
+ if (nums.length == 0) return 0;
+
+ int min = nums[0];
+
+ for (int n : nums) min = Math.min (n, min);
+
+ int res = 0;
+
+ for (int n : nums) res += n - min;
+
+ return res;
+
+ }
+
+}
+</code></pre><p><strong>136. </strong><a href="https://leetcode.com/problems/single-number/" target="_blank" rel="external">Single Number</a><br>思路：XOR,0 ^ N = N,N ^ N = 0<br>答案： </p>
+<pre><code>public class Solution{
+
+ public int singleNumber(int[] nums){
+
+ int n = nums.length;
+
+ int a = 0;
+
+ for(int i = 0; i &lt; n ;i++)
+
+ a ^= nums[i];
+
+ return a;
+
+ }
+
+}
+</code></pre><p><strong>258. </strong><a href="https://leetcode.com/problems/add-digits/" target="_blank" rel="external">Add Digits</a><br>思路：对数字9的敏感性吧，反正我没想出来<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int addDigits(int num) {
+
+ return num == 0 ? 0 : (num % 9 == 0 ? 9 : (num % 9));
+
+ }
+
+}
+</code></pre><h1 id="3-2-位运算（Bit-Manipulation）"><a href="#3-2-位运算（Bit-Manipulation）" class="headerlink" title="3.2 位运算（Bit Manipulation）"></a>3.2 位运算（Bit Manipulation）</h1><p><strong>371. </strong><a href="https://leetcode.com/problems/sum-of-two-integers/" target="_blank" rel="external">Sum of Two Integers</a><br>思路：对比特数的熟悉，其实不太懂原理<br>答案：</p>
+<pre><code>public class Solution {
+
+ public int getSum(int a, int b) {
+
+ if(a == 0)return b;
+
+ if(b == 0)return a;
+
+ while(b != 0){
+
+ int carry = a&amp;b;
+
+ a = a ^ b;
+
+ b = carry &lt;&lt; 1;
+
+ }
+
+ return a;
+
+ }
+
+}
+</code></pre><p><strong>389. </strong><a href="https://leetcode.com/problems/find-the-difference/" target="_blank" rel="external">Find the Difference</a><br>思路：异或的用法，把所有的字符都异或起来，然后两两相消。<br>答案：</p>
+<pre><code>public class Solution {
+
+ public char findTheDifference(String s, String t) {
+
+ char c = 0;
+
+ for (int i = 0; i &lt; s.length(); ++i) {
+
+ c ^= s.charAt(i);
+
+ c ^= t.charAt(i);
+
+ }
+
+ c ^= t.charAt(t.length() - 1);
+
+ return c;
+
+ }
+
+}
+</code></pre><h1 id="3-3-矩阵（Matrix）"><a href="#3-3-矩阵（Matrix）" class="headerlink" title="3.3 矩阵（Matrix）"></a>3.3 矩阵（Matrix）</h1>
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/01/jQuery-start/" data-toggle="tooltip" data-placement="top"
+                           title="jQuery学习笔记">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/01/2016bupt-job-share/" data-toggle="tooltip" data-placement="top"
+                           title="2016北邮就业经验分享">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-1-数组和链表（Array-amp-List）"><span class="toc-text">1.1 数组和链表（Array&List）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-栈和队列（Stack-amp-Queue）"><span class="toc-text">1.2 栈和队列（Stack&Queue）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-3-树（Tree）"><span class="toc-text">1.3 树（Tree）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4-字符串（String）"><span class="toc-text">1.4 字符串（String）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-5-二分查找（Binary-Search）"><span class="toc-text">1.5 二分查找（Binary Search）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-积木块（Building-Block）"><span class="toc-text">2.1 积木块（Building Block）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-2-组合算法（Combinatorial-Algorithm）"><span class="toc-text">2.2 组合算法（Combinatorial Algorithm）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3-贪心算法（Greedy-Algorithm）"><span class="toc-text">2.3 贪心算法（Greedy Algorithm）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-4-动态规划（Dynamic-Programming）"><span class="toc-text">2.4 动态规划（Dynamic Programming）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-1-数学（Math）"><span class="toc-text">3.1 数学（Math）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-2-位运算（Bit-Manipulation）"><span class="toc-text">3.2 位运算（Bit Manipulation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-矩阵（Matrix）"><span class="toc-text">3.3 矩阵（Matrix）</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

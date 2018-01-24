@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        webstorm简单介绍｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/16/webstorm-start/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>webstorm简单介绍</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-16
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            webstorm简单介绍
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>官网地址：<a href="http://www.jetbrains.com/webstorm/features/index.html" target="_blank" rel="external">http://www.jetbrains.com/webstorm/features/index.html</a></p>
+<p>看到网上一篇介绍webstrom的文章，觉得功能确实强大，也知道了为什么阿里巴巴的前端传到github上的文件为啥都有一个 .idea 文件。（传说淘宝内部推荐写js用webstrom）</p>
+<p>我们可以理解 IDE 就是集成了很多你想要的功能，或者你不想要的功能。换句话说就是装了很多插件的 editor ，所以到目前为止，我还觉得没必要给它装什么插件。</p>
+<h2 id="webstrom的特色功能"><a href="#webstrom的特色功能" class="headerlink" title="webstrom的特色功能"></a>webstrom的特色功能</h2><p>WebStorm 是 JetBrains 推出的一款商业的 JavaScript 开发工具</p>
+<p>任何一个编辑器都需要保存(ctrl + s)，这是所有win平台上编辑类软件的特点，但是webstorm编辑文件右上角是没有那个熟悉的<code>*</code>的。<br>好处：省去了ctrl + s之后，在结合Firefox的vim，基本不动鼠标就可以看到结果页面了。<br>坏处：没有以前的 &gt;md.png COPYING Config.plist CopyAsMarkdown-demo.mp4 README.md _Signature.plist html2md.sh html2text.py 标识，万一键盘误操作也会被立即存储。</p>
+<p>任何一个编辑器只要文件关闭了就没有历史记录了，但是webstorm有。 vcs-&gt;Local History -&gt; Show History（快捷键：ALT+~ -〉7）<br>好处：只要webstorm不关闭，你的文件随时可以返回到之前的操作（这也是为啥在 webstorm 里ctrl+y是删除一行的原因了）。<br>坏处：webstorm关闭重启后这些历史记录就没有了；还有一个坏处就是由此带来的内存消耗也必然比较大。</p>
+<p>任何一个编辑器，除了服务器svn之外，没有本地版本，但是webstorm提供一个本地文件修改历史记录（快捷键：ALT+SHIFT+c，Mac中 ALT＋Option＋c）。也可以 Ctrl + E 弹出最近打开的文件。<br>好处：相当于本地svn。<br>坏处：内存消耗也必然比较大。</p>
+<p>集成了zencoding，HTML5，ftp，即时编辑（chrome）,自动完成,基于Mozilla的JavaScript调试器，JSLint、Less支持、CoffeeScript支持、Node.js、单元测试、集成Git和svn版本控制等特性。</p>
+<p>在编写CSS中，会智能的提示各种文件以及图片的路径，就不用再去确认这个文件是否存在了。</p>
+<p>其他的特性就介绍了，想了解更多可以去<a href="http://www.jetbrains.com/webstorm/index.html" target="_blank" rel="external">webstrom官网</a>继续寻找。</p>
+<h2 id="webstorm设置技巧"><a href="#webstorm设置技巧" class="headerlink" title="webstorm设置技巧"></a>webstorm设置技巧</h2><p>如何更改主题（字体&amp;配色）:<br>File -&gt; settings -&gt; Editor -&gt; colors&amp;fonts -&gt; scheme name.<a href="http://phpstorm-themes.com/" target="_blank" rel="external">主题下载地址</a></p>
+<p>如何让webstorm启动的时候不打开工程文件：<br>File -&gt; Settings-&gt;General去掉Reopen last project on startup.</p>
+<p>如何完美显示中文：<br>File -&gt; Settings-&gt;Appearance中勾选Override default fonts by (not recommended)，设置Name:NSimSun，Size:12</p>
+<p>如何显示行号：<br>File -&gt; Settings-&gt;Editor，”Show line numbers”打上勾，就显示行号了</p>
+<p>如何代码自动换行：<br>File -&gt; settings -&gt; Editor “Use Soft Wraps in editor” 打上钩，代码就自动换行了</p>
+<p>如何点击光标，显示在本行末尾：<br>File -&gt; Settings-&gt;Editor “Allow placement of caret after end of line”去掉勾就行了。</p>
+<p>如何修改快键键：<br>File -&gt; Settings-&gt;Keymap，然后双击要修改快捷的功能会有提示框出来，按提示操作</p>
+<p>换成自己熟悉编辑器的快键键：<br>File -&gt;Settings-&gt;Keymap，支持像Visual Studio、Eclipse、NetBeans这样的主流IDE。</p>
+<p>javascript类库提示。<br>File -&gt; settings -&gt; Javascript -&gt; Libraries -&gt; 然后在列表里选择自己经常用到的javascript类库，最后Download and Install就ok了.</p>
+<p>在开发js时发现，需要ctrl + return 才能选候选项：<br>File -&gt; Setting -&gt; Editor -&gt; Code Completion -&gt; Preselect the first suggestion: “Smart” 改为 “Always”</p>
+<p>js提示比较迟缓<br>File -&gt; Code Completion -&gt; Autopopup in 下 1000改为0</p>
+<p>git配置：<br>File -&gt; settings -&gt; Editor -&gt; github，进去改github的账户，如果没有git则不需要.</p>
+<p>插件安装：<br>File -&gt;plugins，然后就选择给力的插件们再安装.(“css-X-fire”插件,用于当使用firebug修改css属性时，编辑器内的css代码也会发生变化。）</p>
+<p>以后更新</p>
+<h2 id="webstorm使用心得"><a href="#webstorm使用心得" class="headerlink" title="webstorm使用心得"></a>webstorm使用心得</h2><p>收藏夹功能:<br>当工程目录很庞大时，有些子目录很经常打开，但层级又很深，这时候可以把目录添加到收藏夹里面，添加成功后，左侧有个“Favorites”菜单</p>
+<p>面包屑导航：<br>除了左侧的工程页面，可以选择目录之外，在顶部菜单下有一个类似网站面包屑导航一样的目录也可以实现相同功。点击每个目录就会有下拉菜单显示其下的子目录，很实用.</p>
+<p>构造器界面:<br>注释符合格式的话就会出现。如果是js文件则是js类的函数和对象；css文件的话则是这个css文件的概括；html文件的话则是节点的结构图。话说这几个就是为了方便查看代码的结构性.</p>
+<p>todo界面：<br>给代码加todo注释就会出现这个界面</p>
+<p>双栏代码界面：<br>右击代码选项卡上的文件，然后右键 -&gt; spilt vertically(左右两屏)或者spilt horizontally(上下两屏)</p>
+<p>本地历史功能:<br>找回代码的好办法</p>
+<p>WebStorm集成git使用</p>
+<p>webstorm中只集成了git的常用操作，并不能完全替代命令行工具。在界面的右下角可以查看处于哪个git分支。也可以在上面点击切换或者新建分支。</p>
+<p>查看当前代码与版本库代码的差异:<br>右击代码界面任意区域，选择git -&gt; compare with然后选择要比较的版本库。</p>
+<h2 id="webstorm快捷键说明"><a href="#webstorm快捷键说明" class="headerlink" title="webstorm快捷键说明"></a>webstorm快捷键说明</h2><p>Editing编辑相关快捷键</p>
+<p>Ctrl + Space：<br>Basic code completion (the name of any class, method or variable) 基本代码完成（任何类、函数或者变量名称），改为Alt+S</p>
+<p>Ctrl + Shift + Enter：<br>Complete statement 补全当前语句</p>
+<p>Ctrl + P：<br>Parameter info (within method call arguments) 参数信息 包括方法调用参数</p>
+<p>Ctrl + mouse over code<br>Brief Info 简单信息</p>
+<p>Ctrl + F1<br>Show description of error or warning at caret 显示光标所在位置的错误信息或者警告信息</p>
+<p>Alt + Insert<br>Generate code…（Getters, Setters, Constructors）新建一个文件或者生成代码，…构造函数，可以创建类里面任何字段的getter与setter方法</p>
+<p>Ctrl + O<br>Override methods 重载方法</p>
+<p>Ctrl + I<br>Implement methods 实现方法</p>
+<p>Ctrl + Alt + T<br>Surround with…（if, else, try, catch, for, etc）用 <em>来围绕选中的代码行，（ </em>包括 if 、 while 、 try catch 等）</p>
+<p>Ctrl + /<br>Comment/uncomment with line comment 行注释/取消行注释</p>
+<p>Ctrl + Shift + /<br>Comment/uncomment with block comment 块注释/取消块注释</p>
+<p>Ctrl + W<br>Select successively increasing code blocks 选择代码块，一般是增量选择</p>
+<p>Ctrl + Shift + W<br>Decrease current selection to previous state 上个快捷键的回退，减量选择代码</p>
+<p>Alt + Q<br>Context info 上下文信息</p>
+<p>Alt + Enter<br>Show intention actions and quick-fixes 意图行动，快速见效</p>
+<p>Ctrl + Alt + L<br>Reformat code 根据模板格式对代码格式化</p>
+<p>Tab/ Shift + Tab<br>Indent/unindent selected lines 对所选行进行缩排处理/撤销缩排处理</p>
+<p>Ctrl + X or Shift + Delete<br>Cut current line or selected block to clipboard 剪切当前行或所选代码块到剪切板</p>
+<p>Ctrl + C or Ctrl + Insert<br>Copy current line or selected block to chipboard 拷贝当前行或者所选代码块到剪切板</p>
+<p>Ctrl + V or Shift + Insert<br>Paste from clipboard 粘贴剪切板上的内容</p>
+<p>Ctrl + Shift + V<br>Paste from recent buffers 粘贴缓冲器中最新的内容</p>
+<p>Ctrl + D<br>Duplicate current line or selected block 复制当前行或者所选代码块</p>
+<p>Ctrl + Y<br>Delete line at caret 删除光标所在位置行</p>
+<p>Ctrl + Shift + J<br>Smart line join（HTML and JavaScript only）加入智能行 （HTML 和JavaScript）</p>
+<p>Ctrl + Enter<br>Smart line split（HTML and JavaScript only）分离智能行 （HTML 和JavaScript）</p>
+<p>Shift + Enter<br>Start new line 另起一行</p>
+<p>Ctrl + Shift + U<br>Toggle case for word at caret or selected block 光标所在位置大小写转换</p>
+<p>Ctrl + Shift + ]/[<br>Select till code block end/start 选择直到代码块结束/开始</p>
+<p>Ctrl + Delete<br>Delete to word end 删除文字结束</p>
+<p>Ctrl + Backspace<br>Delete to word start 删除文字开始</p>
+<p>Ctrl + NumPad+/-<br>Expand/collapse code block 扩展/缩减代码块</p>
+<p>Ctrl + Shift+ NumPad+<br>Expand all 扩张所有</p>
+<p>Ctrl + Shift+ NumPad-<br>Collapse 缩减所有</p>
+<p>Ctrl + F4<br>Close active editor tab 关闭活跃编辑标签</p>
+<p>Search/replace搜索/替代相关快捷键</p>
+<p>Ctrl + F<br>Find 当前文件内快速查找代码</p>
+<p>Ctrl + Shift + F<br>Find in path 指定文件内寻找路径</p>
+<p>F3<br>Find next 查找下一个</p>
+<p>Shift + F3<br>Find previous 查找上一个</p>
+<p>Ctrl + R<br>Replace 当前文件内代码替代</p>
+<p>Ctrl + Shift + R<br>Replace in path 指定文件内代码批量替代</p>
+<p>Usage Search搜索相关快捷键</p>
+<p>Alt + F7/Ctrl + F7<br>Find usages/Find usages in file 找到使用/在文件找到使用</p>
+<p>Ctrl + Shift + F7<br>Highlight usages in file文件中精彩使用</p>
+<p>Ctrl + Alt + F7<br>Show usages 显示使用</p>
+<p>Running运行</p>
+<p>Alt + Shift + F10<br>Select configuration and run 选择构架，运行</p>
+<p>Alt + Shift + F9<br>Select configuration and debug 选择构架，修补漏洞</p>
+<p>Shift + F10<br>Run 运行</p>
+<p>Shift + F9<br>Debug 修补漏洞</p>
+<p>Ctrl + Shift + F10<br>Run context configuration from editor 从编辑运行内容构架</p>
+<p>Ctrl + Shift + X<br>Run command line 运行命令行</p>
+<p>Debugging Debugging相关快捷键</p>
+<p>F8<br>Step over 不进入函数</p>
+<p>F7<br>Step into 单步执行</p>
+<p>Shift + F7<br>Smart step into 智能单步执行</p>
+<p>Shift + F8<br>Step out 跳出</p>
+<p>Alt + F9<br>Run to cursor 运行到光标处</p>
+<p>Alt+ F8<br>Evaluate expression 评估表达</p>
+<p>F9<br>Resume program 重新开始程序</p>
+<p>Ctrl + F8<br>Toggle breakpoint 切换断点</p>
+<p>Ctrl + Shift + F8<br>View breakpoints 查看断点</p>
+<p>Navigation 定位相关快捷键</p>
+<p>Ctrl + N<br>Go to class跳转到指定类</p>
+<p>Ctrl + Shift + N<br>Go to file 通过文件名快速查找工程内的文件</p>
+<p>Ctrl + Alt +Shift + N<br>Go to symbol 通过一个字符查找函数位置</p>
+<p>Alt + Right/ left<br>Go to next/ previous editor tab 进入下一个/ 上一个编辑器选项</p>
+<p>F12<br>Go back to previous tool window 进入上一个工具窗口</p>
+<p>Esc<br>Go to editor（from tool window） 从工具窗口进入编辑器</p>
+<p>Shift + Esc<br>Hide active or last active window 隐藏活动窗口</p>
+<p>Ctrl + Shift + F4<br>Close active run/message/find/…tab 关闭活动….标签</p>
+<p>Ctrl + G<br>Go to line 跳转到第几行</p>
+<p>Ctrl + E<br>Recent files popup 弹出最近打开的文件</p>
+<p>Ctrl + Alt + Left/Right<br>Navigate back/forward 导航前进/后退</p>
+<p>Ctrl + Shift + Backspace<br>Navigate to last edit location 向最近编辑定位导航</p>
+<p>Alt + F1<br>Select current file or symbol in any view 查找当前选中的代码或文件在其他界面模块的位置</p>
+<p>Ctrl + B or Ctrl + Click<br>Go to declaration跳转到定义处</p>
+<p>Ctrl + Alt + B<br>Go to implementation(s) 跳转方法实现处</p>
+<p>Ctrl + Shift + B<br>Go to type declaration 跳转方法定义处</p>
+<p>Ctrl + Shift + I<br>Open quick definition lookup 打开定义快速查找</p>
+<p>Ctrl + U<br>Go to super-method/super-class 跳转方法/超阶级</p>
+<p>Alt + Up/Down<br>Go to previous/next method 在方法间快速移动定位</p>
+<p>Ctrl + ]/[<br>Move to code block end/start 跳转到编码块结束/开始</p>
+<p>Ctrl + F12<br>File structure popup 文件结构弹出</p>
+<p>Ctrl + H<br>Type hierarchy 类型层次</p>
+<p>Ctrl + Alt + H<br>Call hierarchy 调用层次结构</p>
+<p>F2/ Shift + F2<br>Next/previous highlighted error 跳转到后一个/前一个错误，高亮错误或警告快速定位，使用这个快捷键可以快捷在出错的语句之间进行跳转。</p>
+<p>F4/Ctrl + Enter<br>Edit source/ View source 编辑源代码/查看源代码</p>
+<p>Alt + Home<br>Show navigation bar 显示导航栏</p>
+<p>F11<br>Toggle bookmark 切换标记</p>
+<p>Ctrl + F11<br>Toggle bookmark with mnemonic 采用记忆切换标记</p>
+<p>Ctrl + #[0-9]<br>Go to numbered bookmark 跳转到带编号的标记</p>
+<p>Shift + F11<br>Show bookmark 显示标记</p>
+<p>Refactoring 重构相关快捷键</p>
+<p>F5<br>Copy 拷贝</p>
+<p>F6<br>Move 移动</p>
+<p>Alt + Delete<br>Safe Delete 安全删除</p>
+<p>Shift + F6<br>Rename 重新命名</p>
+<p>Ctrl + Alt + N<br>Inline Variable 嵌入变量</p>
+<p>Ctrl + Alt + M<br>Extract Method( Javascript only) 提取函数</p>
+<p>Ctrl + Alt + V<br>Introduce Variable 引入变量</p>
+<p>Ctrl + Alt + F<br>Introduce Field 引入域</p>
+<p>Ctrl + Alt + C<br>Introduce Constant 引入常量</p>
+<p>VCS/Local History 版本控制系统/ 本地历史相关快捷键</p>
+<p>Alt +　BackQuote( )<br>‘VCS’quick popup 快速弹出 VCS</p>
+<p>Ctrl + K<br>Commit project to VCS 提交项目至VCS</p>
+<p>Ctrl + T<br>Update project from VCS 从VCS 更新项目</p>
+<p>Alt + Shift + C<br>View recent changes 查看最新改变</p>
+<p>General 常用的相关快捷键</p>
+<p>Ctrl + Shift +A<br>Find action 查找并调用编辑器的功能</p>
+<p>Alt + #[0-9]<br>Open corresponding tool window 快速切换打开界面模块</p>
+<p>Ctrl + Alt + F11<br>Toggle full screen mode 切换全屏模式</p>
+<p>Ctrl + Shift + F12<br>Toggle maximizing editor 切换最大化编辑器</p>
+<p>Alt + Shift + F<br>Add to Favorites 将当前文件添至收藏夹</p>
+<p>Alt + Shift + I<br>Inspect current file with current profile 使用当前属性检查当前文件</p>
+<p>Ctrl + BackQuote( )<br>Quick switch current scheme 快速转换现有组合</p>
+<p>Ctrl + Alt + S<br>Open setting dialog 打开设置对话框</p>
+<p>Ctrl + Tab<br>Switch between tabs and tool window 标签和工具窗的转换（与windows快捷键冲突）</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/02/11/CSS3-loading/" data-toggle="tooltip" data-placement="top"
+                           title="CSS3饼状loading效果">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/11/ajax-start/" data-toggle="tooltip" data-placement="top"
+                           title="Ajax学习笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#webstrom的特色功能"><span class="toc-text">webstrom的特色功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webstorm设置技巧"><span class="toc-text">webstorm设置技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webstorm使用心得"><span class="toc-text">webstorm使用心得</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webstorm快捷键说明"><span class="toc-text">webstorm快捷键说明</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

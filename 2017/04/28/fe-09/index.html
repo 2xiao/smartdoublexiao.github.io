@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][09]CSS部分｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-09/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][09]CSS部分</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][09]CSS部分
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="CSS选择器有哪些"><a href="#CSS选择器有哪些" class="headerlink" title="CSS选择器有哪些"></a>CSS选择器有哪些</h2><ol>
+<li><strong>*通用选择器</strong>：选择所有元素，<strong>不参与计算优先级</strong>，兼容性IE6+</li>
+<li><strong>#X id选择器</strong>：选择id值为X的元素，兼容性：IE6+</li>
+<li><strong>.X 类选择器</strong>： 选择class包含X的元素，兼容性：IE6+</li>
+<li><strong>X Y后代选择器</strong>： 选择满足X选择器的后代节点中满足Y选择器的元素，兼容性：IE6+</li>
+<li><strong>X 元素选择器</strong>： 选择标所有签为X的元素，兼容性：IE6+</li>
+<li><strong>:link，：visited，：focus，：hover，：active链接状态</strong>： 选择特定状态的链接元素，顺序LoVe HAte，兼容性: IE4+</li>
+<li><strong>X + Y直接兄弟选择器</strong>：在<strong>X之后第一个兄弟节点</strong>中选择满足Y选择器的元素，兼容性： IE7+</li>
+<li><strong>X &gt; Y子选择器</strong>： 选择X的子元素中满足Y选择器的元素，兼容性： IE7+</li>
+<li><strong>X ~ Y兄弟</strong>： 选择<strong>X之后所有兄弟节点</strong>中满足Y选择器的元素，兼容性： IE7+</li>
+<li><strong>[attr]</strong>：选择所有设置了attr属性的元素，兼容性IE7+</li>
+<li><strong>[attr=value]</strong>：选择属性值刚好为value的元素</li>
+<li><strong>[attr~=value]</strong>：选择属性值为空白符分隔，其中一个的值刚好是value的元素</li>
+<li><strong>[attr|=value]</strong>：选择属性值刚好为value或者value-开头的元素</li>
+<li><strong>[attr^=value]</strong>：选择属性值以value开头的元素</li>
+<li><strong>[attr$=value]</strong>：选择属性值以value结尾的元素</li>
+<li><strong>[attr*=value]</strong>：选择属性值中包含value的元素</li>
+<li><strong>[:checked]</strong>：选择单选框，复选框，下拉框中选中状态下的元素，兼容性：IE9+</li>
+<li><strong>X:after, X::after</strong>：after伪元素，选择元素虚拟子元素（元素的最后一个子元素），CSS3中::表示伪元素。兼容性:after为IE8+，::after为IE9+</li>
+<li><strong>:hover</strong>：鼠标移入状态的元素，兼容性a标签IE4+， 所有元素IE7+</li>
+<li><strong>:not(selector)</strong>：选择不符合selector的元素。<strong>不参与计算优先级</strong>，兼容性：IE9+</li>
+<li><strong>::first-letter</strong>：伪元素，选择块元素第一行的第一个字母，兼容性IE5.5+</li>
+<li><strong>::first-line</strong>：伪元素，选择块元素的第一行，兼容性IE5.5+</li>
+<li><strong>:nth-child(an + b)</strong>：伪类，选择前面有an + b - 1个兄弟节点的元素，其中n<blockquote>
+<p>= 0， 兼容性IE9+</p>
+</blockquote>
+</li>
+<li><strong>:nth-last-child(an + b)</strong>：伪类，选择后面有an + b - 1个兄弟节点的元素<br>其中n &gt;= 0，兼容性IE9+</li>
+<li><strong>X:nth-of-type(an+b)</strong>：伪类，X为选择器，<strong>解析得到元素标签</strong>，选择<strong>前面</strong>有an + b - 1个<strong>相同标签</strong>兄弟节点的元素。兼容性IE9+</li>
+<li><strong>X:nth-last-of-type(an+b)</strong>：伪类，X为选择器，解析得到元素标签，选择<strong>后面</strong>有an+b-1个相同<strong>标签</strong>兄弟节点的元素。兼容性IE9+</li>
+<li><strong>X:first-child</strong>：伪类，选择满足X选择器的元素，且这个元素是其父节点的第一个子元素。兼容性IE7+</li>
+<li><strong>X:last-child</strong>：伪类，选择满足X选择器的元素，且这个元素是其父节点的最后一个子元素。兼容性IE9+</li>
+<li><strong>X:only-child</strong>：伪类，选择满足X选择器的元素，且这个元素是其父元素的唯一子元素。兼容性IE9+</li>
+<li><strong>X:only-of-type</strong>：伪类，选择X选择的元素，<strong>解析得到元素标签</strong>，如果该元素没有相同类型的兄弟节点时选中它。兼容性IE9+</li>
+<li><strong>X:first-of-type</strong>：伪类，选择X选择的元素，<strong>解析得到元素标签</strong>，如果该元素<br>是此此类型元素的第一个兄弟。选中它。兼容性IE9+</li>
+</ol>
+<h2 id="css选择器权重规则"><a href="#css选择器权重规则" class="headerlink" title="css选择器权重规则"></a>css选择器权重规则</h2><p>CSS选择器有ID选择器、类选择器（多类选择器）、属性选择器（简单属性选择、具体属性选择、部分属性选择、特定属性选择）、文档结构（后代选择器:” “、子元素选择器:”&gt;”、相邻兄弟选择器:”+”）、伪类选择器（:link ; :visited ; :focus; :hover; :active; :first-child; :lang()）、伪元素选择器（:first-letter; :first-line; :before; :after）</p>
+<p>4个等级的定义如下：<br>第一等：代表内联样式，如: style=””，权值为1000。<br>第二等：代表ID选择器，如：#content，权值为100。<br>第三等：代表类，伪类和属性选择器，如.content，权值为10。<br>第四等：代表类型选择器和伪元素选择器，如div p，权值为1。<br>注意：通用选择器（*），子选择器（&gt;）和相邻同胞选择器（+）并不在这四个等级中，所以他们的权值都为0。<br>优先级：<br>优先级就近原则，同权重情况下样式定义最近者为准;<br>载入样式以最后载入的定位为准;<br>！important&gt;行内样式&gt;id选择器&gt;类选择器&gt;标签选择器&gt;通配符&gt;浏览器默认样式&gt;继承</p>
+<h2 id="css-sprite是什么-有什么优缺点"><a href="#css-sprite是什么-有什么优缺点" class="headerlink" title="css sprite是什么,有什么优缺点"></a>css sprite是什么,有什么优缺点</h2><p>概念：将多个小图片拼接到一个图片中。通过background-position和元素尺寸调节需要显示的背景图案。<br>优点：</p>
+<ol>
+<li>减少HTTP请求数，极大地提高页面加载速度</li>
+<li>增加图片信息重复度，提高压缩比，减少图片大小</li>
+<li>更换风格方便，只需在一张或几张图片上修改颜色或样式即可实现</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>图片合并麻烦</li>
+<li>维护麻烦，修改一个图片可能需要从新布局整个图片，样式</li>
+</ol>
+<h2 id="display-none-与visibility-hidden-的区别"><a href="#display-none-与visibility-hidden-的区别" class="headerlink" title="display: none;与visibility: hidden;的区别"></a><code>display: none;</code>与<code>visibility: hidden;</code>的区别</h2><p>联系：它们都能让元素不可见<br>区别：</p>
+<ol>
+<li>display:none;会让元素完全从渲染树中消失，渲染的时候不占据任何空间；visibility: hidden;不会让元素从渲染树消失，渲染师元素继续占据空间，只是内容不可见</li>
+<li>display: none;是非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示；visibility: hidden;是继承属性，子孙节点消失由于继承了hidden，通过设置visibility: visible;可以让子孙节点显式</li>
+<li>修改常规流中元素的display通常会造成文档重排。修改visibility属性只会造成本元素的重绘。</li>
+<li>读屏器不会读取display: none;元素内容；会读取visibility: hidden;元素内容</li>
+</ol>
+<h2 id="css-hack原理及常用hack"><a href="#css-hack原理及常用hack" class="headerlink" title="css hack原理及常用hack"></a>css hack原理及常用hack</h2><p>原理：利用<strong>不同浏览器对CSS的支持和解析结果不一样</strong>编写针对特定浏览器样式。常见的hack有1）属性hack。2）选择器hack。3）IE条件注释</p>
+<ul>
+<li>IE条件注释：适用于[IE5, IE9]常见格式如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!--[if IE 6]&gt;</div><div class="line">Special instructions for IE 6 here</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>选择器hack：不同浏览器对选择器的支持不一样</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/***** Selector Hacks ******/</div><div class="line"></div><div class="line">/* IE6 and below */</div><div class="line">* html #uno  &#123; color: red &#125;</div><div class="line"></div><div class="line">/* IE7 */</div><div class="line">*:first-child+html #dos &#123; color: red &#125;</div><div class="line"></div><div class="line">/* IE7, FF, Saf, Opera  */</div><div class="line">html&gt;body #tres &#123; color: red &#125;</div><div class="line"></div><div class="line">/* IE8, FF, Saf, Opera (Everything but IE 6,7) */</div><div class="line">html&gt;/**/body #cuatro &#123; color: red &#125;</div><div class="line"></div><div class="line">/* Opera 9.27 and below, safari 2 */</div><div class="line">html:first-child #cinco &#123; color: red &#125;</div><div class="line"></div><div class="line">/* Safari 2-3 */</div><div class="line">html[xmlns*=&quot;&quot;] body:last-child #seis &#123; color: red &#125;</div><div class="line"></div><div class="line">/* safari 3+, chrome 1+, opera9+, ff 3.5+ */</div><div class="line">body:nth-of-type(1) #siete &#123; color: red &#125;</div><div class="line"></div><div class="line">/* safari 3+, chrome 1+, opera9+, ff 3.5+ */</div><div class="line">body:first-of-type #ocho &#123;  color: red &#125;</div><div class="line"></div><div class="line">/* saf3+, chrome1+ */</div><div class="line">@media screen and (-webkit-min-device-pixel-ratio:0) &#123;</div><div class="line"> #diez  &#123; color: red  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* iPhone / mobile webkit */</div><div class="line">@media screen and (max-device-width: 480px) &#123;</div><div class="line"> #veintiseis &#123; color: red  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* Safari 2 - 3.1 */</div><div class="line">html[xmlns*=&quot;&quot;]:root #trece  &#123; color: red  &#125;</div><div class="line"></div><div class="line">/* Safari 2 - 3.1, Opera 9.25 */</div><div class="line">*|html[xmlns*=&quot;&quot;] #catorce &#123; color: red  &#125;</div><div class="line"></div><div class="line">/* Everything but IE6-8 */</div><div class="line">:root *&gt; #quince &#123; color: red  &#125;</div><div class="line"></div><div class="line">/* IE7 */</div><div class="line">*+html #dieciocho &#123;  color: red &#125;</div><div class="line"></div><div class="line">/* Firefox only. 1+ */</div><div class="line">#veinticuatro,  x:-moz-any-link  &#123; color: red &#125;</div><div class="line"></div><div class="line">/* Firefox 3.0+ */</div><div class="line">#veinticinco,  x:-moz-any-link, x:default  &#123; color: red  &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>属性hack：不同浏览器解析bug或方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/* IE6 */</div><div class="line">#once &#123; _color: blue &#125;</div><div class="line"></div><div class="line">/* IE6, IE7 */</div><div class="line">#doce &#123; *color: blue; /* or #color: blue */ &#125;</div><div class="line"></div><div class="line">/* Everything but IE6 */</div><div class="line">#diecisiete &#123; color/**/: blue &#125;</div><div class="line"></div><div class="line">/* IE6, IE7, IE8 */</div><div class="line">#diecinueve &#123; color: blue\9; &#125;</div><div class="line"></div><div class="line">/* IE7, IE8 */</div><div class="line">#veinte &#123; color/*\**/: blue\9; &#125;</div><div class="line"></div><div class="line">/* IE6, IE7 -- acts as an !important */</div><div class="line">#veintesiete &#123; color: blue !ie; &#125; /* string after ! can be anything */</div></pre></td></tr></table></figure>
+<h2 id="specified-value-computed-value-used-value计算方法"><a href="#specified-value-computed-value-used-value计算方法" class="headerlink" title="specified value,computed value,used value计算方法"></a>specified value,computed value,used value计算方法</h2><ul>
+<li>specified value: 计算方法如下：<ol>
+<li>如果样式表设置了一个值，使用这个值</li>
+<li>如果没有设置值，这个属性是继承属性，从父元素继承</li>
+<li>如果没设置，并且不是继承属性，使用css规范指定的初始值</li>
+</ol>
+</li>
+<li>computed value: 以specified value根据规范定义的行为进行计算，通常将相对值计算为绝对值，例如em根据font-size进行计算。一些使用百分数并且需要布局来决定最终值的属性，如width，margin。百分数就直接作为computed value。line-height的无单位值也直接作为computed value。这些值将在计算used value时得到绝对值。<strong>computed value的主要作用是用于继承</strong></li>
+<li>used value：属性计算后的最终值，对于大多数属性可以通过window.getComputedStyle获得，尺寸值单位为像素。以下属性依赖于布局，<ul>
+<li>background-position</li>
+<li>bottom, left, right, top</li>
+<li>height, width</li>
+<li>margin-bottom, margin-left, margin-right, margin-top</li>
+<li>min-height, min-width</li>
+<li>padding-bottom, padding-left, padding-right, padding-top</li>
+<li>text-indent</li>
+</ul>
+</li>
+</ul>
+<h2 id="link与-import的区别"><a href="#link与-import的区别" class="headerlink" title="link与@import的区别"></a><code>link</code>与<code>@import</code>的区别</h2><ol>
+<li>link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS; </li>
+<li>页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;<code>link</code>最大限度支持并行下载，<code>@import</code>过多嵌套导致串行下载，出现<a href="http://www.bluerobot.com/web/css/fouc.asp/" target="_blank" rel="external">FOUC</a></li>
+<li><code>link</code>可以通过<code>rel=&quot;alternate stylesheet&quot;</code>指定候选样式</li>
+<li>浏览器对<code>link</code>支持早于<code>@import</code>，可以使用<code>@import</code>对老浏览器隐藏样式</li>
+<li><code>@import</code>必须在样式规则之前，可以在css文件中引用其他文件</li>
+<li>总体来说：<strong><a href="http://www.stevesouders.com/blog/2009/04/09/dont-use-import/" target="_blank" rel="external">link优于@import</a></strong></li>
+<li>link方式的样式的权重 高于@import的权重. </li>
+<li>import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题; </li>
+</ol>
+<h2 id="display-block-和display-inline-的区别"><a href="#display-block-和display-inline-的区别" class="headerlink" title="display: block;和display: inline;的区别"></a><code>display: block;</code>和<code>display: inline;</code>的区别</h2><p><code>block</code>元素特点：</p>
+<p>1.处于常规流中时，如果<code>width</code>没有设置，会自动填充满父容器<br>2.可以应用<code>margin/padding</code><br>3.在没有设置高度的情况下会扩展高度以包含常规流中的子元素<br>4.处于常规流中时布局时在前后元素位置之间（独占一个水平空间）<br>5.忽略<code>vertical-align</code></p>
+<p><code>inline</code>元素特点</p>
+<p>1.水平方向上根据<code>direction</code>依次布局<br>2.不会在元素前后进行换行<br>3.受<code>white-space</code>控制<br>4.<code>margin/padding</code>在竖直方向上无效，水平方向上有效<br>5.<code>width/height</code>属性对非替换行内元素无效，宽度由元素内容决定<br>6.非替换行内元素的行框高由<code>line-height</code>确定，替换行内元素的行框高由<code>height</code>,<code>margin</code>,<code>padding</code>,<code>border</code>决定<br>6.浮动或绝对定位时会转换为<code>block</code><br>7.<code>vertical-align</code>属性生效</p>
+<h2 id="PNG-GIF-JPG的区别及如何选"><a href="#PNG-GIF-JPG的区别及如何选" class="headerlink" title="PNG,GIF,JPG的区别及如何选"></a>PNG,GIF,JPG的区别及如何选</h2><p>参考资料： <a href="http://www.yuiblog.com/blog/2008/11/04/imageopt-2/" target="_blank" rel="external">选择正确的图片格式</a><br><strong>GIF</strong>:</p>
+<ol>
+<li>8位像素，256色</li>
+<li>无损压缩</li>
+<li>支持简单动画</li>
+<li>支持boolean透明</li>
+<li>适合简单动画</li>
+</ol>
+<p><strong>JPEG</strong>：</p>
+<ol>
+<li>颜色限于256</li>
+<li>有损压缩</li>
+<li>可控制压缩质量</li>
+<li>不支持透明</li>
+<li>适合照片</li>
+</ol>
+<p><strong>PNG</strong>：</p>
+<ol>
+<li>有PNG8和truecolor PNG</li>
+<li>PNG8类似GIF颜色上限为256，文件小，支持alpha透明度，无动画</li>
+<li>适合图标、背景、按钮</li>
+</ol>
+<h2 id="CSS有哪些继承属性"><a href="#CSS有哪些继承属性" class="headerlink" title="CSS有哪些继承属性"></a>CSS有哪些继承属性</h2><ul>
+<li>关于文字排版的属性如：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font" target="_blank" rel="external">font</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/word-break" target="_blank" rel="external">word-break</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing" target="_blank" rel="external">letter-spacing</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align" target="_blank" rel="external">text-align</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering" target="_blank" rel="external">text-rendering</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing" target="_blank" rel="external">word-spacing</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/white-space" target="_blank" rel="external">white-space</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent" target="_blank" rel="external">text-indent</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform" target="_blank" rel="external">text-transform</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow" target="_blank" rel="external">text-shadow</a></li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height" target="_blank" rel="external">line-height</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" target="_blank" rel="external">color</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility" target="_blank" rel="external">visibility</a></li>
+<li><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor" target="_blank" rel="external">cursor</a></p>
+</li>
+<li><p>不可继承的：display、margin、border、padding、background、height、min-height、max- height、width、min-width、max-width、overflow、position、left、right、top、 bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、 page-bread-before和unicode-bidi。 </p>
+</li>
+<li><p>所有元素可继承：visibility和cursor。 </p>
+</li>
+<li><p>内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、 font-family、font-size、font-style、font-variant、font-weight、text- decoration、text-transform、direction。 </p>
+</li>
+<li><p>块状元素可继承：text-indent和text-align。 </p>
+</li>
+<li><p>列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。 </p>
+</li>
+<li><p>表格元素可继承：border-collapse。</p>
+</li>
+</ul>
+<h2 id="IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决"><a href="#IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决" class="headerlink" title="IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决"></a>IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决</h2><ul>
+<li>IE6不支持min-height，解决办法使用css hack：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.target &#123;</div><div class="line">    min-height: 100px;</div><div class="line">    height: auto !important;</div><div class="line">    height: 100px;   // IE6下内容高度超过会自动扩展高度</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>ol</code>内<code>li</code>的序号全为1，不递增。解决方法：为li设置样式<code>display: list-item;</code></li>
+<li>未定位父元素<code>overflow: auto;</code>，包含<code>position: relative;</code>子元素，子元素高于父元素时会溢出。解决办法：1）子元素去掉<code>position: relative;</code>; 2）不能为子元素去掉定位时，父元素<code>position: relative;</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">.outer &#123;</div><div class="line">    width: 215px;</div><div class="line">    height: 100px;</div><div class="line">    border: 1px solid red;</div><div class="line">    overflow: auto;</div><div class="line">    position: relative;  /* 修复bug */</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    width: 100px;</div><div class="line">    height: 200px;</div><div class="line">    background-color: purple;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">    &lt;div class=&quot;inner&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6只支持<code>a</code>标签的<code>:hover</code>伪类，解决方法：使用js为元素监听mouseenter，mouseleave事件，添加类实现效果：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">.p:hover,</div><div class="line">.hover &#123;</div><div class="line">    background: purple;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;p class=&quot;p&quot; id=&quot;target&quot;&gt;aaaa bbbbb&lt;span&gt;DDDDDDDDDDDd&lt;/span&gt; aaaa lkjlkjdf j&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">function addClass(elem, cls) &#123;</div><div class="line">    if (elem.className) &#123;</div><div class="line">        elem.className += &apos; &apos; + cls;</div><div class="line">    &#125; else &#123;</div><div class="line">        elem.className = cls;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">function removeClass(elem, cls) &#123;</div><div class="line">    var className = &apos; &apos; + elem.className + &apos; &apos;;</div><div class="line">    var reg = new RegExp(&apos; +&apos; + cls + &apos; +&apos;, &apos;g&apos;);</div><div class="line">    elem.className = className.replace(reg, &apos; &apos;).replace(/^ +| +$/, &apos;&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var target = document.getElementById(&apos;target&apos;);</div><div class="line">if (target.attachEvent) &#123;</div><div class="line">    target.attachEvent(&apos;onmouseenter&apos;, function () &#123;</div><div class="line">        addClass(target, &apos;hover&apos;);</div><div class="line">    &#125;);</div><div class="line">    target.attachEvent(&apos;onmouseleave&apos;, function () &#123;</div><div class="line">        removeClass(target, &apos;hover&apos;);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE5-8不支持<code>opacity</code>，解决办法：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.opacity &#123;</div><div class="line">    opacity: 0.4</div><div class="line">    filter: alpha(opacity=60); /* for IE5-7 */</div><div class="line">    -ms-filter: &quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=60)&quot;; /* for IE 8*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6在设置<code>height</code>小于<code>font-size</code>时高度值为<code>font-size</code>，解决办法：<code>font-size: 0;</code></li>
+<li>IE6不支持PNG透明背景，解决办法: <strong>IE6下使用gif图片</strong></li>
+<li>IE6-7不支持<code>display: inline-block</code>解决办法：设置inline并触发hasLayout</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">display: inline-block;</div><div class="line">*display: inline;</div><div class="line">*zoom: 1;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6下浮动元素在浮动方向上与父元素边界接触元素的外边距会加倍。解决办法：<br>1）使用padding控制间距。<br>2）浮动元素<code>display: inline;</code>这样解决问题且无任何副作用：css标准规定浮动元素display:inline会自动调整为block</li>
+<li>通过为块级元素设置宽度和左右margin为auto时，IE6不能实现水平居中，解决方法：为父元素设置<code>text-align: center;</code></li>
+</ul>
+<h2 id="容器包含若干浮动元素时如何清理-包含-浮动"><a href="#容器包含若干浮动元素时如何清理-包含-浮动" class="headerlink" title="容器包含若干浮动元素时如何清理(包含)浮动"></a>容器包含若干浮动元素时如何清理(包含)浮动</h2><ol>
+<li>容器元素闭合标签前添加额外元素并设置<code>clear: both</code></li>
+<li>父元素触发块级格式化上下文(见块级可视化上下文部分)</li>
+<li>设置容器元素伪元素进行清理<a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="external">推荐的清理浮动方法</a></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line">* 在标准浏览器下使用</div><div class="line">* 1 content内容为空格用于修复opera下文档中出现</div><div class="line">*   contenteditable属性时在清理浮动元素上下的空白</div><div class="line">* 2 使用display使用table而不是block：可以防止容器和</div><div class="line">*   子元素top-margin折叠,这样能使清理效果与BFC，IE6/7</div><div class="line">*   zoom: 1;一致</div><div class="line">**/</div><div class="line"></div><div class="line">.clearfix:before,</div><div class="line">.clearfix:after &#123;</div><div class="line">    content: &quot; &quot;; /* 1 */</div><div class="line">    display: table; /* 2 */</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix:after &#123;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* IE 6/7下使用</div><div class="line">* 通过触发hasLayout实现包含浮动</div><div class="line">**/</div><div class="line">.clearfix &#123;</div><div class="line">    *zoom: 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="什么是FOUC-如何避免"><a href="#什么是FOUC-如何避免" class="headerlink" title="什么是FOUC?如何避免"></a>什么是FOUC?如何避免</h2><p>Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。<strong>解决方法</strong>：把样式表放到文档的<code>head</code></p>
+<h2 id="如何创建块级格式化上下文-block-formatting-context-BFC有什么用"><a href="#如何创建块级格式化上下文-block-formatting-context-BFC有什么用" class="headerlink" title="如何创建块级格式化上下文(block formatting context),BFC有什么用"></a>如何创建块级格式化上下文(block formatting context),BFC有什么用</h2><p>创建规则：</p>
+<ol>
+<li>根元素</li>
+<li>浮动元素（<code>float</code>不是<code>none</code>）</li>
+<li>绝对定位元素（<code>position</code>取值为<code>absolute</code>或<code>fixed</code>）</li>
+<li><code>display</code>取值为<code>inline-block</code>,<code>table-cell</code>, <code>table-caption</code>,<code>flex</code>, <code>inline-flex</code>之一的元素</li>
+<li><code>overflow</code>不是<code>visible</code>的元素</li>
+</ol>
+<p>作用：</p>
+<ol>
+<li>可以包含浮动元素</li>
+<li>不被浮动元素覆盖</li>
+<li>阻止父子元素的margin折叠</li>
+</ol>
+<h2 id="display-float-position的关系"><a href="#display-float-position的关系" class="headerlink" title="display,float,position的关系"></a>display,float,position的关系</h2><ol>
+<li>如果<code>display</code>为none，那么position和float都不起作用，这种情况下元素不产生框</li>
+<li>否则，如果position值为absolute或者fixed，框就是绝对定位的，float的计算值为none，display根据下面的表格进行调整。</li>
+<li>否则，如果float不是none，框是浮动的，display根据下表进行调整</li>
+<li>否则，如果元素是根元素，display根据下表进行调整</li>
+<li>其他情况下display的值为指定值<br>总结起来：<strong>绝对定位、浮动、根元素都需要调整<code>display</code></strong><br><img src="img/display-adjust.png" alt="display转换规则"></li>
+</ol>
+<h2 id="外边距折叠-collapsing-margins"><a href="#外边距折叠-collapsing-margins" class="headerlink" title="外边距折叠(collapsing margins)"></a>外边距折叠(collapsing margins)</h2><p>折叠的条件：两个元素的 margin 必须是 相邻 的；两个 margin 是邻接的必须满足以下条件：</p>
+<ul>
+<li>必须是处于常规文档流（非float和绝对定位）的块级盒子,并且处于同一个 BFC 当中。</li>
+<li>没有inline盒子，没有空隙，没有 padding 和 border 将他们分隔开。</li>
+<li>都属于垂直方向上相邻的外边距。</li>
+</ul>
+<p>毗邻的两个或多个<code>margin</code>会合并成一个margin，叫做外边距折叠。规则如下：</p>
+<ol>
+<li>两个或多个毗邻的普通流中的块元素垂直方向上的margin会折叠</li>
+<li>浮动元素/inline-block元素/绝对定位元素的margin不会和垂直方向上的其他元素的margin折叠</li>
+<li>创建了块级格式化上下文的元素，不会和它的子元素发生margin折叠</li>
+<li>元素自身的margin-bottom和margin-top相邻时也会折叠</li>
+<li><a href="https://segmentfault.com/a/1190000008721923" target="_blank" rel="external">https://segmentfault.com/a/1190000008721923</a></li>
+</ol>
+<h2 id="如何确定一个元素的包含块-containing-block"><a href="#如何确定一个元素的包含块-containing-block" class="headerlink" title="如何确定一个元素的包含块(containing block)"></a>如何确定一个元素的包含块(containing block)</h2><ol>
+<li><p>根元素的包含块叫做初始包含块，在连续媒体中他的尺寸与viewport相同并且anchored at the canvas origin；对于paged media，它的尺寸等于page area。初始包含块的direction属性与根元素相同。</p>
+</li>
+<li><p><code>position</code>为<code>relative</code>或者<code>static</code>的元素，它的包含块由最近的块级（<code>display</code>为<code>block</code>,<code>list-item</code>, <code>table</code>）祖先元素的<strong>内容框</strong>组成</p>
+</li>
+<li><p>如果元素<code>position</code>为<code>fixed</code>。对于连续媒体，它的包含块为viewport；对于paged media，包含块为page area</p>
+</li>
+<li><p>如果元素<code>position</code>为<code>absolute</code>，它的包含块由祖先元素中最近一个<code>position</code>为<code>relative</code>,<code>absolute</code>或者<code>fixed</code>的元素产生，规则如下：</p>
+<ul>
+<li>如果祖先元素为行内元素，the containing block is the bounding box around the <strong>padding boxes</strong> of the first and the last inline boxes generated for that element.</li>
+<li>其他情况下包含块由祖先节点的<strong>padding edge</strong>组成</li>
+</ul>
+<p>如果找不到定位的祖先元素，包含块为<strong>初始包含块</strong></p>
+</li>
+</ol>
+<h2 id="stacking-context-布局规则"><a href="#stacking-context-布局规则" class="headerlink" title="stacking context,布局规则"></a>stacking context,布局规则</h2><p>z轴上的默认层叠顺序如下（从下到上）：</p>
+<ol>
+<li>根元素的边界和背景</li>
+<li>常规流中的元素按照html中顺序</li>
+<li>浮动块</li>
+<li>positioned元素按照html中出现顺序</li>
+</ol>
+<p>如何创建stacking context：</p>
+<ol>
+<li>根元素</li>
+<li>z-index不为auto的定位元素</li>
+<li>a flex item with a z-index value other than ‘auto’</li>
+<li>opacity小于1的元素</li>
+<li>在移动端webkit和chrome22+，z-index为auto，position: fixed也将创建新的stacking context</li>
+</ol>
+<h2 id="如何水平居中一个元素"><a href="#如何水平居中一个元素" class="headerlink" title="如何水平居中一个元素"></a>如何水平居中一个元素</h2><ul>
+<li>如果需要居中的元素为<strong>常规流中inline元素</strong>，为父元素设置<code>text-align: center;</code>即可实现</li>
+<li>如果需要居中的元素为<strong>常规流中block元素</strong>，1）为元素设置宽度，2）设置左右margin为auto。3）IE6下需在父元素上设置<code>text-align: center;</code>,再给子元素恢复需要的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;content&quot;&gt;</div><div class="line">    aaaaaa aaaaaa a a a a a a a a</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        background: #DDD;</div><div class="line">        text-align: center; /* 3 */</div><div class="line">    &#125;</div><div class="line">    .content &#123;</div><div class="line">        width: 500px;      /* 1 */</div><div class="line">        text-align: left;  /* 3 */</div><div class="line">        margin: 0 auto;    /* 2 */</div><div class="line"></div><div class="line">        background: purple;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>如果需要居中的元素为<strong>浮动元素</strong>，1）为元素设置宽度，2）<code>position: relative;</code>，3）浮动方向偏移量（left或者right）设置为50%，4）浮动方向上的margin设置为元素宽度一半乘以-1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;content&quot;&gt;</div><div class="line">    aaaaaa aaaaaa a a a a a a a a</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        background: #DDD;</div><div class="line">    &#125;</div><div class="line">    .content &#123;</div><div class="line">        width: 500px;         /* 1 */</div><div class="line">        float: left;</div><div class="line"></div><div class="line">        position: relative;   /* 2 */</div><div class="line">        left: 50%;            /* 3 */</div><div class="line">        margin-left: -250px;  /* 4 */</div><div class="line"></div><div class="line">        background-color: purple;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>如果需要居中的元素为<strong>绝对定位元素</strong>，1）为元素设置宽度，2）偏移量设置为50%，3）偏移方向外边距设置为元素宽度一半乘以-1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;content&quot;&gt;</div><div class="line">    aaaaaa aaaaaa a a a a a a a a</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        background: #DDD;</div><div class="line">        position: relative;</div><div class="line">    &#125;</div><div class="line">    .content &#123;</div><div class="line">        width: 800px;</div><div class="line"></div><div class="line">        position: absolute;</div><div class="line">        left: 50%;</div><div class="line">        margin-left: -400px;</div><div class="line"></div><div class="line">        background-color: purple;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>如果需要居中的元素为<strong>绝对定位元素</strong>，1）为元素设置宽度，2）设置左右偏移量都为0,3）设置左右外边距都为auto</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;content&quot;&gt;</div><div class="line">    aaaaaa aaaaaa a a a a a a a a</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        background: #DDD;</div><div class="line">        position: relative;</div><div class="line">    &#125;</div><div class="line">    .content &#123;</div><div class="line">        width: 800px;</div><div class="line"></div><div class="line">        position: absolute;</div><div class="line">        margin: 0 auto;</div><div class="line">        left: 0;</div><div class="line">        right: 0;</div><div class="line"></div><div class="line">        background-color: purple;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="如何竖直居中一个元素"><a href="#如何竖直居中一个元素" class="headerlink" title="如何竖直居中一个元素"></a>如何竖直居中一个元素</h2><p>参考资料：<a href="http://www.vanseodesign.com/css/vertical-centering/" target="_blank" rel="external">6 Methods For Vertical Centering With CSS</a>。 <a href="http://blog.csdn.net/freshlover/article/details/11579669" target="_blank" rel="external">盘点8种CSS实现垂直居中</a></p>
+<ul>
+<li>需要居中元素为<strong>单行文本</strong>，为包含文本的元素设置大于<code>font-size</code>的<code>line-height</code>：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;p class=&quot;text&quot;&gt;center text&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">.text &#123;</div><div class="line">    line-height: 200px;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="H5新增标签："><a href="#H5新增标签：" class="headerlink" title="H5新增标签："></a>H5新增标签：</h2><p>article: 标签定义外部的内容。<br>aside:标签定义 article 以外的内容。a<br>audio:h5新增音频标签。没有高宽属性。<br>canvas:h5新增画布标签。<br>command: 定义命令按钮(未测试)<br>datalist：标签定义选项列表。<br>datalist 及其选项不会被想显示出来，它仅仅是合法的输入值列表。<br>details：标签用于描述文档或文档某个部分的细节。<br>figure：标签用于对元素进行组合。<br>figcaption：定义 figure 元素的标题。<br>footer：定义 section 或 document 的页脚。<br>header：定义 section 或 document 的页眉。<br>hgroup：用于对网页或区段（section）的标题进行组合。<br>keygen:标签规定用于表单的密钥对生成器字段<br>mark：标签定义带有记号的文本。<br>meter：通过min=”0” max=”20”的方式定义度量衡。仅用于已知最大和最小值的度量。<br>nav：定义document或section或article的导航。<br>output：定义不同的输出类型，比如脚本。<br>progress：定义任何类型的任务的进度。<br>rp:定义若浏览器不支持 ruby 元素显示的内容<br>rt：定义 ruby 注释的解释<br>ruby：定义 ruby 注释<br>section：标签定义文档中的节、区段。比如章节、页眉、页脚或文档中的其他部分。<br>source:audio和video的属性之一。为audio和video定义媒介源。<br>summary:为details定义标题。<br>time:定义日期或时间。<br>video：h5新增视频标签。具有高宽属性。</p>
+<h2 id="html5有哪些新特性？"><a href="#html5有哪些新特性？" class="headerlink" title="html5有哪些新特性？"></a>html5有哪些新特性？</h2><p>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>(1)绘画 canvas;<br>(2)用于媒介回放的 video 和 audio 元素;<br>(3)本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;<br>(4)sessionStorage 的数据在浏览器关闭后自动删除;<br>(5)语意化更好的内容元素，比如 article、footer、header、nav、section;<br>(6)表单控件，calendar、date、time、email、url、search;<br>(7)新的技术webworker, websocket, Geolocation;  </p>
+<h2 id="如何处理HTML5新标签的浏览器兼容问题？如何区分-HTML-和-HTML5？"><a href="#如何处理HTML5新标签的浏览器兼容问题？如何区分-HTML-和-HTML5？" class="headerlink" title="如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？"></a>如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？</h2><p>IE8/IE7/IE6支持通过document.createElement方法产生的标签，<br>可以利用这一特性让这些浏览器支持HTML5新标签，<br>浏览器支持新标签后，还需要添加标签默认的样式。<br>当然也可以直接使用成熟的框架、比如html5shim;<br>&lt;!–[if lt IE 9]&gt;  </p>
+<p><script> src=”<a href="http://html5shim.googlecode.com/svn/trunk/html5.js">http://html5shim.googlecode.com/svn/trunk/html5.js</a>“</script><br>&lt;![endif]–&gt;<br>如何区分： DOCTYPE声明\新增的结构元素\功能元素</p>
+<h2 id="三栏布局、两栏布局、两列等高布局"><a href="#三栏布局、两栏布局、两列等高布局" class="headerlink" title="三栏布局、两栏布局、两列等高布局"></a>三栏布局、两栏布局、两列等高布局</h2><h2 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1) &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;&quot; /&gt;   </div><div class="line"> //强制让文档的宽度与设备的宽度保持1:1，   </div><div class="line"> //文档初始化缩放比例是1:1，   </div><div class="line"> //不允许用户点击屏幕放大浏览，    </div><div class="line">//允许用户缩放到的最大比例，   </div><div class="line"> //尤其要注意的是content里多个属性的设置一定要用逗号+空格来隔开，如果不规范将不会起作用。其他属性有：width;height; initial-scale; minimum-scale; maximum-scale; user-scalable;</div><div class="line">2) &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;    </div><div class="line"> //iPhone私有标签，它表示：允许全屏模式浏览</div><div class="line">3) &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot; /&gt;    </div><div class="line">//iPhone私有标签，它指定的iPhone中safari顶端的状态条的样式</div><div class="line">4) &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no; email=no&quot; /&gt;    //不识别邮件和不把数字识别为电话号码</div></pre></td></tr></table></figure>
+<h2 id="行内元素和块级元素的区别？行内块元素的兼容性（IE8-以下）"><a href="#行内元素和块级元素的区别？行内块元素的兼容性（IE8-以下）" class="headerlink" title="行内元素和块级元素的区别？行内块元素的兼容性（IE8 以下）"></a>行内元素和块级元素的区别？行内块元素的兼容性（IE8 以下）</h2><p>(Q1)行内元素：会在水平方向排列，不能包含块级元素，设置width无效，height无效(可以设置line-height)，margin上下无效，padding上下无效。<br>块级元素：各占据一行，垂直方向排列。从新行开始结束接着一个断行。<br>(Q2)兼容性：display:inline-block;<em>display:inline;</em>zoom:1;  </p>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>（1）父级div定义height。<br>（2）结尾处加空div标签clear:both。<br>（3）父级div定义伪类:after和zoom。<br>（4）父级div定义overflow:hidden。<br>（5）父级div定义overflow:auto。<br>（6）父级div也浮动，需要定义宽度。<br>（7）父级div定义display:table。<br>（8）结尾处加br标签clear:both。<br>比较好的是第3种方式，好多网站都这么用。  </p>
+<h2 id="容器包含若干浮动元素时如何清理-包含-浮动-1"><a href="#容器包含若干浮动元素时如何清理-包含-浮动-1" class="headerlink" title="容器包含若干浮动元素时如何清理(包含)浮动"></a>容器包含若干浮动元素时如何清理(包含)浮动</h2><ol>
+<li>容器元素闭合标签前添加额外元素并设置<code>clear: both</code></li>
+<li>父元素触发块级格式化上下文(见块级可视化上下文部分)</li>
+<li>设置容器元素伪元素进行清理<a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="external">推荐的清理浮动方法</a></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/**</div><div class="line">* 在标准浏览器下使用</div><div class="line">* 1 content内容为空格用于修复opera下文档中出现</div><div class="line">*   contenteditable属性时在清理浮动元素上下的空白</div><div class="line">* 2 使用display使用table而不是block：可以防止容器和</div><div class="line">*   子元素top-margin折叠,这样能使清理效果与BFC，IE6/7</div><div class="line">*   zoom: 1;一致</div><div class="line">**/</div><div class="line"></div><div class="line">.clearfix:before,</div><div class="line">.clearfix:after &#123;</div><div class="line">    content: &quot; &quot;; /* 1 */</div><div class="line">    display: table; /* 2 */</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix:after &#123;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* IE 6/7下使用</div><div class="line">* 通过触发hasLayout实现包含浮动</div><div class="line">**/</div><div class="line">.clearfix &#123;</div><div class="line">    *zoom: 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="解释下浮动和它的工作原理？清除浮动的技巧"><a href="#解释下浮动和它的工作原理？清除浮动的技巧" class="headerlink" title="解释下浮动和它的工作原理？清除浮动的技巧"></a>解释下浮动和它的工作原理？清除浮动的技巧</h2><p>浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。 1.使用空标签清除浮动。 这种方法是在所有浮动标签后面添加一个空标签 定义css clear:both. 弊端就是增加了无意义标签。 2.使用overflow。 给包含浮动元素的父标签添加css属性 overflow:auto; zoom:1; zoom:1用于兼容IE6。 3.使用after伪对象清除浮动。 该方法只适用于非IE浏览器。具体写法可参照以下示例。使用中需注意以下几点。一、该方法中必须为需要清除浮动元素的伪对象中设置 height:0，否则该元素会比实际高出若干像素； </p>
+<p><strong>浮动元素引起的问题和解决办法？</strong><br>浮动元素引起的问题： （1）父元素的高度无法被撑开，影响与父元素同级的元素 （2）与浮动元素同级的非浮动元素（内联元素）会跟随其后 （3）若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面显示的结构 </p>
+<p><strong>解决方法：</strong><br>使用<code>CSS</code>中的<code>clear:both</code>;属性来清除元素的浮动可解决2、3问题，对于问题1，添加如下样式，给父元素添加<code>clearfix</code>样式：</p>
+<p>​```<br>    .clearfix:after{content: “.”;display: block;height: 0;clear: both;visibility: hidden;}</p>
+<pre><code>.clearfix{display: inline-block;} /* for IE/Mac */
+</code></pre><p><strong>清除浮动的几种方法：</strong><br>1，额外标签法，<div style="clear:both;"></div>（缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。）<br>2，使用after伪类</p>
+<pre><code>#parent:after{
+
+ content:&quot;.&quot;;
+
+ height:0;
+
+ visibility:hidden;
+
+ display:block;
+
+ clear:both;
+
+ }
+</code></pre><p>3,浮动外部元素<br>4,设置overflow为hidden或者auto</p>
+<p>##box-sizing常用的属性和作用<br>(Q1)box-sizing: content-box|border-box|inherit;<br>(Q2)content-box:宽度和高度分别应用到元素的内容框。在宽度和高度之外绘制元素的内边距和边框(元素默认效果)。<br>border-box:元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。</p>
+<h2 id="doctype是什么-举例常见doctype及特点"><a href="#doctype是什么-举例常见doctype及特点" class="headerlink" title="doctype是什么,举例常见doctype及特点"></a>doctype是什么,举例常见doctype及特点</h2><ol>
+<li><code>&lt;!doctype&gt;</code>声明必须处于HTML文档的头部，在<code>&lt;html&gt;</code>标签之前，HTML5中不区分大小写</li>
+<li><code>&lt;!doctype&gt;</code>声明不是一个HTML标签，是一个用于告诉浏览器当前HTMl版本的指令</li>
+<li>现代浏览器的html布局引擎通过检查doctype决定使用兼容模式还是标准模式对文档进行渲染，一些浏览器有一个接近标准模型。</li>
+<li>在HTML4.01中<code>&lt;!doctype&gt;</code>声明指向一个DTD，由于HTML4.01基于SGML，所以DTD指定了标记规则以保证浏览器正确渲染内容</li>
+<li>HTML5不基于SGML，所以不用指定DTD</li>
+</ol>
+<p>常见dotype：</p>
+<ol>
+<li><strong>HTML4.01 strict</strong>：不允许使用表现性、废弃元素（如font）以及frameset。声明：<code>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;</code></li>
+<li><strong>HTML4.01 Transitional</strong>:允许使用表现性、废弃元素（如font），不允许使用frameset。声明：<code>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</code></li>
+<li><strong>HTML4.01 Frameset</strong>:允许表现性元素，废气元素以及frameset。声明：<code>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Frameset//EN&quot; &quot;http://www.w3.org/TR/html4/frameset.dtd&quot;&gt;</code></li>
+<li><strong>XHTML1.0 Strict</strong>:不使用允许表现性、废弃元素以及frameset。文档必须是结构良好的XML文档。声明：<code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</code></li>
+<li><strong>XHTML1.0 Transitional</strong>:允许使用表现性、废弃元素，不允许frameset，文档必须是结构良好的XMl文档。声明： <code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</code></li>
+<li><strong>XHTML 1.0 Frameset</strong>:允许使用表现性、废弃元素以及frameset，文档必须是结构良好的XML文档。声明：<code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;&gt;</code></li>
+<li><strong>HTML 5</strong>: <code>&lt;!doctype html&gt;</code></li>
+</ol>
+<p>##Doctype作用？标准模式与兼容模式各有什么区别?<br>(Q1)&lt;!DOCTYPE&gt;告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。<br>(Q2)标准模式的排版和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。 </p>
+<h2 id="Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><a href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义" class="headerlink" title="Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?"></a>Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?</h2><p>1）、<code>&lt;!DOCTYPE&gt;</code> 声明位于文档中的最前面，处于 <code>&lt;html&gt;</code> 标签之前。告知浏览器以何种模式来渲染文档。<br>2）、严格模式的排版和 <code>JS</code> 运作模式是 以该浏览器支持的最高标准运行。<br>3）、在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。<br>4）、<code>DOCTYPE</code>不存在或格式不正确会导致文档以混杂模式呈现。</p>
+<h2 id="你知道多少种Doctype文档类型？"><a href="#你知道多少种Doctype文档类型？" class="headerlink" title="你知道多少种Doctype文档类型？"></a>你知道多少种<code>Doctype</code>文档类型？</h2><pre><code>该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档。 HTML 4.01 规定了三种文档类型：Strict、Transitional 以及 Frameset。 XHTML 1.0 规定了三种 XML 文档类型：Strict、Transitional 以及 Frameset。 Standards （标准）模式（也就是严格呈现模式）用于呈现遵循最新标准的网页，而 Quirks （包容）模式（也就是松散呈现模式或者兼容模式）用于呈现为传统浏览器而设计的网页。
+</code></pre><h2 id="常见兼容性问题？"><a href="#常见兼容性问题？" class="headerlink" title="常见兼容性问题？"></a>常见兼容性问题？</h2><p>png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.也可以引用一段脚本处理. 浏览器默认的margin和padding不同。解决方案是加一个全局的<em>{margin:0;padding:0;}来统一。 IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。 浮动ie产生的双倍距离（IE6双边距问题：在IE6下，如果对元素设置了浮动，同时又设置了margin-left或margin-right，margin值会加倍。） #box{ float:left; width:10px; margin:0 0 0 100px;} 这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 <em>display:inline;将其转化为行内属性。(</em>这个符号只有ie6会识别) 渐进识别的方式，从总体中逐渐排除局部。 首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。 接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。 css .bb{ background-color:#f1ee18;/</em>所有识别<em>/ .background-color:#00deff\9; /</em>IE6、7、8识别<em>/ +background-color:#a200ff;/</em>IE6、7识别<em>/ _background-color:#1e0bd1;/</em>IE6识别*/ } 怪异模式问题：漏写DTD声明，Firefox仍然会按照标准模式来解析网页，但在IE中会触发 怪异模式。为避免怪异模式给我们带来不必要的麻烦，最好养成书写DTD声明的好习惯。现在 可以使用<a href="http://www.w3.org/TR/html5/single-page.html" target="_blank" rel="external">html5</a>推荐的写法：<code>&lt;doctype html&gt;</code> </p>
+<h2 id="标准模式-vs-混杂模式"><a href="#标准模式-vs-混杂模式" class="headerlink" title="标准模式 vs 混杂模式"></a>标准模式 vs 混杂模式</h2><p>便准模式：document.compatMode == “CSS1Compat”</p>
+<p>document.documentElement.clientWidth/clientHeight ：其他浏览器，标准模式下的IE6，移动的IE  </p>
+<p>document.body.clientWidth：混杂下的IE6，混杂下的chrome两种都可以</p>
+<p>window.innerWidth：移动设备</p>
+<p>scroll事件在混杂模式下通过\<body\>元素的scrollLeft和scrollTop来监控（document.body.scrollTop），在标准模式下，除Safari之外的浏览器都通过\<html\>元素来反应（document.documentElement.scrollTop）。 </html\></body\></p>
+<h2 id="HTML5-为什么只需要写-lt-DOCTYPE-HTML-gt-？"><a href="#HTML5-为什么只需要写-lt-DOCTYPE-HTML-gt-？" class="headerlink" title="HTML5 为什么只需要写 &lt;!DOCTYPE HTML&gt;？"></a>HTML5 为什么只需要写 &lt;!DOCTYPE HTML&gt;？</h2><p>HTML5不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）。<br>而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。  </p>
+<h2 id="介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？"><a href="#介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？" class="headerlink" title="介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？"></a>介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？</h2><p>（1）有两种， IE 盒子模型、W3C 盒子模型。<br>（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)。<br>（3）区  别： IE的content部分把 border 和 padding计算了进去。  IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框。</p>
+<h2 id="position的absolute与fixed区别"><a href="#position的absolute与fixed区别" class="headerlink" title="position的absolute与fixed区别"></a>position的absolute与fixed区别</h2><p>absolute浮动定位是相对于父级中设置position为relative或者absolute最近的父级元素<br>fixed浮动定位是相对于浏览器视窗的  </p>
+<h2 id="position的值，-relative和absolute分别是相对于谁进行定位的？"><a href="#position的值，-relative和absolute分别是相对于谁进行定位的？" class="headerlink" title="position的值， relative和absolute分别是相对于谁进行定位的？"></a>position的值， relative和absolute分别是相对于谁进行定位的？</h2><ul>
+<li><code>absolute</code> :生成绝对定位的元素， 相对于最近一级的 定位不是 static 的父元素来进行定位。</li>
+<li><code>fixed</code> （老IE不支持）生成绝对定位的元素，通常相对于浏览器窗口或 frame 进行定位。</li>
+<li><code>relative</code> 生成相对定位的元素，相对于其在普通流中的位置进行定位。</li>
+<li><code>static</code> 默认值。没有定位，元素出现在正常的流中</li>
+<li><code>sticky</code> 生成粘性定位的元素，容器的位置根据正常文档流计算得出</li>
+</ul>
+<h2 id="如何在页面上实现一个圆形的可点击区域？"><a href="#如何在页面上实现一个圆形的可点击区域？" class="headerlink" title="如何在页面上实现一个圆形的可点击区域？"></a>如何在页面上实现一个圆形的可点击区域？</h2><p>（1）map+area或者svg<br>（2）border-radius<br>（3）纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等  </p>
+<h2 id="position-absolute和float属性的异同"><a href="#position-absolute和float属性的异同" class="headerlink" title="position:absolute和float属性的异同"></a><code>position:absolute</code>和<code>float</code>属性的异同</h2><ul>
+<li>共同点：对内联元素设置<code>float</code>和<code>absolute</code>属性，可以让元素脱离文档流，并且可以设置其宽高。</li>
+<li>不同点：<code>float</code>仍会占据位置，<code>absolute</code>会覆盖文档流中的其他元素。</li>
+</ul>
+<h2 id="介绍一下box-sizing属性？"><a href="#介绍一下box-sizing属性？" class="headerlink" title="介绍一下box-sizing属性？"></a>介绍一下box-sizing属性？</h2><p><code>box-sizing</code>属性主要用来控制元素的盒模型的解析模式。默认值是<code>content-box</code>。</p>
+<ul>
+<li><code>content-box</code>：让元素维持W3C的标准盒模型。元素的宽度/高度由<code>border + padding + content</code>的宽度/高度决定，设置<code>width/height</code>属性指的是<code>content</code>部分的宽/高</li>
+<li><code>border-box</code>：让元素维持IE传统盒模型（IE6以下版本和IE6~7的怪异模式）。设置<code>width/height</code>属性指的是<code>border + padding + content</code></li>
+</ul>
+<p>标准浏览器下，按照W3C规范对盒模型解析，一旦修改了元素的边框或内距，就会影响元素的盒子尺寸，就不得不重新计算元素的盒子尺寸，从而影响整个页面的布局。</p>
+<h2 id="CSS3新增伪类举例："><a href="#CSS3新增伪类举例：" class="headerlink" title="CSS3新增伪类举例："></a>CSS3新增伪类举例：</h2><pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+
+p:last-of-type 选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+
+p:only-of-type 选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+
+p:only-child 选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+
+p:nth-child(2) 选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+
+:enabled :disabled 控制表单控件的禁用状态。
+
+:checked 单选框或复选框被选中。
+</code></pre><h2 id="CSS3有哪些新特性？"><a href="#CSS3有哪些新特性？" class="headerlink" title="CSS3有哪些新特性？"></a>CSS3有哪些新特性？</h2><p>CSS3实现圆角（border-radius），阴影（box-shadow）， 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform） transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px) skew(-9deg,0deg);//旋转,缩放,定位,倾斜 增加了更多的CSS选择器 多背景 rgba 在CSS3中唯一引入的伪元素是::selection. 媒体查询，多栏布局 border-image </p>
+<p>CSS3中新增了一种盒模型计算方式：<code>box-sizing</code>。盒模型默认的值是<code>content-box</code>, 新增的值是<code>padding-box</code>和<code>border-box</code>，几种盒模型计算元素宽高的区别如下：</p>
+<ul>
+<li><p><code>content-box（默认）</code>  </p>
+<ul>
+<li><p>布局所占宽度Width：<br>Width = width + padding-left + padding-right + border-left + border-right</p>
+</li>
+<li><p>布局所占高度Height:<br>Height = height + padding-top + padding-bottom + border-top + border-bottom</p>
+</li>
+</ul>
+</li>
+<li><p><code>padding-box</code>  </p>
+<ul>
+<li><p>布局所占宽度Width：<br>Width = width(包含padding-left + padding-right) + border-top + border-bottom</p>
+</li>
+<li><p>布局所占高度Height:<br>Height = height(包含padding-top + padding-bottom) + border-top + border-bottom</p>
+</li>
+</ul>
+</li>
+<li><p><code>border-box</code>  </p>
+<ul>
+<li><p>布局所占宽度Width：<br>Width = width(包含padding-left + padding-right + border-left + border-right)</p>
+</li>
+<li><p>布局所占高度Height:<br>Height = height(包含padding-top + padding-bottom + border-top + border-bottom)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h2><p>BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布局的，盒子里面的子元素的样式不会影响到外面的元素。在同一个BFC中的两个毗邻的块级盒在垂直方向（和布局方向有关系）的margin会发生折叠。 （W3C CSS 2.1 规范中的一个概念，它决定了元素如何对其内容进行布局，以及与其他元素的关系和相互作用。</p>
+<p><strong>如何创建块级格式化上下文(block formatting context)</strong></p>
+<ol>
+<li>根元素</li>
+<li>浮动元素（<code>float</code>不是<code>none</code>）</li>
+<li>绝对定位元素（<code>position</code>取值为<code>absolute</code>或<code>fixed</code>）</li>
+<li><code>display</code>取值为<code>inline-block</code>,<code>table-cell</code>, <code>table-caption</code>,<code>flex</code>, <code>inline-flex</code>之一的元素</li>
+<li><code>overflow</code>不是<code>visible</code>的元素</li>
+</ol>
+<p><strong>BFC有什么用</strong></p>
+<ol>
+<li>可以包含浮动元素</li>
+<li>不被浮动元素覆盖</li>
+<li>阻止父子元素的margin折叠</li>
+</ol>
+<h2 id="HTML与XHTML——二者有什么区别"><a href="#HTML与XHTML——二者有什么区别" class="headerlink" title="HTML与XHTML——二者有什么区别"></a>HTML与XHTML——二者有什么区别</h2><p>区别： 1.所有的标记都必须要有一个相应的结束标记 2.所有标签的元素和属性的名字都必须使用小写 3.所有的XML标记都必须合理嵌套 4.所有的属性必须用引号””括起来 5.把所有&lt;和&amp;特殊符号用编码表示 6.给所有属性赋一个值 7.不要在注释内容中使“–” 8.图片必须有说明文字 </p>
+<h2 id="什么是-FOUC（无样式内容闪烁）？你如何来避免-FOUC？"><a href="#什么是-FOUC（无样式内容闪烁）？你如何来避免-FOUC？" class="headerlink" title="什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？"></a>什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？</h2><p> FOUC - Flash Of Unstyled Content 文档样式闪烁<br> <code>&lt;style type=&quot;text/css&quot; media=&quot;all&quot;&gt;@import &quot;../fouc.css&quot;;&lt;/style&gt;</code><br>而引用CSS文件的@import就是造成这个问题的罪魁祸首。IE会先加载整个HTML文档的DOM，然后再去导入外部的CSS文件，因此，在页面DOM加载完成到CSS导入完成中间会有一段时间页面上的内容是没有样式的，这段时间的长短跟网速，电脑速度都有关系。<br> 解决方法简单的出奇，只要在<head>之间加入一个<link>或者<script>元素就可以了。</p>
+<h2 id="lt-strong-gt-，-lt-em-gt-和-lt-b-gt-，-lt-i-gt-标签"><a href="#lt-strong-gt-，-lt-em-gt-和-lt-b-gt-，-lt-i-gt-标签" class="headerlink" title="&lt;strong&gt;，&lt;em&gt;和&lt;b&gt;，&lt;i&gt;标签"></a><code>&lt;strong&gt;</code>，<code>&lt;em&gt;</code>和<code>&lt;b&gt;</code>，<code>&lt;i&gt;</code>标签</h2><p><strong> 标签和 <em> 标签一样，用于强调文本，但它强调的程度更强一些。</p>
+<p>em 是 斜体强调标签，更强烈强调，表示内容的强调点。相当于html元素中的 <i>…</i>;</p>
+<p>&lt; b &gt; &lt; i &gt;是视觉要素，分别表示无意义的加粗，无意义的斜体。</p>
+<p>em 和 strong 是表达要素(phrase elements)。</p>
+<h2 id="lt-img-gt-的title和alt有什么区别"><a href="#lt-img-gt-的title和alt有什么区别" class="headerlink" title="&lt;img&gt;的title和alt有什么区别"></a><code>&lt;img&gt;</code>的<code>title</code>和<code>alt</code>有什么区别</h2><ol>
+<li><code>title</code>是<a href="http://www.w3.org/TR/html-markup/global-attributes.html#common.attrs.core">global attributes</a>之一，用于为元素提供附加的advisory information。通常当鼠标滑动到元素上的时候显示。</li>
+<li><code>alt</code>是<code>&lt;img&gt;</code>的特有属性，是图片内容的等价描述，用于图片无法加载时显示、读屏器阅读图片。可提图片高可访问性，除了纯装饰图片外都必须设置有意义的值，搜索引擎会重点分析。</li>
+</ol>
+<h2 id="HTML全局属性-global-attribute-有哪些"><a href="#HTML全局属性-global-attribute-有哪些" class="headerlink" title="HTML全局属性(global attribute)有哪些"></a>HTML全局属性(global attribute)有哪些</h2><p>参考资料：<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">MDN: html global attribute</a>或者<a href="http://www.w3.org/TR/html-markup/global-attributes.html#common.attrs.core">W3C HTML global-attributes</a></p>
+<ul>
+<li><code>accesskey</code>:设置快捷键，提供快速访问元素如<a href="#" accesskey="a">aaa</a>在windows下的firefox中按<code>alt + shift + a</code>可激活元素</li>
+<li><code>class</code>:为元素设置类标识，多个类名用空格分开，CSS和javascript可通过class属性获取元素</li>
+<li><code>contenteditable</code>: 指定元素内容是否可编辑</li>
+<li><code>contextmenu</code>: 自定义鼠标右键弹出菜单内容</li>
+<li><code>data-*</code>: 为元素增加自定义属性</li>
+<li><code>dir</code>: 设置元素文本方向</li>
+<li><code>draggable</code>: 设置元素是否可拖拽</li>
+<li><code>dropzone</code>: 设置元素拖放类型： copy, move, link</li>
+<li><code>hidden</code>: 表示一个元素是否与文档。样式上会导致元素不显示，但是不能用这个属性实现样式效果</li>
+<li><code>id</code>: 元素id，文档内唯一</li>
+<li><code>lang</code>: 元素内容的的语言</li>
+<li><code>spellcheck</code>: 是否启动拼写和语法检查</li>
+<li><code>style</code>: 行内css样式</li>
+<li><code>tabindex</code>: 设置元素可以获得焦点，通过tab可以导航</li>
+<li><code>title</code>: 元素相关的建议信息</li>
+<li><code>translate</code>: 元素和子孙节点内容是否需要本地化</li>
+</ul>
+</script></head></p>
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-10/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][10]javascript部分">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-08/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][08]安全性">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器有哪些"><span class="toc-text">CSS选择器有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css选择器权重规则"><span class="toc-text">css选择器权重规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css-sprite是什么-有什么优缺点"><span class="toc-text">css sprite是什么,有什么优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display-none-与visibility-hidden-的区别"><span class="toc-text">display: none;与visibility: hidden;的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css-hack原理及常用hack"><span class="toc-text">css hack原理及常用hack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#specified-value-computed-value-used-value计算方法"><span class="toc-text">specified value,computed value,used value计算方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#link与-import的区别"><span class="toc-text">link与@import的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display-block-和display-inline-的区别"><span class="toc-text">display: block;和display: inline;的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG-GIF-JPG的区别及如何选"><span class="toc-text">PNG,GIF,JPG的区别及如何选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS有哪些继承属性"><span class="toc-text">CSS有哪些继承属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决"><span class="toc-text">IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器包含若干浮动元素时如何清理-包含-浮动"><span class="toc-text">容器包含若干浮动元素时如何清理(包含)浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是FOUC-如何避免"><span class="toc-text">什么是FOUC?如何避免</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何创建块级格式化上下文-block-formatting-context-BFC有什么用"><span class="toc-text">如何创建块级格式化上下文(block formatting context),BFC有什么用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display-float-position的关系"><span class="toc-text">display,float,position的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外边距折叠-collapsing-margins"><span class="toc-text">外边距折叠(collapsing margins)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何确定一个元素的包含块-containing-block"><span class="toc-text">如何确定一个元素的包含块(containing block)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stacking-context-布局规则"><span class="toc-text">stacking context,布局规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何水平居中一个元素"><span class="toc-text">如何水平居中一个元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何竖直居中一个元素"><span class="toc-text">如何竖直居中一个元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H5新增标签："><span class="toc-text">H5新增标签：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html5有哪些新特性？"><span class="toc-text">html5有哪些新特性？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何处理HTML5新标签的浏览器兼容问题？如何区分-HTML-和-HTML5？"><span class="toc-text">如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三栏布局、两栏布局、两列等高布局"><span class="toc-text">三栏布局、两栏布局、两列等高布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#meta标签"><span class="toc-text">meta标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素和块级元素的区别？行内块元素的兼容性（IE8-以下）"><span class="toc-text">行内元素和块级元素的区别？行内块元素的兼容性（IE8 以下）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器包含若干浮动元素时如何清理-包含-浮动-1"><span class="toc-text">容器包含若干浮动元素时如何清理(包含)浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解释下浮动和它的工作原理？清除浮动的技巧"><span class="toc-text">解释下浮动和它的工作原理？清除浮动的技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#doctype是什么-举例常见doctype及特点"><span class="toc-text">doctype是什么,举例常见doctype及特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="toc-text">Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#你知道多少种Doctype文档类型？"><span class="toc-text">你知道多少种Doctype文档类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见兼容性问题？"><span class="toc-text">常见兼容性问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准模式-vs-混杂模式"><span class="toc-text">标准模式 vs 混杂模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5-为什么只需要写-lt-DOCTYPE-HTML-gt-？"><span class="toc-text">HTML5 为什么只需要写 <!DOCTYPE HTML>？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？"><span class="toc-text">介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#position的absolute与fixed区别"><span class="toc-text">position的absolute与fixed区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#position的值，-relative和absolute分别是相对于谁进行定位的？"><span class="toc-text">position的值， relative和absolute分别是相对于谁进行定位的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何在页面上实现一个圆形的可点击区域？"><span class="toc-text">如何在页面上实现一个圆形的可点击区域？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#position-absolute和float属性的异同"><span class="toc-text">position:absolute和float属性的异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍一下box-sizing属性？"><span class="toc-text">介绍一下box-sizing属性？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3新增伪类举例："><span class="toc-text">CSS3新增伪类举例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3有哪些新特性？"><span class="toc-text">CSS3有哪些新特性？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFC"><span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML与XHTML——二者有什么区别"><span class="toc-text">HTML与XHTML——二者有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-FOUC（无样式内容闪烁）？你如何来避免-FOUC？"><span class="toc-text">什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

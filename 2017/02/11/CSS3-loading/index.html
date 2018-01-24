@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CSS3饼状loading效果｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/02/11/CSS3-loading/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CSS3饼状loading效果</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-02-11
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            CSS3饼状loading效果
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3>思路一</h3>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"real"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fake"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"rotate"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shelter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"real2"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fake2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"rotate2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shelter2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ring"</span>&gt;</span></div><div class="line">		</div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">300px</span>;</div><div class="line">	<span class="attribute">height</span>:<span class="number">500px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">border</span>:<span class="number">1px</span> solid black;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span> auto;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.ring</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">120px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">120px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span> auto;</div><div class="line">	<span class="attribute">margin-top</span>: -<span class="number">100px</span>;</div><div class="line">	<span class="attribute">border</span>:<span class="number">2px</span> solid pink;</div><div class="line">	<span class="attribute">border-top-color</span>: transparent;</div><div class="line">	<span class="attribute">-webkit-transform-origin</span>:center;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Ring <span class="number">0.8s</span> infinite linear;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.real</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span> auto;</div><div class="line">	<span class="attribute">margin-top</span>: <span class="number">210px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">background</span>:pink;</div><div class="line">	<span class="attribute">opacity</span>: <span class="number">0</span>; </div><div class="line">	<span class="attribute">-webkit-animation</span>: Shelter <span class="number">1.6s</span> <span class="built_in">steps</span>(1, end) infinite;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.real2</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span> auto;</div><div class="line">	<span class="attribute">margin-top</span>: -<span class="number">80px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">background</span>:lightpink;</div><div class="line">	<span class="attribute">opacity</span>: <span class="number">1</span>; </div><div class="line">	<span class="attribute">-webkit-animation</span>: Fake <span class="number">1.6s</span> <span class="built_in">steps</span>(1, end) infinite;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="selector-class">.rotate</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">40px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span>;</div><div class="line">	<span class="attribute">background</span>:lightpink;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-transform-origin</span>:right center;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Rotate <span class="number">0.8s</span> infinite linear;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.fake</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">40px</span> <span class="number">40px</span> <span class="number">0</span>;</div><div class="line">	<span class="attribute">background</span>:lightpink;</div><div class="line">	<span class="attribute">margin-left</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Fake <span class="number">0.8s</span> <span class="built_in">steps</span>(1,end) infinite;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.shelter</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">40px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span>;</div><div class="line">	<span class="attribute">background</span>:pink;</div><div class="line">	<span class="attribute">margin-left</span>: <span class="number">0</span>;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Shelter <span class="number">0.8s</span> <span class="built_in">steps</span>(1,end) infinite;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.rotate2</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">40px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span>;</div><div class="line">	<span class="attribute">background</span>:pink;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-transform-origin</span>:right center;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Rotate <span class="number">0.8s</span> infinite linear;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.fake2</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">40px</span> <span class="number">40px</span> <span class="number">0</span>;</div><div class="line">	<span class="attribute">background</span>:pink;</div><div class="line">	<span class="attribute">margin-left</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Fake <span class="number">0.8s</span> <span class="built_in">steps</span>(1,end) infinite;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.shelter2</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">40px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">	<span class="attribute">border-radius</span>: <span class="number">40px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span>;</div><div class="line">	<span class="attribute">background</span>:lightpink;</div><div class="line">	<span class="attribute">margin-left</span>: <span class="number">0</span>;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">-webkit-animation</span>: Shelter <span class="number">0.8s</span> <span class="built_in">steps</span>(1,end) infinite;</div><div class="line">&#125;</div><div class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> Ring&#123;</div><div class="line">	0% &#123;</div><div class="line">		<span class="attribute">-webkit-transform</span>:<span class="built_in">rotate</span>(360deg);</div><div class="line">		<span class="attribute">transform</span>:<span class="built_in">rotate</span>(360deg);</div><div class="line">	&#125;</div><div class="line">	100%&#123;</div><div class="line">		<span class="attribute">-webkit-transform</span>:<span class="built_in">rotate</span>(0deg);</div><div class="line">		<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> Rotate&#123;</div><div class="line">	0% &#123;</div><div class="line">		<span class="attribute">-webkit-transform</span>:<span class="built_in">rotate</span>(360deg);</div><div class="line">		<span class="attribute">transform</span>:<span class="built_in">rotate</span>(360deg);</div><div class="line">	&#125;</div><div class="line">	100%&#123;</div><div class="line">		<span class="attribute">-webkit-transform</span>:<span class="built_in">rotate</span>(0deg);</div><div class="line">		<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> Fake&#123;</div><div class="line">	0%&#123;</div><div class="line">		<span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	50%,100%&#123;</div><div class="line">		<span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> Shelter&#123;</div><div class="line">	0%&#123;</div><div class="line">		<span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	50%,100%&#123;</div><div class="line">		<span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p></p><h3>问题</h3><br>3.1 关于绝对定位和相对定位<br>relative和absolute还不是特别清楚<p></p>
+<p>3.2 我为了让饼状图连续旋转，设计了两个反转颜色的饼，控制他们间隔着显示，可是旋转的圆饼还怎么设计HTML部分比较高效？</p>
+<p>3.3 clip-path？<br><a href="http://www.w3cplus.com/css/basic-shapes-path.html" target="_blank" rel="external">http://www.w3cplus.com/css/basic-shapes-path.html</a>  </p>
+<p>3.4 画3/4圆：<br>border-top-color: transparent;</p>
+<p></p><h3>参考文档</h3><br><a href="http://www.zhangxinxu.com/wordpress/2014/04/css3-pie-loading-waiting-animation/" target="_blank" rel="external">CSS3实现鸡蛋饼饼状图loading等待转转转</a><p></p>
+<p><a href="http://www.jianshu.com/p/6ac3e3e12d61" target="_blank" rel="external">CSS3实现18种Loading效果</a></p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/02/18/notes/" data-toggle="tooltip" data-placement="top"
+                           title="做项目时总结的一些经验">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/16/webstorm-start/" data-toggle="tooltip" data-placement="top"
+                           title="webstorm简单介绍">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">思路一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">参考文档</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

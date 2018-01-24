@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Hexo实现个人博客搭建部署美化｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/11/30/hexo-blog/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Hexo实现个人博客搭建部署美化</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-11-30
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#hexo"
+                           title="hexo">hexo</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Hexo实现个人博客搭建部署美化
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>周末搭建了自己的博客，我使用的是GitHubPages + Hexo+ Even，一种简单高效的实现方式。当然还有其他的实现方式，如：WordPress、GitHubPages + Jekell等等。</p>
+<h2 id="本地环境准备"><a href="#本地环境准备" class="headerlink" title="本地环境准备"></a>本地环境准备</h2><p>关于创建<a href="https://github.com/" target="_blank" rel="external">Github仓库</a>，<a href="https://git-scm.com/download/" target="_blank" rel="external">Git安装</a>，<a href="https://nodejs.org/en/download/" target="_blank" rel="external">Nodejs安装</a>我就不再赘述。</p>
+<hr>
+<h2 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h2><p><a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="external">Hexo</a>是一个极速、简单且强大的静态博客架构，安装和使用十分便捷： </p>
+<p>打开终端，输入Hexo的安装命令：<br>​<br>    npm install hexo-cli -g</p>
+<p>定位到你希望存储博客的目录下:<br>​<br>    cd <em>*</em></p>
+<p>初始化本地博客仓库：<br>​<br>    hexo init 你的用户名.github.io // 尽量和Github仓库使用同一个名称</p>
+<p>基本的博客框架就已经搭建完了，Hexo安装完成后默认使用landscape主题，终端定位到xxx.github.io文件夹下，输入下面的命令预览：<br>​<br>    hexo s</p>
+<p>在浏览器上输入网址：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> ,Press Ctrl+C to stop. 就能预览到landscape主题下的博客效果。</p>
+<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2><p>我原本用的是大家都在用的NexT主题，但是看到@<a href="https://kchen.cc" target="_blank" rel="external">k.Chen</a>安利@<a href="http://ahonn.me/" target="_blank" rel="external">ahonn</a>制作的简约主题<a href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="external">Even</a>，确实蛮好看的，所以就搬过来用了，步骤如下：</p>
+<p>将终端定位到xxx.github.io目录下，下载并安装Even主题：<br>​<br>    cd xxx.github.io</p>
+<pre><code>git clone https://github.com/iissnan/hexo-theme-even 
+
+cd even/
+
+bin/install
+</code></pre><p>在文件目录中打开<code>_config.yml</code>(./xxx.github.io/config.yml)启用Even主题：<br>​    </p>
+<pre><code># Extensions
+
+## Plugins: http://hexo.io/plugins/
+
+## Themes: http://hexo.io/themes/
+
+theme: even
+</code></pre><p>Even主题就安装好了，其他诸如更改名字、添加社交信息、增加自定义页面、更改LOGO，都在<code>xxx.github.io/themes/even/doc/doc_zh.md</code>中，不再一一赘述。</p>
+<hr>
+<h2 id="博客部署"><a href="#博客部署" class="headerlink" title="博客部署"></a>博客部署</h2><p>终端输入下面的命令完成安装自动部署发布工具：<br>​<br>    sudo npm install hexo-deployer-git –save</p>
+<p>在文件目录中打开<code>_config.yml</code>(./xxx.github.io/config.yml),编辑最后的 Deployment 和 deploy 配置项：<br>​    </p>
+<pre><code># Deployment
+
+## Docs: https://hexo.io/docs/deployment.html
+
+deploy:
+
+ type: git
+</code></pre><p>​<br>​<br>    deploy:</p>
+<pre><code>type: git
+
+repo: &lt;repository url&gt;
+
+branch: [branch]
+
+message: [message]
+</code></pre><p>在本地确认博客效果后，就可以将md文件生成静态网页上传至GithubPages，在终端定位到xxx.github.io目录下，执行下面的命令即可：<br>​<br>    hexo clean #清楚网页缓存</p>
+<pre><code>hexo g #生成静态网页
+
+hexo d #开始部署
+
+//当然也可以使用一次性命令：
+
+hexo clean &amp;&amp; hexo g &amp;&amp; hexo d
+</code></pre><p>首次部署时，终端会让你输入Github的用户名和密码，建议使用 SSH 加密的仓库地址（参看<a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">Github 官方文档</a>配置 SSH 免密操作），现在，所有人都可以通过 <a href="http://.github.io" target="_blank" rel="external">http://.github.io</a> 来访问你的博客了。</p>
+<hr>
+<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>现在我们已经可以无碍的使用 Hexo 来写博客并部署到GitHub上了，可是有一个地方不太优雅，那就是域名。因为我们使用的是 Github 提供的二级域名 github.io，一来太长，二来也不太够自定义、个性化。</p>
+<p>所以，我们可以去买一个域名，然后解析到 Github 去，国内的万网、西部数码，国外的 Godady 等网站都可以购买。我的域名 .tech 每年才 5 元，价格实惠。实在不济，还有 .tk，.ml，.cf，.ga 四个免费域名提供开放注册（为互联网的免费精神干杯🍻）。</p>
+<p>购买域名之后，我们只需要在购买域名的网站把 DNS 解析创建一个CNAME记录和两个 A 记录到：<br>​<br>    @ A 192.30.252.153</p>
+<pre><code>@ A 192.30.252.154
+
+WWW CNAME xxx.github.io
+</code></pre><p>之后在自己的博客根目录下创建一个 CNAME 文件，里面放你解析的域名。</p>
+<p>之后修改根目录下的 _config.yml 文件，把站点地址更新成新的绑定的域名即可<br>​    </p>
+<pre><code># URL
+
+## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;
+
+url: http://yoursite.com
+</code></pre><p>现在，就可以使用自己的域名访问自己的博客了，例如： <a href="http://xxwu.tech">http://xxwu.tech</a></p>
+<hr>
+<h2 id="评论CSS美化"><a href="#评论CSS美化" class="headerlink" title="评论CSS美化"></a>评论CSS美化</h2><p>为了更好地交流互动，我使用了多说的评论模块。首先，在<a href="http://duoshuo.com" target="_blank" rel="external">多说</a>网站登录，点击<code>我要安装</code>，进入后台管理，在设置中输入自己的域名：<code>xxx.duoshuo.com</code>，其中<code>xxx</code>就是你的<code>duoshuo_shortname</code></p>
+<p>然后需要自己创建Board界面,打开终端，定位到xxx.github.io目录下,执行下面的命令:<br>​<br>    hexo new page board</p>
+<p>创建完成后，在对应的目录下找到index.md文件，进行如下的修改：</p>
+<h2 id="​"><a href="#​" class="headerlink" title="​    "></a>​    </h2><pre><code>title: board
+
+date: 2016-11-30 17:16:58
+
+layout: page
+
+---
+
+**最近访客**
+
+&lt;div class=&quot;ds-recent-visitors&quot; data-num-items=&quot;28&quot; data-avatar-size=&quot;42&quot; id=&quot;ds-recent-visitors&quot;&gt;&lt;/div&gt;
+</code></pre><p>打开<code>xxx.github.io/themes/even/_config.yml</code>,修改Menu模块代码：<br>​<br>    menu:</p>
+<pre><code>Archives: /archives/
+
+Categories: /categories/
+
+Tags: /tags/
+
+About: /about/
+
+Board: /board/
+</code></pre><p>修改comments模块，其中<code>post</code>是指各篇文章和留言板的评论功能是否启用，而<code>about</code>是指关于页面的。<br>​    </p>
+<pre><code># comments
+
+comments:
+
+ post: true
+
+ about: false
+</code></pre><p>以及后面的：<br>​    </p>
+<pre><code> # Comments
+
+## Duoshuo
+
+duoshuo_shortname: xxx(上文提到的多说短域名)
+
+## Disqus
+
+#disqus_shortname: Your disqus ID
+</code></pre><p>现在你的网站就可以实现最近访客和评论留言功能了，但是界面还不够美观，在这里我们再次进入<a href="http://duoshuo.com" target="_blank" rel="external">多说</a>的后台管理，在<code>设置/基本设置/自定义CSS</code>中可以自定义评论框和留言板的样式，在这里贴出我的CSS样式代码：<br>​    </p>
+<pre><code>#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current {border:0px;color:#848568;text-shadow:none}
+
+#ds-thread #ds-reset .ds-highlight {font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:bold;color:#698376 !important;}
+
+#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current:hover {color:#696a52;background:#d4d6ba}
+
+#ds-thread #ds-reset a.ds-highlight:hover {color:#696a52 !important;}
+
+#ds-thread {padding-left:30px;}
+
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset #ds-hot-posts {overflow:visible}
+
+#ds-thread #ds-reset .ds-post-self {padding:10px 0 10px 10px;}
+
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset .ds-post-self {border:0 !important;}
+
+#ds-reset .ds-avatar, #ds-thread #ds-reset ul.ds-children .ds-avatar {position:absolute;top:26px;left:-14px;padding:5px;width:36px;height:36px;box-shadow:-1px 0 1px rgba(0,0,0,.15) inset;border-radius:46px; background:#E5E6D0;}
+
+#ds-thread #ds-reset ul.ds-children .ds-avatar {left:-23px;}
+
+#ds-thread .ds-avatar a {display:inline-block;padding:1px; width:32px;height:32px;border:1px solid #b9baa6;border-radius:50%; background-color:#fff !important}
+
+#ds-thread .ds-avatar a:hover {border-color:#de5a4e}
+
+#ds-thread .ds-avatar &gt; img {margin:2px 0 0 2px}
+
+#ds-thread #ds-reset .ds-replybox {box-shadow:none;}
+
+#ds-thread #ds-reset ul.ds-children .ds-replybox.ds-inline-replybox a.ds-avatar,
+
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar {left: 0;top: 0; padding: 0;width: 32px !important;height: 32px !important; background: none;box-shadow: none; } 
+
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar img {width: 32px !important;height: 32px !important; border-radius:50%;} 
+
+#ds-reset .ds-replybox a.ds-avatar,
+
+#ds-reset .ds-replybox .ds-avatar img { padding:0;width:38px !important;height:38px !important; border-radius:5px; }
+
+#ds-reset .ds-avatar img {width:32px !important;height:32px !important;border-radius:32px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.22);
+
+ -webkit-transition:.4s all ease-in-out;-moz-transition:.4s all ease-in-out;-o-transition:.4s all ease-in-out;-ms-transition:.4s all ease-in-out;transition:.4s all ease-in-out;
+
+ }
+
+.ds-post-self:hover .ds-avatar img {-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}
+
+#ds-thread #ds-reset .ds-comment-body {background: #FFFFFF;padding:15px 15px 12px 32px;border-radius:5px; box-shadow:0 1px 2px rgba(0,0,0,.15), 0 1px 0 rgba(255,255,255,.75) inset;}
+
+#ds-thread #ds-reset .ds-comment-body p{color:#787968}
+
+#ds-thread #ds-reset .ds-comments a.ds-user-name {font-weight:bold;color:#696A52 !important;}
+
+#ds-thread #ds-reset .ds-comments a.ds-user-name:hover {color:#D32 !important;}
+
+#ds-thread #ds-reset #ds-hot-posts {border:0}
+
+#ds-reset #ds-hot-posts .ds-gradient-bg {background:none;}
+
+#ds-reset #ds-bubble #ds-ctx .ds-ctx-entry {padding:0;}
+
+#ds-reset #ds-bubble .ds-avatar, #ds-reset #ds-bubble #ds-ctx-bubble .ds-avatar a {position:static;padding:0;border:0; background:none;box-shadow:none;}
+
+#ds-reset #ds-bubble .ds-avatar img, #ds-reset #ds-bubble #ds-ctx-bubble .ds-avatar a {width:45px !important;height:45px !important;}
+
+#ds-reset #ds-bubble .ds-user-name{padding-left:13px;}
+
+#ds-reset .ds-comment-body #ds-ctx {border-left:1px solid #b9baa6;background-color:#e8e8dc !important}
+
+#ds-reset #ds-ctx {margin-right:-15px}
+
+#ds-reset #ds-ctx .ds-ctx-entry {position:relative;padding:10px 30px 10px 10px;}
+
+#ds-reset #ds-ctx .ds-ctx-entry .ds-avatar {top:6px;left:5px;background:none;box-shadow:none;}
+
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-body {margin-left:46px;}
+
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-content {color:#787968}
+
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {color:#696A52;font-weight:bold}
+
+#ds-thread #ds-reset .ds-powered-by{
+
+display:none;
+
+}/*隐藏多说底部版权*/
+
+#ds-thread {padding:32px;}
+
+/*隐藏最新最热等*/
+
+#ds-thread #ds-reset .ds-sort {
+
+display:none;
+
+}
+
+/*隐藏评论框底部分享*/
+
+.ds-sync{
+
+display:none !important;
+
+}
+
+#ds-reset a.ds-like-thread-button { padding: 4px 8px !important; }
+</code></pre><p>以上，属于你的个人博客就搭建好了，希望你能学会，并爱上用这样的方式来写作博客！一切只是刚刚开始，可以折腾的东西还有好多好多，祝你玩得愉快！欢迎下方留言交流！</p>
+<p>参考：<br><a href="http://kchen.cc/2016/11/12/hexo-instructions/" target="_blank" rel="external">基于 Hexo 的全自动博客构建部署系统</a><br><a href="https://123sunxiaolin.github.io/2016/08/27/徒手教你建自己的博客/" target="_blank" rel="external">徒手教你建自己的博客</a></p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/01/2016bupt-job-share/" data-toggle="tooltip" data-placement="top"
+                           title="2016北邮就业经验分享">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/18/notes-2/" data-toggle="tooltip" data-placement="top"
+                           title="二小日报">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地环境准备"><span class="toc-text">本地环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo安装"><span class="toc-text">Hexo安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题安装"><span class="toc-text">主题安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客部署"><span class="toc-text">博客部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#评论CSS美化"><span class="toc-text">评论CSS美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#​"><span class="toc-text">​    </span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#hexo"
+                           title="hexo">hexo</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

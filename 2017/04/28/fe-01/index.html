@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][01]事件｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-01/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][01]事件</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][01]事件
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="描述下js里面的事件流"><a href="#描述下js里面的事件流" class="headerlink" title="描述下js里面的事件流"></a>描述下js里面的事件流</h2><blockquote>
+<p>DOM2级事件模型中规定了事件流的三个阶段：捕获阶段、目标阶段、冒泡阶段，低版本IE（IE8及以下版本）不支持捕获阶段</p>
+<p>捕获事件流：Netscape提出的事件流，即事件由页面元素接收，逐级向下，传播到最具体的元素。</p>
+<p>冒泡事件流：IE提出的事件流，即事件由最具体的元素接收，逐级向上，传播到页面。</p>
+</blockquote>
+<h2 id="IE和W3C绑定事件解绑事件的方法的区别、参数"><a href="#IE和W3C绑定事件解绑事件的方法的区别、参数" class="headerlink" title="IE和W3C绑定事件解绑事件的方法的区别、参数"></a>IE和W3C绑定事件解绑事件的方法的区别、参数</h2><blockquote>
+<p>IE中可以用DOM0级和IE中的方法，W3C中可以用DOM0,DOM2级；</p>
+<p>绑定事件解绑事件的区别：</p>
+<p>1.DOM0级中btn.onclick=function(){}在冒泡阶段被处理；DOM2级中addEventListener()的三个参数是事件对象，事件处理函数，和boolean值，true则在捕获阶段调用，false则在冒泡阶段调用；IE中attachEvent()的两个参数是事件名称，事件处理函数。在冒泡阶段调用。</p>
+<p>2.DOM2中多个事件处理程序是顺序执行，IE中是逆向执行；</p>
+<p>3.作用域：IE中事件处理程序在全局作用域运行，DOM0级方法事件处理程序在其所属元素的作用域运行</p>
+</blockquote>
+<h2 id="事件对象e有什么区别"><a href="#事件对象e有什么区别" class="headerlink" title="事件对象e有什么区别"></a>事件对象e有什么区别</h2><blockquote>
+<p>1.IE中DOM0级方法添加时，event对象是window对象的一个属性，而其他情况event对象都是事件处理函数的参数。</p>
+<p>2.IE中阻止事件的默认行为将returnValue设为false；W3C中使用preventDefault()方法（如果cancelable=true）;</p>
+<p>3.IE中阻止事件冒泡将cancelBubble设为true；W3C中使用stopPropagation()方法</p>
+<p>4.IE中event.srcElement对应W3C中的event.Target，在load事件中，兼容DOM的浏览器会把event.target设为document，而IE则不改变srcElement</p>
+</blockquote>
+<h2 id="事件的代理-委托的原理以及优缺点"><a href="#事件的代理-委托的原理以及优缺点" class="headerlink" title="事件的代理/委托的原理以及优缺点"></a>事件的代理/委托的原理以及优缺点</h2><blockquote>
+<p>优点是:</p>
+<p>1、可以大量节省内存占用，减少事件注册，比如在table上代理所有td的click事件就非常棒</p>
+<p>2、可以实现当新增子对象时无需再次对其绑定事件，对于动态内容部分尤为合适</p>
+<p>缺点是：</p>
+<p>事件代理的应用常用应该仅限于上述需求下，如果把所有事件都用代理就可能会出现事件误判，即本不应用触发事件的被绑上了事件，事实上我见过有人把页面里的所有事件都绑定到document用委托的，这是极其不明智的做法。</p>
+</blockquote>
+<h2 id="手写原生js实现事件代理-要求兼容浏览器"><a href="#手写原生js实现事件代理-要求兼容浏览器" class="headerlink" title="手写原生js实现事件代理,要求兼容浏览器"></a>手写原生js实现事件代理,要求兼容浏览器</h2><blockquote>
+<p>其实就是考核对事件对象e的了解程度，以及在IE下对应的属性名。其实此时如果你说就是用target，currentTarget，以及IE下的srcElement和this，基本就可以略过了。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> EventUtil = &#123;</div><div class="line">	<span class="attr">addHandler</span>: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span> (element.addEventListener)&#123;</div><div class="line">			element.addEventListener(type, handler, <span class="literal">false</span>)</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(element.attachEvent)&#123;</div><div class="line">			element.attachEvent(<span class="string">"on"</span>+type,handler)</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			element[<span class="string">"on"</span>+type]=handler</div><div class="line">		&#125;</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">removeHandler</span>:<span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(element.removeEventListener)&#123;</div><div class="line">			element.removeEventListener(type, handler, <span class="literal">false</span>)</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(element.detachEvent)&#123;</div><div class="line">			element.detachEvent(<span class="string">"on"</span>+type, handler)</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			element[<span class="string">"on"</span>+type] = <span class="literal">null</span></div><div class="line">		&#125;</div><div class="line">	&#125;,</div><div class="line">	getEvent(event)&#123;</div><div class="line">		<span class="keyword">return</span> event || <span class="built_in">window</span>.event</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">getTarget</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> event.target || srcElement</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">preventDefault</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(event.preventDefault)&#123;</div><div class="line">			event.preventDefault()</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			event.returnValue = <span class="literal">false</span></div><div class="line">		&#125;</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">stopPropagation</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(event.stopPropagation)&#123;</div><div class="line">			Event.stopPropagation()</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			event.cancleBubble = <span class="literal">true</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>)</div><div class="line">	EventUtil.addHandler(list, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		event = EventUtil.getEvent(event)</div><div class="line">		<span class="keyword">var</span> target = EventUtil.getTarget(event)</div><div class="line">		<span class="keyword">switch</span>(target.id)&#123;</div><div class="line">			<span class="keyword">case</span> <span class="string">"do1"</span>:</div><div class="line">				<span class="built_in">document</span>.title=<span class="string">"do1"</span></div><div class="line">				<span class="keyword">break</span></div><div class="line">			<span class="keyword">case</span> <span class="string">"do2"</span>:</div><div class="line">				<span class="built_in">document</span>.title = <span class="string">"do2"</span></div><div class="line">				<span class="keyword">break</span></div><div class="line">			<span class="keyword">case</span> <span class="string">"do3"</span>:</div><div class="line">				<span class="built_in">document</span>.title = <span class="string">"do3"</span></div><div class="line">				<span class="keyword">break</span></div><div class="line">		&#125;</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现事件模型"><a href="#实现事件模型" class="headerlink" title="实现事件模型"></a>实现事件模型</h2><p>即写一个类或是一个模块，有两个函数，一个bind一个trigger，分别实现绑定事件和触发事件，核心需求就是可以对某一个事件名称绑定多个事件响应函数，然后触发这个事件名称时，依次按绑定顺序触发相应的响应函数。</p>
+<blockquote>
+<p>这个需求如果对于做过C#的人来讲就再熟悉不过，他根本就是C#中的【委托】（delegate）。而委托与事件几乎是一家子。回到前面说的题目，大致实现思路就是创建一个类或是匿名函数，在bind和trigger函数外层作用域创建一个字典对象，用于存储注册的事件及响应函数列表，bind时，如果字典没有则创建一个，key是事件名称，value是数组，里面放着当前注册的响应函数，如果字段中有，那么就直接push到数组即可。trigger时调出来依次触发事件响应函数即可。</p>
+<p>不过还有很多细节，比如触发响应函数时的上下文应该是什么，触发响应函数的参数列表应该是什么，如果要求把调用trigger的参数列表都传到响应函数中还要考虑到吧arguments对象转化为纯数组才行等等。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>._listener = []</div><div class="line">&#125;</div><div class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">eventName,callback</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> listener = <span class="keyword">this</span>._listener[eventName] || []</div><div class="line">  listener.push(callback)</div><div class="line">  <span class="keyword">this</span>._listener[eventName] = listener</div><div class="line">&#125;</div><div class="line">Model.prototype.trigger = <span class="function"><span class="keyword">function</span>(<span class="params">eventName</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>).slice(<span class="number">1</span>)</div><div class="line">  <span class="keyword">var</span> listener = <span class="keyword">this</span>._listener[eventName]</div><div class="line">  <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(listener))&#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  listener.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line">      callback.apply(<span class="keyword">this</span>, args)</div><div class="line">    &#125;<span class="keyword">catch</span>(er)&#123;</div><div class="line">      <span class="built_in">console</span>.error(er)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> hello = <span class="keyword">new</span> Model()</div><div class="line">hello.bind(<span class="string">"print"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(a,b)</div><div class="line">&#125;)</div><div class="line">hello.bind(<span class="string">"print"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(b,a)</div><div class="line">&#125;)</div><div class="line">hello.trigger(<span class="string">"print"</span>,<span class="string">"1"</span>,<span class="string">"2"</span>)</div></pre></td></tr></table></figure>
+<h2 id="事件如何派发-事件广播（dispatchEvent）"><a href="#事件如何派发-事件广播（dispatchEvent）" class="headerlink" title="事件如何派发/事件广播（dispatchEvent）"></a>事件如何派发/事件广播（dispatchEvent）</h2><h2 id="事件、IE与火狐的事件机制有什么区别？-如何阻止冒泡？"><a href="#事件、IE与火狐的事件机制有什么区别？-如何阻止冒泡？" class="headerlink" title="事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？"></a>事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？</h2><ol>
+<li>我们在网页中的某个操作（有的操作对应多个事件）。例如：当我们点击一个按钮就会产生一个事件。是可以被 JavaScript 侦测到的行为。</li>
+<li>事件处理机制：IE是事件冒泡、firefox同时支持两种事件模型，也就是：捕获型事件和冒泡型事件。； </li>
+<li><code>ev.stopPropagation()</code>;注意旧ie的方法 <code>ev.cancelBubble = true</code>; </li>
+</ol>
+<h2 id="请解释什么是事件代理"><a href="#请解释什么是事件代理" class="headerlink" title="请解释什么是事件代理"></a>请解释什么是事件代理</h2><p>事件代理（Event Delegation），又称之为事件委托。是 <code>JavaScript</code> 中常用绑定事件的常用技巧。顾名思义，“事件代理”即是把原本需要绑定的事件委托给父元素，让父元素担当事件监听的职务。事件代理的原理是<code>DOM</code>元素的事件冒泡。使用事件代理的好处是可以提高性能。</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-02/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][02]类数组对象转换为数组对象">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/09/rem-start/" data-toggle="tooltip" data-placement="top"
+                           title="rem是什么">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#描述下js里面的事件流"><span class="toc-text">描述下js里面的事件流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE和W3C绑定事件解绑事件的方法的区别、参数"><span class="toc-text">IE和W3C绑定事件解绑事件的方法的区别、参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件对象e有什么区别"><span class="toc-text">事件对象e有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的代理-委托的原理以及优缺点"><span class="toc-text">事件的代理/委托的原理以及优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手写原生js实现事件代理-要求兼容浏览器"><span class="toc-text">手写原生js实现事件代理,要求兼容浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现事件模型"><span class="toc-text">实现事件模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件如何派发-事件广播（dispatchEvent）"><span class="toc-text">事件如何派发/事件广播（dispatchEvent）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件、IE与火狐的事件机制有什么区别？-如何阻止冒泡？"><span class="toc-text">事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请解释什么是事件代理"><span class="toc-text">请解释什么是事件代理</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

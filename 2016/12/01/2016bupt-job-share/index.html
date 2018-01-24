@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        2016北邮就业经验分享｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/01/2016bupt-job-share/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>2016北邮就业经验分享</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-01
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            2016北邮就业经验分享
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="1-时间安排："><a href="#1-时间安排：" class="headerlink" title="1.时间安排："></a>1.时间安排：</h2><p>现在开始（12月，1月，2月）写简历和刷算法题；<br>2月底开始内推；  </p>
+<p>3-6月实习；<br>6-10月暑期实习；<br>7月底开始校招；<br>10月之后补招春招。 </p>
+<p>明确找工作目标，内推时间很短，早做准备，实习不忘找内推<br>实习：错过了大批的内推和正式招聘，还有散招<br>校招：错过了大批的招聘，还有补招和春招</p>
+<h2 id="2-简历："><a href="#2-简历：" class="headerlink" title="2.简历："></a>2.简历：</h2><p>现在开始写简历，准备两种简历：网申 + 内推 ，简历不是一次完成的，要不断总结和完善</p>
+<blockquote>
+<p>简历正装照片<br>个人博客<br>github<br>领英，中英简历</p>
+</blockquote>
+<p>简历内容：<br>基本信息（姓名 邮箱 电话 应聘岗位）、教育背景、专业技能、实习经历 &amp; 项目经历、获奖荣誉 &amp; 专业认证 </p>
+<h2 id="3-项目："><a href="#3-项目：" class="headerlink" title="3.项目："></a>3.项目：</h2><p>来源于实习，网上开源项目；面试官不了解你的项目，所以要讲好一个故事，讲清楚自己的贡献；不知道的内容切忌乱蒙 </p>
+<p>师兄介绍他的实习经历里有两个是利用美团，搜狗的开源数据等，自己研究一下，然后写进实习经历里。</p>
+<p>项目介绍：<br>主要工作：个人贡献、涉及技术（可选）、证明人、电话（网申）<br><img src="../../../../images/y3.png" alt=""></p>
+<h2 id="4-算法："><a href="#4-算法：" class="headerlink" title="4.算法："></a>4.算法：</h2><p><img src="../../../../images/y4.png" alt=""></p>
+<p><img src="../../../../images/y5.png" alt=""></p>
+<p><img src="../../../../images/y6.png" alt=""></p>
+<p>算法题：<br>现在就开始准备，在LeetCode上提交，注意逛leetcode discuss，easy medium完全弄懂，在LintCode上修改codeing style，在九章算法上找最优解，还有牛客网，一亩三分地，待字闺中，glassdoor，cc150树上的看懂。hihocoder.com:偏测评和比赛，题目较难，微软笔试指定平台；poj.com:题海3000道；</p>
+<p>参考书：<br>剑指offer，程序员面试宝典，程序员面试金典，编程之美 </p>
+<p>注意项：<br>codeing style（lintcode），bug free（注意看师兄博客，写博客记录算法题，第一天直接写，出错误了，把所有错误记下来，然后第二天接着写，一直loop，知道bug free才return）, AC!=Best Answer(九章算法答案，leetcode discuss),练习手写代码、白板写代码能力，按类别刷题，多做总结，尝试多种解法，注意时间 &amp; 空间复杂度。 </p>
+<h2 id="5-基础知识"><a href="#5-基础知识" class="headerlink" title="5.基础知识"></a>5.基础知识</h2><p>讲原理、说问题、出方案<br>看书、看面经、关注技术网站<br>“专业技能” &amp; 职位招聘要求<br>原理问题必须吃透，某一点深入了解会大大加分</p>
+<h2 id="6-前端"><a href="#6-前端" class="headerlink" title="6.前端"></a>6.前端</h2><p>项目：</p>
+<p>360前端星计划，百度ife，论坛上找外包，自己做客户端,我当时做的项目是自己在外面找的一个外包，做了一个旅游网站；你如果实验室有相关的项目可以跟着做就行，如果没有，也可以自己做，你可以看一下《百度前端技术学院》（百度搜一下），然后看看往年的任务，上面从易到难有4个阶段的任务，跟着做下来会有很大的提高。</p>
+<p>基础知识：</p>
+<ul>
+<li><p>HTML<br>熟悉常用标签以及其属性（W3C上过一遍就行）<br>主要是看一下HTML5中新增加的一些东西（看《javaScript高级程序设计》）<br>canvas、localStorage/sessionStorage、web socket等</p>
+</li>
+<li><p>CSS<br>熟悉基础的页面布局：盒模型／css权重／两栏布局／三栏布局／水平垂直居中<br>多端适配的布局：响应式布局、自适应的单位（％、vw、vh、rem）<br>关于布局相关的，可以通过自己写一些静态的页面来熟悉（比如写一个微博首页之类）。<br>CSS3中的新特性：这个可以看W3C上面<br>CSS预处理器（Sass、Less）：这两种预处理器是类似的，学一种就行。<br>性能较高的CSS的写法<br>CSS相关的书：《CSS禅意花园》</p>
+</li>
+<li><p>javaScript<br>js的基础很重要，推荐几本书：<br>《javaScript高级程序设计》：这本书至少看2遍吧，非常经典，很多面试题在这本书上都可以找到答案<br>《js秘密花园》：这本书在网上可以找到<br>《编写高质量的javaScript》：好像是叫这个名字，我是在图书馆借的</p>
+</li>
+<li><p>学习ES6：<br>《深入浅出ES6》系列<br>《ECMAScript6入门》：阮一峰写的书，在网上就可以看到（现在一般都用ES6来写了）。</p>
+</li>
+<li><p>Http协议<br>了解http的基本组成、常见的http头的作用<br>推荐的书：《http权威指南》</p>
+</li>
+<li><p>浏览器相关<br>了解浏览器如何渲染页面<br>如何优化网站性能<br>网站安全问题（XSS、CSRF）<br>热门的框架<br>至少要熟悉一门前端框架，今年比较热门的前端框架有2个：Vue.js和</p>
+</li>
+<li><p>react<br>推荐书籍：博客（张鑫旭、阮一峰）、《深入react技术栈》、《深入浅出react》系列<br>我现在用的比较多的是react，然后有人给我推荐了一本书是《。入门的话，推荐看官网和一些人的博客（阮一峰）、，然后自己尝试做一下慢慢就会了。</p>
+</li>
+<li><p>工程方面<br>前端自动化构建工具<br>现在用得比较多的是：webpack、gulp</p>
+</li>
+<li><p>代码版本管理 git</p>
+</li>
+<li><p>前端培训课程<br>《百度前端技术学院》<br>今年是3月12号开始报名的，现在也可以看到之前的任务<br>《360前端星计划》<br>关注360实习招聘就行</p>
+</li>
+<li><p>app<br>前端工程师<br>开发者头条</p>
+</li>
+</ul>
+<p>面试相关：</p>
+<p>关于实习，要去大一点的公司实习（坚持不懈地找），无论能不能转正，都要做两手准备（有的校招面试8月初就开始了）</p>
+<p>有自己的技术博客（非常加分），注意平时的积累，基于github搭建一个博客（最好自己买一个域名），面试官会按照博客或github上的项目问</p>
+<p>注意面试题的积累，每次面完把题目纪录下来，然后弄懂，积累的面试题多了之后，就把面试题按知识点进行分类，然后系统地弄懂</p>
+<p>前端的笔试分两种类型：一种是单独为前端出的一份试卷，一种是研发大类；刷到easy程度对前端面试来说肯定是没问题的，但是可能对研发大类的笔试会有点问题，不过建议先看前端基础，框架，学有余力再去刷题</p>
+<p>尽量走内推，笔试太难过了，尤其是对于前端而言，所以前期的内推机会一定要把握好</p>
+<p>关于刷题</p>
+<p>前端岗算法好虽然不是必备项，但会是一个加分项，所以学有余力的话，最好还是去刷一下题（简单的）。<br>可以边学前端边刷题，但是还是前端的基础比较重要<br>做前端不太好进国企</p>
+<p>师姐经验：学完ife第三阶段，把红宝书看两遍就找实习，在今日头条从11月实习到现在，拿到了转正sp，28-30万。</p>
+<h2 id="7-面试笔记："><a href="#7-面试笔记：" class="headerlink" title="7.面试笔记："></a>7.面试笔记：</h2><p>总结面试遇到的题目<br>算法+项目+基础知识 </p>
+<h2 id="8-国企-户口"><a href="#8-国企-户口" class="headerlink" title="8.国企+户口"></a>8.国企+户口</h2><p>军工：10月<br>航天科技，航天工业，航天科工 户口很稳</p>
+<p>银行：10月中<br>中，工，中信，农，北京，商<br>软开，数据中心</p>
+<p>证券，保险：11月<br>人保财险很好，户口+7万年终+2500公积金</p>
+<p>电信 &gt; 移动 &gt; 联通</p>
+<p>中科院，解决户口（计算机，自动化，信工），软件，有员工房</p>
+<p>提前写毕业论文，不然时间冲突。<br>想清楚自己想要留北京吗？要户口吗？</p>
+<h2 id="9-鸡汤："><a href="#9-鸡汤：" class="headerlink" title="9.鸡汤："></a>9.鸡汤：</h2><p>执行力，自我驱动，耐性，如果我真的比别人笨所以我就要付出两倍的时间，我不仅要比你强，还要比你更努力</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/01/leetcode/" data-toggle="tooltip" data-placement="top"
+                           title="一刷leetcode题目解答思路">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/30/hexo-blog/" data-toggle="tooltip" data-placement="top"
+                           title="Hexo实现个人博客搭建部署美化">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-时间安排："><span class="toc-text">1.时间安排：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-简历："><span class="toc-text">2.简历：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-项目："><span class="toc-text">3.项目：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-算法："><span class="toc-text">4.算法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-基础知识"><span class="toc-text">5.基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-前端"><span class="toc-text">6.前端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-面试笔记："><span class="toc-text">7.面试笔记：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-国企-户口"><span class="toc-text">8.国企+户口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-鸡汤："><span class="toc-text">9.鸡汤：</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

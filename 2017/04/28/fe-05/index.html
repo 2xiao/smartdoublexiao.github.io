@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][05]前端性能优化｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-05/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][05]前端性能优化</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][05]前端性能优化
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="你有哪些性能优化的方法？"><a href="#你有哪些性能优化的方法？" class="headerlink" title="你有哪些性能优化的方法？"></a>你有哪些性能优化的方法？</h2><p>（1） 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。<br>（2） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数<br>（3） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。<br>（4） 当需要设置的样式很多时设置className而不是直接操作style。<br>（5） 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。<br>（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。<br>（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。 </p>
+<p>代码层面：避免使用css表达式，避免使用高级选择器，通配选择器。</p>
+<p>缓存利用：缓存Ajax，使用CDN，使用外部js和css文件以便缓存，添加Expires头，服务端配置Etag，减少DNS查找等</p>
+<p>请求数量：合并样式和脚本，使用css图片精灵，初始首屏之外的图片资源按需加载，静态资源延迟加载。</p>
+<p>请求带宽：压缩文件，开启GZIP，</p>
+<ul>
+<li>代码层面的优化</li>
+</ul>
+<ul>
+<li>用<code>hash-table</code>来优化查找</li>
+<li>少用全局变量</li>
+<li>用<code>innerHTML</code>代替<code>DOM</code>操作，减少<code>DOM</code>操作次数，优化<code>javascript</code>性能</li>
+<li>用<code>setTimeout</code>来避免页面失去响应</li>
+<li>缓存DOM节点查找的结果</li>
+<li>避免使用CSS Expression</li>
+<li>避免全局查询</li>
+<li>避免使用with(with会创建自己的作用域，会增加作用域链长度)</li>
+<li>多个变量声明合并</li>
+<li>避免图片和iFrame等的空Src。空Src会重新加载当前页面，影响速度和效率</li>
+<li>尽量避免写在HTML标签中写Style属性</li>
+</ul>
+<blockquote>
+<p>雅虎Best Practices for Speeding Up Your Web Site：</p>
+</blockquote>
+<ul>
+<li>content方面<ol>
+<li>减少HTTP请求：合并文件、CSS精灵、inline Image</li>
+<li>减少DNS查询：DNS查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS缓存、将资源分布到恰当数量的主机名，平衡并行下载和DNS查询</li>
+<li>避免重定向：多余的中间访问</li>
+<li>使Ajax可缓存</li>
+<li>非必须组件延迟加载</li>
+<li>未来所需组件预加载</li>
+<li>减少DOM元素数量</li>
+<li>将资源放到不同的域下：浏览器同时从一个域下载资源的数目有限，增加域可以提高并行下载量</li>
+<li>减少iframe数量</li>
+<li>不要404</li>
+</ol>
+</li>
+<li>Server方面<ol>
+<li>使用CDN</li>
+<li>添加Expires或者Cache-Control响应头</li>
+<li>对组件使用Gzip压缩</li>
+<li>配置ETag</li>
+<li>Flush Buffer Early</li>
+<li>Ajax使用GET进行请求</li>
+<li>避免空src的img标签</li>
+</ol>
+</li>
+<li>Cookie方面<ol>
+<li>减小cookie大小</li>
+<li>引入资源的域名不要包含cookie</li>
+</ol>
+</li>
+<li>css方面<ol>
+<li>将样式表放到页面顶部</li>
+<li>不使用CSS表达式</li>
+<li>使用<link>不使用@import</li>
+<li>不使用IE的Filter</li>
+</ol>
+</li>
+<li>Javascript方面<ol>
+<li>将脚本放到页面底部</li>
+<li>将javascript和css从外部引入</li>
+<li>压缩javascript和css</li>
+<li>删除不需要的脚本</li>
+<li>减少DOM访问</li>
+<li>合理设计事件监听器</li>
+</ol>
+</li>
+<li>图片方面<ol>
+<li>优化图片：根据实际颜色需要选择色深、压缩</li>
+<li>优化css精灵</li>
+<li>不要在HTML中拉伸图片</li>
+<li>保证favicon.ico小并且可缓存</li>
+</ol>
+</li>
+<li>移动方面<ol>
+<li>保证组件小于25k</li>
+<li>Pack Components into a Multipart Document</li>
+</ol>
+</li>
+</ul>
+<h2 id="什么是渐进增强"><a href="#什么是渐进增强" class="headerlink" title="什么是渐进增强"></a>什么是渐进增强</h2><p>渐进增强是指在web设计时强调可访问性、语义化HTML标签、外部样式表和脚本。保证所有人都能访问页面的基本内容和功能同时为高级浏览器和高带宽用户提供更好的用户体验。核心原则如下:</p>
+<ul>
+<li>所有浏览器都必须能访问基本内容</li>
+<li>所有浏览器都必须能使用基本功能</li>
+<li>所有内容都包含在语义化标签中</li>
+<li>通过外部CSS提供增强的布局</li>
+<li>通过非侵入式、外部javascript提供增强功能</li>
+<li>end-user web browser preferences are respected</li>
+</ul>
+<h2 id="移动端性能优化"><a href="#移动端性能优化" class="headerlink" title="移动端性能优化"></a>移动端性能优化</h2><ul>
+<li>尽量使用css3动画，开启硬件加速。<ul>
+<li>适当使用<code>touch</code>事件代替<code>click</code>事件。</li>
+<li>避免使用<code>css3</code>渐变阴影效果。</li>
+<li>可以用<code>transform: translateZ(0)</code>来开启硬件加速。</li>
+<li>不滥用Float。Float在渲染时计算量比较大，尽量减少使用</li>
+<li>不滥用Web字体。Web字体需要下载，解析，重绘当前页面，尽量减少使用。</li>
+<li>合理使用requestAnimationFrame动画代替setTimeout</li>
+<li>CSS中的属性（CSS3 transitions、CSS3 3D transforms、Opacity、Canvas、WebGL、Video）会触发GPU渲染，请合理使用。过渡使用会引发手机过耗电增加</li>
+<li>PC端的在移动端同样适用</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>相关阅读：<a href="https://github.com/cssmagic/blog/issues/20" target="_blank" rel="external">如何做到一秒渲染一个移动页面</a></p>
+</blockquote>
+<h2 id="列举IE-与其他浏览器不一样的特性？"><a href="#列举IE-与其他浏览器不一样的特性？" class="headerlink" title="列举IE 与其他浏览器不一样的特性？"></a>列举IE 与其他浏览器不一样的特性？</h2><ul>
+<li><p>IE支持<code>currentStyle</code>，FIrefox使用<code>getComputStyle</code></p>
+</li>
+<li><p>IE 使用<code>innerText</code>，Firefox使用<code>textContent</code></p>
+</li>
+<li><p>滤镜方面：IE:<code>filter:alpha(opacity= num)</code>；Firefox：<code>-moz-opacity:num</code></p>
+</li>
+<li><p>事件方面：IE：<code>attachEvent</code>：火狐是<code>addEventListener</code></p>
+</li>
+<li><p>鼠标位置：IE是<code>event.clientX</code>；火狐是<code>event.pageX</code></p>
+</li>
+<li><p>IE使用<code>event.srcElement</code>；Firefox使用<code>event.target</code></p>
+</li>
+<li><p>IE中消除list的原点仅需margin:0即可达到最终效果；FIrefox需要设置<code>margin:0;padding:0以及list-style:none</code></p>
+</li>
+<li><p>CSS圆角：ie7以下不支持圆角</p>
+</li>
+</ul>
+<h2 id="IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决"><a href="#IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决" class="headerlink" title="IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决"></a>IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决</h2><ul>
+<li>IE6不支持min-height，解决办法使用css hack：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.target &#123;</div><div class="line">    min-height: 100px;</div><div class="line">    height: auto !important;</div><div class="line">    height: 100px;   // IE6下内容高度超过会自动扩展高度</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>ol</code>内<code>li</code>的序号全为1，不递增。解决方法：为li设置样式<code>display: list-item;</code></p>
+</li>
+<li><p>未定位父元素<code>overflow: auto;</code>，包含<code>position: relative;</code>子元素，子元素高于父元素时会溢出。解决办法：1）子元素去掉<code>position: relative;</code>; 2）不能为子元素去掉定位时，父元素<code>position: relative;</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">.outer &#123;</div><div class="line">    width: 215px;</div><div class="line">    height: 100px;</div><div class="line">    border: 1px solid red;</div><div class="line">    overflow: auto;</div><div class="line">    position: relative;  /* 修复bug */</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    width: 100px;</div><div class="line">    height: 200px;</div><div class="line">    background-color: purple;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">    &lt;div class=&quot;inner&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6只支持<code>a</code>标签的<code>:hover</code>伪类，解决方法：使用js为元素监听mouseenter，mouseleave事件，添加类实现效果：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">.p:hover,</div><div class="line">.hover &#123;</div><div class="line">    background: purple;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;p class=&quot;p&quot; id=&quot;target&quot;&gt;aaaa bbbbb&lt;span&gt;DDDDDDDDDDDd&lt;/span&gt; aaaa lkjlkjdf j&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">function addClass(elem, cls) &#123;</div><div class="line">    if (elem.className) &#123;</div><div class="line">        elem.className += &apos; &apos; + cls;</div><div class="line">    &#125; else &#123;</div><div class="line">        elem.className = cls;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">function removeClass(elem, cls) &#123;</div><div class="line">    var className = &apos; &apos; + elem.className + &apos; &apos;;</div><div class="line">    var reg = new RegExp(&apos; +&apos; + cls + &apos; +&apos;, &apos;g&apos;);</div><div class="line">    elem.className = className.replace(reg, &apos; &apos;).replace(/^ +| +$/, &apos;&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var target = document.getElementById(&apos;target&apos;);</div><div class="line">if (target.attachEvent) &#123;</div><div class="line">    target.attachEvent(&apos;onmouseenter&apos;, function () &#123;</div><div class="line">        addClass(target, &apos;hover&apos;);</div><div class="line">    &#125;);</div><div class="line">    target.attachEvent(&apos;onmouseleave&apos;, function () &#123;</div><div class="line">        removeClass(target, &apos;hover&apos;);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE5-8不支持<code>opacity</code>，解决办法：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.opacity &#123;</div><div class="line">    opacity: 0.4</div><div class="line">    filter: alpha(opacity=60); /* for IE5-7 */</div><div class="line">    -ms-filter: &quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=60)&quot;; /* for IE 8*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6在设置<code>height</code>小于<code>font-size</code>时高度值为<code>font-size</code>，解决办法：<code>font-size: 0;</code></li>
+<li>IE6不支持PNG透明背景，解决办法: <strong>IE6下使用gif图片</strong></li>
+<li>IE6-7不支持<code>display: inline-block</code>解决办法：设置inline并触发hasLayout</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">display: inline-block;</div><div class="line">*display: inline;</div><div class="line">*zoom: 1;</div></pre></td></tr></table></figure>
+<ul>
+<li>IE6下浮动元素在浮动方向上与父元素边界接触元素的外边距会加倍。解决办法：<br>1）使用padding控制间距。<br>2）浮动元素<code>display: inline;</code>这样解决问题且无任何副作用：css标准规定浮动元素display:inline会自动调整为block</li>
+<li>通过为块级元素设置宽度和左右margin为auto时，IE6不能实现水平居中，解决方法：为父元素设置<code>text-align: center;</code></li>
+</ul>
+<h2 id="谈谈你对重构的理解"><a href="#谈谈你对重构的理解" class="headerlink" title="谈谈你对重构的理解"></a>谈谈你对重构的理解</h2><p>网站重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。也就是说是在不改变UI的情况下，对网站进行优化，<br>在扩展的同时保持一致的UI。<br>​<br>对于传统的网站来说重构通常是： 表格(table)布局改为DIV+CSS 使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的) 对于移动平台的优化 针对于SEO进行优化 深层次的网站重构应该考虑的方面 减少代码间的耦合 让代码保持弹性 严格按规范编写代码 设计可扩展的API 代替旧有的框架、语言(如VB) 增强用户体验 通常来说对于速度的优化也包含在重构中 压缩JS、CSS、image等前端资源(通常是由服务器来解决) 程序的性能优化(如数据读写) 采用CDN来加速资源加载 对于JS DOM的优化 HTTP服务器的文件缓存</p>
+<h2 id="说说你对前端架构师的理解"><a href="#说说你对前端架构师的理解" class="headerlink" title="说说你对前端架构师的理解"></a>说说你对前端架构师的理解</h2><p>负责前端团队的管理及与其他团队的协调工作，提升团队成员能力和整体效率；<br>带领团队完成研发工具及平台前端部分的设计、研发和维护；<br>带领团队进行前端领域前沿技术研究及新技术调研，保证团队的技术领先<br>负责前端开发规范制定、功能模块化设计、公共组件搭建等工作，并组织培训。</p>
+<h2 id="前端需要注意哪些SEO"><a href="#前端需要注意哪些SEO" class="headerlink" title="前端需要注意哪些SEO"></a>前端需要注意哪些SEO</h2><ol>
+<li>合理的title、description、keywords：搜索对着三项的权重逐个减小，title值强调重点即可，重要关键词出现不要超过2次，而且要靠前，不同页面title要有所不同；description把页面内容高度概括，长度合适，不可过分堆砌关键词，不同页面description有所不同；keywords列举出重要关键词即可</li>
+<li>语义化的HTML代码，符合W3C规范：语义化代码让搜索引擎容易理解网页</li>
+<li>重要内容HTML代码放在最前：搜索引擎抓取HTML顺序是从上到下，有的搜索引擎对抓取长度有限制，保证重要内容一定会被抓取</li>
+<li>重要内容不要用js输出：爬虫不会执行js获取内容</li>
+<li>少用iframe：搜索引擎不会抓取iframe中的内容</li>
+<li>非装饰性图片必须加alt</li>
+<li>提高网站速度：网站速度是搜索引擎排序的一个重要指标</li>
+</ol>
+<h2 id="什么是web语义化-有什么好处"><a href="#什么是web语义化-有什么好处" class="headerlink" title="什么是web语义化,有什么好处"></a>什么是web语义化,有什么好处</h2><p>web语义化是指通过HTML标记表示页面包含的信息，包含了HTML标签的语义化和css命名的语义化。<br>HTML标签的语义化是指：通过使用包含语义的标签（如h1-h6）恰当地表示文档结构<br>css命名的语义化是指：为html标签添加有意义的class，id补充未表达的语义，如<a href="http://en.wikipedia.org/wiki/Microformats" target="_blank" rel="external">Microformat</a>通过添加符合规则的class描述信息<br>为什么需要语义化：</p>
+<ul>
+<li>去掉样式后页面呈现清晰的结构</li>
+<li>盲人使用读屏器更好地阅读</li>
+<li>搜索引擎更好地理解页面，有利于收录</li>
+<li>便团队项目的可持续运作及维护</li>
+</ul>
+<h2 id="PNG-GIF-JPG的区别及如何选"><a href="#PNG-GIF-JPG的区别及如何选" class="headerlink" title="PNG,GIF,JPG的区别及如何选"></a>PNG,GIF,JPG的区别及如何选</h2><p>参考资料： <a href="http://www.yuiblog.com/blog/2008/11/04/imageopt-2/" target="_blank" rel="external">选择正确的图片格式</a><br><strong>GIF</strong>:</p>
+<ol>
+<li>8位像素，256色</li>
+<li>无损压缩</li>
+<li>支持简单动画</li>
+<li>支持boolean透明</li>
+<li>适合简单动画</li>
+</ol>
+<p><strong>JPEG</strong>：</p>
+<ol>
+<li>颜色限于256</li>
+<li>有损压缩</li>
+<li>可控制压缩质量</li>
+<li>不支持透明</li>
+<li>适合照片</li>
+</ol>
+<p><strong>PNG</strong>：</p>
+<ol>
+<li>有PNG8和truecolor PNG</li>
+<li>PNG8类似GIF颜色上限为256，文件小，支持alpha透明度，无动画</li>
+<li>适合图标、背景、按钮</li>
+</ol>
+<h2 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h2><h3 id="IE浏览器"><a href="#IE浏览器" class="headerlink" title="IE浏览器"></a>IE浏览器</h3><h3 id="CSS3新特性"><a href="#CSS3新特性" class="headerlink" title="CSS3新特性"></a>CSS3新特性</h3><h3 id="HTML5新特性"><a href="#HTML5新特性" class="headerlink" title="HTML5新特性"></a>HTML5新特性</h3><h3 id="ES2015"><a href="#ES2015" class="headerlink" title="ES2015"></a>ES2015</h3><h2 id="移动端版本"><a href="#移动端版本" class="headerlink" title="移动端版本"></a>移动端版本</h2>
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-06/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][06]HTTP">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-04/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][04]闭包与作用域">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#你有哪些性能优化的方法？"><span class="toc-text">你有哪些性能优化的方法？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是渐进增强"><span class="toc-text">什么是渐进增强</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动端性能优化"><span class="toc-text">移动端性能优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列举IE-与其他浏览器不一样的特性？"><span class="toc-text">列举IE 与其他浏览器不一样的特性？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE6浏览器有哪些常见的bug-缺陷或者与标准不一致的地方-如何解决"><span class="toc-text">IE6浏览器有哪些常见的bug,缺陷或者与标准不一致的地方,如何解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#谈谈你对重构的理解"><span class="toc-text">谈谈你对重构的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你对前端架构师的理解"><span class="toc-text">说说你对前端架构师的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端需要注意哪些SEO"><span class="toc-text">前端需要注意哪些SEO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是web语义化-有什么好处"><span class="toc-text">什么是web语义化,有什么好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG-GIF-JPG的区别及如何选"><span class="toc-text">PNG,GIF,JPG的区别及如何选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器兼容"><span class="toc-text">浏览器兼容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE浏览器"><span class="toc-text">IE浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS3新特性"><span class="toc-text">CSS3新特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5新特性"><span class="toc-text">HTML5新特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES2015"><span class="toc-text">ES2015</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动端版本"><span class="toc-text">移动端版本</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

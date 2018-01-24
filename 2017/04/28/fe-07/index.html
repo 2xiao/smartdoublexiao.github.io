@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        [前端面试专栏][07]框架｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/04/28/fe-07/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/offer.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/offer.png');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>[前端面试专栏][07]框架</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-04-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            [前端面试专栏][07]框架
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><p>首先请弄清楚这些概念：</p>
+<ul>
+<li><p>MVVM</p>
+<ul>
+<li><p>前端框架不止是js，更重要的还有<strong>设计思想和编程思维</strong>。</p>
+<p>而且最重要的是它不是一蹴而就的，是一个团队迭代无数次从最初的设想然后一步步踩坑写成的。</p>
+<p>从最开始的操作dom时代（以jq为主）到现在的数据驱动时代（三大框架），我相信保持这样的思维方式才会不断让自己得到提升：在用框架的时候多问问自己为什么要这样用？</p>
+<p>我目前最熟悉的是NG,我对NG这个框架的理解是这样的：</p>
+<p><img src="https://pic3.zhimg.com/v2-0d49d2073d627431b88abf15687d5676_b.png" alt="">  </p>
+<p>为什么要组件化？为什么要MV*分离？为什么要数据驱动？为什么要使用服务？我在使用它的时候总会有一连串的问题冒出来。</p>
+<p>只知道用确<strong>不知道为什么用</strong>，<strong>用了有什么好处</strong>？<strong>有什么坏处</strong>？<strong>这大概就是我春招面试惨败的原因吧。</strong></p>
+<p>就拿一个非常简单的NG指令*ngIf来说，不去深究它，只知道它可以根据表达式的真假决定是否显示一块HTML内容的话，就太悲哀了。</p>
+<p>去查阅相关资料后(包括但不限于<strong>书籍、官网文档、NG的github、stackoverflow</strong>),我发现可以自定义一个myIf指令来实现ngIf的功能：<br>​    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import &#123; Directive, SimpleChange, ViewContainerRef, TemplateRef, Input &#125; from &quot;@angular/core&quot;; @Directive(&#123; selector: &quot;[myIf]&quot; &#125;) export class myIfDirective &#123; constructor(private container: ViewContainerRef, private template: TemplateRef&lt;Object&gt;) &#123; &#125; @Input(&quot;myIf&quot;) expressionResult: boolean; ngOnChanges(changes: &#123; [property: string]: SimpleChange &#125;) &#123; let change = changes[&quot;expressionResult&quot;]; if (!change.isFirstChange() &amp;&amp; !change.currentValue) &#123; this.container.clear(); &#125; else if (change.currentValue) &#123; this.container.createEmbeddedView(this.template); &#125; &#125; &#125;</div></pre></td></tr></table></figure>
+<p>这时又涌现出一大串问题：</p>
+<ol>
+<li>为什么要引入Directive？<ol>
+<li>为什么myIf既要和selector还要和Input关系？</li>
+<li>ngOnChanges方法又是干吗的？</li>
+<li>ViewContainerRef和TemplateRef又是什么鬼？为什么构造函数里只有它们？</li>
+<li>这样做的好处和坏处是什么？</li>
+</ol>
+</li>
+</ol>
+<p>这时继续查阅相关资料，知道了</p>
+<ol>
+<li>Directive是自定义指令的时候必须使用的,顺便还复习了一下装饰者模式,它的作用就是动态地扩展一个对象的功能。<ol>
+<li>selector是用来确定装饰器目标的。Input可以让NG让数据从模板流向类，这样myIf绑定的表达式就进入到这个类了。</li>
+<li>ngOnChanges方法是NG自带的生命周期钩子之一，当检测到输入的数据变化时就会执行，涉及到模板方法,ngIf的核心逻辑就是这个方法里实现的，SimpleChange是其中一种变化类型。</li>
+<li>ViewContainerRef是管理DOM元素的，它内部的一些方法可以帮助动态维护DOM元素。TemplateRef就是NG中获取的DOM元素。在调用指令的时候和这个myIf绑定的HTML元素相关的ViewContainerRef和TemplateRef就被当成构造参数传入了这个类。</li>
+<li>这样做就可以实现数据驱动了，前端们再也不用自己去操心dom了，只需要操心控制dom的数据就行了。那这样做的缺点是什么呢？那就是还有很多动态显示组件的功能做不到，不过NG一直在完善相关指令。NG4.0+给ngIf加入了else逻辑。</li>
+</ol>
+</li>
+</ol>
+<p>可是接着又产生了更多的问题：为什么要使用这些东西？还要涉及到如此多的设计模式？</p>
+<p>……</p>
+<p>好的，这个过程一直继续下去的话，我不仅可以接触大量TS(ES或者说JS)的知识，比如说类、继承、函数(包括箭头函数)、逻辑语句、运算符、优先级、数据类型、异步、模块化、DOM等知识，还可以了解很多设计模式、架构风格、性能优化、编码范式、注释风格等等非js层面的东西。</p>
+<p>js语言本身也在不断发展的。当自己以后碰见问题时能够快速想出解决方案的时候，用js还是ts甚至把甩给后端做都无所谓。</p>
+<p>所以说到底啊，不要只把眼光局限于js上，要放在整个前端开发上甚至编程思维上，为了提升js能力而提升js能力往往是达不成想要的效果的。</p>
+<p>古人有句话：<strong>求其上者得其中 求其中者得其下。</strong></p>
+</li>
+</ul>
+</li>
+<li><p>数据驱动</p>
+<ul>
+<li>DOM是数据的一种自然映射</li>
+</ul>
+</li>
+<li><p>数据响应原理</p>
+<ul>
+<li>数据改变驱动视图自动更新</li>
+</ul>
+</li>
+<li><p>组件化</p>
+<ul>
+<li>扩展HTML元素，封装可重用代码</li>
+<li>就近维护</li>
+</ul>
+</li>
+<li><p>SPA单页面应用</p>
+</li>
+<li><p>虚拟DOM</p>
+</li>
+<li><p><a href="http://www.ituring.com.cn/article/211352" target="_blank" rel="external">全面理解虚拟DOM，实现虚拟DOM</a></p>
+</li>
+<li><p>Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。所有 Vue.js 的模板都是合法的 HTML ，所以能被遵循规范的浏览器和 HTML 解析器解析。</p>
+<p>在底层的实现上， Vue 将模板编译成虚拟 DOM 渲染函数。结合响应系统，在应用状态改变时， Vue 能够智能地计算出重新渲染组件的最小代价并应用到 DOM 操作上。</p>
+<p>如果你熟悉虚拟 DOM 并且偏爱 JavaScript 的原始力量，你也可以不用模板，<a href="render-function.html">直接写渲染（render）函数</a>，使用可选的 JSX 语法。</p>
+</li>
+</ul>
+<ul>
+<li>Vue 插件</li>
+<li>vue router 页面路由</li>
+<li>Vue resource ajax通信</li>
+<li>es6 eslint 代码风格</li>
+<li>单向数据流<ul>
+<li><strong>state</strong>，驱动应用的数据源；</li>
+<li><strong>view</strong>，以声明方式将<strong>state</strong>映射到视图；</li>
+<li><strong>actions</strong>，响应在<strong>view</strong>上的用户输入导致的状态变化。</li>
+<li>view -&gt; ations -&gt; state -&gt; view</li>
+</ul>
+</li>
+<li>Vuex 背后的基本思想，借鉴了 <a href="https://facebook.github.io/flux/docs/overview.html" target="_blank" rel="external">Flux</a>、<a href="http://redux.js.org/" target="_blank" rel="external">Redux</a>、和 <a href="https://guide.elm-lang.org/architecture/" target="_blank" rel="external">The Elm Architecture</a>。</li>
+</ul>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/28/fe-08/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][08]安全性">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-06/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][06]HTTP">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue-js"><span class="toc-text">Vue.js</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#前端面试专栏"
+                           title="前端面试专栏">前端面试专栏</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

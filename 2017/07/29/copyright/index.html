@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        获取图片的版权信息｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2017/07/29/copyright/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg11.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>获取图片的版权信息</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2017-07-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            获取图片的版权信息
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><p><strong>DEMO</strong>见：<a href="http://xxwu.tech/getExif/getExif.html">使用示例</a></p>
+<h2 id="版权藏在哪儿"><a href="#版权藏在哪儿" class="headerlink" title="版权藏在哪儿"></a>版权藏在哪儿</h2><h3 id="1-图片水印"><a href="#1-图片水印" class="headerlink" title="1.图片水印"></a>1.图片水印</h3><h3 id="2-图片元数据"><a href="#2-图片元数据" class="headerlink" title="2.图片元数据"></a>2.图片元数据</h3><p>数码图片由一组数字数据组成,记录着图片的像素、色彩、灰度等，除此之外，数码图片还有一组隐藏于幕后的数 字，这就是元数据（Data about Data，描述数据的数据）。图片元数据中记录着创作源设备、日期、位置、作者、版权等等。某些格式的图片如TIFF(tagged image file format)，JPG，PNG(portable network graphics)，EXIF (exchangeable image file)支持在文件中保存标 题、关键词、类别、作者、版权、URL等元数据，不影响图片的正常显示。可用于识别图片版权信息。使用Acdsee，Photoshop等图像软件都可加入这些信息，程序员还可以通过编程接口灵活添加这些信息。不过，利用图片元数据空间保存的图片版权信息，任何人都可以浏览修改，使它只能是一种辅助性或者隐蔽性的版权保护方法。 </p>
+<p>图 片 文 件 最 常 用 到 的 元 数 据 包 括 EXIF（ Exchangeable Image File Format，即可交换图像文件格式）和IPTC（Inter National Press Telecommunications Council，即国际出版 电讯委员会）。EXIF信息由图片生成设备产生，主要记录图片 生成设备的参数，比如光圈、快门、曝光时间、ISO感光值、焦 长等等。而IPTC信息包含了创作者姓名、版权信息、拍摄地 点、关键字等内容。图片创作者则可使用Acdsee，Photoshop等 图像编辑软件在EXIF或IPTC中添加相关信息以保护作品版权。 不过，图片元数据容量有限不适宜添加较多的信息内容，而且 使用元数据添加的信息很容易为其他用户修改，因此只能作为 一种辅助性的版权保护方法。</p>
+<h3 id="3-数字图像水印"><a href="#3-数字图像水印" class="headerlink" title="3.数字图像水印"></a>3.数字图像水印</h3><p>数字水印技术是将一些 标识信息直接嵌入多媒体、文档、软件等数字载 体中，不影响原载体的使用价值，也不容易被人的知觉系统发现。通过这些隐藏在载体中的信息，可以达到确认内容创建者、购买者、传送隐秘 信息或者判断载体是否被篡改等目的。数字水印具有隐蔽性高、可以抵抗篡改、复制、压缩、转换、 滤波、重复添加等各种攻击的优点。目前已应用 于数字信息版权保护、印刷品防伪、信息来源追溯等领域。 </p>
+<h2 id="获取图片的元数据"><a href="#获取图片的元数据" class="headerlink" title="获取图片的元数据"></a>获取图片的元数据</h2><p>使用<a href="https://github.com/SmartDoubleXiao/getExif/blob/master/exif.js" target="_blank" rel="external">exif.js</a>提供的方法<code>EXIF.getData(img, callback)</code>和<code>EXIF.getAllIptcTags(img)</code>，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">document.getElementById(&quot;file-input&quot;).onchange = function(e) &#123;</div><div class="line">    EXIF.getData(e.target.files[0], function() &#123;</div><div class="line">        var IptcObject = EXIF.getAllIptcTags(this);</div><div class="line">        var IptcString = &quot;&quot;;</div><div class="line">        for(var tag in IptcObject)&#123;</div><div class="line">        	var IptcText = IptcObject[tag];</div><div class="line">        	IptcString += tag + &quot; = &quot; + IptcText + &quot;&lt;br&gt;&quot;;</div><div class="line">        &#125;</div><div class="line">        document.getElementById(&quot;output&quot;).innerHTML = IptcString;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如图，要读取图片的IPTC信息：<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1fftwu9cvqfj30p00iyn1x.jpg" alt=""></p>
+<p><strong>提取出的版权信息为：</strong></p>
+<blockquote>
+<p>captionWriter = 李琰 </p>
+<p>keywords = 中国 </p>
+<p>headline = （一带一路·高峰论坛）习近平会见波兰总理希德沃 </p>
+<p>dateCreated = 20170512 </p>
+<p>copyright = 新华通讯社 </p>
+<p>category = 18 </p>
+<p>caption = 新华社照片，北京，2017年5月12日 习近平会见波兰总理希德沃 5月12日，国家主席习近平在北京人民大会堂会见来华出席“一带一路”国际合作高峰论坛的波兰总理希德沃。 新华社记者 谢环驰 摄 </p>
+<p>byline = 谢环驰</p>
+</blockquote>
+<h2 id="中文编码乱码"><a href="#中文编码乱码" class="headerlink" title="中文编码乱码"></a>中文编码乱码</h2><p>在<a href="https://github.com/SmartDoubleXiao/getExif/blob/master/exif.js" target="_blank" rel="external">exif.js</a>中，方法<code>readIPTCData()</code>中，返回值<code>fieldValue</code>由方法<code>getFinalStringFromDB()</code>得到，这个方法的作用是获取到图片中存储IPTC信息的位置信息后，对字节信息进行编码，得到字符信息，但是编码时需要对中英文字符分开处理。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getFinalStringFromDB(buffer, start, length) &#123;        </div><div class="line">    var outstr = &quot;&quot;;</div><div class="line">    for (n = start; n &lt; start+length; ) &#123;</div><div class="line">        if(buffer.getUint8(n)&lt;127)&#123;</div><div class="line">            outstr += String.fromCharCode(buffer.getUint8(n));</div><div class="line">            n++;</div><div class="line">        &#125;else&#123;</div><div class="line">            var buffer10 = buffer.getUint16(n);</div><div class="line">            var buffer16 = buffer10.toString(16).toUpperCase();</div><div class="line">            var unicode10 = gbk2unicode(buffer16);</div><div class="line">            var str = String.fromCharCode(unicode10);</div><div class="line">            outstr += str;           </div><div class="line">            n += 2;</div><div class="line">        &#125;          </div><div class="line">    &#125;</div><div class="line">    return outstr</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果直接getUint8()，getUint8()每8个比特提取为一个字，非汉字是正确的，但是直接将汉字分为两个Unicode，则图片中的汉字被编译成拉丁文</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getStringFromDB(buffer, start, length) &#123;</div><div class="line">    var outstr = &quot;&quot;;</div><div class="line">    for (n = start; n &lt; start+length; n++) &#123;</div><div class="line">        outstr += String.fromCharCode(buffer.getUint8(n));            </div><div class="line">    &#125;</div><div class="line">    return outstr;</div><div class="line">&#125;</div><div class="line">    </div><div class="line">// captionWriter = Àîçü </div><div class="line">// keywords = ÖÐ¹ú </div><div class="line">// headline = £¨Ò»´øÒ»Â·¡¤¸ß·åÂÛÌ³£©Ï°½üÆ½»á¼û²¨À¼×ÜÀíÏ£µÂÎÖ </div><div class="line">// dateCreated = 20170512 </div><div class="line">// copyright = ÐÂ»ªÍ¨Ñ¶Éç </div><div class="line">// category = 18 </div><div class="line">// caption = ÐÂ»ªÉçÕÕÆ¬£¬±±¾©£¬2017Äê5ÔÂ12ÈÕ Ï°½üÆ½»á¼û²¨À¼×ÜÀíÏ£µÂÎÖ 5ÔÂ12ÈÕ£¬¹ú¼ÒÖ÷Ï¯Ï°½üÆ½ÔÚ±±¾©ÈËÃñ´ó»áÌÃ»á¼ûÀ´»ª³öÏ¯¡°Ò»´øÒ»Â·¡±¹ú¼ÊºÏ×÷¸ß·åÂÛÌ³µÄ²¨À¼×ÜÀíÏ£µÂÎÖ¡£ ÐÂ»ªÉç¼ÇÕß Ð»»·³Û Éã </div><div class="line">// byline = Ð»»·³Û</div></pre></td></tr></table></figure>
+<p>如果直接getUint16()，则每16个比特提取为一个字，能提取出汉字，但是对应关系错误，因为此时还没有修改<code>n</code>，相当于每次还只向后挪动8bytes，所以还要修改<code>n</code>和<code>length</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getFinalStringFromDB(buffer, start, length) &#123;        </div><div class="line">    var outstr = &quot;&quot;;</div><div class="line">    length = length/2;</div><div class="line">    for (n = start; n &lt; start+length; ) &#123;</div><div class="line">        var buffer10 = buffer.getUint16(n);</div><div class="line">        var buffer16 = buffer10.toString(16).toUpperCase();</div><div class="line">        var unicode10 = gbk2unicode(buffer16);</div><div class="line">        outstr += String.fromCharCode(unicode10);</div><div class="line">    &#125;</div><div class="line">    return outstr</div><div class="line">&#125;</div><div class="line"></div><div class="line">// captionWriter = 李铉 </div><div class="line">// keywords = 中泄 </div><div class="line">// headline = 一淮带一宦路贰高叻峰迓论厶坛常习 </div><div class="line">// dateCreated = </div><div class="line">// copyright = 新禄华通 </div><div class="line">// category = </div><div class="line">// caption = 新禄华社缯照掌片北本京年月日习敖近平交会峒见波兰甲总芾理硐希德挛沃月日眨国家抑主飨席习敖近平皆在诒北本京 </div><div class="line">// byline = 谢换环</div></pre></td></tr></table></figure>
+<p>修改n和length，因为n的位置应该向后移动两个比特，所以作出修改，此时汉字部分正确，但是非汉字部分解码错误</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getFinalStringFromDB(buffer, start, length) &#123;        </div><div class="line">    var outstr = &quot;&quot;;</div><div class="line">    for (n = start; n &lt; start+length; ) &#123;</div><div class="line">        var buffer10 = buffer.getUint16(n);</div><div class="line">        var buffer16 = buffer10.toString(16).toUpperCase();</div><div class="line">        var unicode10 = gbk2unicode(buffer16);</div><div class="line">        outstr += String.fromCharCode(unicode10);</div><div class="line">        n += 2;</div><div class="line">    &#125;</div><div class="line">    return outstr</div><div class="line">&#125;</div><div class="line"></div><div class="line">// captionWriter = 李琰 </div><div class="line">// keywords = 中国 </div><div class="line">// headline = 一带一路高峰论坛习近平会见波兰总理希德沃 </div><div class="line">// dateCreated = </div><div class="line">// copyright = 新华通讯社 </div><div class="line">// category = </div><div class="line">// caption = 新华社照片北京年习近平会见波兰总理希德沃月日国家主席习近平在北京人民大会堂会见来华出席一带一路国际合作高峰论坛的波兰总理希德沃禄缂钦谢环驰 </div><div class="line">// byline = 谢环驰</div></pre></td></tr></table></figure>
+<p>修改if判断，对应关系是两个拉丁文字符对应一个汉字，一个汉字占16比特，一个非汉字只占8比特，所以要进行判断，当<code>Unicode&gt;127</code>时，代表此处和后面的8bytes组成一个汉字，当<code>Unicode&lt;127</code>时，代表此处是英文字符。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getFinalStringFromDB(buffer, start, length) &#123;        </div><div class="line">    var outstr = &quot;&quot;;</div><div class="line">    for (n = start; n &lt; start+length; ) &#123;</div><div class="line">        if(buffer.getUint8(n)&lt;127)&#123;</div><div class="line">            outstr += String.fromCharCode(buffer.getUint8(n));</div><div class="line">            n++;</div><div class="line">        &#125;else&#123;</div><div class="line">            var buffer10 = buffer.getUint16(n);</div><div class="line">            var buffer16 = buffer10.toString(16).toUpperCase();</div><div class="line">            var unicode10 = gbk2unicode(buffer16);</div><div class="line">            var str = String.fromCharCode(unicode10);</div><div class="line">            outstr += str;           </div><div class="line">            n += 2;</div><div class="line">        &#125;          </div><div class="line">    &#125;</div><div class="line">    return outstr</div><div class="line">&#125;</div><div class="line">// captionWriter = 李琰</div><div class="line">// keywords = 中国</div><div class="line">// headline = 一带一路高峰论坛习近平会见波兰总理希德沃</div><div class="line">// dateCreated = 20170512</div><div class="line">// copyright = 新华通讯社</div><div class="line">// category = 18</div><div class="line">// caption = 新华社照片北京2017年5月12日 习近平会见波兰总理希德沃 5月12日国家主席习近平在北京人民大会堂会见来华出席一带一路国际合作高峰论坛的波兰总理希德沃 新华社记者 谢环驰 摄 </div><div class="line">// byline = 谢环驰</div></pre></td></tr></table></figure>
+<p>至此，成功解决了中文编码乱码的问题。</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/29/LonelyMonster/" data-toggle="tooltip" data-placement="top"
+                           title="单身的人都是小怪兽">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/28/fe-12/" data-toggle="tooltip" data-placement="top"
+                           title="[前端面试专栏][12]排序算法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DEMO"><span class="toc-text">DEMO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版权藏在哪儿"><span class="toc-text">版权藏在哪儿</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-图片水印"><span class="toc-text">1.图片水印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-图片元数据"><span class="toc-text">2.图片元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数字图像水印"><span class="toc-text">3.数字图像水印</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取图片的元数据"><span class="toc-text">获取图片的元数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文编码乱码"><span class="toc-text">中文编码乱码</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

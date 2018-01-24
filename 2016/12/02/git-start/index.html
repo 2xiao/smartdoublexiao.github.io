@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        git学习笔记｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/02/git-start/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>git学习笔记</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#git"
+                           title="git">git</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            git学习笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>廖雪峰老师的<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">Git</a> 教程 感觉已经做得很好了；除了版本控制外，还教了如何进行团队协作。</p>
+<p>以下记录自己实战过程中的命令，囊括了大部分基础命令，作备忘录。  </p>
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p><strong>初始化一个 Git 仓库</strong></p>
+<p>1.进入项目根目录，如:</p>
+<pre><code>$ cd ~/projects/learngit
+
+$ pwd // 显示当前目录
+
+/Users/james/projects/learngit
+</code></pre><p>2.通过 <code>git init</code>命令把目录变成 Git 可管理的仓库:</p>
+<pre><code>$ git init
+
+Initialized empty Git repository in /Users/james/projects/learngit
+</code></pre><p>3.使用 <code>ls -ah</code>可查看 .git 等隐藏目录</p>
+<p><strong>添加文件到 Git 仓库</strong></p>
+<p>1.把文件添加到仓库</p>
+<pre><code>$ git add readme.txt
+</code></pre><p>可以多次 add 不同文件</p>
+<p>2.把文件提交到仓库</p>
+<pre><code>$ git commit -m &quot;wrote a readme file&quot;
+
+[master 1626163] wrote a readme file
+
+ 1 file changed, 1 deletion(-)
+</code></pre><h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a><strong>时光机穿梭</strong></h2><p>随时掌握工作区的状态，查看文件修改内容</p>
+<pre><code>$ git status //查看当前工作区状态
+
+$ git diff readme.txt //查看具体修改内容
+</code></pre><p><strong>版本回退</strong></p>
+<p>1.回退版本</p>
+<pre><code>$ git log //查看提交历史记录
+
+$ git log --pretty=oneline //精简输出信息
+
+$ git reset --hard HEAD^ //回退至上一个版本
+
+$ git reset --hard HEAD^^ //回退至上上个版本
+
+$ cat readme.txt //查看文件内容
+</code></pre><p>2.重返未来</p>
+<pre><code>$ git reflog //查看自己的每一次命令
+
+$ git reset --hard 1626163 //根据 commit id 回退到指定版本
+</code></pre><p><strong>管理修改</strong></p>
+<p>必须先使用 <code>add</code> 才能被加入到<code>commit</code> 中。</p>
+<p><strong>撤销修改</strong></p>
+<pre><code>$ git checkout -- readme.txt //丢弃工作区的修改
+
+$ git reset HEAD readme.txt //撤销暂存区的修改 (此条执行后，
+</code></pre><p>还需要执行上一条命令才能完全删除修改)</p>
+<pre><code>$ git reset --hard HEAD^ //版本回退 (不小心提交后，直接使用这条即可)
+</code></pre><p><strong>删除文件</strong></p>
+<pre><code>$ rm test.txt
+
+$ git status
+
+$ git rm test.txt //确实从版本库删除文件
+
+$ git commit -m &quot;remove test.txt&quot; //提交到版本库
+
+$ git checkout -- test.txt //如果是误删，使用此条可恢复至文件最新版本。其本质是用版本库的版本替换掉。
+</code></pre><h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a><strong>远程仓库</strong></h2><p>1.创建 SSH Key</p>
+<pre><code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+</code></pre><p>2.用户主目录中查找<code>.ssh</code></p>
+<p>3.Github 账户的 Account settings 中找到 SSH &amp; GPG Keys</p>
+<p>4.点击 New SSH Key，填上任意 Title，在 Key 文本框里粘贴对应 .pub 公钥文件的内容。</p>
+<p><strong>添加远程仓库</strong></p>
+<p>1.GitHub 创建新项目</p>
+<p>2.本地对应仓库目录下运行</p>
+<pre><code>$ git remote add origin git@github.com:yourGithubName/learngit.git
+</code></pre><p>3.推送本地仓库所有内容</p>
+<pre><code>$ git push -u origin master //-u 是为了关联本地 master 分支与远程 master 分支
+
+$ git push origin master
+</code></pre><p><strong>从远程库克隆</strong></p>
+<p>1.选择一个已建好的远程库 (费话) 2.执行命令</p>
+<pre><code>$ git clone git@github.com:yourGithubName/project.git
+</code></pre><p>3.Git 支持多种协议，包括 https，但通过 <code>ssh</code>支持的原生 git 协议速度最快。</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a><strong>分支管理</strong></h2><p>创建与合并分支</p>
+<p>1.创建分支</p>
+<pre><code>$ git checkout -b dev //创建并切换至 dev 分支
+</code></pre><p>等同于</p>
+<pre><code>$ git branch dev
+
+$ git checkout dev
+</code></pre><p>查看当前分支</p>
+<pre><code>$ git branch
+</code></pre><p>2.合并分支</p>
+<pre><code>$ git merge dev
+</code></pre><p>3.删除分支</p>
+<pre><code>$ git branch -d dev
+</code></pre><p>Git 鼓励大量使用分支</p>
+<p><strong>解决冲突</strong></p>
+<p>1.如果两个分支中的同一个文件分别作了不同修改，此时合并会出错</p>
+<pre><code>$ git status //查看冲突文件
+
+ //手动解决冲突
+
+ //重新添加并提交至仓库
+
+$ git log --graph --pretty=oneline --abbrev-commit //查
+</code></pre><p>看分支合并情况<br><strong>分支管理策略</strong></p>
+<p>合并分支时，Git 会用<code>Fast forward</code> 模式，删除分支后会丢掉分支信息</p>
+<p>1.使用<code>--no-ff</code>参数，表示禁用 <code>Fast forward</code>:</p>
+<p>以合并 dev 分支进 master 分支为例</p>
+<pre><code>git merge --no-ff -m &quot;merge with no-ff&quot; dev //merge 的同时添加 commit 描述
+</code></pre><p>2.分支策略</p>
+<p>master 分支应该是稳定的，仅用于发布新版本；</p>
+<p>平时干活应该都在 dev 分支上，等到某个时候，发布新版本时，再把 dev 分支合并到 master 上；</p>
+<p>每个人都在不同的分支上干活，然后时不时往 dev 分支上合并即可。</p>
+<p>bug 分支</p>
+<p>场景：正在开发时遇上 bug，dev 分支上的工作内容还未提交</p>
+<p>1.储藏工作现场</p>
+<pre><code>$ git stash //储藏工作现场
+
+$ git status //此时是干净的，可以放心创建分支来修复bug
+</code></pre><p>2.新建分支上修复 bug</p>
+<pre><code>$ git checkout master //切换至需要修复的分支上
+
+$ git checkout -b issue-101 //创建并切换至临时分支
+
+ //添加并提交至版本库
+
+$ git checkout master //切换至需修复的分支
+
+$ git merge -no-ff -m &quot;merged bug fix 101&quot; issue-101 //合并已修复问题的分支
+
+$ git branch -d issue-101 //删除分支
+
+---
+
+$ git checkout dev //切换回开发分支
+
+$ git status //工作区是干净的
+</code></pre><p>3.重回工作区，恢复现场</p>
+<pre><code>$ git stash list //查看存储的工作现场
+
+$ git stash apply //恢复工作区
+
+$ git stash drop //删除已存储的工作现场
+
+---
+
+$ git stash pop //或者直接使用此条命令，同时恢复并删除存储的工作现场
+
+$ git stash list //查看存储，已删除
+
+$ git stash apply stash@{0} //用于恢复指定的 stash
+</code></pre><p><strong>feature 分支</strong></p>
+<p>新建一个分支开发 feature</p>
+<p>如需强行删除</p>
+<pre><code>$ git branch -D feature-vulcan
+</code></pre><p><strong>多人协作</strong></p>
+<pre><code>$ git remote //查看远程库的信息
+
+$ git remote -v //更详细的信息
+
+---
+
+//如果没有推送权限，则无法看到 push 的地址
+</code></pre><p>推送分支</p>
+<pre><code>$ git push origin master
+
+$ git push origin dev
+</code></pre><p>并不是所有分支都有必要推送至远程</p>
+<p>master 主分支必须远程同步<br>dev 开发分支所有成员都需要在上面工作，也要远程同步<br>bug 分支只用于本地修复 bug<br>feature 分支取决于是否和小伙伴合作开发<br>默认抓取分支只能 clone master 主分支，如果要抓去 dev 分支</p>
+<pre><code>$ git checkout -b dev origin/dev
+</code></pre><p>如果推送时，和远程库产生冲突</p>
+<pre><code>$ git pull //先从远程库把最新的提交从 origin/dev 抓取下来
+</code></pre><p>发现失败了，原因是没有指定本地 dev 分支与远程 origin/dev 分支的链接</p>
+<pre><code>$ git branch --set-upstream-to origin/dev dev //设置链接
+
+$ git pull //重新 pull
+
+ //解决冲突，合并后 push
+</code></pre><h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><strong>标签管理</strong></h2><p><strong>创建标签</strong></p>
+<pre><code>$ git tag v1.0 //打一个新标签
+
+$ git tag //查看所有标签
+</code></pre><p>忘了打标签</p>
+<pre><code>$ git log --pretty=oneline --abbrev-commit //找到提交历史对应的 commit id
+
+$ git tag v0.9 a76db13 //给指定 commit id 打标签
+
+$ git show v0.9 //查看标签信息
+</code></pre><p>-a 指定标签名，-m指定说明文字</p>
+<pre><code>$ git tag -a v0.1 -m &quot;version 0.1 released&quot; 1daea47
+</code></pre><p>-s 用私钥签名一个标签</p>
+<pre><code>$ git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;
+</code></pre><p><strong>操作标签</strong></p>
+<p>删除标签</p>
+<pre><code>$ git tag -d v0.1
+</code></pre><p>推送标签</p>
+<pre><code>$ git push origin v1.0
+
+$ git push origin --tags
+</code></pre><p>要删除远程标签</p>
+<pre><code>$ git tag -d v0.9
+
+$ git push origin :refs/tags/v0.9
+</code></pre><p>检查远程 tag 是否删除，登陆 Github 查看。</p>
+<h2 id="自定义-Git"><a href="#自定义-Git" class="headerlink" title="自定义 Git"></a><strong>自定义 Git</strong></h2><p>让 Git 显示颜色</p>
+<pre><code>$ git config --global color.ui true
+</code></pre><p><strong>忽略特殊文件</strong></p>
+<p>某些文件放到Git工作目录中，但又不能提交它们，比如保存了数据库密码的配置文件等等</p>
+<p>创建一个 <code>.gitignore</code> 文件，编写类似如下配置信息:</p>
+<pre><code># Windows:
+
+Thumbs.db
+
+ehthumbs.db
+
+Desktop.ini
+
+# Python:
+
+*.py[cod]
+
+*.so
+
+*.egg
+
+*.egg-info
+
+dist
+
+build
+
+# My configurations:
+
+db.ini
+
+deploy_key_rsa
+</code></pre><p>官方提供了各种配置文件，自行按需组合即可</p>
+<p>忽略文件的原则是：</p>
+<p>1.忽略操作系统自动生成的文件，比如缩略图等；</p>
+<p>2.忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的.class文件；</p>
+<p>3.忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。<br>最后需提交至 Git，就完成了！</p>
+<pre><code>$ git add -f App.class //强制添加到 Git
+
+$ git check-ignore -v App.class //检查忽略规则是否写错
+</code></pre><p><strong>配置别名</strong></p>
+<p>告诉 Git，以后 <code>st</code> 就表示<code>status</code> ：</p>
+<pre><code>$ git config --global alias.st status
+</code></pre><p>还有别的命令可以简写，很多人都用<code>co</code> 表示 <code>checkout</code>，<code>ci</code>表示 <code>commit</code> ，<code>br</code> 表示 <code>branch</code> ：</p>
+<pre><code>$ git config --global alias.co checkout
+
+$ git config --global alias.ci commit
+
+$ git config --global alias.br branch
+</code></pre><p><code>--global</code> 参数是全局参数，所有Git仓库下都适用。</p>
+<p>如命令 <code>git reset HEAD file</code>可以把暂存区的修改撤销掉（unstage），配置一个<code>unstage</code> 别名:</p>
+<pre><code>$ git config --global alias.unstage &apos;reset HEAD&apos;
+</code></pre><p>因此</p>
+<pre><code>$ git unstage test.py //此命令与下一条相同
+
+$ git reset HEAD test.py
+</code></pre><p>配置一个 <code>git last</code>，让其显示最后一次提交信息:</p>
+<pre><code>$ git config --global alias.last &apos;log -1&apos; //是负一，不是负l
+</code></pre><p>丧心病狂的 <code>lg</code>:</p>
+<pre><code>$ git config --global alias.lg &quot;log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit&quot;
+</code></pre><p><code>--global</code> 全局配置文件地址</p>
+<pre><code>/Users/james/.gitconfig
+</code></pre><p>每个仓库的 Git 配置文件，在仓库根目录下</p>
+<pre><code>.git/config
+</code></pre><p>别名就在 [alias] 后面，要删除别名，直接把对应的行删掉即可。</p>
+<p><strong>搭建 Git 服务器</strong></p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/03/github-demo/" data-toggle="tooltip" data-placement="top"
+                           title="如何预览GitHub里的Demo？">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/02/JS-note/" data-toggle="tooltip" data-placement="top"
+                           title="JavaScript学习笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建版本库"><span class="toc-text">创建版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时光机穿梭"><span class="toc-text">时光机穿梭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程仓库"><span class="toc-text">远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签管理"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义-Git"><span class="toc-text">自定义 Git</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#git"
+                           title="git">git</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>

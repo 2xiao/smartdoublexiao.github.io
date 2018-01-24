@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cool blog">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="favicon-w.ico">
+    <link rel="alternate" type="application/atom+xml" title="xxwu.tech" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        jQuery学习笔记｜WuXiaoxiao&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://xxwu.tech/2016/12/01/jQuery-start/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('../../../../images/bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    xxwu.tech
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/project/">project</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="../../../../images/bg12.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('../../../../images/bg12.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>jQuery学习笔记</h1>
+                    
+                    <span class="meta">
+                         作者 WuXiaoxiao
+                        <span>
+                          日期 2016-12-01
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            jQuery学习笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="11月7日-周一"><a href="#11月7日-周一" class="headerlink" title="11月7日 周一"></a>11月7日 周一</h2><p><strong>成就</strong>：<br>1.学习《JS动画》到4.2<br>2.学习《jQuery基础》到1.4<br><strong>笔记</strong>：<br>1 速度（改变值left、right、width、height、opacity）:<br>2 缓冲运动；<br>3 多物体运动；<br><img src="../../../../images/24.png" alt=""><br>4 任意值变化；<br>5.链式运动；<br>6.同时运动；<br>二．缓冲运动，速度判断时，要取整。<br><code>Math.floor()</code>向下取整；<br><code>Math.ceil()</code>向上取整；<br><code>Math.round()</code>四舍五入；<br><code>var speed = speed&gt;0?Math.ceil(speed):Math.floor(speed);</code><br>三．多物体运动，参数不能公用，要定义成<code>obj[i].timer</code>。</p>
+<h2 id="11月8日-周二"><a href="#11月8日-周二" class="headerlink" title="11月8日 周二"></a>11月8日 周二</h2><p><strong>成就</strong>：学到《jQuery基础》2.1<br><strong>笔记</strong>：<br>1.jQuery是一个类数组对象，而DOM对象就是一个单独的DOM元素 </p>
+<p>2.jQuery对象转化成DOM对象 </p>
+<pre><code>var $div = $(&apos;div&apos;) //jQuery对象
+
+var div = $div[0] //转化成DOM对象
+</code></pre><p>或者 </p>
+<pre><code>var div = $div.get(0) //通过get方法，转化成DOM对象
+
+div.style.color = &apos;red&apos; //操作dom对象的属性
+</code></pre><h2 id="11月9日-周三"><a href="#11月9日-周三" class="headerlink" title="11月9日 周三"></a>11月9日 周三</h2><p><strong>成就</strong>：学到《jQuery基础》2.9<br><strong>笔记</strong>： </p>
+<ol>
+<li><p>id选择器：一个用来查找的ID，即元素的id属性，<code>$( &quot;#id&quot; )</code></p>
+</li>
+<li><p>类选择器，通过class样式类名来获取节点：<code>$( &quot;.class&quot; )</code></p>
+</li>
+<li><p>元素选择器：根据给定（html）标记名称选择所有的元素:<code>$( &quot;element&quot; ),$(&quot;p&quot;)</code></p>
+</li>
+<li><p>全选择器：设置所有的元素：<code>$( &quot;*&quot; )</code></p>
+</li>
+<li><p>层选择器<br><img src="../../../../images/21.png" alt=""></p>
+</li>
+<li><p>基本筛选器<br><img src="../../../../images/22.png" alt=""></p>
+</li>
+<li><p>内容筛选选择器<br><img src="../../../../images/23.png" alt=""></p>
+</li>
+<li><p>可见性筛选选择器 <code>$(“:visible”)与$(“:hidden”)</code></p>
+</li>
+</ol>
+<h2 id="11月10日-周四"><a href="#11月10日-周四" class="headerlink" title="11月10日 周四"></a>11月10日 周四</h2><p><strong>时间</strong>：上午2h,下午2h<br><strong>成就</strong>：学到《jQuery基础》3.3<br><strong>笔记</strong>： </p>
+<p>1.属性筛选选择器<br><img src="../../../../images/17.png" alt=""></p>
+<p>2.子元素筛选选择器<br><img src="../../../../images/18.png" alt=""></p>
+<p>3.表单元素选择器<br><img src="../../../../images/19.png" alt=""></p>
+<p>4.表单对象属性筛选选择器<br><img src="../../../../images/20.png" alt=""></p>
+<p>5.<code>attr()与removeAttr()</code><br><code>attr(传入属性名)</code>：获取属性的值<br><code>attr(属性名, 属性值)</code>：设置属性的值<br><code>attr(属性名,函数值)</code>：设置属性的函数值<br><code>attr(attributes)</code>：给指定元素设置多个属性值，即：{属性名一: “属性值一” , 属性名二: “属性值二” , … … } </p>
+<p>6.<code>.html()与.text()</code><br><code>.html()</code> 不传入值，就是获取集合中第一个匹配元素的HTML内容<br><code>.html( htmlString )</code> 设置每一个匹配元素的html内容<br><code>.html( function(index, oldhtml) )</code>用来返回设置HTML内容的一个函数<br><code>.text()</code> 得到匹配元素集合中每个元素的合并文本，包括他们的后代<br><code>.text( textString )</code> 用于设置匹配元素内容的文本<br><code>.text( function(index, text) )</code> 用来返回设置文本内容的一个函数 </p>
+<p>7.val()</p>
+<h2 id="11月11日-周五"><a href="#11月11日-周五" class="headerlink" title="11月11日 周五"></a>11月11日 周五</h2><p><strong>成就</strong>：学完《jQuery基础》(一),学到《jQuery基础》(二) 4.5<br><strong>感悟</strong>：<br>差不多了解了jQuery的用途，按照大牛给的学习路线，应该在学好HTML5和CSS的前提下，学习原生JS，再学习jQuery框架，大致掌握之后就可以抛弃jQuery，然后好好啃JS高级教程，然后再去学react，Vue，nodejs，ajax~还有很长的路要走！本周学完jQuery四章，然后下周啃完JS，下下周啃react，Vue，nodejs，ajax；然后在准备一下面试，十二月出去实习！<br><strong>笔记</strong>: </p>
+<p>1.addClass()方法<br>.addClass( className ) : 为每个匹配元素所要增加的一个或多个样式名<br>.addClass( function(index, currentClass) ) : 这个函数返回一个或更多用空格隔开的要增加的样式名 </p>
+<p>2.removeClass( )方法<br>.removeClass( [className ] )：每个匹配元素移除的一个或多个用空格隔开的样式名<br>.removeClass( function(index, class) ) ： 一个函数，返回一个或多个将要被移除的样式名 </p>
+<p>3.toggleClass( )方法：在匹配的元素集合中的每个元素上添加或删除一个或多个样式类,取决于这个样式类是否存在或值切换属性。即：如果存在（不存在）就删除（添加）一个类<br>.toggleClass( className )：在匹配的元素集合中的每个元素上用来切换的一个或多个（用空格隔开）样式类名<br>.toggleClass( className, switch )：一个布尔值，用于判断样式是否应该被添加或移除<br>.toggleClass( [switch ] )：一个用来判断样式类添加还是移除的 布尔值<br>.toggleClass( function(index, class, switch) [, switch ] )：用来返回在匹配的元素集合中的每个元素上用来切换的样式类名的一个函数。接收元素的索引位置和元素旧的样式类作为参数 </p>
+<p>4.css() 方法：获取元素样式属性的计算值或者设置元素的CSS属性<br>获取：<br>.css( propertyName ) ：获取匹配元素集合中的第一个元素的样式属性的计算值<br>.css( propertyNames )：传递一组数组，返回一个对象结果<br>设置：<br>.css(propertyName, value )：设置CSS<br>.css( propertyName, function )：可以传入一个回调函数，返回取到对应的值进行处理<br>.css( properties )：可以传一个对象，同时设置多个样式 </p>
+<p>5.jQuery节点创建与属性的处理 </p>
+<p><code>var div = $(&quot;&lt;div class=&#39;right&#39;&gt;&lt;div class=&#39;aaron&#39;&gt;动态创建DIV元素节点&lt;/div&gt;&lt;/div&gt;&quot;) $body.append(div)</code></p>
+<p>6.DOM内部插入append()与appendTo()<br>append()前面是被插入的对象，后面是要在对象内插入的元素内容<br>appendTo()前面是要插入的元素内容，而后面是被插入的对象 </p>
+<p>7.DOM外部插入after()与before()<br>after向元素的后边添加html代码，如果元素后面有元素了，那将后面的元素后移，然后将html代码插入<br>before向元素的前边添加html代码，如果元素前面有元素了，那将前面的元素前移，然后将html代码插 </p>
+<p>8.DOM内部插入prepend()与prependTo()<br>.prepend()方法将指定元素插入到匹配元素里面作为它的第一个子元素 (如果要作为最后一个子元素插入用.append()).<br>.prepend()和.prependTo()实现同样的功能，主要的不同是语法，插入的内容和目标的位置不同 </p>
+<p>9.DOM外部插入insertAfter()与insertBefore()，不支持多参数处理<br>.before()和.insertBefore()实现同样的功能。主要的区别是语法——内容和目标的位置。 对于before()选择表达式在函数前面，内容作为参数，而.insertBefore()刚好相反，内容在方法前面，它将被放在参数里元素的前面<br>.after()和.insertAfter() 实现同样的功能。主要的不同是语法——特别是（插入）内容和目标的位置。 对于after()选择表达式在函数的前面，参数是将要插入的内容。对于 .insertAfter(), 刚好相反，内容在方法前面，它将被放在参数里元素的后面 </p>
+<p>10.DOM节点删除之empty()<br>empty()不仅移除子元素（和其他后代元素），同样移除元素里的文本。因为，根据说明，元素里任何文本字符串都被看做是该元素的子节点。 </p>
+<p>11.DOM节点删除之remove()的有参用法和无参用法<br>remove与empty一样，都是移除元素的方法，但是remove会将元素自身移除，同时也会移除元素内部的一切，包括绑定的事件及与该元素相关的jQuery数据。<br><code>$(&quot;p&quot;).filter(&quot;:contains(&#39;3&#39;)&quot;).remove()</code></p>
+<ol>
+<li>DOM节点删除之保留数据的删除操作detach()<br><code>$(&quot;div&quot;).detach()</code>这一句会移除对象，仅仅是显示效果没有了。但是内存中还是存在的。当你append之后，又重新回到了文档流中。 </li>
+</ol>
+<h2 id="11月12日-周六"><a href="#11月12日-周六" class="headerlink" title="11月12日 周六"></a>11月12日 周六</h2><p><strong>成就</strong>：学到《jQuery基础》(二)5.5<br><strong>感悟</strong>：多自习，少睡觉<br><strong>笔记</strong>： </p>
+<p>1.DOM拷贝clone()<br>.clone()方法深度 复制所有匹配的元素集合，包括所有匹配元素、匹配元素的下级元素、文字节点。</p>
+<pre><code>$(&quot;div&quot;).clone() //只克隆了结构，事件丢失；
+
+$(&quot;div&quot;).clone(true) //结构、事件与数据都克隆
+</code></pre><p>2.DOM替换replaceWith()和replaceAll()<br>.replaceWith( newContent )：用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合；</p>
+<pre><code>$(&quot;p:eq(1)&quot;).replaceWith(&apos;&lt;a style=&quot;color:red&quot;&gt;替换第二段的内容&lt;/a&gt;&apos;)；$(&apos;&lt;a style=&quot;color:red&quot;&gt;替换第二段的内容&lt;/a&gt;&apos;).replaceAll(&apos;p:eq(1)&apos;)
+</code></pre><p>3.DOM包裹wrap()方法<br>要将元素用其他元素包裹起来，也就是给它增加一个父元素</p>
+<pre><code>$(&apos;p&apos;).wrap(&apos;&lt;div&gt;&lt;/div&gt;&apos;)
+
+$(&apos;p&apos;).wrap(function() {return &apos;&lt;div&gt;&lt;/div&gt;&apos;;})
+</code></pre><p>4.DOM包裹unwrap()方法<br>将匹配元素集合的父级元素删除，保留自身（和兄弟元素，如果存在）在原来的位置。</p>
+<p>5.DOM包裹wrapAll()方法<br>wrap是针对单个dom元素处理，wrapAll方法将集合中的元素用其他元素包裹起来，也就是给他们增加一个父元素<br><code>$(&#39;p&#39;).wrapAll(&#39;&lt;div&gt;&lt;/div&gt;&#39;)</code>是统一加一个父级</p>
+<p><code>$(&#39;p&#39;).wrapAll(function() {return &#39;&lt;div&gt;&lt;div/&gt;&#39;; })</code>是分别加一个父级</p>
+<h2 id="11月13日-周日"><a href="#11月13日-周日" class="headerlink" title="11月13日 周日"></a>11月13日 周日</h2><p><strong>成就</strong>：学完《jQuery基础》(二)，学到《jQuery基础》(三) 2.2<br><strong>笔记</strong>： </p>
+<p>1.DOM包裹wrapInner()方法<br>给集合中匹配的元素的内部，增加包裹的HTML结构 </p>
+<p>2.jQuery遍历之children()方法<br>只找第一级的子节点，不找孙子 </p>
+<p>3.jQuery遍历之find()方法<br><code>$(&quot;div&quot;).find(&quot;li&quot;)；</code><br>find查找范围包括子节点的所有后代节点 </p>
+<p>4.jQuery遍历之parent()方法<br>只会向上查找一级, 无参数 </p>
+<p>5.jQuery遍历之parents()方法<br>parent只会查找一级，parents则会往上一直查到查找到祖先节点<br><code>$( &quot;html&quot; ).parent()</code>方法返回一个包含document的集合，而<code>$( &quot;html&quot; ).parents()</code>返回一个空集合。<br><code>$(&#39;.item-b&#39;).parents(&#39;.first-div&#39;).css(&#39;border&#39;, &#39;2px solid blue&#39;)</code></p>
+<p>6.jQuery遍历之closest()方法<br><code>$(&quot;div&quot;).closet(&quot;li&quot;)</code><br>起始位置不同：.closest开始于当前元素 .parents开始于父元素<br>遍历的目标不同：.closest要找到指定的目标，.parents遍历到文档根元素，closest向上查找，直到找到一个匹配的就停止查找，parents一直查找到根元素，并将匹配的元素加入集合<br>结果不同：.closest返回的是包含零个或一个元素的jquery对象（返回最先匹配的祖先元素），parents返回的是包含零个或一个或多个元素的jquery对象 </p>
+<p>7.jQuery遍历之next()方法,下一个同辈元素 </p>
+<p>8.jQuery遍历之prev()方法，上一个同辈元素 </p>
+<p>9.jQuery遍历之siblings()，所有同辈元素 </p>
+<ol>
+<li>jQuery遍历之add()方法, 创建一个新的jQuery对象 ，新的元素添加到匹配的元素集合中<br>处理一：传递选择器:<code>$(&#39;li&#39;).add(&#39;p&#39;)</code><br>处理二：传递dom元素:<code>$(&#39;li&#39;).add(document.getElementsByTagName(&#39;p&#39;)[0])</code><br>处理三：就是动态创建P标签加入到合集，然后插入到指定的位置，但是这样就改变元素的本身的排列了： <code>$(&#39;li&#39;).add(&#39;&lt;p&gt;新的p元素&lt;/p&gt;&#39;).appendTo(目标位置)</code></li>
+</ol>
+<p>11.jQuery遍历之each()<br>each是一个for循环的包装迭代器<br>each通过回调的方式处理，并且会有2个固定的实参，索引与元素<br>each回调方法中的this指向当前迭代的dom元素 </p>
+<p>12.jQuery鼠标事件之click与dbclick事件 </p>
+<pre><code>//第一种 
+
+$(&quot;button:eq(0)&quot;).click(function() {alert(this)})
+
+//第二种 
+
+$(&apos;p&apos;).click(function(e) {alert(e.target.textContent) })
+
+//this指向button元素
+
+$(&quot;button:eq(1)&quot;).click(function() {$(&apos;p&apos;).click() //指定触发绑定的事件}) 
+
+//第三种 
+
+function data(e) { alert(e.data) }
+
+function a() {$(&quot;button:eq(2)&quot;).click(1111, data)}
+
+a();
+</code></pre><p>在同一元素上同时绑定 click 和 dblclick 事件是不可取的。 </p>
+<h2 id="11月14日-周一"><a href="#11月14日-周一" class="headerlink" title="11月14日 周一"></a>11月14日 周一</h2><p><strong>成就</strong>：学到《jQuery基础》(三) 3.1<br><strong>笔记</strong>： </p>
+<p>1.jQuery鼠标事件之mousedown与mouseup事件<br>mousedown强调是按下触发<br>如果在一个元素按住了鼠标不放，并且拖动鼠标离开这个元素，并释放鼠标键，这仍然是算作mousedown事件<br>任何鼠标按钮被按下时都能触发mousedown事件<br>用event 对象的which区别按键，敲击鼠标左键which的值是1，敲击鼠标中键which的值是2，敲击鼠标右键which的值是3<br>mouseup强调是松手触发，与mousedown是相反的<br>mouseup与mousedown组合起来就是click事件<br>如果用户在一个元素上按下鼠标按键，并且拖动鼠标离开这个元素，然后释放鼠标键，这仍然是算作mouseup事件<br>任何鼠标按钮松手时都能触发mouseup事件，用event 对象的which区别按键，敲击鼠标左键which的值是1，敲击鼠标中键which的值是2，敲击鼠标右键which的值是3 </p>
+<p>2.jQuery鼠标事件之mousemove事件<br>mousemove事件是当鼠标指针移动时触发的，即使是一个像素<br>如果处理器做任何重大的处理，或者如果该事件存在多个处理函数，这可能造成浏览器的严重的性能问题 </p>
+<p>3.jQuery鼠标事件之mouseover与mouseout事件 </p>
+<pre><code>var n = 0;
+
+//不同函数传递数据
+
+function data(e) {$(&quot;.right a&quot;).html(&apos;mouseover事件触发次数：&apos; + (++n) + &apos;&lt;br/&gt; 传入数据为 ：&apos;+ e.data) }
+
+function a() {$(&quot;.right p:first&quot;).mouseover(&apos;data = 慕课网&apos;, data)}
+
+a();
+</code></pre><p>4.jQuery鼠标事件之mouseenter与mouseleave事件<br>mouseenter事件和mouseover的区别是事件冒泡的问题，如果触发了mouseover，他会一直往上找父元素上的mouseover事件，如果父元素有mouseover事件就会被触发；而使用 mouseenter事件，mouseenter事件只会在绑定它的元素上被调用，而不会在后代节点上被触发 </p>
+<p>5.jQuery鼠标事件之hover事件<br><code>$(selector).hover(handlerIn, handlerOut)</code></p>
+<p>6.jQuery鼠标事件之focusin事件<br>当一个元素，或者其内部任何一个元素获得焦点的时候，例如：input元素，用户在点击聚焦的时候，如果开发者需要捕获这个动作的时候，jQuery提供了一个focusin事件 </p>
+<p>7.jQuery鼠标事件之focusout事件<br>当一个元素，或者其内部任何一个元素失去焦点的时候，比如input元素，用户在点击失去焦的时候，如果开发者需要捕获这个动作，jQuery提供了一个focusout事件 </p>
+<p>8.jQuery表单事件之blur与focus事件 </p>
+<h2 id="11月15日-周二"><a href="#11月15日-周二" class="headerlink" title="11月15日 周二"></a>11月15日 周二</h2><p><strong>成就</strong>：完成《jQuery基础》(三)<br><strong>笔记</strong>： </p>
+<p>1.jQuery表单事件之change事件</p>
+<p>2.jQuery表单事件之select事件 </p>
+<p>3.jQuery表单事件之submit事件 </p>
+<pre><code>$(&apos;#target1&apos;).submit(function(e) {
+
+alert(&apos;捕获提交表达动作,不阻止页面跳转&apos;)
+
+});
+
+//回车键或者点击提交表单,禁止浏览器默认跳转：
+
+$(&apos;#target2&apos;).submit(function(){
+
+ alert(&apos;捕获提交表达动作,阻止页面跳转&apos;)
+
+ return false;
+
+});
+</code></pre><p>4.jQuery键盘事件之keydown()与keyup()事件<br>keydown()每次获取的内容都是之前输入的，当前输入的获取不到</p>
+<p>5.jQuery键盘事件之keypress()事件<br>只能捕获单个字符，不能捕获组合键<br>无法响应系统功能键（如delete，backspace）<br>不区分小键盘和主键盘的数字字符 </p>
+<p>6.on()的多事件绑定 </p>
+<pre><code>$(&quot;#elem&quot;).on(&quot;mouseover mouseout&quot;,function(){ });
+
+$(&quot;#elem&quot;).on({
+
+ mouseover:function(){}, 
+
+ mouseout:function(){},});
+
+function greet( event ) {alert( &quot;Hello &quot; + event.data.name ); //Hello 慕课网}
+
+$( &quot;button&quot; ).on( &quot;click&quot;, {name: &quot;慕课网&quot;}, greet );
+
+$(&quot;div&quot;).on(&quot;click&quot;,&quot;p&quot;,fn)
+</code></pre><p>事件绑定在最上层div元素上，当用户触发在a元素上，事件将往上冒泡，一直会冒泡在div元素上。如果提供了第二参数，那么事件在往上冒泡的过程中遇到了选择器匹配的元素，将会触发事件回调函数 </p>
+<p>7.卸载事件off()方法<br>当有多个过滤参数时，只有与这些参数完全匹配的事件处理函数才会被移除<br><code>$(&quot;elem&quot;).off()</code>不需要传递事件名了，节点上绑定的所有事件讲全部销毁 </p>
+<p>8.jQuery事件对象的属性和方法<br>event.type：获取事件的类型<br>触发元素的事件类型 </p>
+<p><code>$(&quot;a&quot;).click(function(event) { alert(event.type); // &quot;click&quot;事件 });</code></p>
+<p><code>event.pageX 和 event.pageY</code>：获取鼠标当前相对于页面的坐标<br>通过这2个属性，可以确定元素在当前页面的坐标值，鼠标相对于文档的左边缘的位置（左边）与 （顶边）的距离，简单来说是从页面左上角开始,即是以页面为参考点,不随滑动条移动而变化<br><code>event.preventDefault()</code>方法：阻止默认行为<br>这个用的特别多，在执行这个方法后，如果点击一个链接（a标签），浏览器不会跳转到新的 URL 去了。我们可以用 <code>event.isDefaultPrevented()</code> 来确定这个方法是否(在那个事件对象上)被调用过了<br><code>event.stopPropagation()</code>方法：阻止事件冒泡<br>事件是可以冒泡的，为防止事件冒泡到DOM树上，也就是不触发的任何前辈元素上的事件处理函数<br><code>event.which</code>：获取在鼠标单击时，单击的是鼠标的哪个键<br>event.which 将 event.keyCode 和 event.charCode 标准化了。event.which也将正常化的按钮按下(mousedown 和 mouseupevents)，左键报告1，中间键报告2，右键报告3<br>event.currentTarget : 在事件冒泡过程中的当前DOM元素<br>冒泡前的当前触发事件的DOM对象, 等同于this.<br><code>this和event.target</code>的区别：<br>js中事件是会冒泡的，所以this是可以变化的，但event.target不会变化，它永远是直接接受事件的目标DOM元素；<br>.this和event.target都是dom对象<br>如果要使用jquey中的方法可以将他们转换为jquery对象。比如this和$(this)的使用、event.target和$(event.target)的使用；</p>
+
+                <hr>
+                
+
+                
+                    <section class="comments" id="comments">
+                        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                        <script>
+                          var gitment = new Gitment({
+                            owner: 'SmartDoubleXiao',
+                            repo: 'SmartDoubleXiao.github.io',
+                            oauth: {
+                              client_id: 'b404e69bb5fc27dd6862',
+                              client_secret: '1426edb88ae32b988f696b076b13b4964597549c',
+                            },
+                          })
+                          gitment.render('comments')
+                        </script>
+                    </section>
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/02/JS-note/" data-toggle="tooltip" data-placement="top"
+                           title="JavaScript学习笔记">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/01/leetcode/" data-toggle="tooltip" data-placement="top"
+                           title="一刷leetcode题目解答思路">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#11月7日-周一"><span class="toc-text">11月7日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月8日-周二"><span class="toc-text">11月8日 周二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月9日-周三"><span class="toc-text">11月9日 周三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月10日-周四"><span class="toc-text">11月10日 周四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月11日-周五"><span class="toc-text">11月11日 周五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月12日-周六"><span class="toc-text">11月12日 周六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月13日-周日"><span class="toc-text">11月13日 周日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月14日-周一"><span class="toc-text">11月14日 周一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11月15日-周二"><span class="toc-text">11月15日 周二</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="//igaves.com">莫大艺术家</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wuxiaoxiaojs">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/wuxiaoxiao2011to2015">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/smartdoublexiao">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 二小 2016 ~ 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">您是第 <span id="busuanzi_value_site_pv"></span> 位访客</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xxwu.tech/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-96579584-1';
+    var _gaDomain = 'xxwu.tech';
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'cd5b49144f27a7087ee7c5bf11886819';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="../../../../images/avatar.jpg">
+</body>
+
+</html>
