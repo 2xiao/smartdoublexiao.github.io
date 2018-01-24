@@ -296,11 +296,9 @@ article blockquote cite:before{
 }
 
 .navbar-custom .navbar-brand {
-    font-weight: 800;
-    color: white;
+    font-weight: 300;
     height: 56px;
     line-height: 25px;
-
 }
 
 .navbar-custom .navbar-brand:hover {
@@ -1103,15 +1101,9 @@ img::-moz-selection {
 }
 
 .navbar-custom.is-fixed .brand-logo {
-    border-radius: 3px;
-    background: black;
-    color: white;
-    padding-bottom: 3px;
-    padding-left: 5px;
+    color: #424242;
     margin-right: 5px;
-    padding-top: 1px;
 }
-
 .navbar-custom.is-fixed .navbar-brand,
 .navbar-custom.is-fixed .navbar-right a {
     color: black;
