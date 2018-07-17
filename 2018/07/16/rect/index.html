@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        如何预览GitHub里的Demo？｜二小
+        如何获取元素在页面中的绝对位置？｜二小
         
     </title>
 
-    <link rel="canonical" href="http://xxwu.tech/2016/12/03/github-demo/">
+    <link rel="canonical" href="http://xxwu.tech/2018/07/16/rect/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -134,13 +134,13 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="../../../../images/bg11.jpg">
+<img class="wechat-title-img" src="../../../../images/bg.jpg">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('../../../../images/bg11.jpg');
+        background-image: url('../../../../images/bg.jpg');
     }
 
     
@@ -151,18 +151,18 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>如何预览GitHub里的Demo？</h1>
+                    <h1>如何获取元素在页面中的绝对位置？</h1>
                     
                     <span class="meta">
                          作者 二小
                         <span>
-                          日期 2016-12-03
+                          日期 2018-07-16
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#git"
-                           title="git">git</a>
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
                         
                     </div>
                 </div>
@@ -171,7 +171,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            如何预览GitHub里的Demo？
+            如何获取元素在页面中的绝对位置？
         </span>
     </div>
 </header>
@@ -182,33 +182,29 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>早上逛师姐的博客，发现她做过的<a href="http://panpanfish.com/baiduIFE/" target="_blank" rel="external">demo</a>都放在自己的域名分支下，我一开始以为是将项目代码copy到个人博客仓库里去，然后就像博客里的一篇文章一样打开，结果出来的效果是：会自动加上 <code>Header</code>、<code>Footer</code> 和<code>Comment</code> 等模块，我还特别傻的去theme的配置文件里去改了好久，后来明白只需要在github上建立 <code>gh-pages</code> 分支就可以预览了。</p>
-<p>言归正传，预览Github里的网页或Demo的方法有两种。</p>
-<h2 id="方法一：链接加前缀"><a href="#方法一：链接加前缀" class="headerlink" title="方法一：链接加前缀"></a>方法一：链接加前缀</h2><p>第一种是直接在项目源代码页面链接前缀那加上 <code>http://htmlpreview.github.com/?</code> , 如: </p>
-<p><a href="http://htmlpreview.github.com/?https://github.com/SmartDoubleXiao/ife/blob/master/6.html" target="_blank" rel="external">http://htmlpreview.github.com/?https://github.com/SmartDoubleXiao/ife/blob/master/6.html</a></p>
-<p>适合写完代码预览效果，但是比较麻烦，而且强迫症宝宝受不了。</p>
-<h2 id="方法二：github建分支"><a href="#方法二：github建分支" class="headerlink" title="方法二：github建分支"></a>方法二：github建分支</h2><p>第二种是在Github上建立 <code>gh-pages</code> 分支。</p>
-<blockquote>
-<p>为什么要建立gh-pages分支呢，因为github项目的静态页面解析需要这个名字的分支。</p>
-</blockquote>
-<p>进入到你想要上传的项目文件夹下：</p>
-<pre><code>cd text
-</code></pre><p>git初始化</p>
-<pre><code>git init
-</code></pre><p>创建gh-pages分支</p>
-<pre><code>git checkout --orphan gh-pages
-</code></pre><p>添加文件到暂存区</p>
-<pre><code>git add .
-</code></pre><p>添加信息</p>
-<pre><code>git commit -m &quot;This is add message&quot;
-</code></pre><blockquote>
-<p>或者不写上面的<code>git add .</code>直接写<code>git commit -a -m \&quot;First pages commit\&quot;</code>这个-a参数我查了之后说是对<code>git add .</code>的替代，但我不建议大家使用。</p>
-</blockquote>
-<p>添加仓库</p>
-<pre><code>git remote add origin git@github.com:username/project.git
-</code></pre><p>部署你的项目到github</p>
-<pre><code>git push origin gh-pages
-</code></pre><p>现在你的github profile 中的相应项目下就有一个gh-pages了，直接访问 <code>username.github.io/项目/网页.html</code>就可以直接预览demo,例如：<a href="http://SmartDoubleXiao.github.io/ife/7.html" target="_blank" rel="external">http://SmartDoubleXiao.github.io/ife/7.html</a> . 如果你将github仓库解析到了自己的域名下，就可以直接输入<code>域名/项目/网页.html</code>访问了，例如：<a href="xxwu.tech/ife/7.html">xxwu.tech/ife/7.html</a>.</p>
+                <h3 id="从一个坑爹的需求说开去"><a href="#从一个坑爹的需求说开去" class="headerlink" title="从一个坑爹的需求说开去"></a>从一个坑爹的需求说开去</h3><p>上周产品小哥哥丢过来一个需求，名曰：沉浸式视频体验，大致内容是一个页面里有几十个视频，用户点击其中一个视频时，该视频自动滑动到屏幕可视区域的顶部开始播放，并暂停其他视频，该视频滑出屏幕可视区域之后要自动暂停。</p>
+<p>这个需求有两个关键的技术点：</p>
+<ol>
+<li>如何将视频滑动到屏幕可视区域的顶部</li>
+<li>如何判断视频滑出了屏幕可视区域</li>
+</ol>
+<p>其实这两个技术点有一个共同点，就是需求计算出元素在页面中的绝对位置，也就是指该元素的左上角相对于整张网页左上角的坐标，有两种方法可以计算得到：</p>
+<h4 id="1-递归"><a href="#1-递归" class="headerlink" title="1.递归"></a>1.递归</h4><p>利用<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetTop" target="_blank" rel="external">offsetTop</a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetLeft" target="_blank" rel="external">offsetLeft</a>可以取到当前元素左上角相对于其<code>HTMLElement.offsetParent</code>节点的左边界偏移的像素值，然后再利用<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetParent" target="_blank" rel="external">HTMLElement.offsetParent</a><br>可以得到一个指向最近的包含该元素的定位元素。</p>
+<p>如果没有定位的元素，则<code>offsetParent</code>为最近的<code>table</code>,<code>table cell</code>或根元素（标准模式下为<code>html</code>；<code>quirks</code>模式下为<code>body</code>）。</p>
+<p>利用以上三个属性，写一个递归函数就可以得到当前元素在页面中的绝对位置了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">const getElementLeft = element =&gt; &#123;</div><div class="line">	let actualLeft = element.offsetLeft;</div><div class="line">	let current = element.offsetParent;</div><div class="line">	while (current !== null)&#123;</div><div class="line">		actualLeft += current.offsetLeft;</div><div class="line">		current = current.offsetParent;</div><div class="line">	&#125;</div><div class="line">	return actualLeft;</div><div class="line">&#125;</div><div class="line">const getElementTop = element =&gt; &#123;</div><div class="line">	let actualTop = element.offsetTop;</div><div class="line">	let current = element.offsetParent;</div><div class="line">	while (current !== null)&#123;</div><div class="line">		actualTop += current.offsetTop;</div><div class="line">		current = current.offsetParent;</div><div class="line">	&#125;</div><div class="line">	return actualTop;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：由于在表格和iframe中，<code>offsetParent</code>对象未必等于父容器，所以上面的函数对于表格和iframe中的元素不适用。</p>
+<h4 id="2-你听说过getBoundingClientRect吗？"><a href="#2-你听说过getBoundingClientRect吗？" class="headerlink" title="2. 你听说过getBoundingClientRect吗？"></a>2. 你听说过getBoundingClientRect吗？</h4><p><code>object.getBoundingClientRect()</code>的返回值包含了一组只读属性，包括该元素相对于视口左上角位置的<code>left</code>、<code>top</code>、<code>right</code>和<code>bottom</code>，以及元素的<code>width</code>和<code>height</code>，单位为像素，具体含义可参见下图：<br><img src="http://top.oa.com/apis/imgcache.php/http%3A%2F%2Fmat1.gtimg.com%2Fwww%2Fjs%2Fnews%2Fwemeet%2Frect.png" alt=""></p>
+<p>从上图可以看出，<code>getBoundingClientRect</code>得到的值是相对于视口的，而不是绝对的，当视口区域或其他可滚动元素内发生滚动操作时，top和left属性值就会随之立即发生变化。</p>
+<p>要获得相对于整个网页左上角定位的属性值，只要给top、left属性值加上当前的滚动位置（通过<code>window.scrollX</code>和<code>window.scrollY</code>），这样就可以获取与当前的滚动位置无关的值。</p>
+<h3 id="如何将视频滑动到屏幕可视区域的顶部？"><a href="#如何将视频滑动到屏幕可视区域的顶部？" class="headerlink" title="如何将视频滑动到屏幕可视区域的顶部？"></a>如何将视频滑动到屏幕可视区域的顶部？</h3><p>考虑到<code>getBoundingClientRect</code>的兼容性较好，且算法复杂度较低，最终我采用了<code>getBoundingClientRect</code>方法来实现“将视频滑动到屏幕可视区域的顶部”的功能，使用<code>window.scroll</code>来实现页面滚动，使用<code>setTimeout</code>增加滚动时的动画，具体实现滚动的函数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">const autoScroll = (offsetTop, needScrollTop, hasScrollTop) =&gt; &#123;</div><div class="line">	let _needScrollTop = needScrollTop; // 本次递归时，离终点的距离</div><div class="line">	let _hasScrollTop = hasScrollTop; // 本次递归时，已经移动的距离总和</div><div class="line">	const speed = 10;</div><div class="line">	setTimeout(() =&gt; &#123;</div><div class="line">		const dist = needScrollTop &gt; 0</div><div class="line">			? Math.max(Math.ceil(needScrollTop / speed), 5)</div><div class="line">			: Math.min(Math.ceil(needScrollTop / speed), -5);</div><div class="line">		_needScrollTop -= dist;</div><div class="line">		_hasScrollTop += dist;</div><div class="line">		window.scroll(0, offsetTop + _hasScrollTop);</div><div class="line">		// 如果移动幅度小于十个像素，直接移动，否则递归调用，实现动画效果</div><div class="line">		if (_needScrollTop &gt; speed || _needScrollTop &lt; -speed) &#123;</div><div class="line">			this.__onScroll(offsetTop, _needScrollTop, _hasScrollTop);</div><div class="line">		&#125; else &#123;</div><div class="line">			window.scroll(0, offsetTop + _hasScrollTop + _needScrollTop);</div><div class="line">		&#125;</div><div class="line">	&#125;, 1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">const rect = element.getBoundingClientRect();</div><div class="line"></div><div class="line">const offsetTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || window.screenY;</div><div class="line"></div><div class="line">autoScroll(offsetTop, rect.top, 0);</div></pre></td></tr></table></figure>
+<h3 id="如何判断视频滑出了屏幕可视区域"><a href="#如何判断视频滑出了屏幕可视区域" class="headerlink" title="如何判断视频滑出了屏幕可视区域"></a>如何判断视频滑出了屏幕可视区域</h3><p>利用<code>getBoundingClientRect</code>的返回值同样可以判断元素在屏幕可视区域的曝光和滑出，通过监听页面的滚动事件，在滚动结束时，触发<code>checkLeave</code>和<code>checkExpose</code>函数，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 检测滑出可视区域</div><div class="line">checkLeave() &#123;</div><div class="line">	const element = document.querySelector(`[data-action-id=&quot;$&#123;this.__domId&#125;&quot;]`);</div><div class="line">	if (!element) &#123;</div><div class="line">		console.error(`Action: element [data-action-id=&quot;$&#123;this.__domId&#125;&quot;] not found`);</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	const &#123; top, bottom, left, right &#125; = element.getBoundingClientRect();</div><div class="line">	if ((top &gt; getWindowHeight() || bottom &lt; 0</div><div class="line">		|| left &gt; getWindowWidth() || right &lt; 0)) &#123;</div><div class="line">		this.onLeave(); //onLeave函数中实现具体业务逻辑</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 检测真实曝光</div><div class="line">checkExpose() &#123;</div><div class="line">	const element = document.querySelector(`[data-action-id=&quot;$&#123;this.__domId&#125;&quot;]`);</div><div class="line">	if (!element) &#123;</div><div class="line">		console.error(`Action: element [data-action-id=&quot;$&#123;this.__domId&#125;&quot;] not found`);</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	const &#123; top, bottom, left, right &#125; = element.getBoundingClientRect();</div><div class="line">	if (Math.max(0, top) &lt;= Math.min(getWindowHeight(), bottom)</div><div class="line">		&amp;&amp; Math.max(0, left) &lt;= Math.min(getWindowWidth(), right)) &#123;</div><div class="line">		this.onExpose(); //onExpose函数中实现具体业务逻辑</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以将这两个事件封装成了一个<code>&lt;Action&gt;</code>组件的两个props参数，使用时只需要在需要的元素外包一层<code>&lt;Action&gt;</code>父元素，并传入特定的回调函数即可。</p>
+<p>BTW，多说一句我实现<code>document.querySelector</code>的原理，直接看代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">render() &#123;</div><div class="line">	const &#123; children &#125; = this.props;</div><div class="line">	return cloneElement(Children.only(children), &#123;</div><div class="line">		&apos;data-action-id&apos;: this.__domId,</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上。</p>
 
                 <hr>
                 
@@ -233,15 +229,10 @@
                 <hr>
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2017/02/24/CSS3-3D/" data-toggle="tooltip" data-placement="top"
-                           title="CSS3实现3D轮播图">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2016/12/01/leetcode/" data-toggle="tooltip" data-placement="top"
-                           title="一刷leetcode题目解答思路">Next Post &rarr;</a>
+                        <a href="/2018/02/25/happy-new-year/" data-toggle="tooltip" data-placement="top"
+                           title="过了个年">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -254,7 +245,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一：链接加前缀"><span class="toc-text">方法一：链接加前缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法二：github建分支"><span class="toc-text">方法二：github建分支</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#从一个坑爹的需求说开去"><span class="toc-text">从一个坑爹的需求说开去</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-递归"><span class="toc-text">1.递归</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-你听说过getBoundingClientRect吗？"><span class="toc-text">2. 你听说过getBoundingClientRect吗？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何将视频滑动到屏幕可视区域的顶部？"><span class="toc-text">如何将视频滑动到屏幕可视区域的顶部？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何判断视频滑出了屏幕可视区域"><span class="toc-text">如何判断视频滑出了屏幕可视区域</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -276,8 +267,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#git"
-                           title="git">git</a>
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
